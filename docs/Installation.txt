@@ -2,7 +2,7 @@
 
 MySQL setup:
 
-   CREATE DATABASE essc DEFAULT CHARACTER SET = 'UTF-8';
+   CREATE DATABASE essc DEFAULT CHARACTER SET = 'utf8';
    GRANT ALL ON essc.* TO essc@'%' IDENTIFIED BY 'essc';
 
    The tables are currently created by hbm2sql. That will change.
