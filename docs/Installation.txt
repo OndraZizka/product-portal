@@ -1,13 +1,19 @@
 
 
 MySQL setup:
+============
 
+mysql -u root;
+   SHOW DATABASES;
+   SHOW GRANTS;
    CREATE DATABASE essc DEFAULT CHARACTER SET = 'utf8';
-   GRANT ALL ON essc.* TO essc@'%' IDENTIFIED BY 'essc';
+   GRANT ALL ON essc.* TO essc@'%' IDENTIFIED BY 'essc'; -- Change this.
+   FLUSH PRIVILEGES;
 
    The tables are currently created by hbm2sql. That will change.
 
 Datasource in AS:
+=================
 
         <subsystem xmlns="urn:jboss:domain:datasources:1.1">
             <datasources>
@@ -29,6 +35,7 @@ Datasource in AS:
 
 
 Mail config in AS:
+==================
 Set SMTP host, user and pass.
 
             <mail-session jndi-name="java:jboss/mail/Default">
@@ -42,6 +49,7 @@ Set SMTP host, user and pass.
         </outbound-socket-binding>
 
 Security config in AS (devel purposes):
+=======================================
 
         <subsystem xmlns="urn:jboss:domain:security:1.2">
             <security-domains>
