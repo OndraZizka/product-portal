@@ -7,7 +7,7 @@
     
     <persistence-unit name="primary">
         <!-- OpenShift will gives us a datasource props through system properties - see .openshift/config/standalone.xml . -->
-        <jta-data-source>java:jboss/datasources/MysqlDS</jta-data-source>
+        <jta-data-source>java:jboss/datasources/${essc.dataSource}</jta-data-source>
         <properties>
             <!-- Properties for Hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>

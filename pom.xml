@@ -11,9 +11,9 @@
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.6</maven.compiler.source>
-        <maven.compiler.target>1.6</maven.compiler.target>
-        
+
+        <!-- Local vs. OpenShift vs. production. -->
+        <essc.dataSource>esscDS</essc.dataSource>
         <wicket.mode>development</wicket.mode>
 
         <!-- Define the version of JBoss' Java EE 6 APIs we want to import. -->
@@ -61,6 +61,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
+                    <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
                     <webResources>
                         <resource>
                             <directory>${basedir}/src/main/webapp/WEB-INF</directory>
@@ -105,6 +106,9 @@
             <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
+            <properties>
+                <essc.dataSource>MysqlDS</essc.dataSource>
+            </properties>
             <build>
                 <finalName>test</finalName>
                 <plugins>
