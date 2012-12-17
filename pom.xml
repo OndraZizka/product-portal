@@ -28,12 +28,19 @@
         <!-- Set the name of the war, used as the context root when the app is deployed. -->
         <finalName>${project.artifactId}</finalName>
 
-        <!-- Allow packaging the html files alongside the java sources. -->
+        <!-- Resources -->
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>false</filtering>
+                <filtering>true</filtering>
             </resource>
+            <!-- For persistence.xml, and to keep src/main/java non-filtered. -->
+            <resource> 
+                <directory>src/main/java/META-INF</directory>
+                <targetPath>META-INF</targetPath>
+                <filtering>true</filtering>
+            </resource>
+            <!-- Allow packaging the html files alongside the java sources. -->
             <resource>
                 <directory>src/main/java</directory>
                 <filtering>false</filtering>
