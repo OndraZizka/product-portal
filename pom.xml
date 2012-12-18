@@ -12,11 +12,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Local vs. OpenShift vs. production. -->
-        <essc.dataSource>esscDS</essc.dataSource>
+        <!-- Parametrization - controlled from cmdline. -->
         <essc.hbm2ddl.auto>update</essc.hbm2ddl.auto> <!-- validate | update | create | create-drop -->
+
+        <!-- Local vs. OpenShift vs. production. Controlled in profiles. -->
+        <essc.dataSource>esscDS</essc.dataSource>
         <wicket.mode>development</wicket.mode>
-        <jboss-as.deploy.hostname>localhost</jboss-as.deploy.hostname>
+        <jboss-as.deploy.hostname>localhost</jboss-as.deploy.hostname>  <!-- Where to deploy. -->
+        <war.warName>${project.build.finalName}</war.warName>  <!-- To change to ROOT for "prod", to go to / context. -->
 
         <!-- Define the version of JBoss' Java EE 6 APIs we want to import. -->
         <jboss.spec.version>3.0.0.Final</jboss.spec.version>
@@ -71,6 +74,7 @@
                 <version>2.3</version>
                 <configuration>
                     <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                    <warName>${war.warName}</warName>
                     <webResources>
                         <resource>
                             <directory>${basedir}/src/main/webapp/WEB-INF</directory>
@@ -137,6 +141,7 @@
             <properties>
                 <wicket.mode>deployment</wicket.mode>
                 <jboss-as.deploy.hostname>products.app.eng.bos.redhat.com</jboss-as.deploy.hostname>
+                <war.warName>ROOT</war.warName>
             </properties>
         </profile>
 
