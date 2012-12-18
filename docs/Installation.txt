@@ -17,7 +17,7 @@ Datasource in AS:
 
         <subsystem xmlns="urn:jboss:domain:datasources:1.1">
             <datasources>
-                <datasource jndi-name="java:jboss/datasources/MysqlDS" pool-name="essc-ds-pool" enabled="true" use-java-context="true">
+                <datasource jndi-name="java:jboss/datasources/esscDS" pool-name="essc-ds-pool" enabled="true" use-java-context="true">
                     <connection-url>jdbc:mysql://localhost:3306/essc?characterEncoding=UTF-8&amp;characterSetResults=UTF-8&amp;autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull</connection-url>
                     <driver>mysql</driver>
                     <security>
