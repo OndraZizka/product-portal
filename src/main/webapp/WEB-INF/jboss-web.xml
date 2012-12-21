@@ -4,6 +4,7 @@
            xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee http://www.jboss.org/j2ee/schema/jboss-web_6_0.xsd"
 >
     <!--
+    <context-root>/</context-root>
     <security-domain>java:/jaas/example-domain</security-domain>
     -->
 </jboss-web>
