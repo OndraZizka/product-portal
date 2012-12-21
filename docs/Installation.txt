@@ -12,6 +12,17 @@ mysql -u root;
 
    The tables are currently created by hbm2sql. That will change.
 
+Root context in AS: (for production)
+===================
+
+        <subsystem xmlns="urn:jboss:domain:web:1.2" default-virtual-server="default-host" native="false">
+            <virtual-server name="default-host" enable-welcome-root="false">
+
+Or in the CLI (and restart the server)
+
+        /profile=default/subsystem=web/virtual-server=default-host:write-attribute(name=enable-welcome-root,value=false)
+
+
 Datasource in AS:
 =================
 
