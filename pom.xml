@@ -151,16 +151,26 @@
                     <plugin>
                         <groupId>org.jboss.as.plugins</groupId>
                         <artifactId>jboss-as-maven-plugin</artifactId>
+                        <configuration>
+                            <force>true</force>
+                            <username>admin</username>
+                            <password>${essc.deploy.pass.prod}</password>
+                            <fileNames>
+                                <fileName>target/ROOT.war</fileName>
+                            </fileNames>
+                        </configuration>
+                    </plugin>
+                </plugins>
+                <!--
                         <executions><execution><id>deploy-prod</id>
                             <goals><goal>deploy</goal></goals><phase>install</phase>
                             <configuration>
                                 <force>true</force>
-                                <name>admin</name>
+                                <username>admin</username>
                                 <password>${essc.deploy.pass.prod}</password>
                             </configuration>
                         </execution></executions>
-                    </plugin>
-                </plugins>
+                -->
             </build>
         </profile>
 
