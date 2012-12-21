@@ -1,7 +1,5 @@
 package org.jboss.essc.web.pages;
 
-import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.request.resource.CssResourceReference;
 import org.jboss.essc.web._cp.pageBoxes.AboutSmallBox;
 import org.jboss.essc.web._cp.pageBoxes.RecentChangesBox;
 import org.jboss.essc.web._cp.pageBoxes.RecentReleasesBox;
@@ -28,11 +26,4 @@ public class HomePage extends BaseLayoutPage {
         add( new RecentChangesBox("recentChanges", RECENT_CHANGES_ROWS) );
     }
     
-    
-    /** Adds CSS reference. */
-    public void renderHead(IHeaderResponse response) {
-        //response.renderCSSReference(new PackageResourceReference(HomePage.class, "default/calendar.css"));
-        response.renderCSSReference(new CssResourceReference( HomePage.class, "default.css" ));
-    }
-
 }// class
