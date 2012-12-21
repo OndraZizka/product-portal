@@ -45,10 +45,10 @@ public class SidebarPanel extends Panel {
         add( new UserMenuBox("userBox").setVisibilityAllowed( false ) );
         
         // Administration
-        add( new WebMarkupContainer("adminBox")
+        /*add( new WebMarkupContainer("adminBox")
             .add( new BookmarkablePageLink("addReleaseLink",  AddReleasePage.class))
             .add( new BookmarkablePageLink("addProductLink",  AddProductPage.class))
-        );
+        );*/
         
         // Products
         add( new BookmarkablePageLink("addProductLink", AddProductPage.class)
