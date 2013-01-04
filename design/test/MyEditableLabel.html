@@ -10,7 +10,7 @@
             font-style: normal;
             background: none;
         }
-        input.editable.focus {
+        input.editable.active {
             border: 1px solid silver;
         }
 
@@ -19,7 +19,7 @@
             text-decoration: underline;
         }
 
-        input.editable.link.focus {
+        input.editable.link.active {
             color: black;
             text-decoration: none;
         }
@@ -35,7 +35,7 @@
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#e9e9ce',GradientType=0 ); /* IE6-9 */
         }
 
-        input.editable.focus {
+        input.editable.active {
             background: #ffffff; /* Old browsers */
             background: -moz-linear-gradient(top,  #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6+ */
             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
@@ -57,7 +57,7 @@
 
         var EditableLink = {
             activate: function(){
-                $(this).removeClass('passive').addClass('focus').focus();
+                $(this).removeClass('passive').addClass('active').focus();
                 this.active = true;
                 this.disabled = false;
                 //alert('activ');
@@ -65,7 +65,7 @@
                 //alert(this);
             },
             passivate: function(){
-                $(this).removeClass('focus').addClass('passive');
+                $(this).removeClass('active').addClass('passive');
                 this.active = false;
                 this.disabled = true;
                 //alert('pasiv');
@@ -83,8 +83,8 @@
     <h2>Editable label</h2>
     <div>
         <input type="text" class="editable label passive"
-               onfocus="$(this).removeClass('passive').addClass('focus');"
-               onblur ="$(this).removeClass('focus').addClass('passive');"
+               onfocus="$(this).removeClass('passive').addClass('active');"
+               onblur ="$(this).removeClass('active').addClass('passive');"
                value="Test value 1"
         />
     </div>
@@ -97,7 +97,7 @@
                       );"
         >
         <input type="text" class="editable link passive"
-               xonfocus="$(this).removeClass('passive').addClass('focus');"
+               xonfocus="$(this).removeClass('passive').addClass('active');"
                onblur ="EditableLink.passivate.apply(this);"
                onclick="if(validateURL(this.value)) window.open(this.value, '', 'modal=true,alwaysRaised=yes');"
                value="Test value 2"
