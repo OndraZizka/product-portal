@@ -17,6 +17,7 @@
         input.editable.link.passive {
             color: blue;
             text-decoration: underline;
+            cursor: pointer;
         }
 
         input.editable.link.active {
@@ -25,14 +26,7 @@
         }
 
         input.editable.label.passive {
-            background: rgb(252,255,244); /* Old browsers */
-            background: -moz-linear-gradient(top,  rgba(252,255,244,1) 0%, rgba(233,233,206,1) 100%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,255,244,1)), color-stop(100%,rgba(233,233,206,1))); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(233,233,206,1) 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(233,233,206,1) 100%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(top,  rgba(252,255,244,1) 0%,rgba(233,233,206,1) 100%); /* IE10+ */
-            background: linear-gradient(to bottom,  rgba(252,255,244,1) 0%,rgba(233,233,206,1) 100%); /* W3C */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#e9e9ce',GradientType=0 ); /* IE6-9 */
+            border-bottom: 1px dashed #6ABE01;
         }
 
         input.editable.active {
@@ -55,11 +49,15 @@
                 || val.substring(0, 6) === "ftp://";
         }
 
+        // this.disabled == true blocks any event (at least triggered by onclick=... etc.
+        // TBD: Bind by addEventListener() ?
+
         var EditableLink = {
             activate: function(){
                 $(this).removeClass('passive').addClass('active').focus();
                 this.active = true;
-                this.disabled = false;
+                this.readOnly = false;
+                //this.disabled = false;
                 //alert('activ');
                 this.focus();
                 //alert(this);
@@ -67,7 +65,8 @@
             passivate: function(){
                 $(this).removeClass('active').addClass('passive');
                 this.active = false;
-                this.disabled = true;
+                this.readOnly = true;
+                //this.disabled = true;
                 //alert('pasiv');
             },
             onclick: function(){
@@ -80,27 +79,41 @@
 </head>
 <body>
 
-    <h2>Editable label</h2>
+    <h2>Editable label - icon is a link</h2>
     <div>
+        <img src="./icoExternalLink.png" width="16" height="16" alt="Edit the link"
+             onclick="var url =  $(this).parent().children('input.editable.label').first().get(0).value;
+                      if(validateURL(url))  window.open(url, '', 'modal=true,alwaysRaised=yes');"
+             style="cursor: pointer;"
+        />
         <input type="text" class="editable label passive"
                onfocus="$(this).removeClass('passive').addClass('active');"
                onblur ="$(this).removeClass('active').addClass('passive');"
-               value="Test value 1"
+               value="http://jboss.org/"
         />
     </div>
 
-    <h2>Editable link</h2>
-    <div id="myLink" class="editable link">
-        <img src="/home/ondra/Desktop/icoEdit.png" width="16" height="16" alt="Edit the link"
+    <h2>Editable link - icon enables edit mode</h2>
+    <div id="myLink" class="editable link" style="cursor: pointer">
+        <img src="./icoEdit.png" width="16" height="16" alt="Edit the link"
              onclick="EditableLink.activate.apply(
                          $(this).parent().children('input.editable.link').first().get(0)
                       );"
-        >
+        />
         <input type="text" class="editable link passive"
                xonfocus="$(this).removeClass('passive').addClass('active');"
                onblur ="EditableLink.passivate.apply(this);"
-               onclick="if(validateURL(this.value)) window.open(this.value, '', 'modal=true,alwaysRaised=yes');"
-               value="Test value 2"
+               onclick="if(validateURL(this.value) &amp;&amp; (!this.active) ){
+                            window.open(this.value, '', 'modal=true,alwaysRaised=yes'); }"
+               onselectstart="return this.active;"
+               value="http://redhat.com/"
+        />
+    </div>
+
+    <!-- disabled="<anything>" causes this.disabled == true, and blocks any event! -->
+    <div onclick="alert('div clicked');">
+        <input type="text" onclick=""
+               value="http://redhat.com/"
         />
     </div>
 
