@@ -9,6 +9,9 @@
             /* Override the default style for disabled=true. */
             font-style: normal;
             background: none;
+
+            /* Emulate disabled behavior. */
+            user-select: none; -moz-user-select: none; -webkit-user-select: none;
         }
         input.editable.active {
             border: 1px solid silver;
