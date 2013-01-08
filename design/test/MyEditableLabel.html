@@ -1,10 +1,12 @@
 <html>
 <head>
-    <script src="./jquery183.js" type="text/javascript"></script>
+    <!--<script src="./jquery183.js" type="text/javascript"></script>-->
     <style type="text/css">
         input.editable.passive {
-            border: 1px solid transparent;
+            border: 1px solid red;
             border-bottom: 1px solid transparent;
+            display: inline;
+            width: min-content;
             
             /* Override the default style for disabled=true. */
             font-style: normal;
@@ -44,7 +46,7 @@
         }
     </style>
     <script type="text/javascript">
-        window.$ = jQuery;
+        //window.$ = jQuery;
 
         function validateURL(val){
             return val.substring(0, 7) === "http://"
@@ -57,7 +59,8 @@
 
         var EditableLink = {
             activate: function(){
-                $(this).removeClass('passive').addClass('active').focus();
+                //$(this).removeClass('passive').addClass('active').focus();
+                this.className = (this.className.replace('passive','') + ' active');
                 this.active = true;
                 this.readOnly = false;
                 //this.disabled = false;
@@ -66,13 +69,14 @@
                 //alert(this);
             },
             passivate: function(){
-                $(this).removeClass('active').addClass('passive');
+                //$(this).removeClass('active').addClass('passive');
+                this.className = (this.className.replace('active','') + ' passive');
                 this.active = false;
                 this.readOnly = true;
                 //this.disabled = true;
                 //alert('pasiv');
             },
-            onclick: function(){
+            onclick: function(event){
                 if( this.active ) return;
                 if(validateURL(this.value))
                     window.open(this.value, '', 'location=yes,menubar=no,resizable=yes,scrollbars=yes,status=yes,modal=true,alwaysRaised=yes');
@@ -85,13 +89,13 @@
     <h2>Editable label - icon is a link</h2>
     <div>
         <img src="./icoExternalLink.png" width="16" height="16" alt="Edit the link"
-             onclick="var url =  $(this).parent().children('input.editable.label').first().get(0).value;
+             onclick="var url =  this.parentElement.getElementsByTagName('input')[0].value; //className.contains('input.editable.label')
                       if(validateURL(url))  window.open(url, '', 'modal=true,alwaysRaised=yes');"
              style="cursor: pointer;"
         />
         <input type="text" class="editable label passive"
-               onfocus="$(this).removeClass('passive').addClass('active');"
-               onblur ="$(this).removeClass('active').addClass('passive');"
+               onfocus="this.className = (this.className.replace('passive','') + ' active');"
+               onblur ="this.className = (this.className.replace('active','') + ' passive');"
                value="http://jboss.org/"
         />
     </div>
@@ -99,26 +103,25 @@
     <h2>Editable link - icon enables edit mode</h2>
     <div id="myLink" class="editable link" style="cursor: pointer">
         <img src="./icoEdit.png" width="16" height="16" alt="Edit the link"
-             onclick="EditableLink.activate.apply(
-                         $(this).parent().children('input.editable.link').first().get(0)
-                      );"
+             onclick="EditableLink.activate.apply( this.parentElement.getElementsByTagName('input')[0] );
+                      //$(this).parent().children('input.editable.link').first().get(0)"
         />
         <input type="text" class="editable link passive"
-               xonfocus="$(this).removeClass('passive').addClass('active');"
                onblur ="EditableLink.passivate.apply(this);"
                onclick="if(validateURL(this.value) &amp;&amp; (!this.active) ){
                             window.open(this.value, '', 'modal=true,alwaysRaised=yes'); }"
-               onselectstart="return this.active;"
+               onkeydown="if(!this.active){ event.preventDefault(); event.stopPropagation(); return false; }"
                value="http://redhat.com/"
         />
     </div>
 
-    <!-- disabled="<anything>" causes this.disabled == true, and blocks any event! -->
+    <!-- disabled="<anything>" causes this.disabled == true, and blocks any event! 
     <div onclick="alert('div clicked');">
         <input type="text" onclick=""
                value="http://redhat.com/"
         />
     </div>
+    -->
 
 </body>
 </html>
