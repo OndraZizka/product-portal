@@ -36,6 +36,7 @@ import org.jboss.essc.web.qualifiers.LoggedIn;
 import org.jboss.essc.web.qualifiers.ShowInternals;
 import org.jboss.essc.web.security.EsscAuthSession;
 import org.jboss.essc.web.security.SecuredPage;
+import org.jboss.essc.web.test.EditableTestPage;
 
 
 /**
@@ -80,6 +81,7 @@ public class WicketJavaEEApplication extends WebApplication {
         mountPage("/404",   Http404.class);
         mountPage("/login", LoginPage.class);
         mountPage("/user",  UserPage.class);
+        mountPage("/test",  EditableTestPage.class);
         
         mountPage("/addProduct",            AddProductPage.class);
         mountPage("/addRelease/#{product}", AddReleasePage.class);
