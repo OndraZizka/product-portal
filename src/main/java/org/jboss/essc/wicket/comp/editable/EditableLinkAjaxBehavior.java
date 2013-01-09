@@ -6,41 +6,18 @@ import java.util.Map;
 import org.apache.wicket.Component;
 import org.apache.wicket.behavior.AbstractAjaxBehavior;
 import org.apache.wicket.markup.html.IHeaderResponse;
-import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.handler.TextRequestHandler;
-import org.apache.wicket.util.string.StringValue;
 import org.apache.wicket.util.template.PackageTextTemplate;
 import org.apache.wicket.util.template.TextTemplate;
 
 /**
- *  
+ *  A behavior which adds EditableLink initialization to onDomReady event,
+ *  and then responses to the AJAX requests from it.
  *  @author Ondrej Zizka
  */
 public class EditableLinkAjaxBehavior extends AbstractAjaxBehavior {
-
-    @Override
-    public void onRequest() {
-
-        // Get the value sent from component via AJAX...
-        RequestCycle requestCycle = getComponent().getRequestCycle();
-        Request request = requestCycle.getRequest();
-        String input = request.getRequestParameters().getParameterValue("val").toString();
-
-        // And set it as new model value.
-        //getComponent().setDefaultModelObject( input );
-
-        // Call onChange() instead.
-        if( getComponent() instanceof EditableLink ){
-            ((EditableLink) getComponent()).onChange( input );
-        }
-
-        // Model value after onChange();
-        String ret = getComponent().getDefaultModelObjectAsString(); 
-
-        requestCycle.scheduleRequestHandlerAfterCurrent(new TextRequestHandler("text/plain", "UTF-8", ret));
-    }
 
     @Override
 	public void renderHead( final Component component, final IHeaderResponse response ){
@@ -61,5 +38,26 @@ public class EditableLinkAjaxBehavior extends AbstractAjaxBehavior {
         response.renderOnDomReadyJavaScript(script);               // Wicket 5
     }
 
+    @Override
+    public void onRequest() {
+
+        // Get the value sent from component via AJAX...
+        RequestCycle requestCycle = getComponent().getRequestCycle();
+        Request request = requestCycle.getRequest();
+        String input = request.getRequestParameters().getParameterValue("val").toString();
+
+        // And set it as new model value.
+        //getComponent().setDefaultModelObject( input );
+
+        // Call onChange() instead.
+        if( getComponent() instanceof EditableLink ){
+            ((EditableLink) getComponent()).onChange( input );
+        }
+
+        // Model value after onChange();
+        String ret = getComponent().getDefaultModelObjectAsString();
+
+        requestCycle.scheduleRequestHandlerAfterCurrent(new TextRequestHandler("text/plain", "UTF-8", ret));
+    }
 
 }
