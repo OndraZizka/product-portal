@@ -1,0 +1,35 @@
+    input.editable.passive {
+        border: 1px solid red;
+        border-bottom: 1px solid transparent;
+        display: inline;
+        width: min-content;
+
+        /* Override the default style for disabled=true. */
+        font-style: normal;
+        background: none;
+
+        /* Emulate disabled behavior. */
+        /*user-select: none; -moz-user-select: none; -webkit-user-select: none;*/
+    }
+    input.editable.active {
+        border: 1px solid silver;
+    }
+
+    input.editable.link.passive {
+        color: blue;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    input.editable.link.active {
+        color: black;
+        text-decoration: none;
+    }
+
+    input.editable.label.passive {
+        border-bottom: 1px dashed #6ABE01;
+    }
+
+    input.editable.active {
+        background: #efefef;
+    }
