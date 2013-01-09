@@ -22,13 +22,24 @@ public class EditableLinkAjaxBehavior extends AbstractAjaxBehavior {
 
     @Override
     public void onRequest() {
+
+        // Get the value sent from component via AJAX...
         RequestCycle requestCycle = getComponent().getRequestCycle();
         Request request = requestCycle.getRequest();
-        IRequestParameters parameters = request.getRequestParameters();
-        StringValue input = parameters.getParameterValue("term");
-        String ret = "Returned string";
+        String input = request.getRequestParameters().getParameterValue("val").toString();
 
-        requestCycle.scheduleRequestHandlerAfterCurrent(new TextRequestHandler("application/json", "UTF-8", ret));
+        // And set it as new model value.
+        //getComponent().setDefaultModelObject( input );
+
+        // Call onChange() instead.
+        if( getComponent() instanceof EditableLink ){
+            ((EditableLink) getComponent()).onChange( input );
+        }
+
+        // Model value after onChange();
+        String ret = getComponent().getDefaultModelObjectAsString(); 
+
+        requestCycle.scheduleRequestHandlerAfterCurrent(new TextRequestHandler("text/plain", "UTF-8", ret));
     }
 
     @Override
