@@ -1,6 +1,45 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <!--<script src="./jquery183.js" type="text/javascript"></script>-->
+    <!--
+        EditableLabel and Editable link.
+
+        They have two states:
+
+          * Active  - editation enabled, behaves like an input box.
+          * Passive - editation disabled, behaves like a label or link.
+
+        EditableLink can get activated by:
+          * External call to activate().
+          * Shift + click. DONE: it was caused by user-select.
+
+        EditableLabel can get enabled simply by clicking on it.
+
+        Both can be passivated by:
+         * Pressing Enter - leaves the new value.
+         * Pressing Escape - reverts to original value.
+         * Removing focus - by clicking elsewhere or pressing Tab. TODO
+
+        The "disabled" property is not used as it blocks all events in Firefox.
+        The "readOnly" property is used when passivated.
+        The "user-select" CSS property is not used, it would prevent Home/End.
+        Escape needs to be caught in "onkeyup", otherwise value change would be overriden.
+
+        Known issues:
+         * Home/End don't work in EditableLink.
+
+        Resources:
+         * Key events demo: http://www.javascripter.net/faq/keyboardeventproperties.htm
+         * MartinG gave me this as example of AJAXifying:
+           Behavior: https://github.com/wicketstuff/core/blob/master/jdk-1.6-parent/autocomplete-tagit-parent/autocomplete-tagit/src/main/java/org/wicketstuff/tagit/TagItAjaxBehavior.java
+           JS:       https://github.com/wicketstuff/core/blob/master/jdk-1.6-parent/autocomplete-tagit-parent/autocomplete-tagit/src/main/resources/org/wicketstuff/tagit/res/tag-it.tmpl.js
+
+        Snippets
+        $(this).parent().children('input.editable.link').first().get(0)
+
+        <script src="./jquery183.js" type="text/javascript"></script>
+    -->
+    
     <style type="text/css">
         input.editable.passive {
             border: 1px solid red;
@@ -13,7 +52,7 @@
             background: none;
 
             /* Emulate disabled behavior. */
-            user-select: none; -moz-user-select: none; -webkit-user-select: none;
+            /*user-select: none; -moz-user-select: none; -webkit-user-select: none;*/
         }
         input.editable.active {
             border: 1px solid silver;
@@ -64,9 +103,9 @@
                 this.active = true;
                 this.readOnly = false;
                 //this.disabled = false;
-                //alert('activ');
                 this.focus();
-                //alert(this);
+                this.oldValue = this.value;
+                document.getElementById('debugLog').innerHTML = 'saving old value := ' + this.oldValue;
             },
             passivate: function(){
                 //$(this).removeClass('active').addClass('passive');
@@ -74,7 +113,6 @@
                 this.active = false;
                 this.readOnly = true;
                 //this.disabled = true;
-                //alert('pasiv');
             },
             onclick: function(event){
                 if( this.active ) return;
@@ -103,17 +141,30 @@
     <h2>Editable link - icon enables edit mode</h2>
     <div id="myLink" class="editable link" style="cursor: pointer">
         <img src="./icoEdit.png" width="16" height="16" alt="Edit the link"
-             onclick="EditableLink.activate.apply( this.parentElement.getElementsByTagName('input')[0] );
-                      //$(this).parent().children('input.editable.link').first().get(0)"
+             onclick="EditableLink.activate.apply( this.parentElement.getElementsByTagName('input')[0] );"
         />
-        <input type="text" class="editable link passive"
+        <input type="text" class="editable link passive"        value="ttp://redhat.com/"
                onblur ="EditableLink.passivate.apply(this);"
-               onclick="if(validateURL(this.value) &amp;&amp; (!this.active) ){
+               onclick="if( validateURL(this.value) &amp;&amp; ( ! this.active ) ){
                             window.open(this.value, '', 'modal=true,alwaysRaised=yes'); }"
-               onkeydown="if(!this.active){ event.preventDefault(); event.stopPropagation(); return false; }"
-               value="http://redhat.com/"
+               onkeydown="document.getElementById('debugLog').innerHTML = 'event.keyCode = ' + event.keyCode + ' Active = ' + this.active;
+                          if(!this.active){
+                              if( event.charCode != 0 )  event.preventDefault(); // Allow special keys - Home/End etc.
+                              /*event.stopPropagation();*/
+                              document.getElementById('debugLog').innerHTML += '<br>Cancelled';
+                              return false;
+                          }
+                          if(event.keyCode === 13){  EditableLink.passivate.apply(this); } // Enter
+                          document.getElementById('debugLog').innerHTML += '<br>oldVal was: ' + this.oldValue + ' New: ' + this.value;
+                          "
+               onkeyup="if(event.keyCode === 27){  EditableLink.passivate.apply(this); this.value = this.oldValue; }"
         />
+        <!--
+               onkeypress="if(event.keyCode === 27){  EditableLink.passivate.apply(this); this.value = this.oldValue; }"
+        -->
     </div>
+
+    <div id="debugLog"></div>
 
     <!-- disabled="<anything>" causes this.disabled == true, and blocks any event! 
     <div onclick="alert('div clicked');">
