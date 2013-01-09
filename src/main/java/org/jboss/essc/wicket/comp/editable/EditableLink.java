@@ -6,6 +6,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
+import org.apache.wicket.util.string.StringValue;
 
 /**
     EditableLabel and Editable link.
@@ -54,6 +55,13 @@ public class EditableLink extends Panel {
         //response.render(JavaScriptHeaderItem.forReference(JS));
         response.renderCSSReference( CSS );
         response.renderJavaScriptReference( JS );
+    }
+
+    /**
+     *  Called by AJAX behavior.
+     */
+    void onChange( String input ) {
+        this.setDefaultModelObject( input );
     }
 
 }

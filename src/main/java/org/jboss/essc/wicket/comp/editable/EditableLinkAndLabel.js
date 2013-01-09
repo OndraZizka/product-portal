@@ -21,12 +21,18 @@ var EditableLink = {
             var xhr = createXMLHttpRequest();
             var that = this;
             xhr.onreadystatechange = function() {
-                if(this.readyState === 4 && this.status === 200) {
+                if( this.readyState !== 4 ) return;
+                if( this.status === 200 ) {
                     that.value = this.responseText;
                 }
+                else {
+                    that.className += " ajaxError";
+                }
             };
-            xhr.open('GET', '${callbackUrl}');
-            xhr.send(params);
+            xhr.open('POST', '${callbackUrl}', true);
+            // xhr.overrideMimeType("application/x-www-form-urlencoded; charset=...");
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xhr.send("val=" + this.value);
         }
     },
     activate: function(){
