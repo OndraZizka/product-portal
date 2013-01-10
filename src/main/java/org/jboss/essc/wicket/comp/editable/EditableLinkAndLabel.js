@@ -33,7 +33,7 @@ var EditableLink = {
                 if( this.readyState !== 4 ) return;
                 do {
                     var err = null;
-                    if( this.responseType !== "text" ){
+                    if( this.responseType !== "text" && this.responseType !== "" ){
                         err = 'Server did not return text but: ' + this.responseType;
                     }
                     if( this.status !== 200 ) {
@@ -43,6 +43,7 @@ var EditableLink = {
                     if( err !== null ){
                         eInput.className += " ajaxError";
                         console.log(err);
+                        //this.alt = err;
                         continue;
                     }
 

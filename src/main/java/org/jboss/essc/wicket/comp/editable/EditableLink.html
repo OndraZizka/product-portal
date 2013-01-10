@@ -17,7 +17,7 @@
             />
             </wicket:link>
             <input type="text" class="editable link passive"        value="ttp://redhat.com/"
-                   onblur ="console.log('onblur'); EditableLink.passivate.apply(this);"
+                   onblur ="this.passivate(true);"
                    onclick="if( validateURL(this.value) &amp;&amp; ( ! this.active ) ){
                                 window.open(this.value, '', 'modal=true,alwaysRaised=yes'); }"
                    onkeydown="if( ! this.active ){
@@ -25,19 +25,15 @@
                                       event.preventDefault(); // Allow special keys - Home/End etc.
                                   return false;
                               }
-                              if(event.keyCode === 13){  EditableLink.passivate.apply(this); } // Enter
+                              if(event.keyCode === 13){ this.passivate(true); } // Enter
                               "
                    onkeyup="if( this.active !== true ) return;
-                            console.log('onkeyup keyCode: ' + event.keyCode)
                             if(event.keyCode === 27){
-                                console.log('Esc');///
                                 event.preventDefault();
                                 event.stopPropagation();
                                 this.value = this.oldValue;
-                                //EditableLink.passivate.apply(this);
                                 this.passivate(false);
-                            }
-                            console.log(this.oldValue);"
+                            }"
             />
         </div>
     </wicket:panel>
