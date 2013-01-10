@@ -23,7 +23,7 @@ var EditableLink = {
     },
     /**
      *  Sets the onChangeAjaxHandler to something what communicates with server.
-     *  APPLIED TO input <div>.
+     *  APPLIED TO <input>.
      */
     ajaxify: function( callbackUrl ){
         this.onChangeAjaxHandler = function(){
