@@ -11,9 +11,11 @@
     <wicket:panel>
 
         <div id="myLink" class="editable link" style="cursor: pointer">
-            <img src="./icoEdit.png" width="16" height="16" alt="Edit the link"
+            <wicket:link>
+            <img src="icoEdit.png" width="16" height="16" alt="Edit the link"
                  onclick="EditableLink.activate.apply( this.parentElement.getElementsByTagName('input')[0] );"
             />
+            </wicket:link>
             <input type="text" class="editable link passive"        value="ttp://redhat.com/"
                    onblur ="EditableLink.passivate.apply(this);"
                    onclick="if( validateURL(this.value) &amp;&amp; ( ! this.active ) ){
