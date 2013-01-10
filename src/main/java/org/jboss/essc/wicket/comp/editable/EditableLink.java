@@ -67,7 +67,7 @@ public class EditableLink extends Panel {
      *  Overridable.
      */
     public void onChange() {
-        
+        System.out.println("onChange(); modelObject: " + this.getDefaultModelObjectAsString() );
     }
 
 }
