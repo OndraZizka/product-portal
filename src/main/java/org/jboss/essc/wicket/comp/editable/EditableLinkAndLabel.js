@@ -31,12 +31,24 @@ var EditableLink = {
             var eInput = this;
             xhr.onreadystatechange = function() {
                 if( this.readyState !== 4 ) return;
-                if( this.status === 200 ) {
+                do {
+                    var err = null;
+                    if( this.responseType !== "text" ){
+                        err = 'Server did not return text but: ' + this.responseType;
+                    }
+                    if( this.status !== 200 ) {
+                        err = 'Server returned HTTP status ' + this.status + ": " + this.statusText;
+                    }
+
+                    if( err !== null ){
+                        eInput.className += " ajaxError";
+                        console.log(err);
+                        continue;
+                    }
+
                     eInput.value = this.responseText;
-                }
-                else {
-                    eInput.className += " ajaxError";
-                }
+                    
+                } while( false );
             };
             xhr.open('POST', callbackUrl, true);
             // xhr.overrideMimeType("application/x-www-form-urlencoded; charset=...");
@@ -59,14 +71,15 @@ var EditableLink = {
     /**
      *  APPLIED TO the <input>.
      */
-    passivate: function(){
+    passivate: function(fireAjax){
         //$(this).removeClass('active').addClass('passive');
         this.className = (this.className.replace('active','').replace('passive','') + ' passive');
         //this.disabled = true;
         this.readOnly = true;
         if( ! this.active ) return;
         this.active = false;
-        this.onChangeAjaxHandler();
+        if( fireAjax )
+            this.onChangeAjaxHandler();
     },
     /**
      *  APPLIED TO the <input>.
