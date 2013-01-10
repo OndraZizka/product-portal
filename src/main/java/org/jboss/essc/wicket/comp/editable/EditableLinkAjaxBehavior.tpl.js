@@ -1,3 +1,3 @@
 (function() {
-    EditableLink.ajaxify.apply( document.getElementById('${componentId}') );
+    EditableLink.ajaxify.call( document.getElementById('${componentId}').getInput(), '${callbackUrl}');
 })();
