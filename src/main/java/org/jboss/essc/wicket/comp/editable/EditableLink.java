@@ -24,7 +24,7 @@ import org.apache.wicket.request.resource.ResourceReference;
     Both can be passivated by:
      * Pressing Enter - leaves the new value.
      * Pressing Escape - reverts to original value.
-     * Removing focus - by clicking elsewhere or pressing Tab. TODO
+     * Removing focus - by clicking elsewhere or pressing Tab.
 
     The "disabled" property is not used as it blocks all events in Firefox.
     The "readOnly" property is used when passivated.
@@ -33,6 +33,13 @@ import org.apache.wicket.request.resource.ResourceReference;
 
     Known issues:
      * Home/End don't work in EditableLink.
+
+    Resources:
+     * Key events demo: http://www.javascripter.net/faq/keyboardeventproperties.htm
+     * MartinG gave me this as example of AJAXifying:
+       Behavior: https://github.com/wicketstuff/core/blob/master/jdk-1.6-parent/autocomplete-tagit-parent/autocomplete-tagit/src/main/java/org/wicketstuff/tagit/TagItAjaxBehavior.java
+       JS:       https://github.com/wicketstuff/core/blob/master/jdk-1.6-parent/autocomplete-tagit-parent/autocomplete-tagit/src/main/resources/org/wicketstuff/tagit/res/tag-it.tmpl.js
+
 
  *  @author Ondrej Zizka
  */
