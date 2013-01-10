@@ -47,11 +47,11 @@ public class EditableLinkAjaxBehavior extends AbstractAjaxBehavior {
         String input = request.getRequestParameters().getParameterValue("val").toString();
 
         // And set it as new model value.
-        //getComponent().setDefaultModelObject( input );
+        getComponent().setDefaultModelObject( input );
 
-        // Call onChange() instead.
+        // Call onChange().
         if( getComponent() instanceof EditableLink ){
-            ((EditableLink) getComponent()).onChange( input );
+            ((EditableLink) getComponent()).onChange();
         }
 
         // Model value after onChange();

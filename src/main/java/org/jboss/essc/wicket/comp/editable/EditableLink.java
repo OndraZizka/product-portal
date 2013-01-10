@@ -63,9 +63,11 @@ public class EditableLink extends Panel {
 
     /**
      *  Called by AJAX behavior.
+     *  Sets the default model object.
+     *  Overridable.
      */
-    void onChange( String input ) {
-        this.setDefaultModelObject( input );
+    public void onChange() {
+        
     }
 
 }
