@@ -1,8 +1,13 @@
 
 package org.jboss.essc.wicket.comp.editable;
 
+import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AjaxEventBehavior;
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.AbstractWrapModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
@@ -43,17 +48,41 @@ import org.apache.wicket.request.resource.ResourceReference;
 
  *  @author Ondrej Zizka
  */
-public class EditableLink extends Panel {
+public class EditableLink2 extends Panel {
     
-    private static final ResourceReference CSS = new PackageResourceReference(EditableLink.class, "EditableLinkAndLabel.css");
-    private static final ResourceReference JS = new PackageResourceReference(EditableLink.class, "EditableLinkAndLabel.js");
+    private static final ResourceReference CSS = new PackageResourceReference(EditableLink2.class, "EditableLinkAndLabel.css");
+    private static final ResourceReference JS  = new PackageResourceReference(EditableLink2.class, "EditableLinkAndLabel.js");
 
     
-    public EditableLink( String id, IModel<?> model ) {
-        super( id, model );
+    public EditableLink2( String id, IModel<?> model, AjaxEventBehavior ajaxEventBehavior ) {
+        super( id );
+        
+        TextField input = new TextField("input", model)/*{
+            @Override protected void onModelChanged() {
+                EditableLink2.this.setDefaultModelObject( this.getDefaultModelObject() );
+            }
+        }*/;
+        
+
+        // Ajax behavior.
+        input.setOutputMarkupId( true );
+        /*
+        input.add( new AjaxEventBehavior("") {
+            @Override
+            protected void onEvent( AjaxRequestTarget target ) {
+                Component show2 = getPage().get("ajaxUpdatedVal2");
+                show2.setDefaultModelObject( getComponent().getDefaultModelObject() );
+                target.add( show2 );
+            }
+        } );/**/
+
+        if( ajaxEventBehavior != null )
+            input.add( ajaxEventBehavior );
+
+        add( input );
     }
 
-
+    
     /**
      *  Adds the necessary JavaScript and CSS to head, and the JS to initialize.
      */
