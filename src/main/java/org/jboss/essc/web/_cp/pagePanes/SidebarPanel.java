@@ -12,6 +12,7 @@ import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.request.http.WebResponse;
 import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jboss.essc.web.CookieNames;
@@ -58,7 +59,7 @@ public class SidebarPanel extends Panel {
         } );
         
         // Settings
-        add( new AjaxCheckBox("showInternalReleases") {
+        add( new AjaxCheckBox("showInternalReleases", new Model()) {
             @Override protected void onUpdate( AjaxRequestTarget target ) {
                 target.add( getPage() );
                 
