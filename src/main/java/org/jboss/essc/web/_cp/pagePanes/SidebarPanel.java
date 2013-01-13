@@ -1,16 +1,13 @@
 package org.jboss.essc.web._cp.pagePanes;
 
-import java.awt.Color;
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxCheckBox;
-import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.image.Image;
-import org.apache.wicket.markup.html.image.resource.DefaultButtonImageResource;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
@@ -21,9 +18,7 @@ import org.jboss.essc.web.CookieNames;
 import org.jboss.essc.web._cp.links.ProductLink;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.model.Product;
-import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.pages.prod.AddProductPage;
-import org.jboss.essc.web.pages.rel.AddReleasePage;
 import org.jboss.essc.web.security.EsscAuthSession;
 import org.jboss.essc.web.util.MailSender;
 
