@@ -96,8 +96,8 @@ public class ReleasesBox extends Panel {
                         .setVisibilityAllowed( null != downloadUrl ) )
 
                     // Install - TODO
-                    .add( new ExternalLink("install", downloadUrl ).add(new Image("img", "buttonDownload.png"))
-                        .setVisibilityAllowed( null != downloadUrl ) )
+                    .add( new ExternalLink("install", installUrl ).add(new Image("img", "buttonDownload.png"))
+                        .setVisibilityAllowed( null != installUrl ) )
 
                     // Traits
                     .add( new ListView<LabelAndLink>("repeater", createLinksList(rel)){
