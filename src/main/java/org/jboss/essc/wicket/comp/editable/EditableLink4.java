@@ -1,18 +1,16 @@
 
 package org.jboss.essc.wicket.comp.editable;
 
-import org.apache.wicket.ajax.AjaxEventBehavior;
-import org.apache.wicket.behavior.Behavior;
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.IHeaderResponse;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 
 /**
-    EditableLabel and Editable link.
+    Editable link.
+    This version extends TextField.
 
     They have two states:
 
@@ -46,30 +44,43 @@ import org.apache.wicket.request.resource.ResourceReference;
 
  *  @author Ondrej Zizka
  */
-public class EditableLink2 extends Panel {
+public class EditableLink4<T> extends TextField<T> {
     
-    private static final ResourceReference CSS = new PackageResourceReference(EditableLink2.class, "EditableLinkAndLabel.css");
-    private static final ResourceReference JS  = new PackageResourceReference(EditableLink2.class, "EditableLinkAndLabel.js");
+    private static final ResourceReference CSS = new PackageResourceReference(EditableLink4.class, "EditableLinkAndLabel.css");
+    private static final ResourceReference JS  = new PackageResourceReference(EditableLink4.class, "EditableLinkAndLabel.js");
 
     private TextField input;
     
-    public EditableLink2( String id, IModel<?> model, AjaxEventBehavior ajaxEventBehavior ) {
-        super( id, new Model() );
-        
-        this.input = new TextField("input", model){
-            // Pass the onModelChanged() call.
-            @Override protected void onModelChanged() {
-                EditableLink2.this.setDefaultModelObject( this.getDefaultModelObject() );
-                EditableLink2.this.onModelChanged();
-            }
-        };
-        
-        // AjaxEventBehavior from the param.
-        this.input.setOutputMarkupId( true );
-        if( ajaxEventBehavior != null )
-            this.input.add( ajaxEventBehavior );
+    public EditableLink4( String id, IModel<T> model ) {
+        super( id, model );
+        this.setOutputMarkupId( true );
 
-        add( this.input );
+        this.add( AttributeModifier.replace("class", "editable link passive"));
+
+        this.add( AttributeModifier.replace("onblur", "this.passivate(true);"));
+        this.add( AttributeModifier.replace("onclick",
+                              "if( validateURL(this.value) && ( ! this.active ) ){\n"
+                            + "    window.open(this.value, '', 'modal=true,alwaysRaised=yes'); }"
+                            + "if( ! this.active && event.shiftKey )"
+                            + "    this.activate();"));
+
+        this.add( AttributeModifier.replace("onkeydown",
+                              "if( ! this.active ){\n"
+                            + "    if( event.shiftKey && (event.keyCode === 13 || event.keyCode === 32) )\n"
+                            + "        this.activate();\n"
+                            + "    if( event.charCode !== 0 )\n"
+                            + "        event.preventDefault(); // Allow special keys - Home/End etc.\n"
+                            + "    return false;\n"
+                            + "}\n"
+                            + "if(event.keyCode === 13){ this.passivate(true); } // Enter\n"));
+        this.add( AttributeModifier.replace("onkeyup",
+                              "if( this.active !== true ) return;\n"
+                            + "if(event.keyCode === 27){\n"
+                            + "    event.preventDefault();\n"
+                            + "    event.stopPropagation();\n"
+                            + "    this.value = this.oldValue;\n"
+                            + "    this.passivate(false);\n"
+                            + "}"));
     }
 
     
@@ -86,17 +97,8 @@ public class EditableLink2 extends Panel {
         
         // OnLoad - initialize the element.
         setOutputMarkupId(true);
-        String onLoad = String.format("EditableLink.init( document.getElementById('%s'));", getMarkupId());
+        String onLoad = String.format("EditableLink.init4( document.getElementById('%s'));", getMarkupId());
         response.renderOnDomReadyJavaScript(onLoad);
     }
 
-    /**
-     *  Called by AJAX behavior.
-     *  Sets the default model object.
-     *  Overridable.
-     */
-    public void onChange() {
-        System.err.println("onChange(); modelObject: " + this.getDefaultModelObjectAsString() );
-    }
-
-}
+}// class

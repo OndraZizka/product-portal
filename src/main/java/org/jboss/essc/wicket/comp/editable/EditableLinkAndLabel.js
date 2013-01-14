@@ -1,14 +1,8 @@
 
-function validateURL(val){
-    return val.substring(0, 7) === "http://"
-        || val.substring(0, 8) === "https://"
-        || val.substring(0, 6) === "ftp://";
-}
-
 var EditableLink = {
 
     /**
-     *  Init element's stuff.
+     *  Init element's stuff. Applied to the CONTAINER.
      *  STATIC
      */
     init: function(eContainer){
@@ -21,6 +15,19 @@ var EditableLink = {
         // Initial state is passive.
         eContainer.getInput().passivate();
     },
+    /**
+     *  Init element's stuff.
+     *  STATIC
+     */
+    init4: function(eInput){
+        eInput.activate  = EditableLink.activate;
+        eInput.passivate = EditableLink.passivate;
+        eInput.onChangeAjaxHandler = function(){};
+
+        // Initial state is passive.
+        eInput.getInput().passivate();
+    },
+        
     /**
      *  Sets the onChangeAjaxHandler to something what communicates with server.
      *  APPLIED TO <input>.
@@ -109,4 +116,11 @@ function createXMLHttpRequest() {
         }
     }
     return false;
+}
+
+
+function validateURL(val){
+    return val.substring(0, 7) === "http://"
+        || val.substring(0, 8) === "https://"
+        || val.substring(0, 6) === "ftp://";
 }
