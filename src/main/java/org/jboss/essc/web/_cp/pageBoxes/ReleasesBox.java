@@ -5,13 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.ImageButton;
+import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.request.http.handler.RedirectRequestHandler;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.links.ProductLink;
 import org.jboss.essc.web._cp.links.ReleaseLink;
@@ -61,10 +65,10 @@ public class ReleasesBox extends Panel {
         //if( releases.size() == 0 )
         add( new ListView<Release>("rows", releases)
         {
-            // Populate the table of contacts
+            // Populate the table of releases
             @Override
             protected void populateItem( final ListItem<Release> item) {
-                Release rel = item.getModelObject();
+                final Release rel = item.getModelObject();
                 
                 // CSS for releases row - differentiate internal from public.
                 if( showInternalReleases )  // Only if necessary.
@@ -83,16 +87,29 @@ public class ReleasesBox extends Panel {
                 item.add( new Label("status", status));
                 
                 // Links
-                item.add( new WebMarkupContainer("links").add(
-                    new ListView<LabelAndLink>("repeater", createLinksList(rel)){
-                        @Override protected void populateItem( ListItem<LabelAndLink> item ) {
-                            LabelAndLink ll = item.getModelObject();
-                            item.add(new ExternalLink("link", ll.link, ll.label) );
+                final String downloadUrl = rel.getTraits().getLinkReleasedBinaries();
+                final String installUrl  = null;
+
+                item.add( new WebMarkupContainer("links")
+                    // Download
+                    .add( new ExternalLink("download", downloadUrl ).add(new Image("img", "buttonDownload.png"))
+                        .setVisibilityAllowed( null != downloadUrl ) )
+
+                    // Install - TODO
+                    .add( new ExternalLink("install", downloadUrl ).add(new Image("img", "buttonDownload.png"))
+                        .setVisibilityAllowed( null != downloadUrl ) )
+
+                    // Traits
+                    .add( new ListView<LabelAndLink>("repeater", createLinksList(rel)){
+                            @Override protected void populateItem( ListItem<LabelAndLink> item ) {
+                                LabelAndLink ll = item.getModelObject();
+                                item.add(new ExternalLink("link", ll.link, ll.label) );
+                            }
                         }
-                    }
-                ) );
+                    )
+                );
                 
-            }
+            }// populateItem() - Populate the table of releases
 
         });
         
@@ -115,10 +132,13 @@ public class ReleasesBox extends Panel {
             return dao.getReleasesOfProduct( forProduct, showInternal );
     }
     
-    
+
+    /**
+     * Creates a list of link components for a set traits.
+     */
     private static List<LabelAndLink> createLinksList( Release rel ) {
         List<LabelAndLink> links = new ArrayList<LabelAndLink>();
-        addLinkIfNotNull( links, "Release", rel.getTraits().getLinkReleasedBinaries());
+        //addLinkIfNotNull( links, "Release", rel.getTraits().getLinkReleasedBinaries()); // We have the Download button.
         addLinkIfNotNull( links, "Docs", rel.getTraits().getLinkReleasedDocs());
         addLinkIfNotNull( links, "Tests", rel.getTraits().getLinkMeadJob());
         addLinkIfNotNull( links, "Tattle", rel.getTraits().getLinkTattleTale());
