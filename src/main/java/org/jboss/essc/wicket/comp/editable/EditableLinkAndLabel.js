@@ -25,7 +25,7 @@ var EditableLink = {
         eInput.onChangeAjaxHandler = function(){};
 
         // Initial state is passive.
-        eInput.getInput().passivate();
+        eInput.passivate();
     },
         
     /**
