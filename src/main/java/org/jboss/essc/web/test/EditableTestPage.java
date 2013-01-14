@@ -6,12 +6,14 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.jboss.essc.wicket.comp.editable.EditableLink;
 import org.jboss.essc.wicket.comp.editable.EditableLink2;
 import org.jboss.essc.wicket.comp.editable.EditableLink4;
+import org.jboss.essc.wicket.comp.editable.EditableLinkActivator;
 import org.jboss.essc.wicket.comp.editable.EditableLinkAjaxBehavior;
 
 /**
@@ -82,9 +84,13 @@ public class EditableTestPage extends WebPage {
                 target.add( show2 );
             }
         };
-
         // Link itself
-        add( new EditableLink4("link4", new PropertyModel(this, "link4Href")).add(updateOtherInput4) );
+        EditableLink4 link4 = new EditableLink4("link4", new PropertyModel(this, "link4Href"));
+        link4.add(updateOtherInput4);
+        add( link4 );
+
+        // Activator icon.
+        add( new Image("iconEdit", "icoEdit.png").add( new EditableLinkActivator(link4) ) );
 
         // Other input
         add( new Label("ajaxUpdatedVal4", new Model("orig val 4") ).setOutputMarkupId(true) );
