@@ -61,6 +61,12 @@ public class Release implements Serializable, IHasTraits {
     
     private String note;
 
+
+    // External ID of this product - Jira and Bugzilla.
+    private String extIdJira;
+    private String extIdBugzilla;
+
+
     
     // ---- Traits ----
     

@@ -25,7 +25,10 @@ public class Product implements Serializable, IHasTraits {
     private String name;
     
     private String note;
-    
+
+    // External ID of this product - Jira and Bugzilla.
+    private String extIdJira;
+    private String extIdBugzilla;
 
     
     // ---- Traits ----
