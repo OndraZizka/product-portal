@@ -7,7 +7,10 @@ FLUSH PRIVILEGES;
 CREATE TABLE `product` (
   `id`               INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name`             VARCHAR(255) NOT NULL UNIQUE KEY,
+  `extIdJira`       VARCHAR(255) DEFAULT NULL,
+  `extIdBugzilla`   VARCHAR(255) DEFAULT NULL,
   `note`             VARCHAR(255) DEFAULT NULL,
+
   `gitHash`          VARCHAR(255) DEFAULT NULL,
   `link508`          TEXT DEFAULT NULL,
   `linkBrew`         TEXT DEFAULT NULL,
@@ -30,15 +33,25 @@ CREATE TABLE `product` (
   `linkTck`              TEXT DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `prod_custFields` (
+  `id`              INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `product_id`      INT UNSIGNED NOT NULL,
+  `name`            VARCHAR(255) NOT NULL,
+  UNIQUE KEY `prodId_name` (`product_id`, `name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `release` (
   `id`              INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `product_id`      INT UNSIGNED NOT NULL,
   `version`         VARCHAR(255) DEFAULT NULL,
+  `extIdJira`       VARCHAR(255) DEFAULT NULL,
+  `extIdBugzilla`   VARCHAR(255) DEFAULT NULL,
   `internal`        BOOLEAN NOT NULL,
   `lastChanged`     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `note`            VARCHAR(255) DEFAULT NULL,
   `plannedFor`      DATE DEFAULT NULL,
   `status`          TINYINT UNSIGNED DEFAULT NULL,
+
   `gitHash`         VARCHAR(255) DEFAULT NULL,
   `link508`         TEXT DEFAULT NULL,
   `linkBrew`        TEXT DEFAULT NULL,
@@ -63,6 +76,15 @@ CREATE TABLE `release` (
   CONSTRAINT `product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
+CREATE TABLE `rel_custFields` (
+  `id`              INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `field_id`        INT UNSIGNED NOT NULL,
+  `release_id`      INT UNSIGNED NOT NULL,
+  `val`             VARCHAR(255) NOT NULL,
+  UNIQUE KEY `fieldId_relId` (`field_id`, `release_id`),
+  CONSTRAINT `field_id_fk`   FOREIGN KEY (`field_id`)   REFERENCES `prod_custFields` (`id`),
+  CONSTRAINT `release_id_fk` FOREIGN KEY (`release_id`) REFERENCES `release` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user` (
   `id`   INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
