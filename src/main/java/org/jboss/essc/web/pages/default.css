@@ -259,12 +259,12 @@ a:hover { color: #7ACE11; text-decoration: none; }
 
     .box .meta .more {
             padding-left: 20px;
-            background: url(images/ico/icon-sheet.gif) no-repeat left center;
+            background: url(images/ico/Sheet.gif) no-repeat left center;
     }
 
     .box .meta .comments {
             padding-left: 20px;
-            background: url(images/ico/icon-buubles.gif) no-repeat left center;
+            background: url(images/ico/DialogBubbles.gif) no-repeat left center;
     }
 
 .box .dangerousButton      {  }
