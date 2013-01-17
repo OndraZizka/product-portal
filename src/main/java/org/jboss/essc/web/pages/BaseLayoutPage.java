@@ -34,12 +34,14 @@ public class BaseLayoutPage extends WebPage {
     /**
      *  Global helper to avoid casting everywhere.
      */
+    @Override
     public EsscAuthSession getSession(){
         return (EsscAuthSession) Session.get();
     }
     
     
     /** Adds CSS reference. */
+    @Override
     public void renderHead(IHeaderResponse response) {
         response.renderCSSReference(new CssResourceReference( BaseLayoutPage.class, "default.css" ));
         response.renderJavaScriptReference(new JavaScriptResourceReference( BaseLayoutPage.class, "common.js" ));
