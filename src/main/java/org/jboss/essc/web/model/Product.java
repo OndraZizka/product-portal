@@ -1,6 +1,7 @@
 package org.jboss.essc.web.model;
 
 import java.io.Serializable;
+import java.util.Map;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -37,7 +38,14 @@ public class Product implements Serializable, IHasTraits {
     @XmlTransient
     @JsonIgnore
     private ReleaseTraits traits;
-    
+
+
+    // ---- Custom fields ---- mappedBy = "product",
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true )
+    @JoinColumn(name = "product_id")
+    @MapKey(name = "name")
+    @XmlTransient @JsonIgnore
+    private Map<String, ProductCustomField> customFields;
     
     
     public Product() {

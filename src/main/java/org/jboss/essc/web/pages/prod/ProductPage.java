@@ -12,12 +12,10 @@ import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
-import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.util.lang.Bytes;
 import org.jboss.essc.web._cp.PropertiesUploadForm;
 import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
@@ -90,15 +88,17 @@ public class ProductPage extends BaseLayoutPage {
         if( this.product != null ){
             add( new ReleasesBox("releasesBox", this.product, 100) );
             this.form.add( new ReleaseTraitsPanel("templates", this.product) );
+            this.form.add( new WebMarkupContainer("customFields") );
         }
         else {
             add( new NoItemsFoundBox("releasesBox", "No product specified."));
             this.form.add( new WebMarkupContainer("templates"));
+            this.form.add( new WebMarkupContainer("customFields") );
         }
         
         
         // Save as .properties - TODO
-        this.form.add( new PropertiesDownloadLink("downloadProps", product.getTraits(), product.getName() + "-traits.properties") );
+        this.add( new PropertiesDownloadLink("downloadProps", product.getTraits(), product.getName() + "-traits.properties") );
 
         // Upload & apply .properties
         this.add( new PropertiesUploadForm("uploadForm"){

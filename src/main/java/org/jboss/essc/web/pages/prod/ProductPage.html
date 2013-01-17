@@ -22,16 +22,33 @@
             <div id="defaults" class="box">
                 <div wicket:id="feedback" class="feedback">Feedback will be here</div>
                 <form wicket:id="form" method="post" action="#">
-                    <h3>Traits templates</h3>
+
                     <!-- Trait templates -->
+                    <h3>Traits templates</h3>
                     <wicket:container wicket:id="templates"/>
-                    <input type="submit" value="Save"/>
-                    <input type="button" wicket:id="downloadProps" value="Download as .properties"/>
+
+                    <!-- Custom fields -->
+                    <h3>Custom fields</h3>
+                    <wicket:container wicket:id="customFields"/>
+
+                    <input type="submit" value="Save" style="width: 100%; height: 3ex; margin: 1ex 0"/>
+
                 </form>
-                <form wicket:id="uploadForm" method="post" action="#">
-                    <input type="file" wicket:id="file"/>
-                    <input type="submit" value="Upload & apply a properties file"/>
-                </form>
+                <fieldset title="Other actions">
+                    <legend>Other actions...
+                        <wicket:link>
+                        <img src="icoPlusGreenCircle.png" alt="Show / hide" style="display: none;"
+                            onclick="toggleVisibility(this.parentElement.parentElement.getElementsByTagName('div')[0]);"/>
+                        </wicket:link>
+                    </legend>
+                    <div>
+                        <input type="button" wicket:id="downloadProps" value="Download as .properties"/>
+                        <form wicket:id="uploadForm" method="post" action="#">
+                            <input type="file" wicket:id="file"/>
+                            <input type="submit" value="Upload & apply a properties file"/>
+                        </form>
+                    </div>
+                </fieldset>
             </div>
 
             <!-- Danger zone -->

@@ -7,8 +7,8 @@ FLUSH PRIVILEGES;
 CREATE TABLE `product` (
   `id`               INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name`             VARCHAR(255) NOT NULL UNIQUE KEY,
-  `extIdJira`       VARCHAR(255) DEFAULT NULL,
-  `extIdBugzilla`   VARCHAR(255) DEFAULT NULL,
+  `extIdJira`        VARCHAR(255) DEFAULT NULL,
+  `extIdBugzilla`    VARCHAR(255) DEFAULT NULL,
   `note`             VARCHAR(255) DEFAULT NULL,
 
   `gitHash`          VARCHAR(255) DEFAULT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `product` (
   `linkTck`              TEXT DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `prod_custFields` (
+CREATE TABLE `prod_custField` (
   `id`              INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `product_id`      INT UNSIGNED NOT NULL,
   `name`            VARCHAR(255) NOT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE `release` (
   CONSTRAINT `product_id_fk` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 
-CREATE TABLE `rel_custFields` (
+CREATE TABLE `rel_custField` (
   `id`              INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `field_id`        INT UNSIGNED NOT NULL,
   `release_id`      INT UNSIGNED NOT NULL,
