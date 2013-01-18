@@ -9,6 +9,7 @@ import org.apache.wicket.request.resource.JavaScriptResourceReference;
 import org.jboss.essc.web._cp.pagePanes.HeaderPanel;
 import org.jboss.essc.web._cp.pagePanes.SidebarPanel;
 import org.jboss.essc.web.security.EsscAuthSession;
+import org.jboss.essc.wicket.favicon.FavIconLink;
 
 
 /**
@@ -21,6 +22,9 @@ public class BaseLayoutPage extends WebPage {
 
     // Set up the dynamic behavior for the page, widgets bound by id
     public BaseLayoutPage() {
+
+        // Favicon
+        add( new FavIconLink("favicon", "favicon.ico") );
         
         add( new DebugBar("debugBar") );
         

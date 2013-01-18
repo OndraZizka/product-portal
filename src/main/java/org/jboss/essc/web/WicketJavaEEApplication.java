@@ -1,6 +1,5 @@
 package org.jboss.essc.web;
 
-import java.awt.Color;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.naming.InitialContext;
@@ -12,13 +11,15 @@ import org.apache.wicket.authorization.Action;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.apache.wicket.markup.html.IPackageResourceGuard;
 import org.apache.wicket.markup.html.PackageResourceGuard;
-import org.apache.wicket.markup.html.image.resource.DefaultButtonImageResource;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 import org.apache.wicket.request.component.IRequestableComponent;
+import org.apache.wicket.request.resource.ContextRelativeResource;
+import org.apache.wicket.request.resource.PackageResource;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
+import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.pages.HomePage;
@@ -27,7 +28,6 @@ import org.jboss.essc.web.pages.prod.ProductPage;
 import org.jboss.essc.web.pages.rel.AddReleasePage;
 import org.jboss.essc.web.pages.rel.ReleasePage;
 import org.jboss.essc.web.pages.statics.AboutPage;
-import org.jboss.essc.web.pages.statics.ErrorPage;
 import org.jboss.essc.web.pages.statics.Http404;
 import org.jboss.essc.web.pages.user.LoginPage;
 import org.jboss.essc.web.pages.user.UserPage;
@@ -101,6 +101,9 @@ public class WicketJavaEEApplication extends WebApplication {
      *  Initialize resources. Mostly registers images as shared resources.
      */
     void initResources(){
+        //getSharedResources().add("favicon", new ContextRelativeResource("WEB-INF/classes/Leaf.ico"));
+        //mountResource("/favicon.ico", new SharedResourceReference("favicon") );
+
         ResourceReference ref1 = new PackageResourceReference( BaseLayoutPage.class, "images/btn/AddProduct.png");
         ResourceReference ref3 = new PackageResourceReference( BaseLayoutPage.class, "images/btn/AddResource.png");
         getSharedResources().add("btn.AddProduct", ref1.getResource() );
