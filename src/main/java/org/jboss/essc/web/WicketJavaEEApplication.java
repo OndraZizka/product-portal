@@ -15,11 +15,8 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 import org.apache.wicket.request.component.IRequestableComponent;
-import org.apache.wicket.request.resource.ContextRelativeResource;
-import org.apache.wicket.request.resource.PackageResource;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
-import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.pages.HomePage;
@@ -29,6 +26,7 @@ import org.jboss.essc.web.pages.rel.AddReleasePage;
 import org.jboss.essc.web.pages.rel.ReleasePage;
 import org.jboss.essc.web.pages.statics.AboutPage;
 import org.jboss.essc.web.pages.statics.Http404;
+import org.jboss.essc.web.pages.test.JpaQueryPage;
 import org.jboss.essc.web.pages.user.LoginPage;
 import org.jboss.essc.web.pages.user.UserPage;
 import org.jboss.essc.web.qualifiers.CurrentSession;
@@ -82,6 +80,7 @@ public class WicketJavaEEApplication extends WebApplication {
         mountPage("/login", LoginPage.class);
         mountPage("/user",  UserPage.class);
         mountPage("/test",  EditableTestPage.class);
+        mountPage("/jpa",   JpaQueryPage.class);
         
         mountPage("/addProduct",            AddProductPage.class);
         mountPage("/addRelease/#{product}", AddReleasePage.class);
