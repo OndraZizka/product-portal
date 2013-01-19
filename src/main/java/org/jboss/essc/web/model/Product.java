@@ -66,7 +66,9 @@ public class Product implements Serializable, IHasTraits {
     public void setName(String name) { this.name = name; }
     public String getNote() { return note; }
     public void setNote(String note) { this.note = note; }
-    
+
+    public Map<String, ProductCustomField> getCustomFields() { return customFields; }
+    public void setCustomFields( Map<String, ProductCustomField> customFields ) { this.customFields = customFields; }
 
     @XmlTransient
     @JsonIgnore
@@ -99,5 +101,10 @@ public class Product implements Serializable, IHasTraits {
         else if (!name.equals(other.name)) return false;
         return true;
     }
-   
+
+    @Override
+    public String toString() {
+        return "Product #"+ id + " \"" + name + "\", " + customFields.size() + " customFields }";
+    }
+
 }

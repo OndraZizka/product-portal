@@ -14,10 +14,12 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.PropertiesUploadForm;
 import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
+import org.jboss.essc.web._cp.pageBoxes.CustomFieldsPanel;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
@@ -87,8 +89,22 @@ public class ProductPage extends BaseLayoutPage {
         // Boxes
         if( this.product != null ){
             add( new ReleasesBox("releasesBox", this.product, 100) );
+
+            // Traits
             this.form.add( new ReleaseTraitsPanel("templates", this.product) );
-            this.form.add( new WebMarkupContainer("customFields") );
+
+            // Custom fields
+            this.form.add( new CustomFieldsPanel("customFields", new PropertyModel(this.product, "customFields"), feedbackPanel ){
+
+                @Override protected void onChange() {
+                    productDao.update( (Product)getDefaultModelObject() );
+                }
+
+                @Override protected void onModelChanged() {
+                    
+                }
+
+            });
         }
         else {
             add( new NoItemsFoundBox("releasesBox", "No product specified."));
