@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.UrlValidator;
 import org.jboss.essc.web.model.IHasTraits;
 import org.jboss.essc.web.model.Product;
@@ -106,39 +107,8 @@ public class ReleaseTraitsPanel extends Panel {
 
     }// const
 
-    
-    
-    /**
-     *  Adds the feedback panel to AJAX target.
-     *  
-     *  TODO: Make standalone class. Pass the ReleaseTraitsPanel ref to the constructor.
-     *
-     *  @deprecated  Replaced with my own EditableLink.
-     */
-    public class MyAjaxEditableLabel extends AjaxEditableLabel<String>{
 
-        public MyAjaxEditableLabel( String id, IModel<String> model ) {
-            super( id, model );
-            if( isUrlVerificationEnabled() ){
-                this.add( urlFormatValidator );
-                this.add( urlHttpValidator );
-            } else {
-                this.add( urlFormatSimpleValidator );
-            }
-            add(AttributeModifier.append("class", " fakeLink") );
-        }
 
-        @Override protected void onError( AjaxRequestTarget target ) {
-            target.add( feedbackPanel );
-            //super.onError( target ); // puts the focus back.
-        }
-        @Override protected void onSubmit( AjaxRequestTarget target ) {
-            target.add( feedbackPanel );
-            super.onSubmit( target );
-        }
-    }
-    
-    
     //<editor-fold defaultstate="collapsed" desc="Get/Set">
     public boolean isUrlVerificationEnabled() { return urlVerificationEnabled; }
     public void setUrlVerificationEnabled( boolean urlVerificationEnabled ) { this.urlVerificationEnabled = urlVerificationEnabled; }
