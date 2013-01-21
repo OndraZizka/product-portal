@@ -9,23 +9,23 @@ import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 
 /**
-    Editable link.
+    Editable label.
     This version extends TextField.
 
  *  @author Ondrej Zizka
  */
-public class EditableLink4<T> extends TextField<T> {
+public class EditableLabel<T> extends TextField<T> {
     
-    private static final ResourceReference CSS = new PackageResourceReference(EditableLink4.class, "EditableLinkAndLabel.css");
-    private static final ResourceReference JS  = new PackageResourceReference(EditableLink4.class, "EditableLinkAndLabel.js");
+    private static final ResourceReference CSS = new PackageResourceReference(EditableLabel.class, "EditableLinkAndLabel.css");
+    private static final ResourceReference JS  = new PackageResourceReference(EditableLabel.class, "EditableLinkAndLabel.js");
 
     private TextField input;
     
-    public EditableLink4( String id, IModel<T> model ) {
+    public EditableLabel( String id, IModel<T> model ) {
         super( id, model );
         this.setOutputMarkupId( true );
 
-        this.add( AttributeModifier.replace("class", "editable link passive"));
+        this.add( AttributeModifier.replace("class", "editable label passive"));
     }
 
     

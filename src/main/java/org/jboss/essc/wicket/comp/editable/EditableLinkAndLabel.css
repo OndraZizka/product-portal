@@ -1,5 +1,8 @@
-    input.editable.passive {
+    input.editable.debug {
         border: 1px solid red;
+    }
+    input.editable.passive {
+        border: 1px solid transparent;
         border-bottom: 1px solid transparent;
         display: inline;
         width: min-content;
@@ -12,7 +15,7 @@
         /*user-select: none; -moz-user-select: none; -webkit-user-select: none;*/
     }
     input.editable.active {
-        border: 1px solid silver;
+        border: 1px inset #FFF8DC; /* CornSilk. Or, use ThreeDFace? */
     }
 
     input.editable.link.passive {

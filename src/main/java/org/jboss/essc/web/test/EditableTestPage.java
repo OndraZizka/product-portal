@@ -10,6 +10,7 @@ import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.jboss.essc.wicket.comp.editable.EditableLabel;
 import org.jboss.essc.wicket.comp.editable.EditableLink;
 import org.jboss.essc.wicket.comp.editable.EditableLink2;
 import org.jboss.essc.wicket.comp.editable.EditableLink4;
@@ -28,6 +29,7 @@ public class EditableTestPage extends WebPage {
     private String ajaxUpdatedVal = "orig val";
     private String link2Href = "link2Href orig val";
     private String link4Href = "link2Href orig val";
+    private String labelVal  = "labelVal orig val";
 
 
     public EditableTestPage() {
@@ -94,6 +96,26 @@ public class EditableTestPage extends WebPage {
 
         // Other input
         add( new Label("ajaxUpdatedVal4", new Model("orig val 4") ).setOutputMarkupId(true) );
+
+        // === Label ===
+
+        // Ajax
+        AjaxFormComponentUpdatingBehavior updateOtherInput5 =
+        new AjaxFormComponentUpdatingBehavior("onchange") {
+            @Override
+            protected void onUpdate( AjaxRequestTarget target ) {
+                Component show2 = getPage().get("ajaxUpdatedVal5");
+                show2.setDefaultModelObject( getComponent().getDefaultModelObject() );
+                target.add( show2 );
+            }
+        };
+        // Link itself
+        EditableLabel label = new EditableLabel("label", new PropertyModel(this, "labelVal"));
+        label.add(updateOtherInput5);
+        add( label );
+
+        // Other input
+        add( new Label("ajaxUpdatedVal5", new Model("orig val 5") ).setOutputMarkupId(true) );
 
     }
 

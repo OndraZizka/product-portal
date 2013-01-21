@@ -26,6 +26,11 @@ var EditableLink = {
 
         // Initial state is passive.
         eInput.passivate();
+
+        eInput.onclick   = EditableLink.onclick;
+        eInput.onkeydown = EditableLink.onkeydown;
+        eInput.onkeyup   = EditableLink.onkeyup;
+        eInput.onblur    = EditableLink.onblur;
     },
         
     /**
@@ -93,11 +98,39 @@ var EditableLink = {
      *  APPLIED TO the <input>.
      */
     onclick: function(event){
+        // Active -> nothing to do.
         if( this.active ) return;
-        if(validateURL(this.value))
-            window.open(this.value, '', 'location=yes,menubar=no,resizable=yes,scrollbars=yes,status=yes,modal=true,alwaysRaised=yes');
+
+        if( event.shiftKey  ||  this.className.contains('label') ){
+            this.activate();
+        }
+        else if( validateURL(this.value) ){
+            window.open(this.value, '', 'modal=true,alwaysRaised=yes'); // location=yes,menubar=no,resizable=yes,scrollbars=yes,status=yes,
+        }
     },
-};
+    onblur: function(event){
+        this.passivate(true);
+    },
+    onkeydown: function(event){
+        if( ! this.active ){
+            if( event.shiftKey && (event.keyCode === 13 || event.keyCode === 32) )
+                this.activate();
+            if( event.charCode !== 0 )
+                event.preventDefault(); // Allow special keys - Home/End etc.
+            return false;
+        }
+        if(event.keyCode === 13){ this.passivate(true); } // Enter
+    },
+    onkeyup: function(event){
+        if( this.active !== true )  return;
+        if( event.keyCode === 27 ){
+            event.preventDefault();
+            event.stopPropagation();
+            this.value = this.oldValue;
+            this.passivate(false);
+        }
+    },
+}
 
 
 /**
