@@ -69,33 +69,33 @@ public class ReleaseTraitsPanel extends Panel {
         
         Model<IHasTraits> rm = new Model(release);
         
-        this.add( new ReleaseTraitRowPanel("linkReleasedBinaries", rm, "Released binaries",     Status.RELEASED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkStagedBinaries",   rm, "Staged binaries",       Status.STAGED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkReleasedDocs",     rm, "Released docs",         Status.RELEASED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkStagedDocs",       rm, "Staged docs",           Status.STAGED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkJavadoc",          rm, "Public API Javadoc",    Status.RELEASED, this, feedbackPanel));
+        this.add( new ReleaseTraitRowPanel("linkReleasedBinaries", rm, "Released binaries",     Status.RELEASED, this));
+        this.add( new ReleaseTraitRowPanel("linkStagedBinaries",   rm, "Staged binaries",       Status.STAGED, this));
+        this.add( new ReleaseTraitRowPanel("linkReleasedDocs",     rm, "Released docs",         Status.RELEASED, this));
+        this.add( new ReleaseTraitRowPanel("linkStagedDocs",       rm, "Staged docs",           Status.STAGED, this));
+        this.add( new ReleaseTraitRowPanel("linkJavadoc",          rm, "Public API Javadoc",    Status.RELEASED, this));
 
 
-        this.add( new ReleaseTraitRowPanel("linkIssuesFixed",      rm, "Fixed issues",          Status.RELEASED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkIssuesFound",      rm, "Found issues",          Status.RELEASED, this, feedbackPanel));
+        this.add( new ReleaseTraitRowPanel("linkIssuesFixed",      rm, "Fixed issues",          Status.RELEASED, this));
+        this.add( new ReleaseTraitRowPanel("linkIssuesFound",      rm, "Found issues",          Status.RELEASED, this));
         
         // Build
-        this.add( new ReleaseTraitRowPanel("linkBuildHowto",       rm, "Build HOWTO",           Status.RELEASED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("gitHash",              rm, "Git hash",              Status.TAGGED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkGitRepo",          rm, "Git repo",              Status.STAGED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkMead",             rm, "Mead",                  Status.IN_PROGRESS, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkBrew",             rm, "Brew",                  Status.IN_PROGRESS, this, feedbackPanel));
+        this.add( new ReleaseTraitRowPanel("linkBuildHowto",       rm, "Build HOWTO",           Status.RELEASED, this));
+        this.add( new ReleaseTraitRowPanel("gitHash",              rm, "Git hash",              Status.TAGGED, this));
+        this.add( new ReleaseTraitRowPanel("linkGitRepo",          rm, "Git repo",              Status.STAGED, this));
+        this.add( new ReleaseTraitRowPanel("linkMead",             rm, "Mead",                  Status.IN_PROGRESS, this));
+        this.add( new ReleaseTraitRowPanel("linkBrew",             rm, "Brew",                  Status.IN_PROGRESS, this));
 
         // Tests and reports
-        this.add( new ReleaseTraitRowPanel("linkMeadJob",      rm, "Jenkins MEAD job",          Status.IN_PROGRESS, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkTattleTale",   rm, "TattleTale",                Status.STAGED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkCodeCoverage", rm, "Code coverage",             Status.RELEASED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkTck",          rm, "TCK tests",                 Status.RELEASED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkCC",           rm, "Common Criteria tests",     Status.RELEASED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("link508",          rm, "508 compliance tests",      Status.RELEASED, this, feedbackPanel));
-        this.add( new ReleaseTraitRowPanel("linkJavaEE",       rm, "Java EE compliance tests",  Status.RELEASED, this, feedbackPanel));
+        this.add( new ReleaseTraitRowPanel("linkMeadJob",      rm, "Jenkins MEAD job",          Status.IN_PROGRESS, this));
+        this.add( new ReleaseTraitRowPanel("linkTattleTale",   rm, "TattleTale",                Status.STAGED, this));
+        this.add( new ReleaseTraitRowPanel("linkCodeCoverage", rm, "Code coverage",             Status.RELEASED, this));
+        this.add( new ReleaseTraitRowPanel("linkTck",          rm, "TCK tests",                 Status.RELEASED, this));
+        this.add( new ReleaseTraitRowPanel("linkCC",           rm, "Common Criteria tests",     Status.RELEASED, this));
+        this.add( new ReleaseTraitRowPanel("link508",          rm, "508 compliance tests",      Status.RELEASED, this));
+        this.add( new ReleaseTraitRowPanel("linkJavaEE",       rm, "Java EE compliance tests",  Status.RELEASED, this));
         
-        //this.add( new ReleaseTraitRowPanel("",      rm, "", "",           Status.RELEASED, this, feedbackPanel));
+        //this.add( new ReleaseTraitRowPanel("",      rm, "", "",           Status.RELEASED, this));
         
         
         // Only show legend for Releases; not for Products.
