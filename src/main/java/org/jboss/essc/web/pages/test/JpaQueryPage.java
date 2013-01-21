@@ -47,7 +47,11 @@ public class JpaQueryPage extends WebPage {
         form.add( new ListView("result") {
             @Override
             protected void populateItem( ListItem item ) {
-                item.add( new Label("item", item.getModelObject().toString() ) );
+                try {
+                    item.add( new Label("item", item.getModelObject().toString() ) );
+                } catch (Exception ex){
+                    item.add( new Label("item", item.getModelObject().getClass() + " but toString() threw: " + ex.toString() ) );
+                }
             }
         } );
         

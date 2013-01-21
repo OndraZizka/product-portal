@@ -6,7 +6,8 @@
     <body>
         <form wicket:id="form">
             <textarea wicket:id="query" style="min-width: 40em;">SELECT p FROM Product p</textarea>
-            <br>
+            <br/> Example: <code>SELECT p FROM Product p LEFT JOIN FETCH p.customFields</code>
+            <br/>
             <input type="submit" value="Perform"/>
 
             <table>
