@@ -340,10 +340,10 @@ input.noBorder {
     background-color: lightgoldenrodyellow;
     font-weight: bold;
 }
-.feedback .feedbackPanelERROR { font-weight: bold; color: red; }
-.feedback .feedbackPanelINFO  { font-weight: bold; color: green; }
+.feedbackPanelERROR { font-weight: bold; color: red; }
+.feedbackPanelINFO  { font-weight: bold; color: green; }
 
-input.invalid { border: 1px dashed #E00000; }
+input.invalid { border: 1px dashed #E00000 !important; }
 
 .w100p { width: 100%; }
 .clear { visibility: hidden;  clear: both; }

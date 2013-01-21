@@ -44,9 +44,9 @@ public class ReleaseTraitRowPanel extends Panel {
      */
     public ReleaseTraitRowPanel( String id, IModel<IHasTraits> relModel, String label,
             Release.Status mustBe,
-            ReleaseTraitsPanel rp, FeedbackPanel feedback )
+            ReleaseTraitsPanel rp )
     {
-        this( id, relModel, label, mustBe, mustBe, rp, feedback );
+        this( id, relModel, label, mustBe, mustBe, rp );
     }
     
     /**
@@ -57,11 +57,10 @@ public class ReleaseTraitRowPanel extends Panel {
      * @param mustBe    Stage at which it must be filled.
      * @param shouldBe  Stage at which it should be filled.
      * @param rp        ReleaseTraitsPanel - backref. Needed for AJAX calls.
-     * @param feedback  Feedback panel. TODO: Is it needed?
      */
     public ReleaseTraitRowPanel( String id, IModel<IHasTraits> relModel, String label, 
             Release.Status mustBe, Release.Status shouldBe,  
-            ReleaseTraitsPanel rp, FeedbackPanel feedback )
+            ReleaseTraitsPanel rp )
     {
         super(id, relModel);
         this.relModel = relModel;
