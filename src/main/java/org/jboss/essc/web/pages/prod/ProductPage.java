@@ -82,6 +82,7 @@ public class ProductPage extends BaseLayoutPage {
         this.form = new StatelessForm("form") {
             @Override protected void onSubmit() {
                 product = productDao.update( product );
+                modelChanged();
             }
         };
         this.form.setVersioned(false);
@@ -102,11 +103,14 @@ public class ProductPage extends BaseLayoutPage {
             this.form.add( new CustomFieldsPanel("customFields", new PropertyModel(this.product, "customFields"), feedbackPanel ){
 
                 @Override protected void onChange() {
+                    /*
                     try {
-                        productDao.update( ProductPage.this.getProduct() );
+                        product = productDao.update( ProductPage.this.getProduct() );
+                        modelChanged();
                     } catch ( Exception ex ) {
                         feedbackPanel.error( ex.toString() );
-                    }
+                    }/**/
+                    onProductUpdate( null );
                 }
             });
         }
@@ -136,7 +140,9 @@ public class ProductPage extends BaseLayoutPage {
                 
                 ReleaseTraits traits = ((Product)getPage().getDefaultModelObject()).getTraits();
                 PropertiesUtils.applyToObjectFlat( traits, props );
-                productDao.update( product );
+                //product = productDao.update( product );
+                //modelChanged();
+                onProductUpdate( null );
             }
         });
         
@@ -181,7 +187,8 @@ public class ProductPage extends BaseLayoutPage {
     private void onProductUpdate( AjaxRequestTarget target ) {
         if( target != null )  target.add( this.feedbackPanel );
         try {
-            productDao.update( product );
+            product = productDao.update( product );
+            modelChanged();
             this.feedbackPanel.info("Product saved.");
             if( target != null )
                 target.appendJavaScript("window.notifyFlash('Product saved.')");
