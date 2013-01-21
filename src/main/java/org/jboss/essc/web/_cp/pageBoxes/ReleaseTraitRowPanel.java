@@ -6,6 +6,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.behavior.AttributeAppender;
+import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
@@ -16,6 +17,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.UrlValidator;
 import org.jboss.essc.web.model.IHasTraits;
 import org.jboss.essc.web.model.Release;
+import org.jboss.essc.wicket.InvalidCssClassAppender;
 import org.jboss.essc.wicket.UrlHttpRequestValidator;
 import org.jboss.essc.wicket.UrlSimpleValidator;
 import org.jboss.essc.wicket.comp.editable.EditableLink4;
@@ -77,6 +79,7 @@ public class ReleaseTraitRowPanel extends Panel {
                 ReleaseTraitRowPanel.this.onModelChanged();
             }
         };
+        add( link );
 
         // OnChange - persist.
         link.add( new AjaxFormComponentUpdatingBehavior("onchange"){
@@ -93,7 +96,11 @@ public class ReleaseTraitRowPanel extends Panel {
             link.add( urlFormatSimpleValidator );
         }
 
-        add( link );
+        // Feedback.
+        add( new FeedbackPanel("feedback", new ComponentFeedbackMessageFilter( link ) ) );
+
+        link.add( InvalidCssClassAppender.INSTANCE );
+
 
         // Activator icon.
         add( new Image("iconEdit", "icoEdit.png").add( new EditableLinkActivator(link) ) );

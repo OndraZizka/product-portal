@@ -343,5 +343,7 @@ input.noBorder {
 .feedback .feedbackPanelERROR { font-weight: bold; color: red; }
 .feedback .feedbackPanelINFO  { font-weight: bold; color: green; }
 
+input.invalid { border: 1px dashed #E00000; }
+
 .w100p { width: 100%; }
 .clear { visibility: hidden;  clear: both; }
