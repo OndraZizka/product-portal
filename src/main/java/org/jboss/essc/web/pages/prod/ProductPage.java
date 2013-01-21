@@ -97,7 +97,11 @@ public class ProductPage extends BaseLayoutPage {
             this.form.add( new CustomFieldsPanel("customFields", new PropertyModel(this.product, "customFields"), feedbackPanel ){
 
                 @Override protected void onChange() {
-                    productDao.update( (Product)getDefaultModelObject() );
+                    try {
+                        productDao.update( ProductPage.this.getProduct() );
+                    } catch ( Exception ex ) {
+                        feedbackPanel.error( ex.toString() );
+                    }
                 }
 
                 @Override protected void onModelChanged() {
