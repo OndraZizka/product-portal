@@ -31,6 +31,7 @@ var EditableLink = {
         eInput.onkeydown = EditableLink.onkeydown;
         eInput.onkeyup   = EditableLink.onkeyup;
         eInput.onblur    = EditableLink.onblur;
+        eInput.onfocus   = EditableLink.onfocus;
     },
         
     /**
@@ -107,6 +108,9 @@ var EditableLink = {
         else if( validateURL(this.value) ){
             window.open(this.value, '', 'modal=true,alwaysRaised=yes'); // location=yes,menubar=no,resizable=yes,scrollbars=yes,status=yes,
         }
+    },
+    onfocus: function(event){
+        this.activate();
     },
     onblur: function(event){
         this.passivate(true);
