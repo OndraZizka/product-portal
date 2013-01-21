@@ -5,8 +5,11 @@
 
             <table class="traits lines" border="0" cellpadding="5">
 
-                <tr wicket:id="fieldsRows"/>
+                <wicket:container wicket:id="fieldsRows">
+                    <tr wicket:id="fieldRow"/>
+                </wicket:container>
 
+                <tr><td colspan="2"><h3>Add custom field:</h3></td></tr>
                 <tr wicket:id="addFieldRow"/>
 
             </table>

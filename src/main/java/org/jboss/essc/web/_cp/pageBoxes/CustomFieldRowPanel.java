@@ -19,11 +19,13 @@ public class CustomFieldRowPanel extends Panel {
     public CustomFieldRowPanel( String id, IModel<ProductCustomField> fieldDataModel ) {
         super(id, fieldDataModel);
 
-        setOutputMarkupId( true );///
-
-        add( new EditableLabel<String>("name",  new PropertyModel(fieldDataModel.getObject(), "name")).add(createOnChange(fieldDataModel)) );
+        add( new EditableLabel<String>("name",  new PropertyModel(fieldDataModel.getObject(), "name"))
+                .add(createOnChange(fieldDataModel))
+        );
         
-        add( new EditableLabel<String>("label", new PropertyModel(fieldDataModel.getObject(), "label")).add(createOnChange(fieldDataModel)) );
+        add( new EditableLabel<String>("label", new PropertyModel(fieldDataModel.getObject(), "label"))
+                .add(createOnChange(fieldDataModel))
+        );
 
     }
 

@@ -32,28 +32,26 @@ public class CustomFieldsPanel extends Panel {
         super( id, fieldListModel );
         this.feedbackPanel = feedbackPanel;
 
-        ///this.setOutputMarkupId( true );
+        this.setOutputMarkupId( true );
 
         // Field rows.
         // new PropertyModel<ProductCustomField>(this, "fields")
         add( new ListView<ProductCustomField>("fieldsRows", new ArrayList(fieldListModel.getObject().values())){
             @Override
             protected void populateItem( ListItem<ProductCustomField> item ) {
-                item.add( new CustomFieldRowPanel("field", item.getModel()) );
+                item.add( new CustomFieldRowPanel("fieldRow", item.getModel()) );
             }
         });
 
         // "Add field" row.
         add( new CustomFieldRowPanel("addFieldRow", new PropertyModel<ProductCustomField>(this, "addedField")){
             @Override public void onAjaxChange( AjaxRequestTarget target ) {
-                //if(true) throw new RuntimeException("AAAAAAAAAA!"); // Happens.
                 CustomFieldsPanel.this.info("Changed.");
                 feedbackPanel.info("Changed.");
                 target.add( CustomFieldsPanel.this );
                 target.add( feedbackPanel );
                 try {
-
-                    // TODO: Add addedField to product.customFields and save to DB.
+                    // Add addedField to product.customFields and save to DB.
                     ProductCustomField newField  = (ProductCustomField) this.getDefaultModelObject();
                     Map<String,ProductCustomField> fields = (Map<String,ProductCustomField>) CustomFieldsPanel.this.getDefaultModelObject();
                     fields.put( newField.getName(), newField );
@@ -62,7 +60,6 @@ public class CustomFieldsPanel extends Panel {
                     CustomFieldsPanel.this.onChange();
                 } catch (Exception ex){
                     feedbackPanel.error( ex.toString() );
-                    throw new RuntimeException(ex);///
                 }
             }
         });

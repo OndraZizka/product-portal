@@ -14,7 +14,6 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.PropertiesUploadForm;
@@ -103,11 +102,6 @@ public class ProductPage extends BaseLayoutPage {
                         feedbackPanel.error( ex.toString() );
                     }
                 }
-
-                @Override protected void onModelChanged() {
-                    
-                }
-
             });
         }
         else {
