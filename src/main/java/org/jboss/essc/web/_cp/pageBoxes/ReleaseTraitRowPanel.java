@@ -1,6 +1,7 @@
 
 package org.jboss.essc.web._cp.pageBoxes;
 
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
@@ -13,8 +14,13 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.resource.SharedResourceReference;
+import org.apache.wicket.validation.validator.UrlValidator;
 import org.jboss.essc.web.model.IHasTraits;
 import org.jboss.essc.web.model.Release;
+import org.jboss.essc.wicket.UrlHttpRequestValidator;
+import org.jboss.essc.wicket.UrlSimpleValidator;
+import org.jboss.essc.wicket.comp.editable.EditableLink4;
+import org.jboss.essc.wicket.comp.editable.EditableLinkActivator;
 
 
 /**
@@ -26,6 +32,12 @@ class ReleaseTraitRowPanel extends Panel {
     private IModel<IHasTraits> relModel;
 
     
+    // Validators
+    UrlValidator urlFormatValidator = new UrlValidator();
+    UrlSimpleValidator urlFormatSimpleValidator = new UrlSimpleValidator();
+    UrlHttpRequestValidator urlHttpValidator = new UrlHttpRequestValidator();
+
+
     /**
      *  Defaults 'shouldBe' to the value of 'mustBe'.
      */
@@ -53,19 +65,27 @@ class ReleaseTraitRowPanel extends Panel {
     {
         super(id, relModel);
         this.relModel = relModel;
-        
-        // Go link
-        this.add( new AjaxLink("goLink") {
-                @Override public void onClick( AjaxRequestTarget target ) {
-                }
-            }.add( new Image("goIcon", new SharedResourceReference("ico.ExternalLink") ) )
-        );
-        
-        // AjaxEditableLabel. TODO: Make my own, better.
-        PropertyModel<String> traitModel = new PropertyModel( relModel.getObject().getTraits(), prop);
-        this.add( rp.new MyAjaxEditableLabel("link", traitModel) );
-        
+
+        // Label
         this.add( new Label("name", label) );
+
+        // EditableLink.
+        PropertyModel<String> traitModel = new PropertyModel( relModel.getObject().getTraits(), prop);
+        EditableLink4 link = new EditableLink4("link", traitModel);
+        if( true ){
+            link.add( urlFormatValidator );
+            link.add( urlHttpValidator );
+        } else {
+            link.add( urlFormatSimpleValidator );
+        }
+
+        add( link );
+
+        // Activator icon.
+        add( new Image("iconEdit", "icoEdit.png").add( new EditableLinkActivator(link) ) );
+
+
+        
         
         // For releases, colorize trait rows, showing the urgency to be filled.
         if( relModel.getObject() instanceof Release ){

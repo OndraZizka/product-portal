@@ -25,7 +25,7 @@ public class EditableLink4<T> extends TextField<T> {
         super( id, model );
         this.setOutputMarkupId( true );
 
-        this.add( AttributeModifier.replace("class", "editable link passive"));
+        this.add( AttributeModifier.append("class", " editable link passive"));
     }
 
     

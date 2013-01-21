@@ -101,6 +101,7 @@ var EditableLink = {
     onclick: function(event){
         // Active -> nothing to do.
         if( this.active ) return;
+        //alert( this.className );
 
         if( event.shiftKey  ||  this.className.contains('label') ){
             this.activate();
@@ -110,9 +111,24 @@ var EditableLink = {
         }
     },
     onfocus: function(event){
-        this.activate();
+        // Seems there's no way to recognize how the focus happened - whether Tab or click.
+        //console.log( event + " onfocus; button: " + event.button + " charCode: " + event.charCode );
+        //console.log( event + " " + event.toSource() );
+        //console.log( JSON.stringify(event) );
+        //var desc = "";
+        //for(prop in event) desc += prop + ": " + event[prop] + "\n";
+        //console.log( desc );
+
+        // If got focus after tiny time, user probably pressed
+        var diff = new Date().getTime() - window.lastOnBlur;
+        //console.log( "Diff: "  + diff);
+        
+        // Only activate if not triggered by mouse (happens before onclick).
+        if( this.className.contains("label") || this.value === "" || event.button === 0 || (diff < 100 && ! validateURL(this.value)) )
+            this.activate();
     },
     onblur: function(event){
+        window.lastOnBlur = new Date().getTime();
         this.passivate(true);
     },
     onkeydown: function(event){
