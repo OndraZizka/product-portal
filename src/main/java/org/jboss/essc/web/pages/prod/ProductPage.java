@@ -180,7 +180,7 @@ public class ProductPage extends BaseLayoutPage {
 
 
     /**
-     *  Called when some of sub-components was updated.
+     *  Called when some of sub-components were updated.
      *
      *  @param target  Ajax target, or null if not a result of AJAX.
      */
