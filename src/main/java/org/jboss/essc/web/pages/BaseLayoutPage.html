@@ -25,7 +25,7 @@
             <div id="content">
 
                 <wicket:child>
-
+                    <!-- Whatever is in wicket:child is ignored. -->
 
                     <!-- Latest stuff -->
                     <div class="box stav">
@@ -91,6 +91,17 @@
             
         </div>
         <!-- end page -->
+
+        <div id="notificationFlash" style="position: fixed; top: 0px; left: 0px; background: #fefdd6; border: 2px solid #E00000; font-size: 200%">
+            Saved.
+        </div>
+        <script>
+            function notifyFlash(msg){
+                document.getElementById("notificationFlash").style.display = ( msg === null ? "none" : "block" );
+                if( msg !== null )
+                    window.setTimeout("notifyFlash(null)", 1500);
+            }
+        </script>
 
         <div id="footer">
             <p>&copy;2012 Red Hat&nbsp;&bull;&nbsp; Runs on JBoss AS 7.</p>
