@@ -20,6 +20,7 @@ import org.jboss.essc.web._cp.PropertiesUploadForm;
 import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web._cp.pageBoxes.CustomFieldsPanel;
 import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
+import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitRowPanel;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseTraitsPanel;
 import org.jboss.essc.web._cp.pageBoxes.ReleasesBox;
 import org.jboss.essc.web.dao.ProductDaoBean;
@@ -43,6 +44,7 @@ public class ProductPage extends BaseLayoutPage {
     
     // Components
     private Form<Product> form;
+    private FeedbackPanel feedbackPanel;
 
     // Data
     private Product product;
@@ -71,7 +73,7 @@ public class ProductPage extends BaseLayoutPage {
         setDefaultModel( new PropertyModel( this, "product") );
         
         // Feedback
-        final FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
+        feedbackPanel = new FeedbackPanel("feedback");
         feedbackPanel.setOutputMarkupId( true );
         feedbackPanel.setFilter( new ContainerFeedbackMessageFilter(this) );
         add(feedbackPanel);
@@ -90,7 +92,11 @@ public class ProductPage extends BaseLayoutPage {
             add( new ReleasesBox("releasesBox", this.product, 100) );
 
             // Traits
-            this.form.add( new ReleaseTraitsPanel("templates", this.product) );
+            this.form.add( new ReleaseTraitsPanel("templates", this.product){
+                @Override protected void onTraitUpdate( ReleaseTraitRowPanel row, AjaxRequestTarget target ) {
+                    ProductPage.this.onProductUpdate(target);
+                }
+            });
 
             // Custom fields
             this.form.add( new CustomFieldsPanel("customFields", new PropertyModel(this.product, "customFields"), feedbackPanel ){
@@ -166,6 +172,24 @@ public class ProductPage extends BaseLayoutPage {
 
     }// init()
 
+
+    /**
+     *  Called when some of sub-components was updated.
+     *
+     *  @param target  Ajax target, or null if not a result of AJAX.
+     */
+    private void onProductUpdate( AjaxRequestTarget target ) {
+        if( target != null )  target.add( this.feedbackPanel );
+        try {
+            productDao.update( product );
+            this.feedbackPanel.info("Product saved.");
+            if( target != null )
+                target.appendJavaScript("window.notifyFlash('Product saved.')");
+        } catch( Exception ex ){
+            this.feedbackPanel.info("Saving product failed: " + ex.toString());
+        }
+    }
+
     
     
     public static PageParameters createPageParameters( Product prod ){
@@ -176,6 +200,6 @@ public class ProductPage extends BaseLayoutPage {
     
     public Product getProduct() { return product; }
     public void setProduct( Product product ) { this.product = product; }
-    
-    
+
+
 }// class

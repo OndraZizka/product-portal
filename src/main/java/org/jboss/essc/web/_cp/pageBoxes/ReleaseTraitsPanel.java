@@ -1,15 +1,11 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
-import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.extensions.ajax.markup.html.AjaxEditableLabel;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.UrlValidator;
 import org.jboss.essc.web.model.IHasTraits;
 import org.jboss.essc.web.model.Product;
@@ -107,6 +103,11 @@ public class ReleaseTraitsPanel extends Panel {
 
     }// const
 
+
+    /**
+     *  Called when some of ReleaseTraitRowPanel's is ajax-updated.
+     */
+    protected void onTraitUpdate( ReleaseTraitRowPanel aThis, AjaxRequestTarget target ) {}
 
 
     //<editor-fold defaultstate="collapsed" desc="Get/Set">

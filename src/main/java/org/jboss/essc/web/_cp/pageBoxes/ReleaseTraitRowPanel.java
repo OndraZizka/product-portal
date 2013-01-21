@@ -2,6 +2,9 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
+import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
@@ -23,15 +26,15 @@ import org.jboss.essc.wicket.comp.editable.EditableLinkActivator;
  *  Trait row colored according to the release status and stage when this trait is needed.
  * @author ozizka@redhat.com
  */
-class ReleaseTraitRowPanel extends Panel {
+public class ReleaseTraitRowPanel extends Panel {
     
     private IModel<IHasTraits> relModel;
 
     
     // Validators
-    UrlValidator urlFormatValidator = new UrlValidator();
-    UrlSimpleValidator urlFormatSimpleValidator = new UrlSimpleValidator();
-    UrlHttpRequestValidator urlHttpValidator = new UrlHttpRequestValidator();
+    private static UrlValidator urlFormatValidator = new UrlValidator();
+    private static UrlSimpleValidator urlFormatSimpleValidator = new UrlSimpleValidator();
+    private static UrlHttpRequestValidator urlHttpRequestValidator = new UrlHttpRequestValidator();
 
 
     /**
@@ -74,10 +77,18 @@ class ReleaseTraitRowPanel extends Panel {
                 ReleaseTraitRowPanel.this.onModelChanged();
             }
         };
+
+        // OnChange - persist.
+        link.add( new AjaxFormComponentUpdatingBehavior("onchange"){
+            @Override protected void onUpdate( AjaxRequestTarget target ) {
+                ReleaseTraitRowPanel.this.onUpdate( target );
+            }
+        } );
+
         // URL validators.
         if( false ){
             link.add( urlFormatValidator );
-            link.add( urlHttpValidator );
+            link.add( urlHttpRequestValidator );
         } else {
             link.add( urlFormatSimpleValidator );
         }
@@ -97,11 +108,26 @@ class ReleaseTraitRowPanel extends Panel {
         }
     }
 
-    @Override
-    protected void onModelChanged() {
+    /**
+     *  Hands over the onModelChanged() calls to contained traits TextFields.
+     *  Called only when VALIDATION passes.
+     */
+    @Override protected void onModelChanged() {
         //getParent().onModelChanged();
         //this.relModel.
+        //throw new RuntimeException("debug - ReleaseTraitRowPanel.onModelChanged()");
     }
+
+    /**
+     *  AJAX - Called when one of contained trait TextFields are updated.
+     *  Basically, hands over the onUpdate() call.
+     */
+    protected void onUpdate( AjaxRequestTarget target ) {
+        if( ! (getParent() instanceof ReleaseTraitsPanel) ) return;
+        ReleaseTraitsPanel rtp = (ReleaseTraitsPanel)getParent();
+        rtp.onTraitUpdate(this, target);
+    }
+
 
 }// class ReleaseTraitRowPanel
 
