@@ -9,6 +9,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
@@ -40,8 +41,8 @@ public class CustomFieldsPanel extends Panel {
         // Field rows.
         // new PropertyModel<ProductCustomField>(this, "fields")
 
-        IModel<List<ProductCustomField>> listModel = new LoadableDetachableModel() {
-            @Override protected List<ProductCustomField> load() {
+        IModel<List<ProductCustomField>> listModel = new AbstractReadOnlyModel<List<ProductCustomField>>() {
+            @Override public List<ProductCustomField> getObject() {
                 Map<String,ProductCustomField> map = (Map) CustomFieldsPanel.this.getDefaultModelObject();
                 return new ArrayList(map.values());
             }
@@ -59,13 +60,6 @@ public class CustomFieldsPanel extends Panel {
                         Map<String,ProductCustomField> fieldsMap = (Map) CustomFieldsPanel.this.getDefaultModelObject();
                         //fieldsMap.remove( item.getModelObject().getName() ); // ListView uses indexes -> leads to bad offsets!
                         fieldsMap.remove( name );  // This is more robust. But still, this renders the list before removal...?
-                        item.remove();
-                        this.getDefaultModel().detach();
-                        this.getDefaultModel().getObject();
-                        thatLV.getDefaultModel().detach();
-                        thatLV.getDefaultModel().getObject();
-                        thatLV.modelChanged();
-                        //thatLV.remove( item );
                         target.add( CustomFieldsPanel.this ); // Update UI.
                         try {
                             CustomFieldsPanel.this.onChange( target ); // Persists.
