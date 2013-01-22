@@ -243,6 +243,8 @@ a:hover { color: #7ACE11; text-decoration: none; }
     .box table.traits tr.shouldBe td { background-color: #fdfbd2; /* Subtle yellow */ }
     .box table.traits tr.mustBe th,
     .box table.traits tr.mustBe td { background-color: #fef4ef; } /* #ffb9a0 - Lososova */
+
+    .box table.traits.lines .addFieldRow img.delete { display: none; }  /* Delete trait icon */
     
     .legend                            { padding: 2ex 0  ; }                
     .legend .item                      { float: left; padding: 1ex 1em; }                
