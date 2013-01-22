@@ -65,6 +65,8 @@ public class ReleaseTraitRowPanel extends Panel {
         super(id, relModel);
         this.relModel = relModel;
 
+        this.setOutputMarkupId( true );
+
         String prop = id;
 
         // Label
@@ -96,7 +98,7 @@ public class ReleaseTraitRowPanel extends Panel {
         }
 
         // Feedback.
-        add( new FeedbackPanel("feedback", new ComponentFeedbackMessageFilter( link ) ) );
+        add( new FeedbackPanel("feedback", new ComponentFeedbackMessageFilter( link ) ).setOutputMarkupId(true) );
 
         link.add( InvalidCssClassAppender.INSTANCE );
 
@@ -129,11 +131,16 @@ public class ReleaseTraitRowPanel extends Panel {
      *  Basically, hands over the onUpdate() call.
      */
     protected void onUpdate( AjaxRequestTarget target ) {
+        //if( ! ((EditableLink4)this.get("link")).isValid() )
+            //this.get("link").error("AAAAAAaaaaa!");
+            //throw new RuntimeException("Not valid in onUpdate.");
+
+        target.add( get("feedback") ); // Trying to display validation error, but doesn't work.
+        
         if( ! (getParent() instanceof ReleaseTraitsPanel) ) return;
         ReleaseTraitsPanel rtp = (ReleaseTraitsPanel)getParent();
         rtp.onTraitUpdate(this, target);
     }
-
 
 }// class ReleaseTraitRowPanel
 

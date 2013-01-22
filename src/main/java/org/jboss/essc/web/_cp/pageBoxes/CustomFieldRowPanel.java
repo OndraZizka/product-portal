@@ -2,8 +2,10 @@
 package org.jboss.essc.web._cp.pageBoxes;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.wicket.ajax.AjaxEventBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
+import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
@@ -19,28 +21,42 @@ public class CustomFieldRowPanel extends Panel {
     public CustomFieldRowPanel( String id, IModel<ProductCustomField> fieldDataModel ) {
         super(id, fieldDataModel);
 
-        add( new EditableLabel<String>("name",  new PropertyModel(fieldDataModel.getObject(), "name"))
+        add( new EditableLabel<String>("name",  new PropertyModel(fieldDataModel, "name"))
                 .add(createOnChange(fieldDataModel))
         );
         
-        add( new EditableLabel<String>("label", new PropertyModel(fieldDataModel.getObject(), "label"))
+        add( new EditableLabel<String>("label", new PropertyModel(fieldDataModel, "label"))
                 .add(createOnChange(fieldDataModel))
         );
+        add( new Image("delete", "icoTrash.png").add( new AjaxEventBehavior("onclick") {
+            @Override protected void onEvent( AjaxRequestTarget target ) {
+                onDelete(target);
+            }
+        }) );
 
     }
 
-    private AjaxFormComponentUpdatingBehavior createOnChange( final IModel<ProductCustomField> model ){
+
+    /**  Called when delete icon is clicked. */
+    protected void onDelete( AjaxRequestTarget target ) {}
+
+
+    /* Creates onchange handlers for name and label textfields. */
+    private AjaxFormComponentUpdatingBehavior createOnChange( final IModel<ProductCustomField> parentModel ){
         return
         new AjaxFormComponentUpdatingBehavior("onchange") {
             @Override protected void onUpdate( AjaxRequestTarget target ) {
                 //EditableLabel<String> el = (EditableLabel)getComponent();
                 //el.setModelObject("AAAAA!" + el.getModelObject());///
                 //target.add(getComponent());///
+                Object obj1 = getComponent().getDefaultModelObject();
+                Object obj2 = parentModel.getObject();
 
-                if( ! StringUtils.isBlank( model.getObject().getName() )
-                 && ! StringUtils.isBlank( model.getObject().getLabel() )  // TODO: Hibernate Validator?
-                )
-                    CustomFieldRowPanel.this.onAjaxChange( target );
+                if(        StringUtils.isBlank( parentModel.getObject().getName() )
+                        || StringUtils.isBlank( parentModel.getObject().getLabel() ) ) // TODO: Hibernate Validator?
+                    return;
+
+                CustomFieldRowPanel.this.onAjaxChange( target );
             }
         };
     }

@@ -102,7 +102,7 @@ public class ProductPage extends BaseLayoutPage {
             // Custom fields
             this.form.add( new CustomFieldsPanel("customFields", new PropertyModel(this.product, "customFields"), feedbackPanel ){
 
-                @Override protected void onChange() {
+                @Override protected void onChange( AjaxRequestTarget target ) {
                     /*
                     try {
                         product = productDao.update( ProductPage.this.getProduct() );
@@ -110,7 +110,7 @@ public class ProductPage extends BaseLayoutPage {
                     } catch ( Exception ex ) {
                         feedbackPanel.error( ex.toString() );
                     }/**/
-                    onProductUpdate( null );
+                    onProductUpdate( target );
                 }
             });
         }

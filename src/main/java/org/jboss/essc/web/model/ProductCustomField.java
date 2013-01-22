@@ -42,6 +42,11 @@ public class ProductCustomField implements Serializable {
     public void setName( String name ) { this.name = name; }
     public String getLabel() { return label; }
     public void setLabel( String label ) { this.label = label; }
+
     //</editor-fold>
+    @Override
+    public String toString() {
+        return "ProductCustomField #" + id + " { " + name + " '" + label + "'}";
+    }
 
 }
