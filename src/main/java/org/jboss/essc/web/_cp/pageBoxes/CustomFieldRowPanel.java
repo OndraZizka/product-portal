@@ -30,7 +30,8 @@ public class CustomFieldRowPanel extends Panel {
         );
         add( new Image("delete", "icoTrash.png").add( new AjaxEventBehavior("onclick") {
             @Override protected void onEvent( AjaxRequestTarget target ) {
-                onDelete(target);
+                ProductCustomField field = (ProductCustomField) CustomFieldRowPanel.this.getDefaultModelObject();
+                onDelete( field.getName(), target );
             }
         }) );
 
@@ -38,7 +39,7 @@ public class CustomFieldRowPanel extends Panel {
 
 
     /**  Called when delete icon is clicked. */
-    protected void onDelete( AjaxRequestTarget target ) {}
+    protected void onDelete( String name, AjaxRequestTarget target ) {}
 
 
     /* Creates onchange handlers for name and label textfields. */

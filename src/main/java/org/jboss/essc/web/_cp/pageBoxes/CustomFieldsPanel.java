@@ -27,7 +27,7 @@ public class CustomFieldsPanel extends Panel {
     ProductCustomField addedField = new ProductCustomField();
 
     // Components
-    final FeedbackPanel feedbackPanel;
+    private final FeedbackPanel feedbackPanel;
 
 
     public CustomFieldsPanel( String id, final IModel<Map<String,ProductCustomField>> fieldMapModel, final FeedbackPanel feedbackPanel ) {
@@ -51,12 +51,21 @@ public class CustomFieldsPanel extends Panel {
         add( listView = new ListView<ProductCustomField>("fieldsRows", listModel){ // new ArrayList(fieldMapModel.getObject().values())
             @Override
             protected void populateItem( final ListItem<ProductCustomField> item ) {
+                final ListView thatLV = this;
                 item.add( new CustomFieldRowPanel("fieldRow", item.getModel()){
                     // Delete icon was clicked.
                     @Override
-                    protected void onDelete( AjaxRequestTarget target ) {
+                    protected void onDelete( String name, AjaxRequestTarget target ) {
                         Map<String,ProductCustomField> fieldsMap = (Map) CustomFieldsPanel.this.getDefaultModelObject();
-                        fieldsMap.remove( item.getModelObject().getName() );
+                        //fieldsMap.remove( item.getModelObject().getName() ); // ListView uses indexes -> leads to bad offsets!
+                        fieldsMap.remove( name );  // This is more robust. But still, this renders the list before removal...?
+                        item.remove();
+                        this.getDefaultModel().detach();
+                        this.getDefaultModel().getObject();
+                        thatLV.getDefaultModel().detach();
+                        thatLV.getDefaultModel().getObject();
+                        thatLV.modelChanged();
+                        //thatLV.remove( item );
                         target.add( CustomFieldsPanel.this ); // Update UI.
                         try {
                             CustomFieldsPanel.this.onChange( target ); // Persists.
