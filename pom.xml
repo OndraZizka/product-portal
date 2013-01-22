@@ -157,9 +157,7 @@
                             <force>true</force>
                             <username>admin</username>
                             <password>${essc.deploy.pass.prod}</password>
-                            <fileNames>
-                                <fileName>target/ROOT.war</fileName>
-                            </fileNames>
+                            <filename>ROOT.war</filename>
                         </configuration>
                     </plugin>
                 </plugins>
