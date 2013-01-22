@@ -88,12 +88,11 @@ public class CustomFieldsPanel extends Panel {
                     this.setDefaultModelObject( new ProductCustomField() );
 
                     CustomFieldsPanel.this.onChange( target ); // Perists.
-                    CustomFieldsPanel.this.info("Changed.");
-                    feedbackPanel.info("Changed b."); // TODO: Leave only one.
+                    CustomFieldsPanel.this.info("Custom field added.");
                 } catch (Exception ex){
                     feedbackPanel.error( ex.toString() );
-                    DebugBar b = (DebugBar) get("debugBar");
-                    b.info( ex );
+                    DebugBar bar = (DebugBar) get("debugBar");
+                    bar.info( ex );
                     throw new RuntimeException(ex);
                 }
             }
