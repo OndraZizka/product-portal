@@ -27,6 +27,8 @@
         <jboss.spec.version>3.0.0.Final</jboss.spec.version>
         <version.wicket>1.5.9</version.wicket>
         <version.wicket.cdi>1.2</version.wicket.cdi>
+
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
     </properties>
     
 

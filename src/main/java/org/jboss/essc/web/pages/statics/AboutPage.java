@@ -11,8 +11,8 @@ import org.jboss.essc.web.pages.BaseLayoutPage;
 @SuppressWarnings("serial")
 public class AboutPage extends BaseLayoutPage {
 
-
     public AboutPage() {
+        
     }
     
 }
