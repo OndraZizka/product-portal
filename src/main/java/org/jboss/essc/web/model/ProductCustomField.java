@@ -20,7 +20,7 @@ public class ProductCustomField implements Serializable {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     /*// Unidirectional for now.
