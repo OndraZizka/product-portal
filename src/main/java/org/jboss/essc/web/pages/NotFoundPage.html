@@ -15,19 +15,13 @@
         <wicket:extend>
             
             <!-- Release traits -->
-            <div wicket:id="releaseBox"/>
-
-            <!-- Custom fields -->
-            <div wicket:id="customFields"/>
-
-            <!-- Danger zone -->
-            <div wicket:id="dangerZone" class="box dangerZone">
-                <form wicket:id="form" method="post" action="#">
-                    <input wicket:id="delete"       type="button" class="     dangerousButton" value="Delete this release"/>
-                    <input wicket:id="deleteReally" type="submit" class="very dangerousButton" value="Really, delete it."/>
-                </form>
+            <div class="box notFound">
+                <h1>Not Found</h1>
+                <p wicket:id="message">
+                    The blah blah was not found.
+                </p>
             </div>
-	
+
         </wicket:extend>
         
     </div>

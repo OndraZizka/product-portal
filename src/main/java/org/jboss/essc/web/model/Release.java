@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.text.Format;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
 import org.apache.commons.lang.StringUtils;
@@ -73,7 +75,14 @@ public class Release implements Serializable, IHasTraits {
     @Embedded
     //@Basic(fetch=FetchType.EAGER, optional=false) // HHH-7610
     private ReleaseTraits traits = new ReleaseTraits();
-    
+
+    // ---- Custom fields ----
+    @MapKeyClass(ProductCustomField.class)
+    @MapKeyColumn(name = "name")
+    @OneToMany(mappedBy = "release")
+    //@JoinColumn(referencedColumnName = "release_id")
+    private Map<String, ReleaseCustomField> customFields = new HashMap();
+
     
     public Release() {
     }
@@ -140,6 +149,15 @@ public class Release implements Serializable, IHasTraits {
         return traits; 
     }
     public void setTraits( ReleaseTraits traits ) { this.traits = traits; }
+
+
+    public Map<String, ReleaseCustomField> getCustomFields() {
+        return customFields;
+    }
+
+    public void setCustomFields( Map<String, ReleaseCustomField> customFields ) {
+        this.customFields = customFields;
+    }
         
     /*/
     public String getGitHash() {        return gitHash;    }
