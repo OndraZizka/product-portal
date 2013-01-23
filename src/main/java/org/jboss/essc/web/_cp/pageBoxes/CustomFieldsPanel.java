@@ -11,7 +11,6 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.jboss.essc.web.model.ProductCustomField;
 
@@ -48,11 +47,9 @@ public class CustomFieldsPanel extends Panel {
             }
         };
 
-        ListView<ProductCustomField> listView;
-        add( listView = new ListView<ProductCustomField>("fieldsRows", listModel){ // new ArrayList(fieldMapModel.getObject().values())
+        add( new ListView<ProductCustomField>("fieldsRows", listModel){ // new ArrayList(fieldMapModel.getObject().values())
             @Override
             protected void populateItem( final ListItem<ProductCustomField> item ) {
-                final ListView thatLV = this;
                 item.add( new CustomFieldRowPanel("fieldRow", item.getModel()){
                     // Delete icon was clicked.
                     @Override
