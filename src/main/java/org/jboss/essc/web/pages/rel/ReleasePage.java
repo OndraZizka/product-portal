@@ -3,6 +3,7 @@ package org.jboss.essc.web.pages.rel;
 import org.jboss.essc.web.pages.prod.ProductPage;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
@@ -10,7 +11,6 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseBox;
-import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.pages.BaseLayoutPage;
@@ -30,27 +30,27 @@ public class ReleasePage extends BaseLayoutPage {
     public ReleasePage( PageParameters par ) {
         String prod =  par.get("product").toOptionalString();
         String ver = par.get("version").toOptionalString();
-        String titleIfNotFound = prod + " " + ver;
+        
         try {
             this.release = releaseDao.getRelease( prod, ver );
         }
-        catch( NoResultException ex ){ /* Release remains null. */ }
-        init( titleIfNotFound );
+        catch( NoResultException ex ){
+            // Redirect to NotFoundPage instead.
+            String title = "Not found: " + prod + " " + ver;
+            throw new RestartResponseAtInterceptPageException( new NotFoundPage(title) );
+        }
+        init();
     }
 
     public ReleasePage( Release release ) {
+        if( release == null )
+            throw new RestartResponseAtInterceptPageException( new NotFoundPage("Release not specified.") );
         this.release = release;
-        init("Release not specified.");
     }
     
-    private void init( String titleIfNotFound ){
+    private void init(){
         
-        if( this.release != null ){
-            add( new ReleaseBox("releaseBox", this.release) );
-        }
-        else {
-            add( new NoItemsFoundBox("releaseBox", titleIfNotFound));
-        }
+        add( new ReleaseBox("releaseBox", this.release) );
         
         
         // Danger Zone
