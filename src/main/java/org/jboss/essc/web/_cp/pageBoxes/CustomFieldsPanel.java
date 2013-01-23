@@ -27,13 +27,13 @@ public class CustomFieldsPanel extends Panel {
     ProductCustomField addedField = new ProductCustomField();
 
     // Components
-    private final FeedbackPanel feedbackPanel;
+    //private final FeedbackPanel feedbackPanel;
 
 
     public CustomFieldsPanel( String id, final IModel<Map<String,ProductCustomField>> fieldMapModel, final FeedbackPanel feedbackPanel ) {
         
         super( id, fieldMapModel );
-        this.feedbackPanel = feedbackPanel;
+        //this.feedbackPanel = feedbackPanel;
 
         this.setOutputMarkupId( true );
 
@@ -61,7 +61,7 @@ public class CustomFieldsPanel extends Panel {
                         try {
                             CustomFieldsPanel.this.onChange( target ); // Persists.
                         } catch (Exception ex){
-                            feedbackPanel.error( ex.toString() );
+                            feedbackPanel.error( ex.toString() ); // TODO: error to CustomFieldsPanel.this ?
                         }
                     }
                 });
@@ -87,7 +87,7 @@ public class CustomFieldsPanel extends Panel {
                     CustomFieldsPanel.this.onChange( target ); // Perists.
                     CustomFieldsPanel.this.info("Custom field added.");
                 } catch (Exception ex){
-                    feedbackPanel.error( ex.toString() );
+                    feedbackPanel.error( ex.toString() );// TODO: error to CustomFieldsPanel.this ?
                     DebugBar bar = (DebugBar) get("debugBar");
                     bar.info( ex );
                     throw new RuntimeException(ex);
