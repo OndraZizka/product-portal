@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
@@ -27,14 +29,15 @@ public class ReleaseCustomField implements Serializable {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "release_id", nullable = false, updatable = false)
+    @XmlTransient @JsonIgnore
     private Release release;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "field_id", nullable = false, updatable = false)
+    @XmlTransient @JsonIgnore
     private ProductCustomField field;
 
     private String value;
-
 
 
 
