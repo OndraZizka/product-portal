@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
@@ -59,19 +60,28 @@ public class JpaQueryPage extends WebPage {
         form.add( new ListView("result") {
             @Override
             protected void populateItem( ListItem item ) {
+                Object obj = item.getModelObject();
                 String content;
-                try {
-                    content = toJSON( item.getModelObject() );
-                } catch (Throwable ex){
+                // Exceptions.
+                if( obj instanceof Exception ){
+                    content = ((Exception)obj).toString();
+                    item.add(  AttributeModifier.replace( "style", "white-space: normal") );
+                }
+                // Other objects - JSON.
+                else {
                     try {
-                        content = item.getModelObject().toString();
-                    } catch (Exception ex2) {
-                        content = item.getModelObject().getClass() + " but toString() threw: " + ex2.toString();
+                        content = toJSON( obj );
+                    } catch (Throwable ex){
+                        content = "toJSON() threw " + ex.toString() + "\n";
+                        try {
+                            content += obj.toString();
+                        } catch (Exception ex2) {
+                            content += obj.getClass() + " but toString() threw: " + ex2.toString();
+                        }
                     }
                 }
                 item.add( new Label("item", content) );
             }
-
         } );
         
     }// const
@@ -82,6 +92,28 @@ public class JpaQueryPage extends WebPage {
      */
     private static String toJSON( Object object ) {
         //Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .addDeserializationExclusionStrategy( new ExclusionStrategy() {
+                    @Override public boolean shouldSkipField( FieldAttributes f ) {
+                        return false;
+                    }
+                    @Override public boolean shouldSkipClass( Class<?> clazz ) {
+                        if( ReleaseCustomField.class.equals( clazz ) )
+                                return true;
+                        if( ProductCustomField.class.equals( clazz ) )
+                                return true;
+                        return false;
+                    }
+                } )
+                .create();
+        return gson.toJson(object);
+    }
+
+    /**
+     *  Convert any object to JSON, using Jackson.
+     */
+    private static String toJSON2( Object object ) {
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .addDeserializationExclusionStrategy( new ExclusionStrategy() {
