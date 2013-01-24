@@ -2,6 +2,8 @@ package org.jboss.essc.web.model;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -104,7 +106,13 @@ public class Product implements Serializable, IHasTraits {
 
     @Override
     public String toString() {
-        return "Product #"+ id + " \"" + name + "\", " + customFields.size() + " customFields }";
+        return "Product #"+ id + " \"" + name + "\", " + customFields.size() + " customFields {}";
+    }
+
+    public static Product formString( String str ) {
+        Pattern pat = Pattern.compile("Product #(\\d+) \"(.*)\", .*");
+        Matcher mat = pat.matcher( str );
+        return new Product( Long.parseLong( mat.group(1) ), mat.group(2) );
     }
 
 }
