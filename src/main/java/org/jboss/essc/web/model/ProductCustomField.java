@@ -34,6 +34,9 @@ public class ProductCustomField implements Serializable {
     @Basic(optional = false)
     private String label;
 
+    public String getDefaultValue() {
+        return "";
+    }
 
     //<editor-fold defaultstate="collapsed" desc="get/set">
     public Long getId() { return id; }
