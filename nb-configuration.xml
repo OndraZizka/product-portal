@@ -20,6 +20,7 @@ Any value defined here will override the pom.xml file value but is only applicab
         <word>ajax</word>
         <word>docs</word>
         <word>ESSC</word>
+        <word>instance's</word>
         <word>metadata</word>
         <word>xml</word>
     </spellchecker-wordlist>

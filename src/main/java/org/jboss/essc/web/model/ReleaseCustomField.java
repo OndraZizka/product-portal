@@ -40,6 +40,19 @@ public class ReleaseCustomField implements Serializable {
     private String value;
 
 
+    public ReleaseCustomField() {}
+
+    public ReleaseCustomField( Release release, ProductCustomField field ) {
+        this.release = release;
+        this.field = field;
+    }
+
+
+    @Transient
+    public String getEffectiveValue(){
+        return this.value != null ? this.value : this.getField().toString();
+    }
+
 
     //<editor-fold defaultstate="collapsed" desc="get/set/overrides">
     public Long getId() { return id; }

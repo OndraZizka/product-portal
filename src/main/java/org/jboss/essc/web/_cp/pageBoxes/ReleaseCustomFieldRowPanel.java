@@ -5,9 +5,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.PropertyModel;
-import org.jboss.essc.web.model.ReleaseCustomField;
+import org.jboss.essc.web._cp.pageBoxes.ReleaseCustomFieldsPanel.CustomFieldPrototypeInstanceModel;
 import org.jboss.essc.wicket.comp.editable.EditableLabel;
 
 /**
@@ -16,14 +14,14 @@ import org.jboss.essc.wicket.comp.editable.EditableLabel;
  */
 public class ReleaseCustomFieldRowPanel extends Panel {
 
-    public ReleaseCustomFieldRowPanel( String id, IModel<ReleaseCustomField> fieldModel ) {
-        super(id, fieldModel);
+    public ReleaseCustomFieldRowPanel( String id, CustomFieldPrototypeInstanceModel cfpiModel ) {
+        super(id, cfpiModel);
 
-        add( new Label("name",   new PropertyModel(fieldModel, "field.name")) );
+        add( new Label("name",   cfpiModel.getProtoField().getName()) );
 
-        add( new Label("label",  new PropertyModel(fieldModel, "field.label")) );
+        add( new Label("label",  cfpiModel.getProtoField().getName()) );
         
-        add( new EditableLabel<String>("value", new PropertyModel(fieldModel, "value"))
+        add( new EditableLabel<String>("value", cfpiModel)
             .add(
                 new AjaxFormComponentUpdatingBehavior("onchange") {
                     @Override protected void onUpdate( AjaxRequestTarget target ) {

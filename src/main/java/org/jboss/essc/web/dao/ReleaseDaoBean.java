@@ -64,7 +64,11 @@ public class ReleaseDaoBean {
      *  Get Release by product name and version.
      */
     public Release getRelease( String prodName, String version ) {
-        return this.em.createQuery("SELECT rel FROM Release rel LEFT JOIN FETCH rel.customFields WHERE rel.product.name = ? AND rel.version = ?", Release.class)
+        return this.em.createQuery("SELECT rel FROM Release rel "
+                + " LEFT JOIN FETCH rel.product pr "
+                + "   LEFT JOIN FETCH pr.customFields "
+                + " LEFT JOIN FETCH rel.customFields "
+                + " WHERE rel.product.name = ? AND rel.version = ?", Release.class)
                 .setParameter(1, prodName)
                 .setParameter(2, version)
                 .getSingleResult();
