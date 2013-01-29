@@ -94,10 +94,10 @@ public class ReleaseBox extends Panel {
         this.form.add( releaseTraitsPanel );
         
         // Save as .properties
-        this.form.add( new PropertiesDownloadLink("downloadProps", release, release.toStringIdentifier() + "-traits.properties") );
+        this.add( new PropertiesDownloadLink("downloadProps", release, release.toStringIdentifier() + "-traits.properties") );
         
         // Replace ${ver} tokens with version.
-        this.form.add( new AjaxFallbackLink("replaceVersionTokens"){
+        this.add( new AjaxFallbackLink("replaceVersionTokens"){
             @Override public void onClick( AjaxRequestTarget target ) {
                 target.add( releaseTraitsPanel );
                 
