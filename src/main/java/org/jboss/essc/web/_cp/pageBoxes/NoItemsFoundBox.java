@@ -8,6 +8,7 @@ import org.apache.wicket.markup.html.panel.Panel;
  * A list of releases.
  * 
  * @author Ondrej Zizka
+ * @deprecated   Redirect to other page instead.
  */
 public class NoItemsFoundBox extends Panel {
 
