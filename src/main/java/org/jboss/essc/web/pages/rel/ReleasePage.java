@@ -8,9 +8,11 @@ import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
+import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseBox;
@@ -28,8 +30,12 @@ import org.jboss.essc.web.pages.BaseLayoutPage;
 public class ReleasePage extends BaseLayoutPage {
 
     @Inject private ReleaseDaoBean releaseDao;
-    
+
+    // Data
     private Release release;
+
+    // Components
+    private FeedbackPanel feedbackPanel;
 
     
     public ReleasePage( PageParameters par ) {
@@ -56,6 +62,12 @@ public class ReleasePage extends BaseLayoutPage {
     // Init components.
     private void init(){
 
+        // Feedback
+        feedbackPanel = new FeedbackPanel("feedback");
+        feedbackPanel.setOutputMarkupId( true );
+        feedbackPanel.setFilter( new ContainerFeedbackMessageFilter(this) );
+        add(feedbackPanel);
+
         // Release box.
         add( new ReleaseBox("releaseBox", this.release) );
 
@@ -64,8 +76,7 @@ public class ReleasePage extends BaseLayoutPage {
             // Save release when changed.
             @Override
             protected void onAjaxChange( AjaxRequestTarget target, ListItem<ProductCustomField> item ) {
-                release = releaseDao.update( release );
-                ReleasePage.this.setDefaultModelObject( release );
+                onReleaseUpdate( target );
             }
         });
         
@@ -99,7 +110,25 @@ public class ReleasePage extends BaseLayoutPage {
         });
         
     }
-    
+
+
+    /**
+     *  Called when some of sub-components were updated.
+     *
+     *  @param target  Ajax target, or null if not a result of AJAX.
+     */
+    private void onReleaseUpdate( AjaxRequestTarget target ) {
+        if( target != null )  target.add( this.feedbackPanel );
+        try {
+            release = releaseDao.update( release );
+            this.feedbackPanel.info("Release saved.");
+            if( target != null )
+                target.appendJavaScript("window.notifyFlash('Release saved.')");
+        } catch( Exception ex ){
+            this.feedbackPanel.info("Saving the release failed: " + ex.toString());
+        }
+    }
+
 
     /**  Helper - creates ReleasePage params for given release. */
     public static PageParameters createPageParameters( Release rel ){

@@ -2,6 +2,8 @@
 package org.jboss.essc.web.model;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,10 +27,12 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 public class ReleaseCustomField implements Serializable {
 
     @Id @GeneratedValue( strategy = GenerationType.AUTO )
+    @Column(columnDefinition = "INT UNSIGNED")
     private Long id;
 
+    // TBC: Make uni-dir?
     @ManyToOne(optional = false)
-    @JoinColumn(name = "release_id", nullable = false, updatable = false)
+    @JoinColumn(name = "release_id", nullable = false, updatable = false) // Only at one side.
     @XmlTransient @JsonIgnore
     private Release release;
 
@@ -43,32 +47,47 @@ public class ReleaseCustomField implements Serializable {
     public ReleaseCustomField() {}
 
     public ReleaseCustomField( Release release, ProductCustomField field ) {
-        this.release = release;
-        this.field = field;
+        this.setRelease( release );
+        this.setField( field );
     }
 
 
     @Transient
     public String getEffectiveValue(){
-        return this.value != null ? this.value : this.getField().toString();
+        try {
+            return this.value != null ? this.value : this.getField().toString();
+        } catch ( NullPointerException ex ){
+            return "FIXME NPE";
+        }
     }
 
 
-    //<editor-fold defaultstate="collapsed" desc="get/set/overrides">
+    //<editor-fold defaultstate="collapsed" desc="get/set">
     public Long getId() { return id; }
     public void setId( Long id ) { this.id = id; }
 
     public Release getRelease() { return release; }
     public void setRelease( Release release ) { this.release = release; }
     public ProductCustomField getField() { return field; }
-    public void setField( ProductCustomField field ) { this.field = field; }
+    public void setField( ProductCustomField field ) {
+        this.field = field;
+        // Stupid workaround, see http://stackoverflow.com/questions/14587148/jpa-hibernate-not-storing-mapkeycolumns-value
+        // TODO: Maybe change to property-access (annotations at getters) and get rid of name member?
+        this.name = field == null ? null : field.getName();
+    }
     public String getValue() { return value; }
     public void setValue( String value ) { this.value = value; }
+    //</editor-fold>
 
 
-    @Transient
-    public String getName() { return field.getName(); }
+    //@Transient
+    private String name;
+    //public String getName() { return field == null ? "(DEBUG - no field set)" : field.getName(); }
+    //public void setName( String name ) { }
 
+
+
+    //<editor-fold defaultstate="collapsed" desc="overrides">
     @Override
     public int hashCode() {
         int hash = 5;

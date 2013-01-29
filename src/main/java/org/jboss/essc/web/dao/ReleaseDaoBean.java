@@ -12,6 +12,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
+import org.jboss.essc.web.model.ReleaseCustomField;
 
 /**
  * A bean which manages Contact entities.
@@ -115,6 +116,10 @@ public class ReleaseDaoBean {
         Release managed = this.em.merge(rel);
         this.em.remove(managed);
         this.em.flush();
+    }
+
+    public void storeReleaseCustomField( ReleaseCustomField instanceField ) {
+        this.em.persist( instanceField );
     }
 
 

@@ -38,8 +38,8 @@ public class Release implements Serializable, IHasTraits {
     private static final Format DF = FastDateFormat.getInstance("yyyy-MM-dd", Locale.US);
     
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "INT UNSIGNED")
     private Long id;
     
     //@Column(unique=true)
@@ -78,11 +78,13 @@ public class Release implements Serializable, IHasTraits {
     //@Basic(fetch=FetchType.EAGER, optional=false) // HHH-7610
     private ReleaseTraits traits = new ReleaseTraits();
 
+
     // ---- Custom fields ----
+
     //@MapKeyClass(String.class)
     @MapKeyColumn(name = "name")
-    @OneToMany(mappedBy = "release")
-    //@JoinColumn(referencedColumnName = "release_id")
+    @OneToMany(mappedBy = "release", cascade = CascadeType.ALL )
+    //@JoinColumn(referencedColumnName = "release_id") // Only at one side.
     private Map<String, ReleaseCustomField> customFields = new HashMap();
 
     

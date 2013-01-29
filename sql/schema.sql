@@ -80,8 +80,10 @@ CREATE TABLE `rel_custField` (
   `id`              INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `field_id`        INT UNSIGNED NOT NULL,
   `release_id`      INT UNSIGNED NOT NULL,
-  `val`             VARCHAR(255) NOT NULL,
+  `name`            VARCHAR(255) NOT NULL,  # Redundancy - JPA can't derive map keys from 3rd table.
+  `val`             VARCHAR(255) NOT NULL DEFAULT '',
   UNIQUE KEY `fieldId_relId` (`field_id`, `release_id`),
+  KEY `name` (`name`),
   CONSTRAINT `field_id_fk`   FOREIGN KEY (`field_id`)   REFERENCES `prod_custFields` (`id`),
   CONSTRAINT `release_id_fk` FOREIGN KEY (`release_id`) REFERENCES `release` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
