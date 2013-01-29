@@ -8,11 +8,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.FastDateFormat;
-import org.jboss.essc.web.rest.adapters.ProductSimpleAdapter;
 import org.jboss.essc.web.util.SimpleRelativeDateFormatter;
 
 
