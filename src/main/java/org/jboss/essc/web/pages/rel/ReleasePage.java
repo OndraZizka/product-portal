@@ -10,11 +10,13 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.StatelessForm;
+import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseBox;
 import org.jboss.essc.web._cp.pageBoxes.ReleaseCustomFieldsPanel;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.model.ProductCustomField;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 
@@ -58,7 +60,14 @@ public class ReleasePage extends BaseLayoutPage {
         add( new ReleaseBox("releaseBox", this.release) );
 
         // Custom fields.
-        add( new ReleaseCustomFieldsPanel("customFields", new PropertyModel<Release>( this, "release") ));
+        add( new ReleaseCustomFieldsPanel("customFields", new PropertyModel<Release>( this, "release") ){
+            // Save release when changed.
+            @Override
+            protected void onAjaxChange( AjaxRequestTarget target, ListItem<ProductCustomField> item ) {
+                release = releaseDao.update( release );
+                ReleasePage.this.setDefaultModelObject( release );
+            }
+        });
         
         
         // Danger Zone
@@ -92,6 +101,7 @@ public class ReleasePage extends BaseLayoutPage {
     }
     
 
+    /**  Helper - creates ReleasePage params for given release. */
     public static PageParameters createPageParameters( Release rel ){
         return new PageParameters()
             .add("product", rel.getProduct().getName())

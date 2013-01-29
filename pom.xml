@@ -257,6 +257,14 @@
             <scope>provided</scope>
         </dependency>
         
+        <!-- Hibernate, to have the sources available in IDE. -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.1.6.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Hibernate Validator. 
         <dependency>
             <groupId>org.hibernate</groupId>

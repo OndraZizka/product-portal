@@ -44,9 +44,9 @@ public class Release implements Serializable, IHasTraits {
     
     //@Column(unique=true)
     @ManyToOne
-    @JoinColumn(updatable=false, nullable=false)
+    @JoinColumn(name="product_id", updatable=false, nullable=false)
     //@XmlTransient //@JsonIgnore
-    @XmlJavaTypeAdapter(ProductSimpleAdapter.class)
+    //@XmlJavaTypeAdapter(ProductSimpleAdapter.class)
     private Product product;
 
     private String version;
@@ -79,7 +79,7 @@ public class Release implements Serializable, IHasTraits {
     private ReleaseTraits traits = new ReleaseTraits();
 
     // ---- Custom fields ----
-    @MapKeyClass(ProductCustomField.class)
+    //@MapKeyClass(String.class)
     @MapKeyColumn(name = "name")
     @OneToMany(mappedBy = "release")
     //@JoinColumn(referencedColumnName = "release_id")

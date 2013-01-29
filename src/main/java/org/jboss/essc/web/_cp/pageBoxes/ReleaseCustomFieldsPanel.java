@@ -3,6 +3,7 @@ package org.jboss.essc.web._cp.pageBoxes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -27,11 +28,19 @@ public class ReleaseCustomFieldsPanel extends Panel {
             @Override
             protected void populateItem( final ListItem<ProductCustomField> item ) {
                 CustomFieldPrototypeInstanceModel cfpiModel = new CustomFieldPrototypeInstanceModel(item.getModelObject(), releaseModel.getObject());
-                item.add( new ReleaseCustomFieldRowPanel("fieldRow", cfpiModel));
+                item.add( new ReleaseCustomFieldRowPanel("fieldRow", cfpiModel){
+                    @Override protected void onAjaxChange( AjaxRequestTarget target ) {
+                        ReleaseCustomFieldsPanel.this.onAjaxChange( target, item );
+                    }
+                });
             }
         });
 
     }
+
+    /** Called when some field`s row`s input value changes. */
+    protected void onAjaxChange( AjaxRequestTarget target, ListItem<ProductCustomField> item ) { }
+    
 
     /**
      *  Model which gives instance's value if exists, otherwise prototype's value.
@@ -78,34 +87,8 @@ public class ReleaseCustomFieldsPanel extends Panel {
     }
 
     
-    /**
-     *  Model which gives instance's value if exists, otherwise prototype's value.
-     */
-    class xCustomFieldPrototypeInstanceModel implements IModel<String> {
 
-        Map<String, ProductCustomField> prototype;
-        ReleaseCustomField instanceField;
-
-        public xCustomFieldPrototypeInstanceModel( ReleaseCustomField instanceField ) {
-            this.instanceField = instanceField;
-        }
-
-        @Override public String getObject() {
-            //ProductCustomField protoField = this.prototype.get( this.instanceField.getName() );
-            //if( null == protoField )
-            //    return null;
-            return this.instanceField.getEffectiveValue();
-        }
-
-        @Override public void setObject( String value ) {
-            this.instanceField.setValue( value );
-        }
-
-        @Override public void detach() { }
-
-    }
-
-
+    /**  Type-safe wrap of getDefaultModel(). */
     protected IModel<List<ReleaseCustomField>> getModel(){
         return (IModel<List<ReleaseCustomField>>) this.getDefaultModel();
     }
