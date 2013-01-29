@@ -19,7 +19,7 @@ public class ReleaseCustomFieldRowPanel extends Panel {
 
         add( new Label("name",   cfpiModel.getProtoField().getName()) );
 
-        add( new Label("label",  cfpiModel.getProtoField().getName()) );
+        add( new Label("label",  cfpiModel.getProtoField().getLabel()) );
         
         add( new EditableLabel<String>("value", cfpiModel)
             .add(
