@@ -37,11 +37,11 @@
                 <fieldset title="Other actions">
                     <legend>Other actions...
                         <wicket:link>
-                        <img src="icoPlusGreenCircle.png" alt="Show / hide" style="display: none;"
+                        <img src="icoPlusGreenCircle.png" alt="Show / hide"
                             onclick="toggleVisibility(this.parentElement.parentElement.getElementsByTagName('div')[0]);"/>
                         </wicket:link>
                     </legend>
-                    <div>
+                    <div style="display: none;">
                         <input type="button" wicket:id="downloadProps" value="Download as .properties"/>
                         <form wicket:id="uploadForm" method="post" action="#">
                             <input type="file" wicket:id="file"/>
