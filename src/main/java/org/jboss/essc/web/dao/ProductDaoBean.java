@@ -29,7 +29,7 @@ public class ProductDaoBean {
     }
 
     /**
-     * Get ProductLine by name.
+     * Get Product by name.
      * @throws  NoResultException if no such product found.
      */
     public Product getProductByName( String name ) {
@@ -39,7 +39,7 @@ public class ProductDaoBean {
                 + "WHERE p.name = ?", Product.class).setParameter(1, name).getSingleResult();
     }
     /**
-     * Find ProductLine by name.
+     * Find Product by name.
      * @returns null if not found.
      */
     public Product findProductByName( String name ) {
@@ -48,22 +48,16 @@ public class ProductDaoBean {
         return list.get(0);
     }
 
-    /**
-     * Add a new ProductLine.
-     */
-    public Product addProductLine( String name) {
-        return this.em.merge( new Product( null, name ) );
-    }
 
     /**
-     * Add a new ProductLine.
+     * Add a new Product.
      */
     public Product addProduct( Product prod ) {
         return this.em.merge( prod );
     }
 
     /**
-     * Remove a ProductLine.
+     * Remove a Product.
      */
     public void remove(Product prod) {
         Product managed = this.em.merge(prod);
@@ -83,10 +77,10 @@ public class ProductDaoBean {
         
         // Delete releases
         // Ends up with Hibernate screwing up SQL - "cross join"
-        //int up = this.em.createQuery( "DELETE FROM Release r WHERE r.product.name = ?" ).setParameter( 1, prod.getName() ).executeUpdate();
+        //int up = this.em.createQuery( "DELETE FROM Release r WHERE r.product.name = ?1" ).setParameter( 1, prod.getName() ).executeUpdate();
         int up = this.em.createQuery( "DELETE FROM Release r WHERE r.product IN "
-                + "(SELECT p FROM Product p WHERE p.name = ?)" ).setParameter( 1, prod.getName() ).executeUpdate();
-        System.out.println("Updated " + up);
+                + "(SELECT p FROM Product p WHERE p.name = ?1)" ).setParameter( 1, prod.getName() ).executeUpdate();
+        System.out.println("Deleted " + up);
         
         this.em.remove(prod);
         this.em.flush();
