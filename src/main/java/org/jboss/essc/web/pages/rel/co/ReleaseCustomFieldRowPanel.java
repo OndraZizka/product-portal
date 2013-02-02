@@ -1,11 +1,11 @@
 
-package org.jboss.essc.web._cp.pageBoxes;
+package org.jboss.essc.web.pages.rel.co;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.jboss.essc.web._cp.pageBoxes.ReleaseCustomFieldsPanel.CustomFieldPrototypeInstanceModel;
+import org.jboss.essc.web.pages.rel.co.ReleaseCustomFieldsPanel.CustomFieldPrototypeInstanceModel;
 import org.jboss.essc.wicket.comp.editable.EditableLabel;
 
 /**

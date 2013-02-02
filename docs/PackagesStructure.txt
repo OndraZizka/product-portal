@@ -1,0 +1,13 @@
+
+
+_cp             - App-wide components.
+dao             - Data Access Objects
+model           - @Entities
+pages.<pageGroup>
+pages.<pageGroup>.co   - components
+pages.static    - mostly static pages like Home, About etc.
+wicket          - Wicket-related classes - implementations of various interfaces.
+qualifiers      - CDI @Qualifiers
+security        - Stuff around login, users etc.
+rest            - Portal's REST API classes.
+test            - Test pages.

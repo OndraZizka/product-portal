@@ -2,7 +2,7 @@ package org.jboss.essc.web.pages;
 
 import org.jboss.essc.web._cp.pageBoxes.AboutSmallBox;
 import org.jboss.essc.web._cp.pageBoxes.RecentChangesBox;
-import org.jboss.essc.web._cp.pageBoxes.RecentReleasesBox;
+import org.jboss.essc.web.pages.rel.co.RecentReleasesBox;
 
 
 /**

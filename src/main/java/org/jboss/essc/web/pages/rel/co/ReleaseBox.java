@@ -1,4 +1,4 @@
-package org.jboss.essc.web._cp.pageBoxes;
+package org.jboss.essc.web.pages.rel.co;
 
 import java.io.IOException;
 import java.util.ArrayList;

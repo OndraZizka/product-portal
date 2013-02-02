@@ -1,4 +1,4 @@
-package org.jboss.essc.web._cp.pageBoxes;
+package org.jboss.essc.web.pages.rel.co;
 
 import java.util.List;
 import org.jboss.essc.web.model.Product;
