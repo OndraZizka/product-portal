@@ -7,15 +7,11 @@ import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
-import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.jboss.essc.wicket.comp.editable.EditableLabel;
-import org.jboss.essc.wicket.comp.editable.EditableLink;
-import org.jboss.essc.wicket.comp.editable.EditableLink2;
 import org.jboss.essc.wicket.comp.editable.EditableLink4;
 import org.jboss.essc.wicket.comp.editable.EditableLinkActivator;
-import org.jboss.essc.wicket.comp.editable.EditableLinkAjaxBehavior;
 
 /**
  *
@@ -34,6 +30,7 @@ public class EditableTestPage extends WebPage {
 
     public EditableTestPage() {
 
+        /*
         // === Link1 ===
 
         EditableLink link = new EditableLink("link", new PropertyModel(this, "linkHref")){
@@ -72,6 +69,7 @@ public class EditableTestPage extends WebPage {
 
         // Other input
         add( new Label("ajaxUpdatedVal2", new Model("orig val 2") ).setOutputMarkupId(true) );
+        */
 
         
         // === Link4 ===
