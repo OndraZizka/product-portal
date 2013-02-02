@@ -32,7 +32,7 @@ public class UserDaoBean {
      * Get User by name.
      */
     public User getUserByName( String name ) {
-        return this.em.createQuery("SELECT u FROM User u WHERE u.name = ?", User.class).setParameter(1, name).getSingleResult();
+        return this.em.createQuery("SELECT u FROM User u WHERE u.name = ?1", User.class).setParameter(1, name).getSingleResult();
     }
     
     /**

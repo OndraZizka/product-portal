@@ -5,11 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import org.jboss.essc.web.model.MavenArtifact;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.ReleaseCustomField;
@@ -45,12 +41,12 @@ public class ReleaseDaoBean {
 //SELECT rel FROM org.jboss.essc.web.model.Release rel WHERE rel.product = ? AND NOT rel.internal ORDER BY rel.version DESC
     public List<Release> getReleasesOfProduct(Product prod, boolean showInternal) {
         String cond = showInternal ? "" : "AND false = rel.internal";
-        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product = ? " + cond + " ORDER BY rel.version DESC").setParameter(1, prod).getResultList();
+        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product = ?1 " + cond + " ORDER BY rel.version DESC").setParameter(1, prod).getResultList();
     }
 
     public List<Release> getReleasesOfProduct(String prodName, boolean showInternal) {
         String cond = showInternal ? "" : "AND false = rel.internal";
-        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product.name = ? " + cond + " ORDER BY rel.version DESC").setParameter(1, prodName).getResultList();
+        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product.name = ?1 " + cond + " ORDER BY rel.version DESC").setParameter(1, prodName).getResultList();
     }
 
     
@@ -69,18 +65,23 @@ public class ReleaseDaoBean {
                 + " LEFT JOIN FETCH rel.product pr "
                 + "   LEFT JOIN FETCH pr.customFields "
                 + " LEFT JOIN FETCH rel.customFields "
-                + " WHERE rel.product.name = ? AND rel.version = ?", Release.class)
+                + " WHERE rel.product.name = ? AND rel.version = ?1", Release.class)
                 .setParameter(1, prodName)
                 .setParameter(2, version)
                 .getSingleResult();
     }
-    
+
+    public List<MavenArtifact> getReleaseDeps( Release rel ){
+        return this.em.createQuery("SELECT ma FROM MavenArtifacts ma WHERE ma.rel = ?1", MavenArtifact.class)
+                .setParameter(1, rel)
+                .getResultList();
+    }
     
     /**
      *  Does a release exist?
      */
     public boolean exists( String prodName, String version ){
-        return this.em.createQuery("SELECT COUNT(*) FROM Release rel WHERE rel.product.name = ? AND rel.version = ?", Long.class)
+        return this.em.createQuery("SELECT COUNT(*) FROM Release rel WHERE rel.product.name = ? AND rel.version = ?1", Long.class)
                 .setParameter(1, prodName)
                 .setParameter(2, version)
                 .getSingleResult() != 0;
