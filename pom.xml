@@ -143,7 +143,7 @@
         <profile>
             <id>prod</id>
             <properties>
-                <wicket.mode>deployment</wicket.mode>
+                <wicket.mode>development</wicket.mode> <!-- development | deployment -->
                 <jboss-as.deploy.hostname>products.app.eng.bos.redhat.com</jboss-as.deploy.hostname>
                 <plugin.war.warName>ROOT</plugin.war.warName>
             </properties>
