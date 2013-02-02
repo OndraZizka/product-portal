@@ -93,7 +93,7 @@ public class ReleaseTraitsPanel extends Panel {
         this.add( new ReleaseTraitRowPanel("linkTck",          rm, "TCK tests",                 Status.RELEASED, this));
         this.add( new ReleaseTraitRowPanel("linkCC",           rm, "Common Criteria tests",     Status.RELEASED, this));
         this.add( new ReleaseTraitRowPanel("link508",          rm, "508 compliance tests",      Status.RELEASED, this));
-        this.add( new ReleaseTraitRowPanel("linkJavaEE",       rm, "Java EE compliance tests",  Status.RELEASED, this));
+        //this.add( new ReleaseTraitRowPanel("linkJavaEE",       rm, "Java EE compliance tests",  Status.RELEASED, this));
         
         //this.add( new ReleaseTraitRowPanel("",      rm, "",           Status.RELEASED, this));
         

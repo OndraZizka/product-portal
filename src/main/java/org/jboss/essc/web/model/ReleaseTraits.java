@@ -43,7 +43,7 @@ public class ReleaseTraits implements Serializable, Cloneable {
     private String linkTck;
     private String linkCC;
     private String link508;
-    private String linkJavaEE;
+    //private String linkJavaEE;
 
 
     public void replaceTemplatesTokens( String token, String val ){
@@ -102,8 +102,8 @@ public class ReleaseTraits implements Serializable, Cloneable {
     
     public String getLinkTck() { return linkTck; }
     public void setLinkTck( String linkTck ) { this.linkTck = linkTck; }
-    public String getLinkJavaEE() { return linkJavaEE; }
-    public void setLinkJavaEE( String linkJavaEE ) { this.linkJavaEE = linkJavaEE; }
+    //public String getLinkJavaEE() { return linkJavaEE; }
+    //public void setLinkJavaEE( String linkJavaEE ) { this.linkJavaEE = linkJavaEE; }
     public String getLink508() { return link508; }
     public void setLink508( String link508 ) { this.link508 = link508; }
     public String getLinkCC() { return linkCC; }
