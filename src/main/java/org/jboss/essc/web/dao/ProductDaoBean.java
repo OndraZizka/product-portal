@@ -22,9 +22,9 @@ public class ProductDaoBean {
     }
 
     /**
-     * Get ProductLine by ID.
+     * Get Product by ID.
      */
-    public Product getProductLine(Long id) {
+    public Product getProduct(Long id) {
         return this.em.find(Product.class, id);
     }
 
