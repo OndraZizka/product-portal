@@ -20,7 +20,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @XmlRootElement(name="product")
 public class Product implements Serializable, IHasTraits {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "INT UNSIGNED")
     private Long id;
     
