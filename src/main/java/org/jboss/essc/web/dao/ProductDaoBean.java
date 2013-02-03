@@ -36,14 +36,14 @@ public class ProductDaoBean {
         return this.em.createQuery(
                 "SELECT p FROM Product p "
                 + "LEFT JOIN FETCH p.customFields cf "
-                + "WHERE p.name = ?", Product.class).setParameter(1, name).getSingleResult();
+                + "WHERE p.name = ?1", Product.class).setParameter(1, name).getSingleResult();
     }
     /**
      * Find Product by name.
      * @returns null if not found.
      */
     public Product findProductByName( String name ) {
-        List<Product> list = this.em.createQuery("SELECT p FROM Product p WHERE p.name = ?", Product.class).setParameter(1, name).getResultList();
+        List<Product> list = this.em.createQuery("SELECT p FROM Product p WHERE p.name = ?1", Product.class).setParameter(1, name).getResultList();
         if( list.isEmpty() )  return null;
         return list.get(0);
     }

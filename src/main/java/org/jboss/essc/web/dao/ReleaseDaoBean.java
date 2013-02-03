@@ -38,7 +38,7 @@ public class ReleaseDaoBean {
         return this.em.createQuery("SELECT rel FROM Release rel WHERE 1=1 " + cond + " ORDER BY rel.plannedFor DESC").getResultList();
     }
 
-//SELECT rel FROM org.jboss.essc.web.model.Release rel WHERE rel.product = ? AND NOT rel.internal ORDER BY rel.version DESC
+//SELECT rel FROM org.jboss.essc.web.model.Release rel WHERE rel.product = ?1 AND NOT rel.internal ORDER BY rel.version DESC
     public List<Release> getReleasesOfProduct(Product prod, boolean showInternal) {
         String cond = showInternal ? "" : "AND false = rel.internal";
         return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product = ?1 " + cond + " ORDER BY rel.version DESC").setParameter(1, prod).getResultList();
@@ -61,11 +61,15 @@ public class ReleaseDaoBean {
      *  Get Release by product name and version.
      */
     public Release getRelease( String prodName, String version ) {
+        return getRelease( prodName, version, false );
+    }
+    public Release getRelease( String prodName, String version, boolean withDeps ) {
         return this.em.createQuery("SELECT rel FROM Release rel "
                 + " LEFT JOIN FETCH rel.product pr "
                 + "   LEFT JOIN FETCH pr.customFields "
                 + " LEFT JOIN FETCH rel.customFields "
-                + " WHERE rel.product.name = ? AND rel.version = ?1", Release.class)
+                + (withDeps ? " LEFT JOIN FETCH rel.dependencies" : "")
+                + " WHERE rel.product.name = ?1 AND rel.version = ?2", Release.class)
                 .setParameter(1, prodName)
                 .setParameter(2, version)
                 .getSingleResult();
@@ -81,7 +85,7 @@ public class ReleaseDaoBean {
      *  Does a release exist?
      */
     public boolean exists( String prodName, String version ){
-        return this.em.createQuery("SELECT COUNT(*) FROM Release rel WHERE rel.product.name = ? AND rel.version = ?1", Long.class)
+        return this.em.createQuery("SELECT COUNT(*) FROM Release rel WHERE rel.product.name = ?1 AND rel.version = ?2", Long.class)
                 .setParameter(1, prodName)
                 .setParameter(2, version)
                 .getSingleResult() != 0;
