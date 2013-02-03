@@ -59,7 +59,7 @@ public class AddReleasePage extends BaseLayoutPage {
         this.form = new Form<Release>("form") {
             @Override protected void onSubmit() {
                 Release rel = releaseDao.addRelease( product, version );
-                setResponsePage( ReleasePage.class, ReleasePage.createPageParameters( rel ) );
+                setResponsePage( ReleasePage.class, ReleaseBasedPage.createPageParameters( rel ) );
             }
         };
 

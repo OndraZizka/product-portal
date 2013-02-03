@@ -1,32 +1,34 @@
 
-package org.jboss.essc.web._cp.links;
+package org.jboss.essc.web.pages.rel.co;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.markup.html.link.DownloadLink;
 import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
-import org.jboss.essc.web.util.PropertiesUtils;
+import org.jboss.essc.web.model.Release;
 
 
 /**
  *
  * @author ozizka@redhat.com
  */
-public class PropertiesDownloadLink extends DownloadLink {
+public class DepsDownloadLink extends DownloadLink {
 
-    public PropertiesDownloadLink( String id, final Object obj, String fileName ) {
+    public DepsDownloadLink( String id, final Release rel, final String fileName ) {
+
         super( id, new AbstractReadOnlyModel<File>() {
             @Override public File getObject() {
                 
-                String propsString = PropertiesUtils.getPropertiesAsString(obj);
+                String csvString = StringUtils.join( rel.getDeps(), ":");
                 
                 try {
-                    File tempFile = File.createTempFile( "essc-web-", ".properties" );
-                    InputStream data = new ByteArrayInputStream( propsString.getBytes() );
+                    File tempFile = File.createTempFile( "ProdPortal-deps-" + fileName + "-", ".properties" );
+                    InputStream data = new ByteArrayInputStream( csvString.getBytes() );
                     Files.writeTo( tempFile, data );
                     return tempFile;
                 }

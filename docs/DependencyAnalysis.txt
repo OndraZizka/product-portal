@@ -1,3 +1,5 @@
 We could track which deps each release has.
 
 mvn dependency:list -DoutputFile=`pwd`/deps.txt -DappendOutput -DincludeScope=compile
+
+sort deps.txt | uniq

@@ -3,8 +3,10 @@ package org.jboss.essc.web.model;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.text.Format;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import javax.persistence.*;
@@ -84,6 +86,15 @@ public class Release implements Serializable, IHasTraits {
     //@JoinColumn(referencedColumnName = "release_id") // Only at one side.
     private Map<String, ReleaseCustomField> customFields = new HashMap();
 
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinTable(name = "rel_x_deps", 
+            joinColumns        = {@JoinColumn(name = "rel_id")},
+            inverseJoinColumns = {@JoinColumn(name = "ma_id")}
+    )
+    private List<MavenArtifact> deps = new ArrayList();
+
+
     
     public Release() {
     }
@@ -144,6 +155,9 @@ public class Release implements Serializable, IHasTraits {
     public Date getLastChanged() { return lastChanged; }
     public void setLastChanged( Date lastChanged ) { this.lastChanged = lastChanged; }
 
+    public List<MavenArtifact> getDeps() { return deps; }
+    public void setDeps( List<MavenArtifact> deps ) { this.deps = deps; }
+
     //*
     public ReleaseTraits getTraits() { 
         if( traits == null )  traits = new ReleaseTraits(); // HHH-7610
@@ -159,37 +173,13 @@ public class Release implements Serializable, IHasTraits {
     public void setCustomFields( Map<String, ReleaseCustomField> customFields ) {
         this.customFields = customFields;
     }
-        
-    /*/
-    public String getGitHash() {        return gitHash;    }
-    public void setGitHash(String gitHash) { this.gitHash = gitHash;    }
-    public String getLinkBrew() {        return linkBrew;    }
-    public void setLinkBrew(String linkBrew) { this.linkBrew = linkBrew;    }
-    public String getLinkGitRepo() {        return linkGitRepo;    }
-    public void setLinkGitRepo(String linkGitRepo) { this.linkGitRepo = linkGitRepo;    }
-    public String getLinkIssuesFixed() {        return linkIssuesFixed;    }
-    public void setLinkIssuesFixed(String linkIssuesFixed) { this.linkIssuesFixed = linkIssuesFixed;    }
-    public String getLinkIssuesFound() {        return linkIssuesFound;    }
-    public void setLinkIssuesFound(String linkIssuesFound) { this.linkIssuesFound = linkIssuesFound;    }
-    public String getLinkMavenLocalRepo() {        return linkMavenLocalRepo;    }
-    public void setLinkMavenLocalRepo(String linkMavenLocalRepo) { this.linkMavenLocalRepo = linkMavenLocalRepo;    }
-    public String getLinkMead() {        return linkMead;    }
-    public void setLinkMead(String linkMead) { this.linkMead = linkMead;    }
-    public String getLinkReleasedBinaries() {        return linkReleasedBinaries;    }
-    public void setLinkReleasedBinaries(String linkReleasedBinaries) { this.linkReleasedBinaries = linkReleasedBinaries;    }
-    public String getLinkReleasedDocs() {        return linkReleasedDocs;    }
-    public void setLinkReleasedDocs(String linkReleasedDocs) { this.linkReleasedDocs = linkReleasedDocs;    }
-    public String getLinkStagedBinaries() {        return linkStagedBinaries;    }
-    public void setLinkStagedBinaries(String linkStagedBinaries) { this.linkStagedBinaries = linkStagedBinaries;    }
-    public String getLinkStagedDocs() {        return linkStagedDocs;    }
-    public void setLinkStagedDocs(String linkStagedDocs) { this.linkStagedDocs = linkStagedDocs;    }
-    /**/
     //</editor-fold>
 
     public String toStringIdentifier() {
         return (this.product == null ? "" : this.product.getName()) + "-" + this.version;
     }
 
+    //<editor-fold defaultstate="collapsed" desc="hash/eq">
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -205,19 +195,20 @@ public class Release implements Serializable, IHasTraits {
         if (obj == null)  return false;
         if (getClass() != obj.getClass())  return false;
         Release other = (Release) obj;
-        
+
         if (product == null) {
             if (other.product != null) return false;
         }
         else if (!product.equals(other.product)) return false;
-        
+
         if (version == null) {
             if (other.version != null) return false;
         }
         else if (!version.equals(other.version)) return false;
-        
+
         return true;
     }
+    //</editor-fold>
 
     public String formatPlannedFor() {
         return (this.plannedFor == null) ? "" : DF.format( this.plannedFor );

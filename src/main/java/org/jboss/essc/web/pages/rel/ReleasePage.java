@@ -129,14 +129,6 @@ public class ReleasePage extends BaseLayoutPage {
         }
     }
 
-
-    /**  Helper - creates ReleasePage params for given release. */
-    public static PageParameters createPageParameters( Release rel ){
-        return new PageParameters()
-            .add("product", rel.getProduct().getName())
-            .add("version", rel.getVersion() );
-    }
-
     
     public Release getRelease() { return release; }
     public void setRelease( Release release ) { this.release = release; }

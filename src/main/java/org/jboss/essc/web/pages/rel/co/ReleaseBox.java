@@ -14,7 +14,8 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.StatelessForm;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
@@ -23,6 +24,9 @@ import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.ReleaseTraits;
+import org.jboss.essc.web.pages.rel.ReleaseBasedPage;
+import org.jboss.essc.web.pages.rel.ReleaseDepsPage;
+import org.jboss.essc.web.pages.rel.ReleasePage;
 import org.jboss.essc.web.util.PropertiesUtils;
 
 
@@ -52,6 +56,9 @@ public class ReleaseBox extends Panel {
         // Heading
         add( new Label("productName", this.release.getProduct().getName()) );
         add( new Label("version", this.release.getVersion()) );
+
+        add( new BookmarkablePageLink("depsLink", ReleaseDepsPage.class, ReleaseBasedPage.createPageParameters( release ))
+                .add( new Label("label", "Dependencies...")) );
         
         // Feedback
         final FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");

@@ -3,9 +3,12 @@
 <wicket:panel>
 
     <!-- Release box -->
-    <div id="defaults" class="box">
+    <div class="release box">
         
-        <h2><span wicket:id="productName">EAP</span> <span wicket:id="version">6.0.1.ER1</span></h2>
+        <h2>
+            <span wicket:id="productName">EAP</span> <span wicket:id="version">6.0.1.ER1</span>
+            <a class="deps" wicket:id="depsLink" style="float: right;"><span wicket:id="label">Dependencies...</span></a>
+        </h2>
         
         <div wicket:id="feedback" class="feedback">Feedback will be here</div>
         

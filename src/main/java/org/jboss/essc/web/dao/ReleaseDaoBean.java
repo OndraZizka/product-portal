@@ -68,11 +68,11 @@ public class ReleaseDaoBean {
                 + " LEFT JOIN FETCH rel.product pr "
                 + "   LEFT JOIN FETCH pr.customFields "
                 + " LEFT JOIN FETCH rel.customFields "
-                + (withDeps ? " LEFT JOIN FETCH rel.dependencies" : "")
+                + (withDeps ? " LEFT JOIN FETCH rel.deps" : "")
                 + " WHERE rel.product.name = ?1 AND rel.version = ?2", Release.class)
                 .setParameter(1, prodName)
                 .setParameter(2, version)
-                .getSingleResult();
+                .getSingleResult(); // Causes "firstResult/maxResults specified with collection fetch; applying in memory!"
     }
 
     public List<MavenArtifact> getReleaseDeps( Release rel ){

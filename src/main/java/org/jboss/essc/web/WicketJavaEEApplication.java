@@ -23,6 +23,7 @@ import org.jboss.essc.web.pages.HomePage;
 import org.jboss.essc.web.pages.prod.AddProductPage;
 import org.jboss.essc.web.pages.prod.ProductPage;
 import org.jboss.essc.web.pages.rel.AddReleasePage;
+import org.jboss.essc.web.pages.rel.ReleaseDepsPage;
 import org.jboss.essc.web.pages.rel.ReleasePage;
 import org.jboss.essc.web.pages.statics.AboutPage;
 import org.jboss.essc.web.pages.statics.Http404;
@@ -87,6 +88,7 @@ public class WicketJavaEEApplication extends WebApplication {
         
         mountPage("/product/${name}",               ProductPage.class);
         mountPage("/release/${product}/${version}", ReleasePage.class);
+        mountPage("/release/${product}/${version}/deps", ReleaseDepsPage.class);
      
         initResources();
         
