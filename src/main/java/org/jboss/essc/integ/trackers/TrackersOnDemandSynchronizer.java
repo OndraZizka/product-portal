@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  *  @author Ondrej Zizka
  *  @deprecated  We rather simply create Releases upfront.
  */
-@Stateless
+//@Stateless
 public class TrackersOnDemandSynchronizer {
     private static final Logger log = LoggerFactory.getLogger(TrackersOnDemandSynchronizer.class);
     
