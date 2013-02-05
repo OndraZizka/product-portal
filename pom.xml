@@ -29,6 +29,7 @@
         <version.wicket.cdi>1.2</version.wicket.cdi>
 
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
     </properties>
     
 
@@ -52,7 +53,7 @@
             <!-- Allow packaging the html files alongside the java sources. -->
             <resource>
                 <directory>src/main/java</directory>
-                <filtering>false</filtering>
+                <filtering>true</filtering>
                 <includes><include>**</include></includes>
                 <excludes><exclude>**/*.java</exclude></excludes>
             </resource>
