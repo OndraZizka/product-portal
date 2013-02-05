@@ -2,17 +2,13 @@ package org.jboss.essc.integ.trackers;
 
 import org.jboss.essc.integ.trackers.model.ExternalVersionInfo;
 import org.jboss.essc.integ.trackers.model.ExternalProjectInfo;
-import java.net.URL;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import org.codehaus.jackson.map.DeserializationConfig.Feature;
-import org.codehaus.jackson.map.ObjectMapper;
 
 
 @Stateless
@@ -106,4 +102,5 @@ public class ExternalTrackersSynchronizer {
 
         return versionNames;
     }
-}
+
+}// class
