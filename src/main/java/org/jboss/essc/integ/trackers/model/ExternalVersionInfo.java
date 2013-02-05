@@ -12,7 +12,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 
-@Entity
+//@Entity
 @Table(name = "extVersion")
 public class ExternalVersionInfo {
 

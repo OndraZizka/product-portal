@@ -1,6 +1,7 @@
 package org.jboss.essc.integ.trackers.model;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 
-@Entity
+//@Entity
 @Table(name = "extProject")
 public class ExternalProjectInfo {
 
@@ -36,7 +37,7 @@ public class ExternalProjectInfo {
     @JsonProperty("name")
     private String name;
     
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<ExternalVersionInfo> versions;
     
     @JsonIgnore
