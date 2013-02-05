@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 @Stateless
 public class TrackersScheduledSynchronizer {
     private static final Logger log = LoggerFactory.getLogger(TrackersScheduledSynchronizer.class);
+    //private static final org.jboss.logging.Logger log2 = org.jboss.logging.Logger.getLogger(TrackersScheduledSynchronizer.class);
     
     
     
@@ -37,11 +38,17 @@ public class TrackersScheduledSynchronizer {
     @Inject private ReleaseDaoBean daoRelease;
     
     
-    
-    @Schedule(hour = "11", minute = "29", info = "Issue tracker version -> Release synchronization")
+    /**
+     *  Loads all products, downloads their status and creates releases
+     *  for any version of which we don't have a release yet.
+     * 
+     *  TODO: Filter out some like "No Release", Future, etc.
+     */
+    @Schedule(dayOfWeek = "*", dayOfMonth = "*", hour = "*", minute = "31", info = "Issue tracker version -> Release synchronization")
     public void createReleasesForNewVersionsOfAllProducts(){
         try {
             final BugzillaRetriever bz = new BugzillaRetriever();
+            log.info("Starting synchronization with issue trackers.");
 
             // For each product...
             List<Product> products = daoProduct.getProducts_orderName(1000);
@@ -49,6 +56,8 @@ public class TrackersScheduledSynchronizer {
                 if( StringUtils.isBlank( product.getExtIdBugzilla() ))
                     continue;
 
+                log.info("  Checking new versions of product " + product.getName());
+                
                 //List<Long> = daoProduct.getVersionsOfProduct();
                 List<Release> releases = daoRelease.getReleasesOfProduct( product, true );
 
