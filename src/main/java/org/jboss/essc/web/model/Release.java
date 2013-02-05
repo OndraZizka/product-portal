@@ -31,7 +31,7 @@ import org.jboss.essc.web.util.SimpleRelativeDateFormatter;
  *  @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
-@Entity @Table(name="`release`")
+@Entity @Table(name="`release`", uniqueConstraints = @UniqueConstraint(columnNames = {"product_id", "version"}))
 public class Release implements Serializable, IHasTraits {
     
     private static final Format DF = FastDateFormat.getInstance("yyyy-MM-dd", Locale.US);
@@ -154,6 +154,11 @@ public class Release implements Serializable, IHasTraits {
     public void setPlannedFor( Date plannedFor ) { this.plannedFor = plannedFor; }
     public Date getLastChanged() { return lastChanged; }
     public void setLastChanged( Date lastChanged ) { this.lastChanged = lastChanged; }
+
+    public String getExtIdJira() { return extIdJira; }
+    public void setExtIdJira(String extIdJira) { this.extIdJira = extIdJira; }
+    public String getExtIdBugzilla() { return extIdBugzilla; }
+    public void setExtIdBugzilla(String extIdBugzilla) { this.extIdBugzilla = extIdBugzilla; }    
 
     public List<MavenArtifact> getDeps() { return deps; }
     public void setDeps( List<MavenArtifact> deps ) { this.deps = deps; }

@@ -69,6 +69,11 @@ public class Product implements Serializable, IHasTraits {
     public String getNote() { return note; }
     public void setNote(String note) { this.note = note; }
 
+    public String getExtIdJira() { return extIdJira; }
+    public void setExtIdJira(String extIdJira) { this.extIdJira = extIdJira; }
+    public String getExtIdBugzilla() { return extIdBugzilla; }
+    public void setExtIdBugzilla(String extIdBugzilla) { this.extIdBugzilla = extIdBugzilla; }    
+
     public Map<String, ProductCustomField> getCustomFields() { return customFields; }
     public void setCustomFields( Map<String, ProductCustomField> customFields ) { this.customFields = customFields; }
 

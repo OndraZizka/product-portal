@@ -38,7 +38,7 @@ public class ReleaseDaoBean {
         return this.em.createQuery("SELECT rel FROM Release rel WHERE 1=1 " + cond + " ORDER BY rel.plannedFor DESC").getResultList();
     }
 
-//SELECT rel FROM org.jboss.essc.web.model.Release rel WHERE rel.product = ?1 AND NOT rel.internal ORDER BY rel.version DESC
+    //SELECT rel FROM org.jboss.essc.web.model.Release rel WHERE rel.product = ?1 AND NOT rel.internal ORDER BY rel.version DESC
     public List<Release> getReleasesOfProduct(Product prod, boolean showInternal) {
         String cond = showInternal ? "" : "AND false = rel.internal";
         return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product = ?1 " + cond + " ORDER BY rel.version DESC").setParameter(1, prod).getResultList();
@@ -105,6 +105,14 @@ public class ReleaseDaoBean {
         Release rel = new Release( null, product, version );
         return this.em.merge( rel );
     }
+
+    
+    public void addRelease(Release newRel) {
+        //if( exists(newRel) )
+        //    throw new IllegalArgumentException("Release already exists: " + newRel.getProduct() + " " + newRel.getVersion() );
+        em.persist( newRel );
+    }
+    
 
     /**
      * Update a Release.
