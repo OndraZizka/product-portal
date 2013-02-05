@@ -19,7 +19,6 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.PropertiesUploadForm;
 import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web.pages.prod.co.CustomFieldsPanel;
-import org.jboss.essc.web._cp.pageBoxes.NoItemsFoundBox;
 import org.jboss.essc.web.pages.rel.co.ReleaseTraitRowPanel;
 import org.jboss.essc.web.pages.rel.co.ReleaseTraitsPanel;
 import org.jboss.essc.web.pages.rel.co.ReleasesBox;
@@ -89,36 +88,21 @@ public class ProductPage extends BaseLayoutPage {
         add( this.form );
         
         // Boxes
-        if( this.product != null ){
-            add( new ReleasesBox("releasesBox", this.product, 100) );
+        add( new ReleasesBox("releasesBox", this.product, 100) );
 
-            // Traits
-            this.form.add( new ReleaseTraitsPanel("templates", this.product){
-                @Override protected void onTraitUpdate( ReleaseTraitRowPanel row, AjaxRequestTarget target ) {
-                    ProductPage.this.onProductUpdate(target);
-                }
-            });
+        // Traits
+        this.form.add( new ReleaseTraitsPanel("templates", this.product){
+            @Override protected void onTraitUpdate( ReleaseTraitRowPanel row, AjaxRequestTarget target ) {
+                ProductPage.this.onProductUpdate(target);
+            }
+        });
 
-            // Custom fields
-            this.form.add( new CustomFieldsPanel("customFields", new PropertyModel(this.product, "customFields"), feedbackPanel ){
-
-                @Override protected void onChange( AjaxRequestTarget target ) {
-                    /*
-                    try {
-                        product = productDao.update( ProductPage.this.getProduct() );
-                        modelChanged();
-                    } catch ( Exception ex ) {
-                        feedbackPanel.error( ex.toString() );
-                    }/**/
-                    onProductUpdate( target );
-                }
-            });
-        }
-        else {
-            add( new NoItemsFoundBox("releasesBox", "No product specified."));
-            this.form.add( new WebMarkupContainer("templates"));
-            this.form.add( new WebMarkupContainer("customFields") );
-        }
+        // Custom fields
+        this.form.add( new CustomFieldsPanel("customFields", new PropertyModel(this.product, "customFields"), feedbackPanel ){
+            @Override protected void onChange( AjaxRequestTarget target ) {
+                onProductUpdate( target );
+            }
+        });
         
         
         // Save as .properties - TODO
