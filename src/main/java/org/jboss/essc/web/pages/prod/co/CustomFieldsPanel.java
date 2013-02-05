@@ -1,4 +1,4 @@
-package org.jboss.essc.web._cp.pageBoxes;
+package org.jboss.essc.web.pages.prod.co;
 
 import java.util.ArrayList;
 import java.util.List;

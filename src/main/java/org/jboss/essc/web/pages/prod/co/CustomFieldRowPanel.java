@@ -1,5 +1,5 @@
 
-package org.jboss.essc.web._cp.pageBoxes;
+package org.jboss.essc.web.pages.prod.co;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.ajax.AjaxEventBehavior;
