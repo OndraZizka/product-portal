@@ -184,6 +184,15 @@ public class Release implements Serializable, IHasTraits {
         return (this.product == null ? "" : this.product.getName()) + "-" + this.version;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Release #%d{ prod=%s ver=%s %s plannedFor=%s lastChanged=%s status=% jiraId=%s bzId=%s, note=%s }",
+                // traits=" + traits + ", customFields=" + customFields + ", deps=" + deps + '}';
+            id, product, version, internal ? "internal" : "", plannedFor, lastChanged, status.statusString, extIdJira, extIdBugzilla , note);
+    }
+    
+    
+
     //<editor-fold defaultstate="collapsed" desc="hash/eq">
     @Override
     public int hashCode() {
