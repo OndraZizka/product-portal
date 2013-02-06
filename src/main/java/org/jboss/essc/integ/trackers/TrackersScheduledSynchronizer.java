@@ -44,14 +44,14 @@ public class TrackersScheduledSynchronizer {
      * 
      *  TODO: Filter out some like "No Release", Future, etc.
      */
-    @Schedule(dayOfWeek = "*", dayOfMonth = "*", hour = "*", minute = "31", info = "Issue tracker version -> Release synchronization")
+    @Schedule(dayOfWeek = "*", dayOfMonth = "*", hour = "*", minute = "23", info = "Issue tracker version -> Release synchronization")
     public void createReleasesForNewVersionsOfAllProducts(){
         try {
             final BugzillaRetriever bz = new BugzillaRetriever();
             log.info("Starting synchronization with issue trackers.");
 
             // For each product...
-            List<Product> products = daoProduct.getProducts_orderName(1000);
+            List<Product> products = daoProduct.getProducts_orderName(2000);
             for( Product product : products ) {
                 if( StringUtils.isBlank( product.getExtIdBugzilla() ))
                     continue;
@@ -63,11 +63,16 @@ public class TrackersScheduledSynchronizer {
 
                 // For each version in Bugzilla...
                 ExternalProjectInfo projInfo = bz.retrieveProject( product.getExtIdBugzilla() );
+                log.info("  " + projInfo.getVersions().size() + " versions to check.");
+
                 for (ExternalVersionInfo verInfo : projInfo.getVersions() ) {
+                    
                     Release newRel = new Release(null, product, verInfo.getName());
                     newRel.setExtIdBugzilla( "" + verInfo.getExternalId() );
                     if( releases.contains( newRel ) ) // Relies on equals()!
                        continue;
+                    
+                    log.info("    Seems to be new: " + verInfo);
                     newRel.setNote("Imported from Bugzilla");
                     try {
                         daoRelease.addRelease( newRel );
@@ -77,6 +82,7 @@ public class TrackersScheduledSynchronizer {
                     }
                 }
             }// for each product
+            log.info("Finished synchronization with issue trackers.");
         }
         catch( Exception ex ){
             log.error("Couldn't imported releases from Bugzilla: " + ex, ex);
