@@ -1,5 +1,6 @@
 package org.jboss.essc.web.pages.rel.co;
 
+import org.jboss.essc.web.pages.prod.co.ReleasesBox;
 import java.util.List;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;

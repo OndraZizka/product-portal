@@ -23,7 +23,7 @@ import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web.pages.prod.co.CustomFieldsPanel;
 import org.jboss.essc.web.pages.rel.co.ReleaseTraitRowPanel;
 import org.jboss.essc.web.pages.rel.co.ReleaseTraitsPanel;
-import org.jboss.essc.web.pages.rel.co.ReleasesBox;
+import org.jboss.essc.web.pages.prod.co.ReleasesBox;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.ReleaseTraits;

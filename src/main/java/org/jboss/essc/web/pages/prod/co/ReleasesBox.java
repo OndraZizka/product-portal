@@ -1,4 +1,4 @@
-package org.jboss.essc.web.pages.rel.co;
+package org.jboss.essc.web.pages.prod.co;
 
 import java.io.Serializable;
 import java.util.ArrayList;
