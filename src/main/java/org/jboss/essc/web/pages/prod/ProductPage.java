@@ -14,6 +14,8 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
+import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.PropertiesUploadForm;
@@ -28,6 +30,7 @@ import org.jboss.essc.web.model.ReleaseTraits;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.pages.HomePage;
 import org.jboss.essc.web.util.PropertiesUtils;
+import org.jboss.essc.wicket.comp.editable.EditableLabel;
 
 
 /**
@@ -78,7 +81,7 @@ public class ProductPage extends BaseLayoutPage {
         add(feedbackPanel);
 
         // Form
-        this.form = new StatelessForm("form") {
+        this.form = new Form("form", new CompoundPropertyModel(getModel())) {
             @Override protected void onSubmit() {
                 product = productDao.update( product );
                 modelChanged();
@@ -89,6 +92,9 @@ public class ProductPage extends BaseLayoutPage {
         
         // Boxes
         add( new ReleasesBox("releasesBox", this.product, 100) );
+        
+        // Bugzilla ID
+        this.form.add( new EditableLabel<String>("extIdBugzilla") );
 
         // Traits
         this.form.add( new ReleaseTraitsPanel("templates", this.product){
@@ -192,5 +198,6 @@ public class ProductPage extends BaseLayoutPage {
     public Product getProduct() { return product; }
     public void setProduct( Product product ) { this.product = product; }
 
+    protected IModel<Product> getModel(){ return (IModel<Product>) this.getDefaultModel(); }
 
 }// class
