@@ -63,11 +63,14 @@ public class SidebarPanel extends Panel {
             @Override protected void onUpdate( AjaxRequestTarget target ) {
                 target.add( getPage() );
                 
-                boolean val = StringUtils.isBlank( this.getValue() );
+                //boolean val = StringUtils.isBlank( this.getValue() );
+                boolean val = this.getModelObject();
                 
+                // Set session setting.
                 EsscAuthSession sess = (EsscAuthSession)getSession();
                 sess.getSettings().setShowInternalReleases( val );
                 
+                // Store this setting to cookie (to survive session end).
                 Cookie cookie = new Cookie(CookieNames.COOKIE_SHOW_INTERNAL_RELEASES, val ? "true" : "false");
                 cookie.setPath("/");
                 cookie.setMaxAge(Integer.MAX_VALUE);
