@@ -186,9 +186,9 @@ public class Release implements Serializable, IHasTraits {
 
     @Override
     public String toString() {
-        return String.format("Release #%d{ prod=%s ver=%s %s plannedFor=%s lastChanged=%s status=% jiraId=%s bzId=%s, note=%s }",
+        return String.format("Release #%d{ prod=%s ver='%s' %s lastChanged=%s status=%s plannedFor=%tF %tT jiraId=%s bzId=%s, note=%s }",
                 // traits=" + traits + ", customFields=" + customFields + ", deps=" + deps + '}';
-            id, product, version, internal ? "internal" : "", plannedFor, lastChanged, status.statusString, extIdJira, extIdBugzilla , note);
+            id, product, version, internal ? "(internal)" : "", lastChanged, status.statusString, plannedFor, plannedFor, extIdJira, extIdBugzilla , note);
     }
     
     
