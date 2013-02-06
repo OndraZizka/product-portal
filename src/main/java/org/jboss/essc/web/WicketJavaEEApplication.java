@@ -27,6 +27,7 @@ import org.jboss.essc.web.pages.rel.ReleaseDepsPage;
 import org.jboss.essc.web.pages.rel.ReleasePage;
 import org.jboss.essc.web.pages.statics.AboutPage;
 import org.jboss.essc.web.pages.statics.Http404;
+import org.jboss.essc.web.pages.test.AdminPage;
 import org.jboss.essc.web.pages.test.JpaQueryPage;
 import org.jboss.essc.web.pages.user.LoginPage;
 import org.jboss.essc.web.pages.user.UserPage;
@@ -82,6 +83,7 @@ public class WicketJavaEEApplication extends WebApplication {
         mountPage("/user",  UserPage.class);
         mountPage("/test",  EditableTestPage.class);
         mountPage("/jpa",   JpaQueryPage.class);
+        mountPage("/admin", AdminPage.class);
         
         mountPage("/addProduct",            AddProductPage.class);
         mountPage("/addRelease/#{product}", AddReleasePage.class);
