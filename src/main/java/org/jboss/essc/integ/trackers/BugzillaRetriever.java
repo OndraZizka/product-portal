@@ -10,11 +10,13 @@ import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
-    https://bugzilla.redhat.com/jsonrpc.cgi?method=Product.get&params=[{%22ids%22:[1,2]}]     params=[{"ids":[226]}]
-    EAP id: 226
-  
- *  Example output from BZ:
  * 
+ *  See http://www.bugzilla.org/docs/tip/en/html/api/
+ * 
+ *   Example output from BZ for  EAP id 226:
+ * 
+ *   https://bugzilla.redhat.com/jsonrpc.cgi?method=Product.get&params=[{%22ids%22:[1,2]}]     params=[{"ids":[226]}]
+ *  
  *   {"error":null,"id":"https://bugzilla.redhat.com/","result":{
  *      "products":[{
  *          "milestones":[...],
@@ -40,7 +42,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  *      }]
  *   }}
  *
- *  @author ondra
+ *  @author Ondrej Zizka
  */
 public class BugzillaRetriever implements IProjectInfoRetriever {
 
