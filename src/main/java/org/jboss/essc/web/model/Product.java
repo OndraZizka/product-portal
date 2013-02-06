@@ -111,7 +111,7 @@ public class Product implements Serializable, IHasTraits {
 
     @Override
     public String toString() {
-        return "Product #"+ id + " \"" + name + "\", customFields empty? " + customFields.isEmpty();
+        return "Product #"+ id + " \"" + name + "\"";
     }
 
     public static Product formString( String str ) {
