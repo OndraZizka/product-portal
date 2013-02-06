@@ -61,10 +61,14 @@ public class TrackersScheduledSynchronizer {
                 //List<Long> = daoProduct.getVersionsOfProduct();
                 List<Release> releases = daoRelease.getReleasesOfProduct( product, true );
 
-                // For each version in Bugzilla...
                 ExternalProjectInfo projInfo = bz.retrieveProject( product.getExtIdBugzilla() );
+                if( null == projInfo ){
+                    log.error("  Failed downloading project info from Bugzilla.");
+                    continue;
+                }
                 log.info("  " + projInfo.getVersions().size() + " versions to check.");
 
+                // For each version in Bugzilla...
                 for (ExternalVersionInfo verInfo : projInfo.getVersions() ) {
                     
                     Release newRel = new Release(null, product, verInfo.getName());
