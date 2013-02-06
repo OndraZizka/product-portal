@@ -20,6 +20,12 @@ public class EditableLabel<T> extends TextField<T> {
     private static final ResourceReference JS  = new PackageResourceReference(EditableLabel.class, "EditableLinkAndLabel.js");
 
     private TextField input;
+
+    
+    // For CompoundPropertyModel
+    public EditableLabel(String id) {
+        super(id);
+    }
     
     public EditableLabel( String id, IModel<T> model ) {
         super( id, model );
