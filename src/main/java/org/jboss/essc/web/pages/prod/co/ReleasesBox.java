@@ -13,6 +13,8 @@ import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.links.ProductLink;
 import org.jboss.essc.web._cp.links.ReleaseLink;
@@ -54,13 +56,24 @@ public class ReleasesBox extends Panel {
         final boolean showProductCol = this.forProduct == null;
         final boolean showInternalReleases = this.isShowInternalStuff();
 
-        List<Release> releases = this.loadReleases( showInternalReleases );
+        //List<Release> releases = this.loadReleases( showInternalReleases );
+        // TODO: Convert to LDM.
         
+        // Model - Releases list LDM
+        IModel<List<Release>> releasesModel = new LoadableDetachableModel<List<Release>>(){
+            @Override
+            protected List<Release> load() {
+                return loadReleases(isShowInternalStuff());
+            }
+        };
+        
+        
+        // Heading
         add( new Label("heading", "Releases" + (showProductCol ? "" : " of " + this.forProduct.getName() ) ) );
         add( new WebMarkupContainer("productTH").setVisible( showProductCol ) );
         
         // Releases table
-        add( new ListView<Release>("rows", releases)
+        add( new ListView<Release>("rows", releasesModel)
         {
             // Populate the table of releases
             @Override

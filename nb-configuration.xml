@@ -30,6 +30,7 @@ Any value defined here will override the pom.xml file value but is only applicab
         <word>metadata</word>
         <word>Ondřej</word>
         <word>OpenShift</word>
+        <word>Overridable</word>
         <word>productization</word>
         <word>xml</word>
         <word>Žižka</word>
