@@ -1,4 +1,4 @@
-package org.jboss.essc.web.pages.rel.co;
+package org.jboss.essc.web.pages.home.co;
 
 import org.jboss.essc.web.pages.prod.co.ReleasesBox;
 import java.util.List;
