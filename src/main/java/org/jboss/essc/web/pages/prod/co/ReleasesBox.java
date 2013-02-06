@@ -52,14 +52,14 @@ public class ReleasesBox extends Panel {
         this.numReleases = numReleases;
         
         final boolean showProductCol = this.forProduct == null;
-        final boolean showInternalReleases = isShowInternalStuff();
+        final boolean showInternalReleases = this.isShowInternalStuff();
 
-        List<Release> releases = getReleases( showInternalReleases );
+        List<Release> releases = this.loadReleases( showInternalReleases );
         
         add( new Label("heading", "Releases" + (showProductCol ? "" : " of " + this.forProduct.getName() ) ) );
         add( new WebMarkupContainer("productTH").setVisible( showProductCol ) );
         
-        //if( releases.size() == 0 )
+        // Releases table
         add( new ListView<Release>("rows", releases)
         {
             // Populate the table of releases
@@ -122,11 +122,14 @@ public class ReleasesBox extends Panel {
     }// const
     
     
-    protected List<Release> getReleases( boolean showInternal ){
+    /**
+     *  Overridable - loads the releases to show.
+     */
+    protected List<Release> loadReleases( boolean showInternal ){
         if( this.forProduct == null )
             return dao.getReleases_orderDateDesc(this.numReleases, showInternal);
         else
-            return dao.getReleasesOfProduct( forProduct, showInternal );
+            return dao.getReleasesOfProduct( this.forProduct, showInternal );
     }
     
 
@@ -149,10 +152,19 @@ public class ReleasesBox extends Panel {
             links.add( new LabelAndLink(label, link) );
     }
 
-    // TODO: Could be handled by CSS only.
+    /**
+     *  Returns true if the internal releases etc should be shown.
+     *  Determined by user's preference or session.settings if no user is signed in.
+     */
     private boolean isShowInternalStuff() {
-        User user = ((EsscAuthSession)getSession()).getUser();
-        return user == null ? false : user.isShowProd();
+        EsscAuthSession sess = (EsscAuthSession)getSession();
+
+        // User setting has precedence.
+        User user = sess.getUser();
+        if( user != null)  return user.isShowProd();
+        
+        // Session
+        return sess.getSettings().isShowInternalReleases();
     }
 
 

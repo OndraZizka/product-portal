@@ -22,7 +22,7 @@ public class RecentReleasesBox extends ReleasesBox {
     }
 
     
-    protected List<Release> getReleases(boolean showInternal){
+    protected List<Release> loadReleases(boolean showInternal){
         return this.dao.getReleases_orderDateDesc(this.numReleases, showInternal );
     }
     

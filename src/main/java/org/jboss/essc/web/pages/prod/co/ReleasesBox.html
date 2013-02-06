@@ -2,38 +2,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <wicket:panel>
 
-            <!-- Recent releases -->
-            <div class="box releases">
-                <h2 wicket:id="heading" class="title">Releases</h2>
-                <div class="entry">
-                    
-                    <table class="lines">
-                        <tr class="header">
-                            <th wicket:id="productTH">Product</th>
-                            <th>Version</th>
-                            <th>Status</th>
-                            <th>Important links</th>
-                        </tr>
-                        
-                        <tr wicket:id="rows">
-                            <td wicket:id="productTD"><a wicket:id="productLink">EAP</a></td>
-                            <td><a wicket:id="versionLink">6.0.0.ER1</a></td>
-                            <td wicket:id="status" class="status">planned + date + relative time</td>
-                            <td wicket:id="links" class="links">
-                                <a href="#" wicket:id="download"><img wicket:id="img" alt="Download archive."   src="buttonDownload.png"/></a>
-                                <a href="#" wicket:id="install" ><img wicket:id="img" alt="Download installer." src="buttonDownload.png"/></a>
-                                <wicket:container wicket:id="repeater">
-                                    <a wicket:id="link" href="#">Builds</a>
-                                </wicket:container>
-                            </td>
-                        </tr>
-                        
-                    </table>
-                    
-                </div>
-                <p wicket:id="add" class="meta"><a wicket:id='link' href="#" class="more">Add a release...</a></p>
-                
-            </div>
+    <!-- Recent releases -->
+    <div class="box releases">
+        <h2 wicket:id="heading" class="title">Releases</h2>
+        <div class="entry">
+
+            <table class="lines">
+                <tr class="header">
+                    <th wicket:id="productTH">Product</th>
+                    <th>Version</th>
+                    <th>Status</th>
+                    <th>Important links</th>
+                </tr>
+
+                <tr wicket:id="rows">
+                    <td wicket:id="productTD"><a wicket:id="productLink">EAP</a></td>
+                    <td><a wicket:id="versionLink">6.0.0.ER1</a></td>
+                    <td wicket:id="status" class="status">planned + date + relative time</td>
+                    <td wicket:id="links" class="links">
+                        <a href="#" wicket:id="download"><img wicket:id="img" alt="Download archive."   src="buttonDownload.png"/></a>
+                        <a href="#" wicket:id="install" ><img wicket:id="img" alt="Download installer." src="buttonDownload.png"/></a>
+                        <wicket:container wicket:id="repeater">
+                            <a wicket:id="link" href="#">Builds</a>
+                        </wicket:container>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+        <p wicket:id="add" class="meta"><a wicket:id='link' href="#" class="more">Add a release...</a></p>
+
+    </div>
     
 </wicket:panel>
 </html>
