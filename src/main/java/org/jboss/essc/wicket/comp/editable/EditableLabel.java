@@ -19,8 +19,6 @@ public class EditableLabel<T> extends TextField<T> {
     private static final ResourceReference CSS = new PackageResourceReference(EditableLabel.class, "EditableLinkAndLabel.css");
     private static final ResourceReference JS  = new PackageResourceReference(EditableLabel.class, "EditableLinkAndLabel.js");
 
-    private TextField input;
-
     
     // For CompoundPropertyModel
     public EditableLabel(String id) {
