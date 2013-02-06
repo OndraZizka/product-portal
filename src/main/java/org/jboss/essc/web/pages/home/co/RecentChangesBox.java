@@ -1,4 +1,4 @@
-package org.jboss.essc.web._cp.pageBoxes;
+package org.jboss.essc.web.pages.home.co;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

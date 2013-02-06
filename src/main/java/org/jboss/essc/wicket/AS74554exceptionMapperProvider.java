@@ -9,7 +9,7 @@ import org.apache.wicket.request.handler.PageProvider;
 import org.apache.wicket.request.handler.RenderPageRequestHandler;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.IProvider;
-import org.jboss.essc.web.pages.HomePage;
+import org.jboss.essc.web.pages.home.HomePage;
 
 
 /**

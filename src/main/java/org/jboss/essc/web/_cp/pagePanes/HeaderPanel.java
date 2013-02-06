@@ -7,7 +7,7 @@ import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.jboss.essc.web.pages.HomePage;
+import org.jboss.essc.web.pages.home.HomePage;
 import org.jboss.essc.web.pages.statics.AboutPage;
 import org.jboss.essc.wicket.BPLinkWithBody;
 

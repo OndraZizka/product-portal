@@ -1,4 +1,4 @@
-package org.jboss.essc.web._cp.pageBoxes;
+package org.jboss.essc.web.pages.home.co;
 
 import javax.servlet.http.Cookie;
 import org.apache.wicket.ajax.AjaxRequestTarget;

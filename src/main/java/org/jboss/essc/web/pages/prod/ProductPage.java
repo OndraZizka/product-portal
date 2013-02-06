@@ -28,7 +28,7 @@ import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.ReleaseTraits;
 import org.jboss.essc.web.pages.BaseLayoutPage;
-import org.jboss.essc.web.pages.HomePage;
+import org.jboss.essc.web.pages.home.HomePage;
 import org.jboss.essc.web.util.PropertiesUtils;
 import org.jboss.essc.wicket.comp.editable.EditableLabel;
 

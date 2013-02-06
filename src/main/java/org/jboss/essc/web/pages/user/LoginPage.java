@@ -16,7 +16,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web.dao.UserDaoBean;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.pages.BaseLayoutPage;
-import org.jboss.essc.web.pages.HomePage;
+import org.jboss.essc.web.pages.home.HomePage;
 import org.jboss.essc.web.util.MailSender;
 import org.jboss.essc.web.util.PicketBoxAuthPojo;
 import org.picketbox.exceptions.PicketBoxProcessingException;

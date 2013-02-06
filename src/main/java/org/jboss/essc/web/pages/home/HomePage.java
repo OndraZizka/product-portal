@@ -1,7 +1,8 @@
-package org.jboss.essc.web.pages;
+package org.jboss.essc.web.pages.home;
 
-import org.jboss.essc.web._cp.pageBoxes.AboutSmallBox;
-import org.jboss.essc.web._cp.pageBoxes.RecentChangesBox;
+import org.jboss.essc.web.pages.home.co.AboutSmallBox;
+import org.jboss.essc.web.pages.home.co.RecentChangesBox;
+import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.pages.rel.co.RecentReleasesBox;
 
 

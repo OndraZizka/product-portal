@@ -19,7 +19,7 @@ import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.pages.BaseLayoutPage;
-import org.jboss.essc.web.pages.HomePage;
+import org.jboss.essc.web.pages.home.HomePage;
 import org.jboss.essc.web.pages.prod.AddProductPage;
 import org.jboss.essc.web.pages.prod.ProductPage;
 import org.jboss.essc.web.pages.rel.AddReleasePage;
