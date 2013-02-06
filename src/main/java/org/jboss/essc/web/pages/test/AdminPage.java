@@ -3,6 +3,7 @@ package org.jboss.essc.web.pages.test;
 
 import javax.inject.Inject;
 import org.apache.wicket.RuntimeConfigurationType;
+import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.WebPage;
@@ -29,7 +30,7 @@ public class AdminPage extends WebPage {
         
         // Scan  bugzilla
         form.add( new AjaxButton("scanBugzilla"){
-            @Override public void onEvent(IEvent<?> event) {
+            @Override public void onSubmit(AjaxRequestTarget target, Form<?> form) {
                 //if( isDevel() )
                     syncer.createReleasesForNewVersionsOfAllProducts();
             }
@@ -38,16 +39,16 @@ public class AdminPage extends WebPage {
             
         // Logging tests
         form.add( new AjaxButton("log4jINFO"){
-            @Override public void onEvent(IEvent<?> event) { log.info("Info log4j"); }
+            @Override public void onSubmit(AjaxRequestTarget target, Form<?> form) { log.info("Info log4j"); }
         });
         form.add( new AjaxButton("log4jDEBUG"){
-            @Override public void onEvent(IEvent<?> event) { log.info("Debug log4j"); }
+            @Override public void onSubmit(AjaxRequestTarget target, Form<?> form) { log.info("Debug log4j"); }
         });
         form.add( new AjaxButton("jbossloggingINFO"){
-            @Override public void onEvent(IEvent<?> event) { log2.info("Info JBoss Logging"); }
+            @Override public void onSubmit(AjaxRequestTarget target, Form<?> form) { log2.info("Info JBoss Logging"); }
         });
         form.add( new AjaxButton("jbossloggingDEBUG"){
-            @Override public void onEvent(IEvent<?> event) { log2.info("Debug JBoss Logging"); }
+            @Override public void onSubmit(AjaxRequestTarget target, Form<?> form) { log2.info("Debug JBoss Logging"); }
         });
         
     }// const()
