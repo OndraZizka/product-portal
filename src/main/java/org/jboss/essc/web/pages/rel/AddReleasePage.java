@@ -11,6 +11,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.jboss.essc.ex.ProductPortalException;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
@@ -58,8 +59,14 @@ public class AddReleasePage extends BaseLayoutPage {
         // Form
         this.form = new Form<Release>("form") {
             @Override protected void onSubmit() {
-                Release rel = releaseDao.addRelease( product, version );
-                setResponsePage( ReleasePage.class, ReleaseBasedPage.createPageParameters( rel ) );
+                try {
+                    Release rel = releaseDao.addRelease( product, version );
+                    setResponsePage( ReleasePage.class, ReleaseBasedPage.createPageParameters( rel ) );
+                } catch (ProductPortalException ex){
+                    form.error("Failed adding a release: " + ex.getMessage());
+                } catch (Exception ex){
+                    form.error("Failed adding a release: " + ex);
+                }
             }
         };
 

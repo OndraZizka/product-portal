@@ -5,6 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import org.jboss.essc.ex.ProductPortalException;
 import org.jboss.essc.web.model.MavenArtifact;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
@@ -94,12 +95,12 @@ public class ReleaseDaoBean {
     /**
      * Add a new Release.
      */
-    public Release addRelease( Product product, String version ) {
+    public Release addRelease( Product product, String version ) throws ProductPortalException {
         // Verify that the relese doesn't exist yet.
         // TODO: use exists().
         try {
             getRelease( product.getName(), version );
-            throw new IllegalArgumentException("Release already exists: " + product.getName() + " " + version );
+            throw new ProductPortalException("Release already exists: " + product.getName() + " " + version );
         } catch (NoResultException ex){ /* OK */ }
         
         Release rel = new Release( null, product, version );

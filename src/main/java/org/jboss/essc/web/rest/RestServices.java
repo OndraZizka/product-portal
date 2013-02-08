@@ -2,14 +2,15 @@ package org.jboss.essc.web.rest;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
@@ -41,7 +42,8 @@ public class RestServices {
         for (Product prod : prods) {
             prod.setTraits(null);
         }
-        return rewrap(prods);
+        //return rewrap(prods);
+        return rewrap(prods, "product");
     }
     
     @GET
@@ -54,7 +56,8 @@ public class RestServices {
     {
         System.out.println("Releases of: " + product);
         List<Release> rel = daoRel.getReleasesOfProduct(product, true);
-        return rel;
+        //return rel;
+        return rewrap(rel, "release");
     }
     
     @GET
@@ -124,6 +127,19 @@ public class RestServices {
         List<ProductWrapper> p2 = new ArrayList(prods.size());
         for( Product product : prods){
             p2.add( new ProductWrapper(product));
+        }
+        return p2;
+    }
+    
+    /**
+     *  Map-based generic wrapper - needed for JSON client.
+     */
+    private List rewrap(List items, String wrapName) {
+        List p2 = new ArrayList(items.size());
+        for( Object item : items){
+            Map map = new HashMap();
+            map.put(wrapName, item);
+            p2.add( map );
         }
         return p2;
     }
