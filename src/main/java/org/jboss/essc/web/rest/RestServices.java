@@ -15,6 +15,7 @@ import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
+import org.jboss.resteasy.annotations.providers.jaxb.Formatted;
 
 /**
  * @author ozizka@redhat.com
@@ -33,6 +34,7 @@ public class RestServices {
     @GET
     @Path("/products")
     @Produces("application/json")
+    @Formatted
     //@XmlElement(type = Product.class, name = "product") // No effect
     //@XmlElementWrapper(name="productx") // No effect
     //@org.jboss.resteasy.annotations.providers.jaxb.json.Mapped(attributesAsElements = "product") // No effect?
@@ -49,20 +51,26 @@ public class RestServices {
     @GET
     @Path("/releases/{product}")
     @Produces("application/json")
+    @Formatted
     public List<Release> getReleases( 
             @PathParam("product") String product, 
             @Context HttpServletResponse res,
             @Context SecurityContext sc ) 
     {
         System.out.println("Releases of: " + product);
-        List<Release> rel = daoRel.getReleasesOfProduct(product, true);
+        List<Release> releases = daoRel.getReleasesOfProduct(product, true);
+        for( Release rel : releases ) {
+            rel.setCustomFields(null);
+            rel.setDeps(null);
+        }
         //return rel;
-        return rewrap(rel, "release");
+        return rewrap(releases, "release");
     }
     
     @GET
     @Path("/release/{product}/{version}")
     @Produces("application/json")
+    @Formatted
     public Release getReleaseInfo( 
             @PathParam("product") String product, 
             @PathParam("version") String version, 
@@ -108,13 +116,17 @@ public class RestServices {
         // Verify that the relese doesn't exist yet.
         try {
             daoRel.getRelease( prodName, version );
-        } catch (NoResultException ex){
-            res.sendError(404, "Release already exists: " + prodName + " " + version);
+            res.sendError(409, "Release already exists: " + prodName + " " + version);
+            return null;
+        } catch (NoResultException ex){ /* OK */ }
+        
+        // Add a release to the product.
+        try {
+            return daoRel.addRelease( prod, version );
+        } catch (Exception ex) {
+            res.sendError(500, "Failed adding a release " + prodName + " " + version + ": " + ex);
             return null;
         }
-        
-        // Add a release to it
-        return daoRel.addRelease( prod, version );
     }
 
     

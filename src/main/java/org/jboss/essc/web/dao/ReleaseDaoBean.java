@@ -42,12 +42,14 @@ public class ReleaseDaoBean {
     //SELECT rel FROM org.jboss.essc.web.model.Release rel WHERE rel.product = ?1 AND NOT rel.internal ORDER BY rel.version DESC
     public List<Release> getReleasesOfProduct(Product prod, boolean showInternal) {
         String cond = showInternal ? "" : "AND false = rel.internal";
-        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product = ?1 " + cond + " ORDER BY rel.version DESC").setParameter(1, prod).getResultList();
+        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product = ?1 " + cond + " ORDER BY rel.version DESC")
+                .setParameter(1, prod).getResultList();
     }
 
     public List<Release> getReleasesOfProduct(String prodName, boolean showInternal) {
         String cond = showInternal ? "" : "AND false = rel.internal";
-        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product.name = ?1 " + cond + " ORDER BY rel.version DESC").setParameter(1, prodName).getResultList();
+        return this.em.createQuery("SELECT rel FROM Release rel WHERE rel.product.name = ?1 " + cond + " ORDER BY rel.version DESC")
+                .setParameter(1, prodName).getResultList();
     }
 
     
