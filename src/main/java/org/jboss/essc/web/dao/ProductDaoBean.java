@@ -3,8 +3,11 @@ package org.jboss.essc.web.dao;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import org.jboss.essc.web.model.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -12,6 +15,7 @@ import org.jboss.essc.web.model.Product;
  */
 @Stateless
 public class ProductDaoBean {
+    private static final Logger log = LoggerFactory.getLogger(ProductDaoBean.class);
 
     @PersistenceContext
     private EntityManager em;
@@ -80,7 +84,7 @@ public class ProductDaoBean {
         //int up = this.em.createQuery( "DELETE FROM Release r WHERE r.product.name = ?1" ).setParameter( 1, prod.getName() ).executeUpdate();
         int up = this.em.createQuery( "DELETE FROM Release r WHERE r.product IN "
                 + "(SELECT p FROM Product p WHERE p.name = ?1)" ).setParameter( 1, prod.getName() ).executeUpdate();
-        System.out.println("Deleted " + up);
+        log.debug("Deleted " + up);
         
         this.em.remove(prod);
         this.em.flush();

@@ -16,6 +16,8 @@ import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 import org.jboss.resteasy.annotations.providers.jaxb.Formatted;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author ozizka@redhat.com
@@ -23,6 +25,7 @@ import org.jboss.resteasy.annotations.providers.jaxb.Formatted;
 
 @Path("/")
 public class RestServices {
+    private static final Logger log = LoggerFactory.getLogger(RestServices.class);
     
     @Inject private ReleaseDaoBean daoRel; 
     @Inject private ProductDaoBean daoProd; 
@@ -57,7 +60,7 @@ public class RestServices {
             @Context HttpServletResponse res,
             @Context SecurityContext sc ) 
     {
-        System.out.println("Releases of: " + product);
+        log.debug("Releases of: " + product);
         List<Release> releases = daoRel.getReleasesOfProduct(product, true);
         for( Release rel : releases ) {
             rel.setCustomFields(null);
@@ -77,10 +80,10 @@ public class RestServices {
             @Context HttpServletResponse res,
             @Context SecurityContext sc ) throws IOException
     {
-        System.out.println("Release: " + product + " " + version);
+        log.debug("Release: " + product + " " + version);
         
         try {
-            return daoRel.getRelease(product, version);
+            return daoRel.getRelease(product, version, daoRel.WITHOUT_DEPS).setDeps(null);
         } catch (NoResultException ex){
             res.sendError(404, "No such release.");
             return null;
@@ -102,7 +105,7 @@ public class RestServices {
             @Context HttpServletResponse res,
             @Context SecurityContext sc ) throws IOException
     {
-        System.out.println("Release: " + prodName + " " + version);
+        log.debug("Release: " + prodName + " " + version);
         
         // Get product
         Product prod;

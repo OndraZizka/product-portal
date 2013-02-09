@@ -17,8 +17,11 @@ import org.jboss.essc.web.model.ReleaseCustomField;
 @Stateless
 public class ReleaseDaoBean {
 
-    @PersistenceContext
-    private EntityManager em;
+    public static final boolean WITH_DEPS = true;
+    public static final boolean WITHOUT_DEPS = false;
+    
+    
+    @PersistenceContext private EntityManager em;
 
 
     public List<Release> getReleases_orderDateDesc(int limit, boolean showInternal) {

@@ -146,7 +146,7 @@ public class Release implements Serializable, IHasTraits {
     public void setInternal( boolean internal ) { this.internal = internal; }
 
     public String getNote() {        return note;    }
-    public void setNote(String note) { this.note = note;    }
+    public Release setNote(String note) { this.note = note; return this; }
     public Status getStatus() {        return status;    }
     public void setStatus(Status status) { this.status = status;    }
     
@@ -161,7 +161,7 @@ public class Release implements Serializable, IHasTraits {
     public void setExtIdBugzilla(String extIdBugzilla) { this.extIdBugzilla = extIdBugzilla; }    
 
     public List<MavenArtifact> getDeps() { return deps; }
-    public void setDeps( List<MavenArtifact> deps ) { this.deps = deps; }
+    public Release setDeps( List<MavenArtifact> deps ) { this.deps = deps; return this; }
 
     //*
     public ReleaseTraits getTraits() { 
