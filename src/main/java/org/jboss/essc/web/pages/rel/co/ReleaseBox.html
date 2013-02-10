@@ -16,7 +16,10 @@
             
             <table class="form" border="0" cellpadding="5">
                 <tr> <td>Status:</td> <td><select wicket:id="status"/></td></tr>
-                <tr> <td>Planned for / Released on:</td> <td><input type="text" wicket:id="date"/></td></tr>
+                <!--
+                <tr> <td>Planned for / Released on:</td> <td><div wicket:id="date"/> (yyyy-MM-dd)</td></tr>
+                -->
+                <tr> <td>Planned for / Released on:</td> <td><input type="text" wicket:id="date"/> (yyyy-MM-dd)</td></tr>
                 <tr> <td colspan="2"><input type="checkbox" wicket:id="internal" id="int"/> <label for="int">Internal release (shown optionally)</label></td></tr>
             </table>
 

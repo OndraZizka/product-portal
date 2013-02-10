@@ -10,12 +10,12 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxFallbackLink;
 import org.apache.wicket.extensions.markup.html.form.DateTextField;
+import org.apache.wicket.extensions.yui.calendar.DatePicker;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
@@ -26,7 +26,6 @@ import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.ReleaseTraits;
 import org.jboss.essc.web.pages.rel.ReleaseBasedPage;
 import org.jboss.essc.web.pages.rel.ReleaseDepsPage;
-import org.jboss.essc.web.pages.rel.ReleasePage;
 import org.jboss.essc.web.util.PropertiesUtils;
 
 
@@ -83,6 +82,7 @@ public class ReleaseBox extends Panel {
         // Date
         //this.form.add( new AjaxEditableLabel("date").add(new PatternValidator("\\d{4}-\\d\\d-\\d\\d") ) );
         this.form.add( new DateTextField("date", new PropertyModel<Date>( release, "plannedFor"), "yyyy-MM-dd")
+            .add( new DatePicker()) // Subclass to customize.
             .add(new AjaxFormComponentUpdatingBehavior("onchange") {
                 @Override protected void onUpdate( AjaxRequestTarget target ) {
                     Date date = ((DateTextField)getFormComponent()).getModelObject();
