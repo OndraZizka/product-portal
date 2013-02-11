@@ -57,10 +57,10 @@ public class SimpleRelativeDateFormatter {
         if( diff < 8 )  return in + "a week" + ago;
         if( diff < 14 ) return in + diff + " days" + ago;
         
-        long weeks = diff / 7;
-        if( weeks < 4 ) return in + diff + " weeks" + ago;
+        long weeks = (diff + 2) / 7; //  +2 will write "3 weeks" for 19 days (round up)
+        if( weeks < 4 ) return in + weeks + " weeks" + ago;
         if( weeks < 5 ) return in + "a month" + ago;
-        if( weeks < 8 ) return in + diff + " weeks" + ago;
+        if( weeks < 8 ) return in + weeks + " weeks" + ago;
         
         diff /= 30;  // Months, cca.
         if( diff < 12 ) return in + diff + " months" + ago;
