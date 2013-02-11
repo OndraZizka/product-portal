@@ -74,6 +74,7 @@ var EditableLink = {
      *  APPLIED TO the <input>.
      */
     activate: function(){
+        console.log('Activated ' + this);
         //$(this).removeClass('passive').addClass('active').focus();
         this.className = (this.className.replace('passive','') + ' active');
         //this.disabled = false;
@@ -103,7 +104,8 @@ var EditableLink = {
         if( this.active ) return;
         //alert( this.className );
 
-        if( event.shiftKey  ||  this.className.contains('label') ){
+        //if( event.shiftKey  ||  this.className.contains('label') ){
+        if( event.shiftKey  ||  this.className.search('label') != -1 ){
             this.activate();
         }
         else if( validateURL(this.value) ){
