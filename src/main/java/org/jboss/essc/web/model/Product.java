@@ -5,15 +5,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 
 /**
- *  Product line - groups releases of the same product.
+ *  Product - groups the releases of the same product.
  * 
  *  @author Ondrej Zizka
  */
@@ -122,4 +120,4 @@ public class Product implements Serializable, IHasTraits {
         return new Product( Long.parseLong( mat.group(1) ), mat.group(2) );
     }
 
-}
+}// class
