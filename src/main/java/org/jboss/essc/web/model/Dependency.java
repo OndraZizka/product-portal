@@ -5,10 +5,10 @@ import javax.persistence.*;
 
 
 /**
- *  Product line - groups releases of the same product.
+ *  Dependency.
  * 
  *  @author Ondrej Zizka
- *  @deprecated  Currently using @ManyToMany.
+ *  @deprecated  Currently using just @ManyToMany.
  */
 @SuppressWarnings("serial")
 @Entity @Table(name="dep")
