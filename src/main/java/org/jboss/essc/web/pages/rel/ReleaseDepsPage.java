@@ -2,7 +2,8 @@ package org.jboss.essc.web.pages.rel;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web.model.Release;
-import org.jboss.essc.web.pages.rel.co.DepsBox;
+import org.jboss.essc.web.pages.rel.co.DepsActionsBox;
+import org.jboss.essc.web.pages.rel.co.DepsListBox;
 
 
 /**
@@ -26,8 +27,9 @@ public class ReleaseDepsPage extends ReleaseBasedPage {
     protected void onInitialize() {
         super.onInitialize();
 
-        add( new DepsBox("depsBox", this.getModel() ) );
-
+        add( new DepsActionsBox("actionsBox", this.getModel() ) );
+        
+        add( new DepsListBox("depsBox", this.getModel() ) );
     }
 
 

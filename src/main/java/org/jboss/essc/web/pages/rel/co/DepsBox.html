@@ -3,10 +3,8 @@
 <wicket:panel>
 
     <!-- Release Dependencies box -->
-    <div id="defaults" class="box">
+    <div class="box">
         
-        <h2><span wicket:id="productName">EAP</span> <span wicket:id="version">6.0.1.ER1</span> - dependencies</h2>
-
         <!-- Dependency artifacts -->
         <table class="deps">
             <tr wicket:id="deps" class="dep">
@@ -21,59 +19,6 @@
                 <td wicket:id="s" class="scope">compile</td>
             </tr>
         </table>
-        
-        <!-- Other actions -->
-        <fieldset title="Actions">
-            <legend>Actions
-                <wicket:link>
-                <img src="icoPlusGreenCircle.png" alt="Show / hide"
-                    onclick="toggleVisibility(this.parentElement.parentElement.getElementsByTagName('div')[0]);"/>
-                </wicket:link>
-            </legend>
-            <div style="display: none;">
-                
-                <div wicket:id="feedback"/>
-                
-                <!-- Propose change -->
-                <form wicket:id="proposeChangeForm">
-                    <fieldset>
-                        <legend>Propose version change</legend>
-                        <table style="width: auto; margin: 0;">
-                            <tr>
-                                <td>Dependency to change: </td>
-                                <td>New version: </td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <select wicket:id="subjectGA"/>
-                                    <div id="newGAcontainer">
-                                        <!-- New artifact (&lt;groupId:artifactId&gt;): -->
-                                        <input  wicket:id="newGA" type="text"/>
-                                    </div>
-                                </td>
-                                <td><input  wicket:id="newVer" type="text" style="width: 10ex;"/></td>
-                                <td><input type="submit" value="Propose version change"/></td>
-                            </tr>
-                        </table>
-                        <textarea wicket:id="rationale" cols="60" rows="4"  style="width: 100%" title="Rationale">Rationale</textarea>
-                    </fieldset>
-                </form>
-
-                <!-- Download -->
-                <input type="button" wicket:id="downloadProps" value="Download as CSV (G:A:P[:classifier]:V:scope)"/>
-                
-                <hr/>
-                
-                <!-- Upload -->
-                <form wicket:id="uploadForm" method="post" action="#">
-                    <input type="file" wicket:id="file"/>
-                    <input type="submit" value="Upload & apply a CSV file (G:A:P[:classifier]:V:scope)"/>
-                </form>
-                <div>mvn dependency:list | sort | uniq | grep ':compile' > deps.txt</div>
-            </div>
-        </fieldset>
-        
         
     </div>
 

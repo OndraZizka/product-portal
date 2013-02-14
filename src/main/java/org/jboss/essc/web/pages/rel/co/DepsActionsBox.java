@@ -1,10 +1,10 @@
 package org.jboss.essc.web.pages.rel.co;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import javax.inject.Inject;
-import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -12,14 +12,13 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.IChoiceRenderer;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.jboss.essc.web.dao.CommentDao;
 import org.jboss.essc.web.dao.DepChangeDao;
+import org.jboss.essc.web.dao.MavenArtifactDao;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.DepChangeProposal;
 import org.jboss.essc.web.model.MavenArtifact;
@@ -32,17 +31,19 @@ import org.jboss.essc.web.pages.rel.DepsUploadForm;
  * 
  * @author Ondrej Zizka
  */
-public class DepsBox extends Panel {
+public class DepsActionsBox extends Panel {
     
     @Inject private ReleaseDaoBean daoRelease;
     @Inject private CommentDao     daoComment;
     @Inject private DepChangeDao   daoDepChange;
+    @Inject private MavenArtifactDao  daoMavenArtifact;
 
+    
     // Components
     private FeedbackPanel feedbackPanel;
     
     
-    public DepsBox( String id, final IModel<Release> releaseModel ) {
+    public DepsActionsBox( String id, final IModel<Release> releaseModel ) {
         super( id );
 
         final Release release = releaseModel.getObject();
@@ -54,19 +55,6 @@ public class DepsBox extends Panel {
         add( new Label("productName", release.getProduct().getName()) );
         add( new Label("version",     release.getVersion()) );
         
-        // Dependencies
-        add( new ListView<MavenArtifact>("deps", new PropertyModel(getModel(), "deps") ) {
-            @Override
-            protected void populateItem( ListItem<MavenArtifact> item ) {
-                MavenArtifact ma = item.getModelObject();
-                item.add( new Label("g", new PropertyModel(item.getModel(), "groupId")));
-                item.add( new Label("a", new PropertyModel(item.getModel(), "artifactId")));
-                item.add( new Label("c", "/" + ma.getClassifier()).setVisibilityAllowed( ! StringUtils.isBlank(ma.getClassifier()) ));
-                item.add( new Label("v", new PropertyModel(item.getModel(), "version")));
-                item.add( new Label("p", ma.getPackaging()).setVisibilityAllowed(! "jar".equals(ma.getPackaging())));
-                item.add( new Label("s", ma.getScope()).setVisibilityAllowed(! "compile".equals(ma.getScope())));
-            }
-        });
 
         // Feedback
         this.feedbackPanel = new FeedbackPanel("feedback");
@@ -122,6 +110,8 @@ public class DepsBox extends Panel {
         this.add( new DepsUploadForm("uploadForm"){
 
             @Override protected void onSubmit() {
+                
+                // Parse the uploaded file.
                 List<MavenArtifact> deps;
                 try {
                     deps = processDepsFromUploadedFile();
@@ -130,12 +120,23 @@ public class DepsBox extends Panel {
                     this.error( "Could not process CSV with dependencies: " + ex.toString() );
                     return;
                 }
+                // Replace the existing deps in the list.
+                Iterator<MavenArtifact> it = deps.iterator();
+                while( it.hasNext() ){
+                    MavenArtifact ma = it.next();
+                    MavenArtifact ma2 = daoMavenArtifact.findMavenArtifact(ma);
+                    if( null != ma2 ){
+                        it.remove();
+                        deps.add(ma2);
+                    }
+                }
                 
+                //
                 try {
-                    Release rel = (Release) DepsBox.this.getModel().getObject();
+                    Release rel = (Release) DepsActionsBox.this.getModel().getObject();
                     rel.setDeps(deps);
                     rel = daoRelease.update( rel );
-                    DepsBox.this.setDefaultModelObject( rel );
+                    DepsActionsBox.this.setDefaultModelObject( rel );
                 }
                 catch( Exception ex ) {
                     this.error( "Could not save dependencies: " + ex.toString() );

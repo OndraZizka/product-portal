@@ -87,7 +87,7 @@ public class Release implements Serializable, IHasTraits {
     private Map<String, ReleaseCustomField> customFields = new HashMap();
 
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "rel_x_deps", 
             joinColumns        = {@JoinColumn(name = "rel_id")},
             inverseJoinColumns = {@JoinColumn(name = "ma_id")}

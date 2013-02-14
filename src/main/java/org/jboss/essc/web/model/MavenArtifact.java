@@ -27,9 +27,7 @@ public class MavenArtifact implements Serializable {
     private String packaging;
     private String classifier;
 
-    private String scope; // TODO: Move to a Dependency entity.
-    private String note;  // TODO: Move to a Dependency entity.
-
+    
     
     public MavenArtifact() { }
 
@@ -58,11 +56,6 @@ public class MavenArtifact implements Serializable {
     public void setClassifier( String classifier ) { this.classifier = classifier; }
     public String getPackaging() { return packaging; }
     public void setPackaging(String packaging) { this.packaging = packaging; }    
-    public String getScope() { return scope; }
-    public void setScope( String scope ) { this.scope = scope; }
-
-    public String getNote() { return note; }
-    public void setNote(String note) { this.note = note; }
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="hash/eq">
@@ -107,13 +100,14 @@ public class MavenArtifact implements Serializable {
     public static MavenArtifact fromDepsPluginString( String str ) {
         String[] parts = StringUtils.split( str, ":");
         if( parts.length < 3 )
-            throw new IllegalArgumentException("Expected format: 'G:A:P[:C]:V:scope]'");
+            throw new IllegalArgumentException("Expected format: 'G:A:P[:C]:V:scope'");
 
         int offset = (parts.length == 6) ?  1  :  0; // Includes classifier.
         
         MavenArtifact ma = new MavenArtifact( parts[0], parts[1], parts[3+offset], parts[2] );
-        if( parts.length >= 5 )
-            ma.setScope(parts[4+offset] );
+        if( parts.length >= 5 ){
+            //ma.setScope(parts[4+offset] );
+        }
 
         return ma;
     }
