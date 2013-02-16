@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>JBoss ESSC Team Portal</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="ESSC team portal" />
+</head>
+<body>
+<div id="page">
+    
+    <div id="content">
+
+        <wicket:extend>
+
+            <!-- Add work unit form box -->
+            <div class="addWorkUnit box">
+                <h2>Add work unit</h2>
+                
+                <div wicket:id="feedback"/>
+                    
+                <form wicket:id="form" action="#">
+                    <table>
+                        <tr>
+                            <td>Title</td><td><input type="text" wicket:id="title"/></td>
+                        </tr>
+                        <tr>
+                            <td>Tags</td><td><input type="text" wicket:id="tags"/></td>
+                        </tr>
+                        <tr><td colspan="2">
+                            <textarea wicket:id="note" style="width: 100%"></textarea>
+                        </td></tr>
+                        <tr><td colspan="2">
+                            <input type="submit" value="Add work unit."/>
+                        </td></tr>
+                    </table>
+                </form>
+            </div>
+
+            <!-- Recent similar -->
+            <div class="box releases">
+                <h2 wicket:id="heading" class="title">Releases</h2>
+                <div class="entry">
+                    <div wicket:id="recentSimilar"/>
+                </div>
+
+        </wicket:extend>
+        
+    </div>
+    <!-- end content -->
+    
+</div>
+</body>
+</html>

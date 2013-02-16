@@ -329,6 +329,12 @@
             <version>${version.wicket}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.wicketstuff</groupId>
+            <artifactId>wicketstuff-autocomplete-tagit</artifactId>
+            <version>${version.wicket}.1</version>
+        </dependency>
+
         <!-- Wicket CDI integration. -->
         <dependency>
             <groupId>net.ftlines.wicket-cdi</groupId>
