@@ -22,6 +22,7 @@ public class ExternalVersionInfo {
     private Long id;
 
     @JsonProperty("id")
+    @Column(columnDefinition = "INT UNSIGNED")
     private long externalId;
 
     @ManyToOne
