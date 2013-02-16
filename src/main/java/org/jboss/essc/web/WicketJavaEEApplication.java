@@ -18,6 +18,7 @@ import org.apache.wicket.request.component.IRequestableComponent;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.jboss.essc.web.model.User;
+import org.jboss.essc.web.model.WorkUnit;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.pages.home.HomePage;
 import org.jboss.essc.web.pages.prod.AddProductPage;
@@ -31,6 +32,9 @@ import org.jboss.essc.web.pages.test.AdminPage;
 import org.jboss.essc.web.pages.test.JpaQueryPage;
 import org.jboss.essc.web.pages.user.LoginPage;
 import org.jboss.essc.web.pages.user.UserPage;
+import org.jboss.essc.web.pages.worktags.AddWorkUnitPage;
+import org.jboss.essc.web.pages.worktags.WorkTagPage;
+import org.jboss.essc.web.pages.worktags.WorkUnitPage;
 import org.jboss.essc.web.qualifiers.CurrentSession;
 import org.jboss.essc.web.qualifiers.LoggedIn;
 import org.jboss.essc.web.qualifiers.ShowInternals;
@@ -91,6 +95,10 @@ public class WicketJavaEEApplication extends WebApplication {
         mountPage("/product/${name}",               ProductPage.class);
         mountPage("/release/${product}/${version}", ReleasePage.class);
         mountPage("/release/${product}/${version}/deps", ReleaseDepsPage.class);
+        
+        mountPage("/workTag/${name}", WorkTagPage.class);
+        mountPage("/workUnit/${id}",  WorkUnitPage.class);
+        mountPage("/addWorkUnit", AddWorkUnitPage.class);
      
         initResources();
         

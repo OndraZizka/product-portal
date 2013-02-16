@@ -22,7 +22,7 @@ import org.wicketstuff.tagit.TagItTextField;
  * @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
-public class AddWorkTagPage extends BaseLayoutPage {
+public class AddWorkUnitPage extends BaseLayoutPage {
 
     @Inject private WorkTagDao daoWorkTag;
     
@@ -33,7 +33,7 @@ public class AddWorkTagPage extends BaseLayoutPage {
     private FeedbackPanel feedbackPanel;
 
     
-    public AddWorkTagPage( PageParameters par ) {
+    public AddWorkUnitPage( PageParameters par ) {
 
         // Feedback
         feedbackPanel = new FeedbackPanel("feedback");
