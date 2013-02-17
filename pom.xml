@@ -24,7 +24,7 @@
         <plugin.war.warName>${project.build.finalName}</plugin.war.warName>  <!-- To change to ROOT for "prod", to go to / context. -->
 
         <!-- Define the version of JBoss' Java EE 6 APIs we want to import. -->
-        <jboss.spec.version>3.0.0.Final</jboss.spec.version>
+        <jboss.spec.version>3.0.2.Final</jboss.spec.version>
         <version.wicket>1.5.9</version.wicket>
         <version.wicket.cdi>1.2</version.wicket.cdi>
 
@@ -109,8 +109,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.0</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>

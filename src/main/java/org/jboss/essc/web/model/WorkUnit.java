@@ -13,7 +13,7 @@ import org.apache.commons.lang.StringUtils;
  *  @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
-@Entity @Table(name="dep")
+@Entity @Table(name="workunit")
 public class WorkUnit implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

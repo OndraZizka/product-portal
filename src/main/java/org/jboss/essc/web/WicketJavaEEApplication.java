@@ -18,7 +18,6 @@ import org.apache.wicket.request.component.IRequestableComponent;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.jboss.essc.web.model.User;
-import org.jboss.essc.web.model.WorkUnit;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.pages.home.HomePage;
 import org.jboss.essc.web.pages.prod.AddProductPage;
@@ -41,7 +40,6 @@ import org.jboss.essc.web.qualifiers.ShowInternals;
 import org.jboss.essc.web.security.EsscAuthSession;
 import org.jboss.essc.web.security.SecuredPage;
 import org.jboss.essc.web.test.EditableTestPage;
-
 
 /**
  * Wicket application class.
@@ -161,11 +159,19 @@ public class WicketJavaEEApplication extends WebApplication {
         return sess.getSettings().isShowInternalReleases();
     }
     
+    public static WicketJavaEEApplication getApp(){
+        return (WicketJavaEEApplication) Application.get();
+    }
     
     
-    
+    public boolean isDevMode(){
+        return RuntimeConfigurationType.DEVELOPMENT == Application.get().getConfigurationType();
+    }
 
-}// class
+    
+}// class WicketJavaEEApplication
+
+
 
 
 
@@ -198,5 +204,5 @@ class EsscAuthStrategy implements IAuthorizationStrategy {
         // okay to proceed
         return true;
     }
-
-}
+    
+}// class EsscAuthStrategy

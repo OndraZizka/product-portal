@@ -1,0 +1,1542 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007f49e302a558, pid=21697, tid=139954921121536
+#
+# JRE version: 7.0_09-b30
+# Java VM: OpenJDK 64-Bit Server VM (23.2-b09 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# V  [libjvm.so+0x56f558]  JVM_GetEnclosingMethodInfo+0x178
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please include
+# instructions on how to reproduce the bug and visit:
+#   https://bugs.launchpad.net/ubuntu/+source/openjdk-7/
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007f49a4002000):  JavaThread "http-/127.0.0.1:8080-1" daemon [_thread_in_vm, id=21799, stack(0x00007f49cb3ba000,0x00007f49cb5bb000)]
+
+siginfo:si_signo=SIGSEGV: si_errno=0, si_code=1 (SEGV_MAPERR), si_addr=0x000000000062009a
+
+Registers:
+RAX=0x0000000000620022, RBX=0x00007f49a4002000, RCX=0x0000000000620022, RDX=0x0000000769a6ae40
+RSP=0x00007f49cb5b7af0, RBP=0x00007f49cb5b7b40, RSI=0x0000000000000044, RDI=0x00007f49904eec00
+R8 =0x0000000000000002, R9 =0x00000007e4585d90, R10=0x00007f49d9017d85, R11=0x00007f49e323c720
+R12=0x00007f49904eebd8, R13=0x0000000000000044, R14=0x00007f49cb5b7bb8, R15=0x00007f49a4002000
+RIP=0x00007f49e302a558, EFLAGS=0x0000000000010246, CSGSFS=0x0000000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007f49cb5b7af0)
+0x00007f49cb5b7af0:   00007f49904eebf8 00007f49cb5b7b40
+0x00007f49cb5b7b00:   00007f49e3721bb0 0000000000000000
+0x00007f49cb5b7b10:   0000000000000000 0000000000000000
+0x00007f49cb5b7b20:   0000000764e12be0 0000000000000000
+0x00007f49cb5b7b30:   0000000764e12be0 00007f49cb5b7bb8
+0x00007f49cb5b7b40:   00007f49cb5b7b98 00007f49d9017db1
+0x00007f49cb5b7b50:   00000007651475ba 00007f49cb5b7b58
+0x00007f49cb5b7b60:   0000000000000000 00007f49cb5b7bb8
+0x00007f49cb5b7b70:   0000000764ee5da0 0000000000000000
+0x00007f49cb5b7b80:   0000000764e12be0 0000000000000000
+0x00007f49cb5b7b90:   00007f49cb5b7bb8 00007f49cb5b7c00
+0x00007f49cb5b7ba0:   00007f49d90063b3 0000000000000000
+0x00007f49cb5b7bb0:   00007f49d901303b 00000007e7fdfc10
+0x00007f49cb5b7bc0:   00007f49cb5b7bc0 0000000764e12cc1
+0x00007f49cb5b7bd0:   00007f49cb5b7c18 0000000764ee5da0
+0x00007f49cb5b7be0:   0000000000000000 0000000764e12cf8
+0x00007f49cb5b7bf0:   00007f49cb5b7bb8 00007f49cb5b7c18
+0x00007f49cb5b7c00:   00007f49cb5b7c60 00007f49d90063b3
+0x00007f49cb5b7c10:   0000000000000000 00000007e7fdfc10
+0x00007f49cb5b7c20:   00007f49cb5b7c20 0000000764e13201
+0x00007f49cb5b7c30:   00007f49cb5b7c80 0000000764ee5da0
+0x00007f49cb5b7c40:   0000000000000000 0000000764e13260
+0x00007f49cb5b7c50:   00007f49cb5b7c18 00007f49cb5b7c80
+0x00007f49cb5b7c60:   00007f49cb5b7cc8 00007f49d90063b3
+0x00007f49cb5b7c70:   0000000000000000 0000000000000000
+0x00007f49cb5b7c80:   00000007e7fdfc10 00007f49cb5b7c88
+0x00007f49cb5b7c90:   0000000764e13a39 00007f49cb5b7ce8
+0x00007f49cb5b7ca0:   0000000764ee5da0 0000000000000000
+0x00007f49cb5b7cb0:   0000000764e13a90 00007f49cb5b7c80
+0x00007f49cb5b7cc0:   00007f49cb5b7ce8 00007f49cb5b7d30
+0x00007f49cb5b7cd0:   00007f49d90063b3 0000000000000000
+0x00007f49cb5b7ce0:   0000000000000000 00000007e7fdfc10 
+
+Instructions: (pc=0x00007f49e302a558)
+0x00007f49e302a538:   8b 04 24 48 89 da 44 89 ee 48 8b b8 f0 00 00 00
+0x00007f49e302a548:   e8 23 31 00 00 48 83 7b 08 00 0f 85 69 ff ff ff
+0x00007f49e302a558:   48 8b 50 78 48 8b 45 b0 31 f6 48 8b 38 e8 76 f3
+0x00007f49e302a568:   f1 ff 49 8b 14 24 0f b7 82 ea 01 00 00 66 85 c0 
+
+Register to memory mapping:
+
+RAX=0x0000000000620022 is an unknown value
+RBX=0x00007f49a4002000 is a thread
+RCX=0x0000000000620022 is an unknown value
+RDX=0x0000000769a6ae40 is an oop
+{constant pool} 
+ - klass: {other class}
+ - holder: 0x0000000767cd3a50
+ - cache: 0x0000000769a6b098
+ -   1 :  : klass_index=28 name_and_type_index=69
+ -   2 :  : klass_index=28 name_and_type_index=70
+ -   3 :  : klass_index=29 name_and_type_index=71
+ -   4 :  : 'org/apache/wicket/Component'
+ -   5 :  : klass_index=73 name_and_type_index=74
+ -   6 :  : klass_index=28 name_and_type_index=75
+ -   7 :  : 'org/jboss/essc/web/model/ProductCustomField'
+ -   8 :  : klass_index=67 name_and_type_index=75
+ -   9 :  : 'java/util/Map'
+ -  10 :  : klass_index=7 name_and_type_index=78
+ -  11 :  : klass_index=9 name_and_type_index=79
+ -  12 :  : klass_index=7 name_and_type_index=80
+ -  13 :  : klass_index=28 name_and_type_index=81
+ -  14 :  : klass_index=67 name_and_type_index=82
+ -  15 :  : "Changed." {0x7e4585de0}
+ -  16 :  : klass_index=67 name_and_type_index=84
+ -  17 :  : "Changed b." {0x7e4585e18}
+ -  18 :  : klass_index=86 name_and_type_index=84
+ -  19 :  : 'java/lang/Exception'
+ -  20 :  : klass_index=19 name_and_type_index=88
+ -  21 :  : klass_index=86 name_and_type_index=89
+ -  22 :  : "debugBar" {0x7dce367d0}
+ -  23 :  : klass_index=28 name_and_type_index=91
+ -  24 :  : 'org/apache/wicket/devutils/debugbar/DebugBar'
+ -  25 :  : klass_index=24 name_and_type_index=84
+ -  26 :  : 'java/lang/RuntimeException'
+ -  27 :  : klass_index=26 name_and_type_index=94
+ -  28 :  : 'org/jboss/essc/web/_cp/pageBoxes/CustomFieldsPanel$2' {0x767cd3a50}
+ -  29 :  : 'org/jboss/essc/web/_cp/pageBoxes/CustomFieldRowPanel' {0x767cd33e8}
+ -  30 :  : 'val$feedbackPanel'
+ -  31 :  : 'Lorg/apache/wicket/markup/html/panel/FeedbackPanel;'
+ -  32 :  : 'this$0'
+ -  33 :  : 'Lorg/jboss/essc/web/_cp/pageBoxes/CustomFieldsPanel;'
+ -  34 :  : '<init>'
+ -  35 :  : '(Lorg/jboss/essc/web/_cp/pageBoxes/CustomFieldsPanel;Ljava/lang/String;Lorg/apache/wicket/model/IModel;Lorg/apache/wicket/markup/html/panel/FeedbackPanel;)V'
+ -  36 :  : 'Code'
+ -  37 :  : 'LineNumberTable'
+ -  38 :  : 'LocalVariableTable'
+ -  39 :  : 'this'
+ -  40 :  : ''
+ -  41 :  : 'InnerClasses'
+ -  42 :  : 'Lorg/jboss/essc/web/_cp/pageBoxes/CustomFieldsPanel$2;'
+ -  43 :  : 'x0'
+ -  44 :  : 'Ljava/lang/String;'
+ -  45 :  : 'x1'
+ -  46 :  : 'Lorg/apache/wicket/model/IModel;'
+ -  47 :  : 'LocalVariableTypeTable'
+ -  48 :  : 'Lorg/apache/wicket/model/IModel<Lorg/jboss/essc/web/model/ProductCustomField;>;'
+ -  49 :  : 'onAjaxChange'
+ -  50 :  : '(Lorg/apache/wicket/ajax/AjaxRequestTarget;)V'
+ -  51 :  : 'newField'
+ -  52 :  : 'Lorg/jboss/essc/web/model/ProductCustomField;'
+ -  53 :  : 'fields'
+ -  54 :  : 'Ljava/util/Map;'
+ -  55 :  : 'b'
+ -  56 :  : 'Lorg/apache/wicket/devutils/debugbar/DebugBar;'
+ -  57 :  : 'ex'
+ -  58 :  : 'Ljava/lang/Exception;'
+ -  59 :  : 'target'
+ -  60 :  : 'Lorg/apache/wicket/ajax/AjaxRequestTarget;'
+ -  61 :  : 'Ljava/util/Map<Ljava/lang/String;Lorg/jboss/essc/web/model/ProductCustomField;>;'
+ -  62 :  : 'StackMapTable'
+ -  63 :  : 'java/lang/Exception'
+ -  64 :  : 'SourceFile'
+ -  65 :  : 'CustomFieldsPanel.java'
+ -  66 :  : 'EnclosingMethod'
+ -  67 :  : 'org/jboss/essc/web/_cp/pageBoxes/CustomFieldsPanel'
+ -  68 :  : name_index=34 signature_index=98
+ -  69 :  : name_index=32 signature_index=33
+ -  70 :  : name_index=30 signature_index=31
+ -  71 :  : name_index=34 signature_index=99
+ -  72 :  : 'org/apache/wicket/Component'
+ -  73 :  : 'org/apache/wicket/ajax/AjaxRequestTarget'
+ -  74 :  : name_index=101 signature_index=102
+ -  75 :  : name_index=103 signature_index=104
+ -  76 :  : 'org/jboss/essc/web/model/ProductCustomField'
+ -  77 :  : 'java/util/Map'
+ -  78 :  : name_index=105 signature_index=106
+ -  79 :  : name_index=107 signature_index=108
+ -  80 :  : name_index=34 signature_index=109
+ -  81 :  : name_index=110 signature_index=111
+ -  82 :  : name_index=112 signature_index=50
+ -  83 :  : 'Changed.'
+ -  84 :  : name_index=113 signature_index=114
+ -  85 :  : 'Changed b.'
+ -  86 :  : 'org/apache/wicket/markup/html/panel/FeedbackPanel'
+ -  87 :  : 'java/lang/Exception'
+ -  88 :  : name_index=116 signature_index=106
+ -  89 :  : name_index=117 signature_index=114
+ -  90 :  : 'debugBar'
+ -  91 :  : name_index=118 signature_index=119
+ -  92 :  : 'org/apache/wicket/devutils/debugbar/DebugBar'
+ -  93 :  : 'java/lang/RuntimeException'
+ -  94 :  : name_index=34 signature_index=120
+ -  95 :  : 'org/jboss/essc/web/_cp/pageBoxes/CustomFieldsPanel$2'
+ -  96 :  : 'org/jboss/essc/web/_cp/pageBoxes/CustomFieldRowPanel'
+ -  97 :  : 'org/jboss/essc/web/_cp/pageBoxes/CustomFieldsPanel'
+ -  98 :  : '(Ljava/lang/String;Lorg/apache/wicket/model/IModel;Lorg/apache/wicket/markup/html/panel/FeedbackPanel;)V'
+ -  99 :  : '(Ljava/lang/String;Lorg/apache/wicket/model/IModel;)V'
+ - 100 :  : 'org/apache/wicket/ajax/AjaxRequestTarget'
+ - 101 :  : 'add'
+ - 102 :  : '([Lorg/apache/wicket/Component;)V'
+ - 103 :  : 'getDefaultModelObject'
+ - 104 :  : '()Ljava/lang/Object;'
+ - 105 :  : 'getName'
+ - 106 :  : '()Ljava/lang/String;'
+ - 107 :  : 'put'
+ - 108 :  : '(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;'
+ - 109 :  : '()V'
+ - 110 :  : 'setDefaultModelObject'
+ - 111 :  : '(Ljava/lang/Object;)Lorg/apache/wicket/Component;'
+ - 112 :  : 'onChange'
+ - 113 :  : 'info'
+ - 114 :  : '(Ljava/io/Serializable;)V'
+ - 115 :  : 'org/apache/wicket/markup/html/panel/FeedbackPanel'
+ - 116 :  : 'toString'
+ - 117 :  : 'error'
+ - 118 :  : 'get'
+ - 119 :  : '(Ljava/lang/String;)Lorg/apache/wicket/Component;'
+ - 120 :  : '(Ljava/lang/Throwable;)V'
+ - 121 :  : 'setOutputMarkupId'
+ - 122 :  : '(Z)Lorg/apache/wicket/Component;'
+ - 123 :  : name_index=121 signature_index=122
+ - 124 :  : klass_index=28 name_and_type_index=123
+
+RSP=0x00007f49cb5b7af0 is pointing into the stack for thread: 0x00007f49a4002000
+RBP=0x00007f49cb5b7b40 is pointing into the stack for thread: 0x00007f49a4002000
+RSI=0x0000000000000044 is an unknown value
+RDI=0x00007f49904eec00 is an unknown value
+R8 =0x0000000000000002 is an unknown value
+R9 =0x00000007e4585d90 is an oop
+[C 
+ - klass: {type array char}
+ - length: 16
+R10=0x00007f49d9017d85 is an Interpreter codelet
+method entry point (kind = native)  [0x00007f49d90178e0, 0x00007f49d90186c0]  3552 bytes
+R11=0x00007f49e323c720: <offset 0x781720> in /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server/libjvm.so at 0x00007f49e2abb000
+R12=0x00007f49904eebd8 is an unknown value
+R13=0x0000000000000044 is an unknown value
+R14=0x00007f49cb5b7bb8 is pointing into the stack for thread: 0x00007f49a4002000
+R15=0x00007f49a4002000 is a thread
+
+
+Stack: [0x00007f49cb3ba000,0x00007f49cb5bb000],  sp=0x00007f49cb5b7af0,  free space=2038k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0x56f558]  JVM_GetEnclosingMethodInfo+0x178
+j  java.lang.Class.getEnclosingMethod0()[Ljava/lang/Object;+0
+j  java.lang.Class.getEnclosingMethodInfo()Ljava/lang/Class$EnclosingMethodInfo;+1
+j  java.lang.Class.getEnclosingClass()Ljava/lang/Class;+1
+j  java.lang.Class.getSimpleBinaryName()Ljava/lang/String;+1
+j  java.lang.Class.getSimpleName()Ljava/lang/String;+34
+j  org.apache.wicket.MarkupContainer.toString(Z)Ljava/lang/String;+18
+j  org.apache.wicket.MarkupContainer.toString()Ljava/lang/String;+2
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x529b9c]  JavaCalls::call_helper(JavaValue*, methodHandle*, JavaCallArguments*, Thread*)+0x32c
+V  [libjvm.so+0x529645]  JavaCalls::call(JavaValue*, methodHandle, JavaCallArguments*, Thread*)+0x25
+V  [libjvm.so+0x53f1a8]  jni_invoke_nonstatic(JNIEnv_*, JavaValue*, _jobject*, JNICallType, _jmethodID*, JNI_ArgumentPusher*, Thread*)+0x188
+V  [libjvm.so+0x546a2d]  jni_CallObjectMethodA+0xbd
+C  [libjdwp.so+0x1bc68]  Agent_OnLoad+0xce28
+C  [libjdwp.so+0x141aa]  Agent_OnLoad+0x536a
+C  [libjdwp.so+0x14540]  Agent_OnLoad+0x5700
+C  [libjdwp.so+0x17685]  Agent_OnLoad+0x8845
+V  [libjvm.so+0x5dbe93]  JvmtiExport::post_single_step(JavaThread*, methodOopDesc*, unsigned char*)+0x1f3
+V  [libjvm.so+0x5dc1d9]  JvmtiExport::at_single_stepping_point(JavaThread*, methodOopDesc*, unsigned char*)+0x99
+V  [libjvm.so+0x522ea4]  InterpreterRuntime::at_safepoint(JavaThread*)+0x44
+j  org.jboss.essc.web._cp.pageBoxes.CustomFieldsPanel$2.onAjaxChange(Lorg/apache/wicket/ajax/AjaxRequestTarget;)V+0
+j  org.jboss.essc.web._cp.pageBoxes.CustomFieldRowPanel$2.onUpdate(Lorg/apache/wicket/ajax/AjaxRequestTarget;)V+66
+j  org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior.onEvent(Lorg/apache/wicket/ajax/AjaxRequestTarget;)V+77
+j  org.apache.wicket.ajax.AjaxEventBehavior.respond(Lorg/apache/wicket/ajax/AjaxRequestTarget;)V+2
+j  org.apache.wicket.ajax.AbstractDefaultAjaxBehavior.onRequest()V+34
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x529b9c]  JavaCalls::call_helper(JavaValue*, methodHandle*, JavaCallArguments*, Thread*)+0x32c
+V  [libjvm.so+0x529645]  JavaCalls::call(JavaValue*, methodHandle, JavaCallArguments*, Thread*)+0x25
+V  [libjvm.so+0x7683d4]  Reflection::invoke(instanceKlassHandle, methodHandle, Handle, bool, objArrayHandle, BasicType, objArrayHandle, bool, Thread*)+0x4f4
+V  [libjvm.so+0x76955b]  Reflection::invoke_method(oopDesc*, Handle, objArrayHandle, Thread*)+0x16b
+V  [libjvm.so+0x56dd5c]  JVM_InvokeMethod+0x13c
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+87
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+57
+j  org.apache.wicket.RequestListenerInterface.internalInvoke(Lorg/apache/wicket/Component;Ljava/lang/Object;)V+30
+j  org.apache.wicket.RequestListenerInterface.invoke(Lorg/apache/wicket/request/component/IRequestableComponent;Lorg/apache/wicket/behavior/Behavior;)V+45
+j  org.apache.wicket.request.handler.ListenerInterfaceRequestHandler.invokeListener()V+47
+j  org.apache.wicket.request.handler.ListenerInterfaceRequestHandler.respond(Lorg/apache/wicket/request/IRequestCycle;)V+225
+j  org.apache.wicket.request.cycle.RequestCycle$HandlerExecutor.respond(Lorg/apache/wicket/request/IRequestHandler;)V+13
+j  org.apache.wicket.request.RequestHandlerStack.execute(Lorg/apache/wicket/request/IRequestHandler;)V+21
+j  org.apache.wicket.request.cycle.RequestCycle.execute(Lorg/apache/wicket/request/IRequestHandler;)V+21
+j  org.apache.wicket.request.cycle.RequestCycle.processRequest()Z+27
+j  org.apache.wicket.request.cycle.RequestCycle.processRequestAndDetach()Z+1
+j  org.apache.wicket.protocol.http.WicketFilter.processRequest(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;Ljavax/servlet/FilterChain;)Z+212
+j  org.apache.wicket.protocol.http.WicketFilter.doFilter(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;Ljavax/servlet/FilterChain;)V+4
+j  org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;)V+141
+j  org.apache.catalina.core.ApplicationFilterChain.doFilter(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;)V+101
+j  org.apache.catalina.core.StandardWrapperValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+684
+j  org.apache.catalina.core.StandardContextValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+200
+j  org.jboss.as.jpa.interceptor.WebNonTxEmCloserValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+9
+j  org.jboss.as.web.security.SecurityContextAssociationValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+389
+j  org.apache.catalina.core.StandardHostValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+233
+j  org.apache.catalina.valves.ErrorReportValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+6
+j  org.apache.catalina.core.StandardEngineValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+42
+j  org.apache.catalina.connector.CoyoteAdapter.service(Lorg/apache/coyote/Request;Lorg/apache/coyote/Response;)V+188
+j  org.apache.coyote.http11.Http11Processor.process(Ljava/net/Socket;)Lorg/apache/tomcat/util/net/JIoEndpoint$Handler$SocketState;+379
+j  org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Ljava/net/Socket;)Lorg/apache/tomcat/util/net/JIoEndpoint$Handler$SocketState;+65
+j  org.apache.tomcat.util.net.JIoEndpoint$Worker.run()V+128
+j  java.lang.Thread.run()V+11
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x529b9c]  JavaCalls::call_helper(JavaValue*, methodHandle*, JavaCallArguments*, Thread*)+0x32c
+V  [libjvm.so+0x528e11]  JavaCalls::call_virtual(JavaValue*, KlassHandle, Symbol*, Symbol*, JavaCallArguments*, Thread*)+0x1d1
+V  [libjvm.so+0x528e6f]  JavaCalls::call_virtual(JavaValue*, Handle, KlassHandle, Symbol*, Symbol*, Thread*)+0x4f
+V  [libjvm.so+0x56072f]  thread_entry(JavaThread*, Thread*)+0xaf
+V  [libjvm.so+0x8164a2]  JavaThread::thread_main_inner()+0xf2
+V  [libjvm.so+0x6f99d2]  java_start(Thread*)+0xf2
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  java.lang.Class.getEnclosingMethod0()[Ljava/lang/Object;+0
+j  java.lang.Class.getEnclosingMethodInfo()Ljava/lang/Class$EnclosingMethodInfo;+1
+j  java.lang.Class.getEnclosingClass()Ljava/lang/Class;+1
+j  java.lang.Class.getSimpleBinaryName()Ljava/lang/String;+1
+j  java.lang.Class.getSimpleName()Ljava/lang/String;+34
+j  org.apache.wicket.MarkupContainer.toString(Z)Ljava/lang/String;+18
+j  org.apache.wicket.MarkupContainer.toString()Ljava/lang/String;+2
+v  ~StubRoutines::call_stub
+j  org.jboss.essc.web._cp.pageBoxes.CustomFieldsPanel$2.onAjaxChange(Lorg/apache/wicket/ajax/AjaxRequestTarget;)V+0
+j  org.jboss.essc.web._cp.pageBoxes.CustomFieldRowPanel$2.onUpdate(Lorg/apache/wicket/ajax/AjaxRequestTarget;)V+66
+j  org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior.onEvent(Lorg/apache/wicket/ajax/AjaxRequestTarget;)V+77
+j  org.apache.wicket.ajax.AjaxEventBehavior.respond(Lorg/apache/wicket/ajax/AjaxRequestTarget;)V+2
+j  org.apache.wicket.ajax.AbstractDefaultAjaxBehavior.onRequest()V+34
+v  ~StubRoutines::call_stub
+j  sun.reflect.NativeMethodAccessorImpl.invoke0(Ljava/lang/reflect/Method;Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+0
+j  sun.reflect.NativeMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+87
+j  sun.reflect.DelegatingMethodAccessorImpl.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+6
+j  java.lang.reflect.Method.invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;+57
+j  org.apache.wicket.RequestListenerInterface.internalInvoke(Lorg/apache/wicket/Component;Ljava/lang/Object;)V+30
+j  org.apache.wicket.RequestListenerInterface.invoke(Lorg/apache/wicket/request/component/IRequestableComponent;Lorg/apache/wicket/behavior/Behavior;)V+45
+j  org.apache.wicket.request.handler.ListenerInterfaceRequestHandler.invokeListener()V+47
+j  org.apache.wicket.request.handler.ListenerInterfaceRequestHandler.respond(Lorg/apache/wicket/request/IRequestCycle;)V+225
+j  org.apache.wicket.request.cycle.RequestCycle$HandlerExecutor.respond(Lorg/apache/wicket/request/IRequestHandler;)V+13
+j  org.apache.wicket.request.RequestHandlerStack.execute(Lorg/apache/wicket/request/IRequestHandler;)V+21
+j  org.apache.wicket.request.cycle.RequestCycle.execute(Lorg/apache/wicket/request/IRequestHandler;)V+21
+j  org.apache.wicket.request.cycle.RequestCycle.processRequest()Z+27
+j  org.apache.wicket.request.cycle.RequestCycle.processRequestAndDetach()Z+1
+j  org.apache.wicket.protocol.http.WicketFilter.processRequest(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;Ljavax/servlet/FilterChain;)Z+212
+j  org.apache.wicket.protocol.http.WicketFilter.doFilter(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;Ljavax/servlet/FilterChain;)V+4
+j  org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;)V+141
+j  org.apache.catalina.core.ApplicationFilterChain.doFilter(Ljavax/servlet/ServletRequest;Ljavax/servlet/ServletResponse;)V+101
+j  org.apache.catalina.core.StandardWrapperValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+684
+j  org.apache.catalina.core.StandardContextValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+200
+j  org.jboss.as.jpa.interceptor.WebNonTxEmCloserValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+9
+j  org.jboss.as.web.security.SecurityContextAssociationValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+389
+j  org.apache.catalina.core.StandardHostValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+233
+j  org.apache.catalina.valves.ErrorReportValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+6
+j  org.apache.catalina.core.StandardEngineValve.invoke(Lorg/apache/catalina/connector/Request;Lorg/apache/catalina/connector/Response;)V+42
+j  org.apache.catalina.connector.CoyoteAdapter.service(Lorg/apache/coyote/Request;Lorg/apache/coyote/Response;)V+188
+j  org.apache.coyote.http11.Http11Processor.process(Ljava/net/Socket;)Lorg/apache/tomcat/util/net/JIoEndpoint$Handler$SocketState;+379
+j  org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Ljava/net/Socket;)Lorg/apache/tomcat/util/net/JIoEndpoint$Handler$SocketState;+65
+j  org.apache.tomcat.util.net.JIoEndpoint$Worker.run()V+128
+j  java.lang.Thread.run()V+11
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007f49a400b000 JavaThread "JDWP Command Reader" daemon [_thread_in_native, id=21810, stack(0x00007f49c1b89000,0x00007f49c1c8a000)]
+  0x00007f49a4009000 JavaThread "http-/127.0.0.1:8080-6" daemon [_thread_in_native, id=21806, stack(0x00007f49c1c8a000,0x00007f49c1d8b000)]
+  0x00007f49a4007800 JavaThread "http-/127.0.0.1:8080-5" daemon [_thread_in_native, id=21805, stack(0x00007f49c1d8b000,0x00007f49c1e8c000)]
+  0x00007f49a4006000 JavaThread "http-/127.0.0.1:8080-4" daemon [_thread_in_native, id=21804, stack(0x00007f49c1e8c000,0x00007f49c1f8d000)]
+  0x00007f49a4004800 JavaThread "http-/127.0.0.1:8080-3" daemon [_thread_in_native, id=21803, stack(0x00007f49c1f8d000,0x00007f49c208e000)]
+  0x00007f49a4003000 JavaThread "http-/127.0.0.1:8080-2" daemon [_thread_in_native, id=21802, stack(0x00007f49c208e000,0x00007f49c218f000)]
+  0x00007f496054b000 JavaThread "ModificationWatcher Task" daemon [_thread_blocked, id=21801, stack(0x00007f49c218f000,0x00007f49c2290000)]
+  0x00007f496040e800 JavaThread "Wicket-PageSavingThread" daemon [_thread_blocked, id=21800, stack(0x00007f49c2290000,0x00007f49c2391000)]
+=>0x00007f49a4002000 JavaThread "http-/127.0.0.1:8080-1" daemon [_thread_in_vm, id=21799, stack(0x00007f49cb3ba000,0x00007f49cb5bb000)]
+  0x00007f49801e7000 JavaThread "Thread-64" [_thread_in_native, id=21790, stack(0x00007f49c29f5000,0x00007f49c2af6000)]
+  0x00007f49801aa800 JavaThread "server-timer" daemon [_thread_blocked, id=21789, stack(0x00007f49c2af6000,0x00007f49c2bf7000)]
+  0x00007f497c1d2800 JavaThread "DeploymentScanner-threads - 2" [_thread_blocked, id=21788, stack(0x00007f49c2bf7000,0x00007f49c2cf8000)]
+  0x00007f496821d800 JavaThread "Transaction Reaper Worker 0" daemon [_thread_blocked, id=21787, stack(0x00007f49c2cf8000,0x00007f49c2df9000)]
+  0x00007f496821c000 JavaThread "Transaction Reaper" daemon [_thread_blocked, id=21786, stack(0x00007f49c3111000,0x00007f49c3212000)]
+  0x00007f49681b8000 JavaThread "Periodic Recovery" [_thread_blocked, id=21785, stack(0x00007f49c2df9000,0x00007f49c2efa000)]
+  0x00007f49680e6800 JavaThread "Transaction Expired Entry Monitor" daemon [_thread_blocked, id=21784, stack(0x00007f49c2f45000,0x00007f49c3046000)]
+  0x00007f49840b3000 JavaThread "Timer-0" [_thread_blocked, id=21783, stack(0x00007f49c3212000,0x00007f49c3313000)]
+  0x00007f4978106000 JavaThread "http-/127.0.0.1:8080-Acceptor-0" daemon [_thread_in_native, id=21782, stack(0x00007f49c3313000,0x00007f49c3414000)]
+  0x00007f4978109000 JavaThread "http-/127.0.0.1:8080-Poller" daemon [_thread_blocked, id=21781, stack(0x00007f49c3414000,0x00007f49c3515000)]
+  0x00007f496c0f2800 JavaThread "ContainerBackgroundProcessor[StandardEngine[jboss.web]]" daemon [_thread_blocked, id=21780, stack(0x00007f49c3515000,0x00007f49c3616000)]
+  0x00007f49ac049800 JavaThread "Abandoned connection cleanup thread" daemon [_thread_blocked, id=21779, stack(0x00007f49c368e000,0x00007f49c378f000)]
+  0x00007f496c0c4800 JavaThread "ConnectionValidator" daemon [_thread_blocked, id=21778, stack(0x00007f49c37f8000,0x00007f49c38f9000)]
+  0x00007f498007d800 JavaThread "IdleRemover" daemon [_thread_blocked, id=21777, stack(0x00007f49c38f9000,0x00007f49c39fa000)]
+  0x00007f496806f000 JavaThread "Remoting "lenovo" write-1" [_thread_in_native, id=21776, stack(0x00007f49c39fa000,0x00007f49c3afb000)]
+  0x00007f496806b800 JavaThread "Remoting "lenovo" read-1" [_thread_in_native, id=21775, stack(0x00007f49c3afb000,0x00007f49c3bfc000)]
+  0x00007f497c09b800 JavaThread "Remoting "lenovo:MANAGEMENT" write-1" [_thread_in_native, id=21750, stack(0x00007f49c9438000,0x00007f49c9539000)]
+  0x00007f497c09a000 JavaThread "Remoting "lenovo:MANAGEMENT" read-1" [_thread_in_native, id=21749, stack(0x00007f49c9539000,0x00007f49c963a000)]
+  0x00007f497007b800 JavaThread "DeploymentScanner-threads - 1" [_thread_blocked, id=21748, stack(0x00007f49c963d000,0x00007f49c973e000)]
+  0x00007f49dc00b800 JavaThread "DestroyJavaVM" [_thread_blocked, id=21698, stack(0x00007f49e44c3000,0x00007f49e45c4000)]
+  0x00007f4974055800 JavaThread "MSC service thread 1-8" [_thread_blocked, id=21721, stack(0x00007f49cb5bb000,0x00007f49cb6bc000)]
+  0x00007f4970002000 JavaThread "MSC service thread 1-7" [_thread_blocked, id=21720, stack(0x00007f49cb6bc000,0x00007f49cb7bd000)]
+  0x00007f497c001000 JavaThread "MSC service thread 1-6" [_thread_blocked, id=21719, stack(0x00007f49cb7bd000,0x00007f49cb8be000)]
+  0x00007f4984007000 JavaThread "MSC service thread 1-5" [_thread_blocked, id=21718, stack(0x00007f49cb8be000,0x00007f49cb9bf000)]
+  0x00007f4978001000 JavaThread "MSC service thread 1-4" [_thread_blocked, id=21717, stack(0x00007f49cb9bf000,0x00007f49cbac0000)]
+  0x00007f49dc989000 JavaThread "MSC service thread 1-3" [_thread_blocked, id=21716, stack(0x00007f49cbac0000,0x00007f49cbbc1000)]
+  0x00007f4980002000 JavaThread "MSC service thread 1-2" [_thread_blocked, id=21715, stack(0x00007f49cbbc1000,0x00007f49cbcc2000)]
+  0x00007f49dc987000 JavaThread "MSC service thread 1-1" [_thread_blocked, id=21714, stack(0x00007f49cbcc2000,0x00007f49cbdc3000)]
+  0x00007f49dc330800 JavaThread "Reference Reaper" daemon [_thread_blocked, id=21713, stack(0x00007f49d1885000,0x00007f49d1986000)]
+  0x00007f49dc1e8000 JavaThread "Service Thread" daemon [_thread_blocked, id=21711, stack(0x00007f49d1a87000,0x00007f49d1b88000)]
+  0x00007f49dc1e6000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=21710, stack(0x00007f49d1b88000,0x00007f49d1c89000)]
+  0x00007f49dc1e3000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=21709, stack(0x00007f49d1c89000,0x00007f49d1d8a000)]
+  0x00007f49dc1e0800 JavaThread "JDWP Event Helper Thread" daemon [_thread_blocked, id=21708, stack(0x00007f49d1d8a000,0x00007f49d1e8b000)]
+  0x00007f49dc1dd000 JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_blocked, id=21707, stack(0x00007f49d1e8b000,0x00007f49d1f8c000)]
+  0x00007f49dc1d0800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=21706, stack(0x00007f49d2191000,0x00007f49d2292000)]
+  0x00007f49dc17b800 JavaThread "Finalizer" daemon [_thread_blocked, id=21705, stack(0x00007f49d2292000,0x00007f49d2393000)]
+  0x00007f49dc179000 JavaThread "Reference Handler" daemon [_thread_blocked, id=21704, stack(0x00007f49d2393000,0x00007f49d2494000)]
+
+Other Threads:
+  0x00007f49dc170800 VMThread [stack: 0x00007f49d2494000,0x00007f49d2595000] [id=21703]
+  0x00007f49dc1f3000 WatcherThread [stack: 0x00007f49d1986000,0x00007f49d1a87000] [id=21712]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ PSYoungGen      total 272128K, used 252976K [0x00000007d6f60000, 0x00000007eaa40000, 0x0000000800000000)
+  eden space 240064K, 92% used [0x00000007d6f60000,0x00000007e471f5b8,0x00000007e59d0000)
+  from space 32064K, 99% used [0x00000007e7f10000,0x00000007e9e5cda8,0x00000007e9e60000)
+  to   space 38144K, 0% used [0x00000007e59d0000,0x00000007e59d0000,0x00000007e7f10000)
+ ParOldGen       total 84032K, used 55252K [0x0000000784e00000, 0x000000078a010000, 0x00000007d6f60000)
+  object space 84032K, 65% used [0x0000000784e00000,0x00000007883f5220,0x000000078a010000)
+ PSPermGen       total 78464K, used 78405K [0x0000000764e00000, 0x0000000769aa0000, 0x0000000784e00000)
+  object space 78464K, 99% used [0x0000000764e00000,0x0000000769a914a8,0x0000000769aa0000)
+
+Card table byte_map: [0x00007f49e0202000,0x00007f49e06dc000] byte_map_base: 0x00007f49dc6db000
+
+Polling page: 0x00007f49e44c2000
+
+Code Cache  [0x00007f49d9000000, 0x00007f49d9310000, 0x00007f49dc000000)
+ total_blobs=1396 nmethods=913 adapters=442 free_code_cache=46518Kb largest_free_block=47139904
+
+Compilation events (10 events):
+Event: 405.182 Thread 0x00007f49dc1e6000 1043             org.apache.wicket.util.visit.Visit::isDontGoDeeper (16 bytes)
+Event: 405.182 Thread 0x00007f49dc1e6000 nmethod 1043 0x00007f49d92939d0 code [0x00007f49d9293b00, 0x00007f49d9293b78]
+Event: 405.182 Thread 0x00007f49dc1e6000 1044             org.apache.wicket.util.visit.Visit::isStopped (16 bytes)
+Event: 405.183 Thread 0x00007f49dc1e6000 nmethod 1044 0x00007f49d92ccbd0 code [0x00007f49d92ccd00, 0x00007f49d92ccd78]
+Event: 421.007 Thread 0x00007f49dc1e6000 1045             org.apache.wicket.util.visit.Visits::visitChildren (146 bytes)
+Event: 421.011 Thread 0x00007f49dc1e3000 1046             java.io.Bits::putShort (16 bytes)
+Event: 421.012 Thread 0x00007f49dc1e3000 nmethod 1046 0x00007f49d91fd590 code [0x00007f49d91fd6e0, 0x00007f49d91fd7f8]
+Event: 421.012 Thread 0x00007f49dc1e3000 1047             java.io.ObjectOutputStream$BlockDataOutputStream::writeShort (47 bytes)
+Event: 421.013 Thread 0x00007f49dc1e3000 nmethod 1047 0x00007f49d9298510 code [0x00007f49d9298660, 0x00007f49d9298848]
+Event: 421.035 Thread 0x00007f49dc1e6000 nmethod 1045 0x00007f49d927edd0 code [0x00007f49d927f1c0, 0x00007f49d9280870]
+
+GC Heap History (10 events):
+Event: 1.964 GC heap before
+{Heap before GC invocations=4 (full 0):
+ PSYoungGen      total 36736K, used 36724K [0x00000007d6f60000, 0x00000007db720000, 0x0000000800000000)
+  eden space 31488K, 100% used [0x00000007d6f60000,0x00000007d8e20000,0x00000007d8e20000)
+  from space 5248K, 99% used [0x00000007d8e20000,0x00000007d933d3c8,0x00000007d9340000)
+  to   space 5248K, 0% used [0x00000007db200000,0x00000007db200000,0x00000007db720000)
+ ParOldGen       total 84032K, used 15667K [0x0000000784e00000, 0x000000078a010000, 0x00000007d6f60000)
+  object space 84032K, 18% used [0x0000000784e00000,0x0000000785d4cd80,0x000000078a010000)
+ PSPermGen       total 32960K, used 32936K [0x0000000764e00000, 0x0000000766e30000, 0x0000000784e00000)
+  object space 32960K, 99% used [0x0000000764e00000,0x0000000766e2a0e0,0x0000000766e30000)
+Event: 1.982 GC heap after
+Heap after GC invocations=4 (full 0):
+ PSYoungGen      total 68224K, used 5221K [0x00000007d6f60000, 0x00000007db720000, 0x0000000800000000)
+  eden space 62976K, 0% used [0x00000007d6f60000,0x00000007d6f60000,0x00000007dace0000)
+  from space 5248K, 99% used [0x00000007db200000,0x00000007db719458,0x00000007db720000)
+  to   space 5248K, 0% used [0x00000007dace0000,0x00000007dace0000,0x00000007db200000)
+ ParOldGen       total 84032K, used 25488K [0x0000000784e00000, 0x000000078a010000, 0x00000007d6f60000)
+  object space 84032K, 30% used [0x0000000784e00000,0x00000007866e4068,0x000000078a010000)
+ PSPermGen       total 32960K, used 32936K [0x0000000764e00000, 0x0000000766e30000, 0x0000000784e00000)
+  object space 32960K, 99% used [0x0000000764e00000,0x0000000766e2a0e0,0x0000000766e30000)
+}
+Event: 2.495 GC heap before
+{Heap before GC invocations=5 (full 0):
+ PSYoungGen      total 68224K, used 68197K [0x00000007d6f60000, 0x00000007db720000, 0x0000000800000000)
+  eden space 62976K, 100% used [0x00000007d6f60000,0x00000007dace0000,0x00000007dace0000)
+  from space 5248K, 99% used [0x00000007db200000,0x00000007db719458,0x00000007db720000)
+  to   space 5248K, 0% used [0x00000007dace0000,0x00000007dace0000,0x00000007db200000)
+ ParOldGen       total 84032K, used 25488K [0x0000000784e00000, 0x000000078a010000, 0x00000007d6f60000)
+  object space 84032K, 30% used [0x0000000784e00000,0x00000007866e4068,0x000000078a010000)
+ PSPermGen       total 37184K, used 37014K [0x0000000764e00000, 0x0000000767250000, 0x0000000784e00000)
+  object space 37184K, 99% used [0x0000000764e00000,0x0000000767225a50,0x0000000767250000)
+Event: 2.517 GC heap after
+Heap after GC invocations=5 (full 0):
+ PSYoungGen      total 68224K, used 5220K [0x00000007d6f60000, 0x00000007e0dc0000, 0x0000000800000000)
+  eden space 62976K, 0% used [0x00000007d6f60000,0x00000007d6f60000,0x00000007dace0000)
+  from space 5248K, 99% used [0x00000007dace0000,0x00000007db1f93b8,0x00000007db200000)
+  to   space 18112K, 0% used [0x00000007dfc10000,0x00000007dfc10000,0x00000007e0dc0000)
+ ParOldGen       total 84032K, used 35017K [0x0000000784e00000, 0x000000078a010000, 0x00000007d6f60000)
+  object space 84032K, 41% used [0x0000000784e00000,0x0000000787032610,0x000000078a010000)
+ PSPermGen       total 37184K, used 37014K [0x0000000764e00000, 0x0000000767250000, 0x0000000784e00000)
+  object space 37184K, 99% used [0x0000000764e00000,0x0000000767225a50,0x0000000767250000)
+}
+Event: 2.783 GC heap before
+{Heap before GC invocations=6 (full 0):
+ PSYoungGen      total 68224K, used 68196K [0x00000007d6f60000, 0x00000007e0dc0000, 0x0000000800000000)
+  eden space 62976K, 100% used [0x00000007d6f60000,0x00000007dace0000,0x00000007dace0000)
+  from space 5248K, 99% used [0x00000007dace0000,0x00000007db1f93b8,0x00000007db200000)
+  to   space 18112K, 0% used [0x00000007dfc10000,0x00000007dfc10000,0x00000007e0dc0000)
+ ParOldGen       total 84032K, used 35017K [0x0000000784e00000, 0x000000078a010000, 0x00000007d6f60000)
+  object space 84032K, 41% used [0x0000000784e00000,0x0000000787032610,0x000000078a010000)
+ PSPermGen       total 37376K, used 37269K [0x0000000764e00000, 0x0000000767280000, 0x0000000784e00000)
+  object space 37376K, 99% used [0x0000000764e00000,0x0000000767265578,0x0000000767280000)
+Event: 2.803 GC heap after
+Heap after GC invocations=6 (full 0):
+ PSYoungGen      total 141184K, used 18103K [0x00000007d6f60000, 0x00000007e1360000, 0x0000000800000000)
+  eden space 123072K, 0% used [0x00000007d6f60000,0x00000007d6f60000,0x00000007de790000)
+  from space 18112K, 99% used [0x00000007dfc10000,0x00000007e0dbdec0,0x00000007e0dc0000)
+  to   space 20992K, 0% used [0x00000007de790000,0x00000007de790000,0x00000007dfc10000)
+ ParOldGen       total 84032K, used 35890K [0x0000000784e00000, 0x000000078a010000, 0x00000007d6f60000)
+  object space 84032K, 42% used [0x0000000784e00000,0x000000078710c948,0x000000078a010000)
+ PSPermGen       total 37376K, used 37269K [0x0000000764e00000, 0x0000000767280000, 0x0000000784e00000)
+  object space 37376K, 99% used [0x0000000764e00000,0x0000000767265578,0x0000000767280000)
+}
+Event: 3.289 GC heap before
+{Heap before GC invocations=7 (full 0):
+ PSYoungGen      total 141184K, used 141175K [0x00000007d6f60000, 0x00000007e1360000, 0x0000000800000000)
+  eden space 123072K, 100% used [0x00000007d6f60000,0x00000007de790000,0x00000007de790000)
+  from space 18112K, 99% used [0x00000007dfc10000,0x00000007e0dbdec0,0x00000007e0dc0000)
+  to   space 20992K, 0% used [0x00000007de790000,0x00000007de790000,0x00000007dfc10000)
+ ParOldGen       total 84032K, used 35890K [0x0000000784e00000, 0x000000078a010000, 0x00000007d6f60000)
+  object space 84032K, 42% used [0x0000000784e00000,0x000000078710c948,0x000000078a010000)
+ PSPermGen       total 40640K, used 40561K [0x0000000764e00000, 0x00000007675b0000, 0x0000000784e00000)
+  object space 40640K, 99% used [0x0000000764e00000,0x000000076759c400,0x00000007675b0000)
+Event: 3.327 GC heap after
+Heap after GC invocations=7 (full 0):
+ PSYoungGen      total 144064K, used 20990K [0x00000007d6f60000, 0x00000007e9e60000, 0x0000000800000000)
+  eden space 123072K, 0% used [0x00000007d6f60000,0x00000007d6f60000,0x00000007de790000)
+  from space 20992K, 99% used [0x00000007de790000,0x00000007dfc0f998,0x00000007dfc10000)
+  to   space 32064K, 0% used [0x00000007e7f10000,0x00000007e7f10000,0x00000007e9e60000)
+ ParOldGen       total 84032K, used 52465K [0x0000000784e00000, 0x000000078a010000, 0x00000007d6f60000)
+  object space 84032K, 62% used [0x0000000784e00000,0x000000078813c7b8,0x000000078a010000)
+ PSPermGen       total 40640K, used 40561K [0x0000000764e00000, 0x00000007675b0000, 0x0000000784e00000)
+  object space 40640K, 99% used [0x0000000764e00000,0x000000076759c400,0x00000007675b0000)
+}
+Event: 4.812 GC heap before
+{Heap before GC invocations=8 (full 0):
+ PSYoungGen      total 144064K, used 144062K [0x00000007d6f60000, 0x00000007e9e60000, 0x0000000800000000)
+  eden space 123072K, 100% used [0x00000007d6f60000,0x00000007de790000,0x00000007de790000)
+  from space 20992K, 99% used [0x00000007de790000,0x00000007dfc0f998,0x00000007dfc10000)
+  to   space 32064K, 0% used [0x00000007e7f10000,0x00000007e7f10000,0x00000007e9e60000)
+ ParOldGen       total 84032K, used 52465K [0x0000000784e00000, 0x000000078a010000, 0x00000007d6f60000)
+  object space 84032K, 62% used [0x0000000784e00000,0x000000078813c7b8,0x000000078a010000)
+ PSPermGen       total 60608K, used 60451K [0x0000000764e00000, 0x0000000768930000, 0x0000000784e00000)
+  object space 60608K, 99% used [0x0000000764e00000,0x0000000768908ef0,0x0000000768930000)
+Event: 4.851 GC heap after
+Heap after GC invocations=8 (full 0):
+ PSYoungGen      total 272128K, used 32051K [0x00000007d6f60000, 0x00000007eaa40000, 0x0000000800000000)
+  eden space 240064K, 0% used [0x00000007d6f60000,0x00000007d6f60000,0x00000007e59d0000)
+  from space 32064K, 99% used [0x00000007e7f10000,0x00000007e9e5cda8,0x00000007e9e60000)
+  to   space 38144K, 0% used [0x00000007e59d0000,0x00000007e59d0000,0x00000007e7f10000)
+ ParOldGen       total 84032K, used 55252K [0x0000000784e00000, 0x000000078a010000, 0x00000007d6f60000)
+  object space 84032K, 65% used [0x0000000784e00000,0x00000007883f5220,0x000000078a010000)
+ PSPermGen       total 60608K, used 60451K [0x0000000764e00000, 0x0000000768930000, 0x0000000784e00000)
+  object space 60608K, 99% used [0x0000000764e00000,0x0000000768908ef0,0x0000000768930000)
+}
+
+Deoptimization events (10 events):
+Event: 15.562 Thread 0x00007f49a4002000 Uncommon trap -34 fr.pc 0x00007f49d927f224
+Event: 15.563 Thread 0x00007f49a4002000 Uncommon trap -12 fr.pc 0x00007f49d92d7d78
+Event: 15.676 Thread 0x00007f49a4002000 Uncommon trap -34 fr.pc 0x00007f49d927f224
+Event: 76.270 Thread 0x00007f49a4002000 Uncommon trap -34 fr.pc 0x00007f49d91cf118
+Event: 132.107 Thread 0x00007f49681b8000 Uncommon trap -34 fr.pc 0x00007f49d9179b88
+Event: 132.107 Thread 0x00007f49681b8000 Uncommon trap -34 fr.pc 0x00007f49d9179b88
+Event: 392.803 Thread 0x00007f49a4002000 Uncommon trap -34 fr.pc 0x00007f49d91a7a04
+Event: 393.868 Thread 0x00007f49a4002000 Uncommon trap -34 fr.pc 0x00007f49d91a7a04
+Event: 397.812 Thread 0x00007f49a4002000 Uncommon trap -34 fr.pc 0x00007f49d91a7a04
+Event: 421.004 Thread 0x00007f49a4002000 Uncommon trap -34 fr.pc 0x00007f49d91cf118
+
+Internal exceptions (10 events):
+Event: 15.431 Thread 0x00007f49a4002000 Threw 0x00000007df5259f0 at /build/buildd/openjdk-7-7u9-2.3.4/build/openjdk/hotspot/src/share/vm/prims/jni.cpp:1631
+Event: 15.433 Thread 0x00007f49a4002000 Threw 0x00000007df54dc08 at /build/buildd/openjdk-7-7u9-2.3.4/build/openjdk/hotspot/src/share/vm/prims/jni.cpp:1631
+Event: 75.698 Thread 0x00007f49a4003000 Threw 0x00000007dfce8d80 at /build/buildd/openjdk-7-7u9-2.3.4/build/openjdk/hotspot/src/share/vm/prims/jni.cpp:742
+Event: 75.757 Thread 0x00007f49a4009000 Threw 0x00000007dfcd70d8 at /build/buildd/openjdk-7-7u9-2.3.4/build/openjdk/hotspot/src/share/vm/prims/jni.cpp:742
+Event: 76.040 Thread 0x00007f49a4007800 Threw 0x00000007dfe0cca0 at /build/buildd/openjdk-7-7u9-2.3.4/build/openjdk/hotspot/src/share/vm/prims/jni.cpp:742
+Event: 76.040 Thread 0x00007f49a4004800 Threw 0x00000007dfdc6428 at /build/buildd/openjdk-7-7u9-2.3.4/build/openjdk/hotspot/src/share/vm/prims/jni.cpp:742
+Event: 76.052 Thread 0x00007f49a4006000 Threw 0x00000007dfe50840 at /build/buildd/openjdk-7-7u9-2.3.4/build/openjdk/hotspot/src/share/vm/prims/jni.cpp:742
+Event: 388.729 Thread 0x00007f49a4002000 Threw 0x00000007e08390a8 at /build/buildd/openjdk-7-7u9-2.3.4/build/openjdk/hotspot/src/share/vm/runtime/reflection.cpp:1039
+Event: 397.688 Thread 0x00007f49a4002000 Threw 0x00000007e373e618 at /build/buildd/openjdk-7-7u9-2.3.4/build/openjdk/hotspot/src/share/vm/prims/jni.cpp:716
+Event: 397.690 Thread 0x00007f49a4002000 Threw 0x00000007e38b3fe0 at /build/buildd/openjdk-7-7u9-2.3.4/build/openjdk/hotspot/src/share/vm/prims/jni.cpp:716
+
+Events (10 events):
+Event: 437.434 Executing VM operation: GetCurrentLocation
+Event: 437.434 Executing VM operation: GetCurrentLocation done
+Event: 437.434 Executing VM operation: ChangeSingleStep
+Event: 437.434 Executing VM operation: ChangeSingleStep done
+Event: 437.435 Executing VM operation: ChangeSingleStep
+Event: 437.435 Executing VM operation: ChangeSingleStep done
+Event: 437.879 Executing VM operation: GetOrSetLocal
+Event: 437.879 Executing VM operation: GetOrSetLocal done
+Event: 437.880 Executing VM operation: GetOrSetLocal
+Event: 437.880 Executing VM operation: GetOrSetLocal done
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 08:02 8538382                            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
+00600000-00601000 r--p 00000000 08:02 8538382                            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
+00601000-00602000 rw-p 00001000 08:02 8538382                            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
+00ca3000-00ebb000 rw-p 00000000 00:00 0                                  [heap]
+764e00000-769aa0000 rw-p 00000000 00:00 0 
+769aa0000-784e00000 rw-p 00000000 00:00 0 
+784e00000-78a010000 rw-p 00000000 00:00 0 
+78a010000-7d6f60000 rw-p 00000000 00:00 0 
+7d6f60000-7eaa40000 rw-p 00000000 00:00 0 
+7eaa40000-800000000 rw-p 00000000 00:00 0 
+7f4940000000-7f494006f000 rw-p 00000000 00:00 0 
+7f494006f000-7f4944000000 ---p 00000000 00:00 0 
+7f4948000000-7f49480af000 rw-p 00000000 00:00 0 
+7f49480af000-7f494c000000 ---p 00000000 00:00 0 
+7f4950000000-7f49500f5000 rw-p 00000000 00:00 0 
+7f49500f5000-7f4954000000 ---p 00000000 00:00 0 
+7f4958000000-7f495807a000 rw-p 00000000 00:00 0 
+7f495807a000-7f495c000000 ---p 00000000 00:00 0 
+7f495c000000-7f495c15f000 rw-p 00000000 00:00 0 
+7f495c15f000-7f4960000000 ---p 00000000 00:00 0 
+7f4960000000-7f4960788000 rw-p 00000000 00:00 0 
+7f4960788000-7f4964000000 ---p 00000000 00:00 0 
+7f4964000000-7f4964075000 rw-p 00000000 00:00 0 
+7f4964075000-7f4968000000 ---p 00000000 00:00 0 
+7f4968000000-7f496843c000 rw-p 00000000 00:00 0 
+7f496843c000-7f496c000000 ---p 00000000 00:00 0 
+7f496c000000-7f496c35d000 rw-p 00000000 00:00 0 
+7f496c35d000-7f4970000000 ---p 00000000 00:00 0 
+7f4970000000-7f4970258000 rw-p 00000000 00:00 0 
+7f4970258000-7f4974000000 ---p 00000000 00:00 0 
+7f4974000000-7f497439b000 rw-p 00000000 00:00 0 
+7f497439b000-7f4978000000 ---p 00000000 00:00 0 
+7f4978000000-7f49783ff000 rw-p 00000000 00:00 0 
+7f49783ff000-7f497c000000 ---p 00000000 00:00 0 
+7f497c000000-7f497c54f000 rw-p 00000000 00:00 0 
+7f497c54f000-7f4980000000 ---p 00000000 00:00 0 
+7f4980000000-7f4980214000 rw-p 00000000 00:00 0 
+7f4980214000-7f4984000000 ---p 00000000 00:00 0 
+7f4984000000-7f49841c9000 rw-p 00000000 00:00 0 
+7f49841c9000-7f4988000000 ---p 00000000 00:00 0 
+7f4988000000-7f4988021000 rw-p 00000000 00:00 0 
+7f4988021000-7f498c000000 ---p 00000000 00:00 0 
+7f498c000000-7f498c021000 rw-p 00000000 00:00 0 
+7f498c021000-7f4990000000 ---p 00000000 00:00 0 
+7f4990000000-7f4990e4d000 rw-p 00000000 00:00 0 
+7f4990e4d000-7f4994000000 ---p 00000000 00:00 0 
+7f4994000000-7f4994021000 rw-p 00000000 00:00 0 
+7f4994021000-7f4998000000 ---p 00000000 00:00 0 
+7f4998000000-7f4998021000 rw-p 00000000 00:00 0 
+7f4998021000-7f499c000000 ---p 00000000 00:00 0 
+7f499c000000-7f499e75d000 rw-p 00000000 00:00 0 
+7f499e75d000-7f49a0000000 ---p 00000000 00:00 0 
+7f49a0000000-7f49a0021000 rw-p 00000000 00:00 0 
+7f49a0021000-7f49a4000000 ---p 00000000 00:00 0 
+7f49a4000000-7f49a40dd000 rw-p 00000000 00:00 0 
+7f49a40dd000-7f49a8000000 ---p 00000000 00:00 0 
+7f49a8000000-7f49a8021000 rw-p 00000000 00:00 0 
+7f49a8021000-7f49ac000000 ---p 00000000 00:00 0 
+7f49ac000000-7f49ac07f000 rw-p 00000000 00:00 0 
+7f49ac07f000-7f49b0000000 ---p 00000000 00:00 0 
+7f49b0000000-7f49b009d000 rw-p 00000000 00:00 0 
+7f49b009d000-7f49b4000000 ---p 00000000 00:00 0 
+7f49b7270000-7f49bc000000 rw-p 00000000 00:00 0 
+7f49bc000000-7f49bc188000 rw-p 00000000 00:00 0 
+7f49bc188000-7f49c0000000 ---p 00000000 00:00 0 
+7f49c1b89000-7f49c1b8c000 ---p 00000000 00:00 0 
+7f49c1b8c000-7f49c1c8a000 rw-p 00000000 00:00 0                          [stack:21810]
+7f49c1c8a000-7f49c1c8d000 ---p 00000000 00:00 0 
+7f49c1c8d000-7f49c1d8b000 rw-p 00000000 00:00 0                          [stack:21806]
+7f49c1d8b000-7f49c1d8e000 ---p 00000000 00:00 0 
+7f49c1d8e000-7f49c1e8c000 rw-p 00000000 00:00 0                          [stack:21805]
+7f49c1e8c000-7f49c1e8f000 ---p 00000000 00:00 0 
+7f49c1e8f000-7f49c1f8d000 rw-p 00000000 00:00 0                          [stack:21804]
+7f49c1f8d000-7f49c1f90000 ---p 00000000 00:00 0 
+7f49c1f90000-7f49c208e000 rw-p 00000000 00:00 0                          [stack:21803]
+7f49c208e000-7f49c2091000 ---p 00000000 00:00 0 
+7f49c2091000-7f49c218f000 rw-p 00000000 00:00 0                          [stack:21802]
+7f49c218f000-7f49c2192000 ---p 00000000 00:00 0 
+7f49c2192000-7f49c2290000 rw-p 00000000 00:00 0                          [stack:21801]
+7f49c2290000-7f49c2293000 ---p 00000000 00:00 0 
+7f49c2293000-7f49c2391000 rw-p 00000000 00:00 0                          [stack:21800]
+7f49c2391000-7f49c239c000 r--s 001fb000 08:02 8524825                    /usr/lib/jvm/java-7-openjdk-common/jre/lib/charsets.jar
+7f49c239c000-7f49c23a7000 r--s 001fb000 08:02 8524825                    /usr/lib/jvm/java-7-openjdk-common/jre/lib/charsets.jar
+7f49c26aa000-7f49c26b0000 r--s 00031000 08:02 6831434                    /home/ondra/sw/AS/7.1.3/modules/org/jaxen/main/jaxen-1.1.3.jar
+7f49c28b2000-7f49c28b8000 r--s 00039000 08:02 6163975                    /home/ondra/sw/AS/7.1.3/modules/org/yaml/snakeyaml/main/snakeyaml-1.8.jar
+7f49c28b8000-7f49c28bf000 r--s 0004e000 08:02 7864557                    /home/ondra/sw/AS/7.1.3/modules/org/apache/james/mime4j/main/apache-mime4j-0.6.jar
+7f49c28bf000-7f49c28c1000 r--s 00011000 08:02 5375489                    /home/ondra/sw/AS/7.1.3/modules/org/codehaus/jettison/main/jettison-1.3.1.jar
+7f49c28c1000-7f49c28c2000 r--s 00006000 08:02 5375481                    /home/ondra/sw/AS/7.1.3/modules/org/codehaus/jackson/jackson-xc/main/jackson-xc-1.9.2.jar
+7f49c28c2000-7f49c28d0000 r--s 000ad000 08:02 5375484                    /home/ondra/sw/AS/7.1.3/modules/org/codehaus/jackson/jackson-mapper-asl/main/jackson-mapper-asl-1.9.2.jar
+7f49c28d0000-7f49c28d1000 r--s 00004000 08:02 5375473                    /home/ondra/sw/AS/7.1.3/modules/org/codehaus/jackson/jackson-jaxrs/main/jackson-jaxrs-1.9.2.jar
+7f49c28d1000-7f49c28d2000 r--s 00002000 08:02 6426310                    /home/ondra/sw/AS/7.1.3/modules/org/slf4j/impl/main/slf4j-jboss-logmanager-1.0.0.GA.jar
+7f49c28d2000-7f49c28d6000 r--s 00034000 08:02 5375476                    /home/ondra/sw/AS/7.1.3/modules/org/codehaus/jackson/jackson-core-asl/main/jackson-core-asl-1.9.2.jar
+7f49c28d6000-7f49c28d7000 r--s 00000000 08:02 7738897                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-yaml-provider/main/resteasy-yaml-provider-2.3.3.Final-jandex.jar
+7f49c28d7000-7f49c28d9000 r--s 00000000 08:02 7738899                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-yaml-provider/main/resteasy-yaml-provider-2.3.3.Final.jar
+7f49c28d9000-7f49c28da000 r--s 00000000 08:02 7738955                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-multipart-provider/main/resteasy-multipart-provider-2.3.3.Final-jandex.jar
+7f49c28da000-7f49c28dc000 r--s 0000f000 08:02 7738957                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-multipart-provider/main/resteasy-multipart-provider-2.3.3.Final.jar
+7f49c28dc000-7f49c28dd000 r--s 00000000 08:02 7738914                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-jsapi/main/resteasy-jsapi-2.3.3.Final-jandex.jar
+7f49c28dd000-7f49c28de000 r--s 00005000 08:02 7738916                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-jsapi/main/resteasy-jsapi-2.3.3.Final.jar
+7f49c28de000-7f49c28df000 r--s 00000000 08:02 7738944                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-jettison-provider/main/resteasy-jettison-provider-2.3.3.Final-jandex.jar
+7f49c28df000-7f49c28e0000 r--s 00007000 08:02 7738948                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-jettison-provider/main/resteasy-jettison-provider-2.3.3.Final.jar
+7f49c28e0000-7f49c28e1000 r--s 00000000 08:02 7738963                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-jackson-provider/main/resteasy-jackson-provider-2.3.3.Final-jandex.jar
+7f49c28e1000-7f49c28e3000 r--s 00000000 08:02 7738966                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-jackson-provider/main/resteasy-jackson-provider-2.3.3.Final.jar
+7f49c28e3000-7f49c28e4000 r--s 00000000 08:02 7738939                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-jaxb-provider/main/resteasy-jaxb-provider-2.3.3.Final-jandex.jar
+7f49c28e4000-7f49c28e7000 r--s 0000e000 08:02 7738937                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-jaxb-provider/main/resteasy-jaxb-provider-2.3.3.Final.jar
+7f49c28e7000-7f49c28e9000 r--s 00008000 08:02 7738882                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-atom-provider/main/resteasy-atom-provider-2.3.3.Final.jar
+7f49c28e9000-7f49c28f7000 r--s 0008f000 08:02 7867600                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/google-collections-1.0.jar-4ba92ff55b63a286/google-collections-1.0.jar
+7f49c28f7000-7f49c28fa000 r--s 00018000 08:02 7867599                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/aether-impl-1.8.jar-245cce00b1aaa988/aether-impl-1.8.jar
+7f49c28fa000-7f49c28fc000 r--s 00002000 08:02 7867598                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/shrinkwrap-resolver-api-maven-1.0.0-beta-6.jar-7633b161230e5453/shrinkwrap-resolver-api-maven-1.0.0-beta-6.jar
+7f49c28fc000-7f49c28fe000 r--s 0000d000 08:02 7867597                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/plexus-interpolation-1.14.jar-e9cc1da7d0f68570/plexus-interpolation-1.14.jar
+7f49c28fe000-7f49c2905000 r--s 00072000 08:02 7867596                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/mail-1.4.4.jar-9dbec983fe5a7ab1/mail-1.4.4.jar
+7f49c2905000-7f49c2906000 r--s 00006000 08:02 7867595                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/aether-connector-wagon-1.8.jar-2726b86165eaa66f/aether-connector-wagon-1.8.jar
+7f49c2906000-7f49c2908000 r--s 0000e000 08:02 7867594                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/activation-1.1.jar-4233b8a08848e088/activation-1.1.jar
+7f49c2908000-7f49c290a000 r--s 0000b000 08:02 7867593                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/maven-aether-provider-3.0.1.jar-1c9155b842a54788/maven-aether-provider-3.0.1.jar
+7f49c290a000-7f49c290c000 r--s 00002000 08:02 7867591                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/aether-spi-1.8.jar-dbbab7cc978a27c8/aether-spi-1.8.jar
+7f49c290c000-7f49c290f000 r--s 00023000 08:02 7867590                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/jdom-1.0.jar-401d7ab1e20d296f/jdom-1.0.jar
+7f49c290f000-7f49c2918000 r--s 0002d000 08:02 7867589                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/xml-apis-1.4.01.jar-6a220c4a8996af90/xml-apis-1.4.01.jar
+7f49c2918000-7f49c291a000 r--s 0000a000 08:02 7867588                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/plexus-classworlds-2.2.2.jar-5b9d2ec5afe009db/plexus-classworlds-2.2.2.jar
+7f49c291a000-7f49c291c000 r--s 00004000 08:02 7867587                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-cdi-1.2.jar-6de2dd27d577af9d/wicket-cdi-1.2.jar
+7f49c291c000-7f49c291e000 r--s 00006000 08:02 7867586                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/rome-fetcher-1.0.jar-33c3991d7a297e09/rome-fetcher-1.0.jar
+7f49c291e000-7f49c2921000 r--s 0001c000 08:02 7867585                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/jboss-serialization-1.0.4.FINAL.jar-3a68271769e4b4f5/jboss-serialization-1.0.4.FINAL.jar
+7f49c2921000-7f49c2923000 r--s 00005000 08:02 7867583                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wagon-http-shared-1.0-beta-7.jar-4430820dbece7c93/wagon-http-shared-1.0-beta-7.jar
+7f49c2923000-7f49c2924000 r--s 00000000 08:02 7867582                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/shrinkwrap-spi-1.0.0.jar-37ee6a8d79bdebd4/shrinkwrap-spi-1.0.0.jar
+7f49c2924000-7f49c2926000 r--s 00006000 08:02 7867578                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/maven-repository-metadata-3.0.1.jar-ac5cf4d346ed2273/maven-repository-metadata-3.0.1.jar
+7f49c2926000-7f49c2928000 r--s 00002000 08:02 7867577                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/shrinkwrap-descriptors-api-base-2.0.0-alpha-2.jar-4760f01f997ce2d6/shrinkwrap-descriptors-api-base-2.0.0-alpha-2.jar
+7f49c2928000-7f49c292d000 r--s 00041000 08:02 7867576                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/commons-lang-2.6.jar-40b37d8fe22f7f51/commons-lang-2.6.jar
+7f49c292d000-7f49c292e000 r--s 00002000 08:02 7867574                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/shrinkwrap-resolver-api-1.0.0-beta-6.jar-ae43bf1c0532b366/shrinkwrap-resolver-api-1.0.0-beta-6.jar
+7f49c292e000-7f49c2931000 r--s 00010000 08:02 7867573                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/aether-api-1.8.jar-99aebf85d91b7514/aether-api-1.8.jar
+7f49c2931000-7f49c2938000 r--s 00051000 08:02 7867572                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/log4j-1.2.12.jar-ba3fa2665253bb66/log4j-1.2.12.jar
+7f49c2938000-7f49c293b000 r--s 00008000 08:02 7867568                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/maven-settings-builder-3.0.1.jar-b4e55f92e620f6a8/maven-settings-builder-3.0.1.jar
+7f49c293b000-7f49c293c000 r--s 00003000 08:02 7867567                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/seam-conversation-spi-3.0.0.CR2.jar-4587d794e026541e/seam-conversation-spi-3.0.0.CR2.jar
+7f49c293c000-7f49c293f000 r--s 00019000 08:02 7867566                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/aether-util-1.8.jar-49b27eeccceb320c/aether-util-1.8.jar
+7f49c293f000-7f49c2942000 r--s 00012000 08:02 7867565                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-devutils-1.5.9.jar-e54f444ce66b3269/wicket-devutils-1.5.9.jar
+7f49c2942000-7f49c2947000 r--s 00020000 08:02 7867564                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/maven-model-builder-3.0.1.jar-d0ee421e6588719f/maven-model-builder-3.0.1.jar
+7f49c2947000-7f49c2949000 r--s 0000d000 08:02 7867563                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/commons-logging-1.1.1.jar-641d4dded1035c1d/commons-logging-1.1.1.jar
+7f49c2949000-7f49c294a000 r--s 00003000 08:02 7867562                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wagon-http-lightweight-1.0-beta-7.jar-a52a20419897c0ab/wagon-http-lightweight-1.0-beta-7.jar
+7f49c294a000-7f49c294e000 r--s 00033000 08:02 7867561                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/plexus-utils-2.0.4.jar-2948af1d9a30debb/plexus-utils-2.0.4.jar
+7f49c294e000-7f49c2953000 r--s 00040000 08:02 7867560                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/commons-httpclient-3.0.1.jar-c360f67f1a129f32/commons-httpclient-3.0.1.jar
+7f49c2953000-7f49c2956000 r--s 00013000 08:02 7867558                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-request-1.5.9.jar-df70e88368d4b358/wicket-request-1.5.9.jar
+7f49c2956000-7f49c2958000 r--s 00005000 08:02 7867556                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/commons-logging-api-1.0.4.jar-3431bc4f4bc50f7/commons-logging-api-1.0.4.jar
+7f49c2958000-7f49c295a000 r--s 00009000 08:02 7867554                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/shrinkwrap-resolver-impl-maven-1.0.0-beta-6.jar-73bd2682e5fd7bcb/shrinkwrap-resolver-impl-maven-1.0.0-beta-6.jar
+7f49c295a000-7f49c295e000 r--s 0002a000 08:02 7867553                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/commons-io-2.4.jar-67af0c747ff93cf/commons-io-2.4.jar
+7f49c295e000-7f49c2962000 r--s 00032000 08:02 7867552                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/rome-1.0.jar-e931ba2f7a780517/rome-1.0.jar
+7f49c2962000-7f49c2969000 r--s 0002e000 08:02 7867551                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/plexus-container-default-1.5.5.jar-47b6a838184ec929/plexus-container-default-1.5.5.jar
+7f49c2969000-7f49c2972000 r--s 00058000 08:02 7867549                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-util-1.5.9.jar-54d3800d131bbb1a/wicket-util-1.5.9.jar
+7f49c2972000-7f49c2979000 r--s 00039000 08:02 7867548                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/commons-codec-1.7.jar-4130434a2e31dedb/commons-codec-1.7.jar
+7f49c2979000-7f49c297d000 r--s 0001d000 08:02 7867546                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/xbean-reflect-3.4.jar-22d2d135b6827976/xbean-reflect-3.4.jar
+7f49c297d000-7f49c2980000 r--s 00012000 08:02 7867545                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-request-6.4.0.jar-7714fe62b550832f/wicket-request-6.4.0.jar
+7f49c2980000-7f49c2984000 r--s 00018000 08:02 7867544                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-devutils-6.4.0.jar-d8d5dab059fc65bf/wicket-devutils-6.4.0.jar
+7f49c2984000-7f49c2989000 r--s 00048000 08:02 7867542                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/dom4j-1.6.1.jar-a8d1aa216236702d/dom4j-1.6.1.jar
+7f49c2989000-7f49c29a2000 r--s 00134000 08:02 7867541                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/xercesImpl-2.10.0.jar-57f4770d231dbee6/xercesImpl-2.10.0.jar
+7f49c29a2000-7f49c29a3000 r--s 00002000 08:02 7867540                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wagon-file-1.0-beta-7.jar-9d29ac902e8ada29/wagon-file-1.0-beta-7.jar
+7f49c29a3000-7f49c29a8000 r--s 00016000 08:02 7867539                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/xml-apis-1.0.b2.jar-f84de643f07dcde5/xml-apis-1.0.b2.jar
+7f49c29a8000-7f49c29aa000 r--s 00002000 08:02 7867538                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/plexus-cipher-1.4.jar-fc5aa6a9573b4d8f/plexus-cipher-1.4.jar
+7f49c29aa000-7f49c29bc000 r--s 0013b000 08:02 7867537                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-extensions-6.4.0.jar-2292ffce5c6363ab/wicket-extensions-6.4.0.jar
+7f49c29bc000-7f49c29be000 r--s 00005000 08:02 7867536                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/slf4j-api-1.6.4.jar-c9a6fa0de1ed87ee/slf4j-api-1.6.4.jar
+7f49c29be000-7f49c29c3000 r--s 00041000 08:02 7867535                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/commons-lang-2.6.jar-8fadbb02d86c9049/commons-lang-2.6.jar
+7f49c29c3000-7f49c29cd000 r--s 0005c000 08:02 7867534                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-util-6.4.0.jar-16b5ab02fe2b1842/wicket-util-6.4.0.jar
+7f49c29cd000-7f49c29f1000 r--s 00179000 08:02 7867531                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-core-1.5.9.jar-7865aaf9e64d286/wicket-core-1.5.9.jar
+7f49c29f1000-7f49c29f2000 r--s 00003000 08:02 7867532                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/seam-conversation-spi-3.0.0.CR2.jar-761929b756fc7f5d/seam-conversation-spi-3.0.0.CR2.jar
+7f49c29f2000-7f49c29f5000 r--s 0000a000 08:02 7867529                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-auth-roles-6.4.0.jar-65c3410fb7a3a5be/wicket-auth-roles-6.4.0.jar
+7f49c29f5000-7f49c29f8000 ---p 00000000 00:00 0 
+7f49c29f8000-7f49c2af6000 rw-p 00000000 00:00 0                          [stack:21790]
+7f49c2af6000-7f49c2af9000 ---p 00000000 00:00 0 
+7f49c2af9000-7f49c2bf7000 rw-p 00000000 00:00 0                          [stack:21789]
+7f49c2bf7000-7f49c2bfa000 ---p 00000000 00:00 0 
+7f49c2bfa000-7f49c2cf8000 rw-p 00000000 00:00 0                          [stack:21788]
+7f49c2cf8000-7f49c2cfb000 ---p 00000000 00:00 0 
+7f49c2cfb000-7f49c2df9000 rw-p 00000000 00:00 0                          [stack:21787]
+7f49c2df9000-7f49c2dfc000 ---p 00000000 00:00 0 
+7f49c2dfc000-7f49c2efa000 rw-p 00000000 00:00 0                          [stack:21785]
+7f49c2efa000-7f49c2f05000 r--s 00084000 08:02 7083288                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/xb/main/jbossxb-2.0.3.GA.jar
+7f49c2f05000-7f49c2f14000 r--s 000b3000 08:02 7738983                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/netty/main/netty-3.2.6.Final.jar
+7f49c2f14000-7f49c2f15000 r--s 00000000 08:02 7738103                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ws/native/jbossws-native-services/main/jbossws-native-services-4.0.5.GA.jar
+7f49c2f15000-7f49c2f21000 r--s 000c9000 08:02 7738098                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ws/native/jbossws-native-core/main/jbossws-native-core-4.0.5.GA.jar
+7f49c2f21000-7f49c2f30000 r--s 00076000 08:02 7212921                    /home/ondra/sw/AS/7.1.3/modules/org/joda/time/main/joda-time-1.6.2.jar
+7f49c2f30000-7f49c2f34000 r--s 00024000 08:02 7864529                    /home/ondra/sw/AS/7.1.3/modules/org/apache/ws/xmlschema/main/xmlschema-core-2.0.2.jar
+7f49c2f34000-7f49c2f36000 r--s 00013000 08:02 7864506                    /home/ondra/sw/AS/7.1.3/modules/org/apache/xml-resolver/main/xml-resolver-1.2.jar
+7f49c2f36000-7f49c2f3e000 r--s 0005f000 08:02 7864514                    /home/ondra/sw/AS/7.1.3/modules/org/apache/velocity/main/velocity-1.6.3.jar
+7f49c2f3e000-7f49c2f40000 r--s 00010000 08:02 7864523                    /home/ondra/sw/AS/7.1.3/modules/org/apache/neethi/main/neethi-3.0.2.jar
+7f49c2f40000-7f49c2f45000 r--s 00041000 08:02 7739077                    /home/ondra/sw/AS/7.1.3/modules/org/apache/commons/lang/main/commons-lang-2.6.jar
+7f49c2f45000-7f49c2f48000 ---p 00000000 00:00 0 
+7f49c2f48000-7f49c3046000 rw-p 00000000 00:00 0                          [stack:21784]
+7f49c3046000-7f49c3047000 r--s 00000000 08:02 7738878                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-atom-provider/main/resteasy-atom-provider-2.3.3.Final-jandex.jar
+7f49c3047000-7f49c3048000 r--s 00000000 08:02 7738823                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/logging/jul-to-slf4j-stub/main/jul-to-slf4j-stub-1.0.0.Final.jar
+7f49c3048000-7f49c304c000 r--s 00020000 08:02 7867528                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/shrinkwrap-impl-base-1.0.0.jar-b184559474636279/shrinkwrap-impl-base-1.0.0.jar
+7f49c304c000-7f49c304e000 r--s 0000b000 08:02 7867527                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wagon-provider-api-1.0-beta-7.jar-c0b40ca8c40bac69/wagon-provider-api-1.0-beta-7.jar
+7f49c304e000-7f49c3050000 r--s 0000a000 08:02 7867526                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/maven-settings-3.0.1.jar-8bcbf24c6f3d89af/maven-settings-3.0.1.jar
+7f49c3050000-7f49c305d000 r--s 00115000 08:02 7867525                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-extensions-1.5.9.jar-d67427eb9471c4ab/wicket-extensions-1.5.9.jar
+7f49c305d000-7f49c3060000 r--s 0000a000 08:02 7867524                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-auth-roles-1.5.9.jar-4639bc8515bbd4db/wicket-auth-roles-1.5.9.jar
+7f49c3060000-7f49c3061000 r--s 00006000 08:02 7867523                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/plexus-sec-dispatcher-1.3.jar-fc8699ab32a7518f/plexus-sec-dispatcher-1.3.jar
+7f49c3061000-7f49c3064000 r--s 0000d000 08:02 7867522                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/shrinkwrap-api-1.0.0.jar-e89b283ed26cd45b/shrinkwrap-api-1.0.0.jar
+7f49c3064000-7f49c3088000 r--s 001aa000 08:02 7865795                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-core-6.4.0.jar-d9ca4ae63251ce2e/wicket-core-6.4.0.jar
+7f49c3088000-7f49c308f000 r--s 00047000 08:02 7867484                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/JTexyCore-1.0.4.jar-b1c8a3fe13ded602/JTexyCore-1.0.4.jar
+7f49c308f000-7f49c3093000 r--s 0002a000 08:02 7867457                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/commons-io-2.4.jar-5bada0a957e085cf/commons-io-2.4.jar
+7f49c3093000-7f49c3098000 r--s 0003f000 08:02 7867414                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/jsoup-1.7.1.jar-4063432416c6f503/jsoup-1.7.1.jar
+7f49c3098000-7f49c309c000 r--s 00020000 08:02 7739000                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/shrinkwrap/core/main/shrinkwrap-impl-base-1.0.0.jar
+7f49c309c000-7f49c309d000 r--s 0002c000 08:02 5388515                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/domain-http-error-context/main/jboss-as-domain-http-error-context-7.1.3.Final.jar
+7f49c309d000-7f49c3102000 r--s 01701000 08:02 5388596                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/console/main/jboss-as-console-1.4.0.Final-resources.jar
+7f49c3102000-7f49c3103000 r--s 00001000 08:02 5532447                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/jsf/main/jboss-as-jsf-7.1.3.Final.jar
+7f49c3103000-7f49c3105000 r--s 00000000 08:02 7867521                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/plexus-component-annotations-1.5.5.jar-3d806dfffa2a1289/plexus-component-annotations-1.5.5.jar
+7f49c3105000-7f49c3108000 r--s 00007000 08:02 7867520                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/shrinkwrap-descriptors-spi-2.0.0-alpha-2.jar-794c942fdd42404/shrinkwrap-descriptors-spi-2.0.0-alpha-2.jar
+7f49c3108000-7f49c310b000 r--s 00026000 08:02 7867516                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/maven-model-3.0.1.jar-ac9aaa65a06a3b64/maven-model-3.0.1.jar
+7f49c310b000-7f49c310d000 r--s 00005000 08:02 7867514                    /home/ondra/sw/AS/7.1.3/standalone/tmp/vfs/deployment63dbb8e3ddbf556a/wicket-cdi-6.0.jar-3b497817cb062568/wicket-cdi-6.0.jar
+7f49c310d000-7f49c310e000 r--s 00000000 08:02 7739004                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/shrinkwrap/core/main/shrinkwrap-spi-1.0.0.jar
+7f49c310e000-7f49c3111000 r--s 0000d000 08:02 7738998                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/shrinkwrap/core/main/shrinkwrap-api-1.0.0.jar
+7f49c3111000-7f49c3114000 ---p 00000000 00:00 0 
+7f49c3114000-7f49c3212000 rw-p 00000000 00:00 0                          [stack:21786]
+7f49c3212000-7f49c3215000 ---p 00000000 00:00 0 
+7f49c3215000-7f49c3313000 rw-p 00000000 00:00 0                          [stack:21783]
+7f49c3313000-7f49c3316000 ---p 00000000 00:00 0 
+7f49c3316000-7f49c3414000 rw-p 00000000 00:00 0                          [stack:21782]
+7f49c3414000-7f49c3417000 ---p 00000000 00:00 0 
+7f49c3417000-7f49c3515000 rw-p 00000000 00:00 0                          [stack:21781]
+7f49c3515000-7f49c3518000 ---p 00000000 00:00 0 
+7f49c3518000-7f49c3616000 rw-p 00000000 00:00 0                          [stack:21780]
+7f49c3616000-7f49c3618000 r--s 00008000 08:02 7864742                    /home/ondra/sw/AS/7.1.3/modules/javax/xml/registry/api/main/jboss-jaxr-api_1.0_spec-1.0.2.Final.jar
+7f49c3618000-7f49c361b000 r--s 00002000 08:02 7864670                    /home/ondra/sw/AS/7.1.3/modules/javax/management/j2ee/api/main/jboss-j2eemgmt-api_1.1_spec-1.0.1.Final.jar
+7f49c361b000-7f49c361d000 r--s 00007000 08:02 7864706                    /home/ondra/sw/AS/7.1.3/modules/javax/enterprise/deploy/api/main/jboss-jad-api_1.2_spec-1.0.1.Final.jar
+7f49c361d000-7f49c362a000 r--s 0008b000 08:02 7864520                    /home/ondra/sw/AS/7.1.3/modules/org/apache/santuario/xmlsec/main/xmlsec-1.5.2.jar
+7f49c362a000-7f49c362f000 r--s 00061000 08:02 7864532                    /home/ondra/sw/AS/7.1.3/modules/org/apache/ws/security/main/wss4j-1.6.6.jar
+7f49c362f000-7f49c3634000 r--s 00042000 08:02 5375340                    /home/ondra/sw/AS/7.1.3/modules/com/sun/xml/messaging/saaj/main/saaj-impl-1.3.16-jbossorg-1.jar
+7f49c3634000-7f49c363e000 r--s 0004f000 08:02 7864621                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/main/cxf-api-2.4.8-patch-01.jar
+7f49c363e000-7f49c363f000 r--s 00002000 08:02 7864575                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-xjc-ts-2.4.0.jar
+7f49c363f000-7f49c3640000 r--s 00003000 08:02 7864599                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-xjc-dv-2.4.0.jar
+7f49c3640000-7f49c3641000 r--s 00002000 08:02 7864602                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-xjc-boolean-2.4.0.jar
+7f49c3641000-7f49c3645000 r--s 00024000 08:02 7864618                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-tools-wsdlto-frontend-jaxws-2.4.8-patch-01.jar
+7f49c3645000-7f49c3647000 r--s 00008000 08:02 7864615                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-tools-wsdlto-databinding-jaxb-2.4.8-patch-01.jar
+7f49c3647000-7f49c3649000 r--s 0000b000 08:02 7864608                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-tools-wsdlto-core-2.4.8-patch-01.jar
+7f49c3649000-7f49c364b000 r--s 0000f000 08:02 7864580                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-tools-validator-2.4.8-patch-01.jar
+7f49c364b000-7f49c364e000 r--s 0001a000 08:02 7864600                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-tools-java2ws-2.4.8-patch-01.jar
+7f49c364e000-7f49c3652000 r--s 00024000 08:02 7864607                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-tools-common-2.4.8-patch-01.jar
+7f49c3652000-7f49c365d000 r--s 00083000 08:02 7864606                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-ws-security-2.4.8-patch-01.jar
+7f49c365d000-7f49c3662000 r--s 0002e000 08:02 7864613                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-ws-rm-2.4.8-patch-01.jar
+7f49c3662000-7f49c3666000 r--s 00024000 08:02 7864576                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-ws-policy-2.4.8-patch-01.jar
+7f49c3666000-7f49c3668000 r--s 00014000 08:02 7864603                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-ws-addr-2.4.8-patch-01.jar
+7f49c3668000-7f49c3672000 r--s 0012f000 08:02 5375309                    /home/ondra/sw/AS/7.1.3/modules/com/h2database/h2/main/h2-1.3.168.jar
+7f49c3672000-7f49c3676000 r--s 0001f000 08:02 7864614                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-transports-jms-2.4.8-patch-01.jar
+7f49c3676000-7f49c367b000 r--s 0002f000 08:02 7864577                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-transports-http-2.4.8-patch-01.jar
+7f49c367b000-7f49c367d000 r--s 00003000 08:02 7864581                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-transports-common-2.4.8-patch-01.jar
+7f49c367d000-7f49c3680000 r--s 0000e000 08:02 7864605                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-management-2.4.8-patch-01.jar
+7f49c3680000-7f49c3682000 r--s 00017000 08:02 7864578                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-frontend-simple-2.4.8-patch-01.jar
+7f49c3682000-7f49c3688000 r--s 00051000 08:02 7864612                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-frontend-jaxws-2.4.8-patch-01.jar
+7f49c3688000-7f49c368a000 r--s 00017000 08:02 7864609                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-databinding-jaxb-2.4.8-patch-01.jar
+7f49c368a000-7f49c368e000 r--s 00036000 08:02 7864597                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-databinding-aegis-2.4.8-patch-01.jar
+7f49c368e000-7f49c3691000 ---p 00000000 00:00 0 
+7f49c3691000-7f49c378f000 rw-p 00000000 00:00 0                          [stack:21779]
+7f49c378f000-7f49c3798000 r--s 00079000 08:02 7864611                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-core-2.4.8-patch-01.jar
+7f49c3798000-7f49c379a000 r--s 00008000 08:02 7864579                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-bindings-xml-2.4.8-patch-01.jar
+7f49c379a000-7f49c379e000 r--s 00027000 08:02 7864616                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-bindings-soap-2.4.8-patch-01.jar
+7f49c379e000-7f49c37a0000 r--s 00005000 08:02 7864617                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-bindings-object-2.4.8-patch-01.jar
+7f49c37a0000-7f49c37a2000 r--s 0000a000 08:02 7864601                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-bindings-http-2.4.8-patch-01.jar
+7f49c37a2000-7f49c37a4000 r--s 00007000 08:02 7864610                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-bindings-coloc-2.4.8-patch-01.jar
+7f49c37a4000-7f49c37ab000 r--s 0004f000 08:02 7864574                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-common-utilities-2.4.8-patch-01.jar
+7f49c37ab000-7f49c37af000 r--s 00019000 08:02 7738135                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ws/cxf/jbossws-cxf-server/main/jbossws-cxf-server-4.0.5.GA.jar
+7f49c37af000-7f49c37b1000 r--s 00002000 08:02 7738157                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ws/cxf/jbossws-cxf-transports-httpserver/main/jbossws-cxf-transports-httpserver-4.0.5.GA.jar
+7f49c37b1000-7f49c37b2000 r--s 00000000 08:02 7738147                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ws/cxf/jbossws-cxf-factories/main/jbossws-cxf-factories-4.0.5.GA.jar
+7f49c37b2000-7f49c37ba000 r--s 000c4000 08:02 6426050                    /home/ondra/sw/AS/7.1.3/modules/mysql/main/mysql-connector-java-5.1.22-bin.jar
+7f49c37ba000-7f49c37bd000 r--s 00010000 08:02 7738084                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ws/jaxws-client/main/jbossws-cxf-client-4.0.5.GA.jar
+7f49c37bd000-7f49c37c5000 r--s 00043000 08:02 5532452                    /home/ondra/sw/AS/7.1.3/modules/org/kohsuke/rngom/main/rngom-201103.jboss-1.jar
+7f49c37c5000-7f49c37cd000 r--s 0005c000 08:02 5375313                    /home/ondra/sw/AS/7.1.3/modules/com/sun/xsom/main/xsom-20110809.jar
+7f49c37cd000-7f49c37d0000 r--s 0000e000 08:02 5375335                    /home/ondra/sw/AS/7.1.3/modules/com/sun/xml/txw2/main/txw2-20110809.jar
+7f49c37d0000-7f49c37e4000 r--s 000f2000 08:02 5375343                    /home/ondra/sw/AS/7.1.3/modules/com/sun/xml/bind/main/jaxb-xjc-2.2.5.jboss-1.jar
+7f49c37e4000-7f49c37f8000 r--s 000e5000 08:02 5375345                    /home/ondra/sw/AS/7.1.3/modules/com/sun/xml/bind/main/jaxb-impl-2.2.5.jboss-1.jar
+7f49c37f8000-7f49c37fb000 ---p 00000000 00:00 0 
+7f49c37fb000-7f49c38f9000 rw-p 00000000 00:00 0                          [stack:21778]
+7f49c38f9000-7f49c38fc000 ---p 00000000 00:00 0 
+7f49c38fc000-7f49c39fa000 rw-p 00000000 00:00 0                          [stack:21777]
+7f49c39fa000-7f49c39fd000 ---p 00000000 00:00 0 
+7f49c39fd000-7f49c3afb000 rw-p 00000000 00:00 0                          [stack:21776]
+7f49c3afb000-7f49c3afe000 ---p 00000000 00:00 0 
+7f49c3afe000-7f49c3bfc000 rw-p 00000000 00:00 0                          [stack:21775]
+7f49c3bfc000-7f49c3bff000 ---p 00000000 00:00 0 
+7f49c3bff000-7f49c3cfd000 rw-p 00000000 00:00 0 
+7f49c3cfd000-7f49c3d00000 ---p 00000000 00:00 0 
+7f49c3d00000-7f49c3dfe000 rw-p 00000000 00:00 0 
+7f49c3dfe000-7f49c3e01000 ---p 00000000 00:00 0 
+7f49c3e01000-7f49c3eff000 rw-p 00000000 00:00 0 
+7f49c3eff000-7f49c3f02000 ---p 00000000 00:00 0 
+7f49c3f02000-7f49c4000000 rw-p 00000000 00:00 0 
+7f49c4000000-7f49c4090000 rw-p 00000000 00:00 0 
+7f49c4090000-7f49c8000000 ---p 00000000 00:00 0 
+7f49c8000000-7f49c8001000 r--s 00005000 08:02 7864573                    /home/ondra/sw/AS/7.1.3/modules/org/apache/cxf/impl/main/cxf-rt-transports-local-2.4.8-patch-01.jar
+7f49c8001000-7f49c8002000 r--s 00003000 08:02 5375329                    /home/ondra/sw/AS/7.1.3/modules/com/sun/istack/main/istack-commons-tools-2.6.1.jar
+7f49c8002000-7f49c8004000 r--s 00004000 08:02 5375330                    /home/ondra/sw/AS/7.1.3/modules/com/sun/istack/main/istack-commons-runtime-2.6.1.jar
+7f49c8004000-7f49c8008000 r--s 00022000 08:02 5375324                    /home/ondra/sw/AS/7.1.3/modules/com/sun/codemodel/main/codemodel-2.6.jar
+7f49c8008000-7f49c8009000 r--s 00003000 08:02 5375349                    /home/ondra/sw/AS/7.1.3/modules/com/github/relaxng/main/relaxngDatatype-2011.1.jar
+7f49c8009000-7f49c800b000 r--s 00006000 08:02 7212911                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/jaxbintros/main/jboss-jaxb-intros-1.0.2.GA.jar
+7f49c800b000-7f49c8010000 r--s 00020000 08:02 7864664                    /home/ondra/sw/AS/7.1.3/modules/javax/wsdl4j/api/main/wsdl4j-1.6.2.jar
+7f49c8010000-7f49c8013000 r--s 00011000 08:02 5376090                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/clustering/web/infinispan/main/jboss-as-clustering-web-infinispan-7.1.3.Final.jar
+7f49c8013000-7f49c8015000 r--s 00003000 08:02 5376066                    /home/ondra/sw/AS/7.1.3/modules/org/scannotation/scannotation/main/scannotation-1.0.2.jar
+7f49c8015000-7f49c8017000 r--s 00005000 08:02 7864539                    /home/ondra/sw/AS/7.1.3/modules/org/apache/httpcomponents/main/httpmime-4.1.2.jar
+7f49c8017000-7f49c801c000 r--s 00028000 08:02 7864538                    /home/ondra/sw/AS/7.1.3/modules/org/apache/httpcomponents/main/httpcore-4.1.4.jar
+7f49c801c000-7f49c8024000 r--s 0004e000 08:02 7864537                    /home/ondra/sw/AS/7.1.3/modules/org/apache/httpcomponents/main/httpclient-4.1.2.jar
+7f49c8125000-7f49c8128000 ---p 00000000 00:00 0 
+7f49c8128000-7f49c8226000 rw-p 00000000 00:00 0 
+7f49c8226000-7f49c8229000 ---p 00000000 00:00 0 
+7f49c8229000-7f49c8327000 rw-p 00000000 00:00 0 
+7f49c862a000-7f49c862d000 ---p 00000000 00:00 0 
+7f49c862d000-7f49c872b000 rw-p 00000000 00:00 0 
+7f49c8b2f000-7f49c8b32000 ---p 00000000 00:00 0 
+7f49c8b32000-7f49c8c30000 rw-p 00000000 00:00 0 
+7f49c8c30000-7f49c8c33000 ---p 00000000 00:00 0 
+7f49c8c33000-7f49c8d31000 rw-p 00000000 00:00 0 
+7f49c8e32000-7f49c8e35000 ---p 00000000 00:00 0 
+7f49c8e35000-7f49c8f33000 rw-p 00000000 00:00 0 
+7f49c8f33000-7f49c8f36000 ---p 00000000 00:00 0 
+7f49c8f36000-7f49c9034000 rw-p 00000000 00:00 0 
+7f49c9034000-7f49c9037000 ---p 00000000 00:00 0 
+7f49c9037000-7f49c9135000 rw-p 00000000 00:00 0 
+7f49c9135000-7f49c9138000 ---p 00000000 00:00 0 
+7f49c9138000-7f49c9236000 rw-p 00000000 00:00 0 
+7f49c9236000-7f49c9239000 ---p 00000000 00:00 0 
+7f49c9239000-7f49c9337000 rw-p 00000000 00:00 0 
+7f49c9436000-7f49c9438000 rw-p 00000000 00:00 0 
+7f49c9438000-7f49c943b000 ---p 00000000 00:00 0 
+7f49c943b000-7f49c9539000 rw-p 00000000 00:00 0                          [stack:21750]
+7f49c9539000-7f49c953c000 ---p 00000000 00:00 0 
+7f49c953c000-7f49c963a000 rw-p 00000000 00:00 0                          [stack:21749]
+7f49c963a000-7f49c963d000 r--s 00016000 08:02 7340455                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/com/sun/httpserver/main/httpserver-1.0.1.Final.jar
+7f49c963d000-7f49c9640000 ---p 00000000 00:00 0 
+7f49c9640000-7f49c973e000 rw-p 00000000 00:00 0                          [stack:21748]
+7f49c973e000-7f49c9741000 ---p 00000000 00:00 0 
+7f49c9741000-7f49c983f000 rw-p 00000000 00:00 0 
+7f49c983f000-7f49c9842000 ---p 00000000 00:00 0 
+7f49c9842000-7f49c9940000 rw-p 00000000 00:00 0 
+7f49c9940000-7f49c9944000 r--s 00038000 08:02 5375458                    /home/ondra/sw/AS/7.1.3/modules/org/hornetq/main/hornetq-jms-2.2.21.Final.jar
+7f49c9944000-7f49c995e000 r--s 00158000 08:02 5375425                    /home/ondra/sw/AS/7.1.3/modules/org/hornetq/main/hornetq-core-2.2.21.Final.jar
+7f49c995e000-7f49c9960000 r--s 00003000 08:02 6559635                    /home/ondra/sw/AS/7.1.3/modules/org/slf4j/jcl-over-slf4j/main/jcl-over-slf4j-1.6.1.jar
+7f49c9960000-7f49c9963000 r--s 00011000 08:02 5375405                    /home/ondra/sw/AS/7.1.3/modules/org/hibernate/commons-annotations/main/hibernate-commons-annotations-4.0.1.Final.jar
+7f49c9963000-7f49c996b000 r--s 00058000 08:02 5375418                    /home/ondra/sw/AS/7.1.3/modules/org/hibernate/envers/main/hibernate-envers-4.1.6.Final.jar
+7f49c996b000-7f49c996f000 r--s 00019000 08:02 5376143                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/jpa/hibernate/4/jboss-as-jpa-hibernate4-7.1.3.Final.jar
+7f49c996f000-7f49c9974000 r--s 00048000 08:02 5375498                    /home/ondra/sw/AS/7.1.3/modules/org/dom4j/main/dom4j-1.6.1.jar
+7f49c9974000-7f49c997f000 r--s 00071000 08:02 7738345                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/security/xacml/main/jbossxacml-2.0.8.Final.jar
+7f49c997f000-7f49c9982000 ---p 00000000 00:00 0 
+7f49c9982000-7f49c9a80000 rw-p 00000000 00:00 0 
+7f49c9a80000-7f49c9a83000 ---p 00000000 00:00 0 
+7f49c9a83000-7f49c9b81000 rw-p 00000000 00:00 0 
+7f49c9b81000-7f49c9b84000 ---p 00000000 00:00 0 
+7f49c9b84000-7f49c9c82000 rw-p 00000000 00:00 0 
+7f49c9c82000-7f49c9c84000 r--s 00009000 08:02 6722280                    /home/ondra/sw/AS/7.1.3/modules/org/slf4j/ext/main/slf4j-ext-1.6.1.jar
+7f49c9c84000-7f49c9c86000 r--s 00005000 08:02 6559637                    /home/ondra/sw/AS/7.1.3/modules/org/slf4j/main/slf4j-api-1.6.1.jar
+7f49c9c86000-7f49c9c97000 r--s 000c6000 08:02 7738393                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/weld/core/main/weld-core-1.1.9.Final.jar
+7f49c9c97000-7f49c9c99000 r--s 00001000 08:02 7738307                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/iiop-client/main/jboss-iiop-client-1.0.0.Final.jar
+7f49c9c99000-7f49c9c9b000 r--s 00004000 08:02 7738417                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/weld/api/main/weld-api-1.1.Final.jar
+7f49c9c9b000-7f49c9c9e000 r--s 00017000 08:02 6947719                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/classfilewriter/main/jboss-classfilewriter-1.0.3.Final.jar
+7f49c9c9e000-7f49c9ca3000 r--s 00019000 08:02 7738081                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ws/spi/main/jbossws-spi-2.0.4.GA.jar
+7f49c9ca3000-7f49c9ca9000 r--s 0003c000 08:02 6426305                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ejb-client/main/jboss-ejb-client-1.0.11.Final.jar
+7f49c9ca9000-7f49c9cac000 r--s 00008000 08:02 5376103                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/clustering/ejb3/infinispan/main/jboss-as-clustering-ejb3-infinispan-7.1.3.Final.jar
+7f49c9cac000-7f49c9cb2000 r--s 00034000 08:02 7738125                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ws/common/main/jbossws-common-2.0.4.GA.jar
+7f49c9cb2000-7f49c9cb5000 r--s 00009000 08:02 5376086                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/clustering/web/spi/main/jboss-as-clustering-web-spi-7.1.3.Final.jar
+7f49c9cb5000-7f49c9cb7000 r--s 00003000 08:02 5376119                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/clustering/registry/main/jboss-as-clustering-registry-7.1.3.Final.jar
+7f49c9cb7000-7f49c9cb9000 r--s 00007000 08:02 7864791                    /home/ondra/sw/AS/7.1.3/modules/javax/security/auth/message/api/main/jboss-jaspi-api_1.0_spec-1.0.1.Final.jar
+7f49c9cb9000-7f49c9cc2000 r--s 00096000 08:02 5375463                    /home/ondra/sw/AS/7.1.3/modules/org/javassist/main/javassist-3.15.0-GA.jar
+7f49c9cc2000-7f49c9ccc000 r--s 00067000 08:02 7864784                    /home/ondra/sw/AS/7.1.3/modules/javax/servlet/jstl/api/main/jboss-jstl-api_1.2_spec-1.0.3.Final.jar
+7f49c9ccc000-7f49c9cce000 r--s 0000f000 08:02 5375409                    /home/ondra/sw/AS/7.1.3/modules/org/hibernate/main/hibernate-infinispan-4.1.6.Final.jar
+7f49c9cce000-7f49c9ccf000 r--s 00003000 08:02 7738059                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/osgi/repository/main/jbosgi-repository-core-1.2.0.Final.jar
+7f49c9ccf000-7f49c9cd0000 r--s 00000000 08:02 5378457                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/jpa/util/main/jboss-as-jpa-util-7.1.3.Final.jar
+7f49c9cd0000-7f49c9cd3000 r--s 0000c000 08:02 7864779                    /home/ondra/sw/AS/7.1.3/modules/javax/servlet/jsp/api/main/jboss-jsp-api_2.2_spec-1.0.1.Final.jar
+7f49c9cd3000-7f49c9cd6000 r--s 0000a000 08:02 7738093                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ws/api/main/jbossws-api-1.0.0.GA.jar
+7f49c9cd6000-7f49c9cd9000 r--s 00010000 08:02 5376150                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/jpa/spi/main/jboss-as-jpa-spi-7.1.3.Final.jar
+7f49c9cd9000-7f49c9ce2000 r--s 0006c000 08:02 5375407                    /home/ondra/sw/AS/7.1.3/modules/org/hibernate/main/hibernate-entitymanager-4.1.6.Final.jar
+7f49c9ce2000-7f49c9ce4000 r--s 00002000 08:02 7738058                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/osgi/repository/main/jbosgi-repository-api-1.2.0.Final.jar
+7f49c9ce4000-7f49c9d31000 r--s 003f2000 08:02 5375410                    /home/ondra/sw/AS/7.1.3/modules/org/hibernate/main/hibernate-core-4.1.6.Final.jar
+7f49c9d31000-7f49c9d38000 r--s 0005e000 08:02 5532426                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/jacorb/main/jboss-as-jacorb-7.1.3.Final.jar
+7f49c9d38000-7f49c9d39000 r--s 00001000 08:02 7738163                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ejb3/main/jboss-ejb3-ext-api-2.0.0.jar
+7f49c9d39000-7f49c9d47000 r--s 0007f000 08:02 7606659                    /home/ondra/sw/AS/7.1.3/modules/org/apache/commons/collections/main/commons-collections-3.2.1.jar
+7f49c9d47000-7f49c9d48000 r--s 00001000 08:02 7864768                    /home/ondra/sw/AS/7.1.3/modules/javax/jws/api/main/jsr181-api-1.0-MR1.jar
+7f49c9d48000-7f49c9d4b000 r--s 00007000 08:02 7864679                    /home/ondra/sw/AS/7.1.3/modules/javax/jms/api/main/jboss-jms-api_1.1_spec-1.0.1.Final.jar
+7f49c9d4b000-7f49c9d50000 r--s 00015000 08:02 7864760                    /home/ondra/sw/AS/7.1.3/modules/javax/persistence/api/main/hibernate-jpa-2.0-api-1.0.1.Final.jar
+7f49c9d50000-7f49c9d51000 r--s 00003000 08:02 7738053                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/osgi/vfs/main/jbosgi-vfs30-1.1.0.Final.jar
+7f49c9d51000-7f49c9d53000 r--s 0000a000 08:02 7738297                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/jts/integration/main/jbossjts-integration-4.16.4.Final.jar
+7f49c9d53000-7f49c9d54000 r--s 00002000 08:02 7738052                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/osgi/vfs/main/jbosgi-vfs-1.1.0.Final.jar
+7f49c9d54000-7f49c9d60000 r--s 000a1000 08:02 7864640                    /home/ondra/sw/AS/7.1.3/modules/javax/faces/api/main/jboss-jsf-api_2.1_spec-2.0.4.Final.jar
+7f49c9d60000-7f49c9d62000 r--s 00000000 08:02 5387757                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/webservices/main/jbossws-cxf-resources-4.0.5.GA-jboss712.jar
+7f49c9d62000-7f49c9d64000 r--s 00009000 08:02 7738073                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/osgi/resolver/main/jbosgi-resolver-felix-2.1.0.Final.jar
+7f49c9d64000-7f49c9d67000 r--s 0000f000 08:02 7738072                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/osgi/resolver/main/jbosgi-resolver-api-2.1.0.Final.jar
+7f49c9d67000-7f49c9d6f000 r--s 00052000 08:02 5387759                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/webservices/main/jboss-as-webservices-server-integration-7.1.3.Final.jar
+7f49c9d6f000-7f49c9d74000 r--s 00038000 08:02 5375638                    /home/ondra/sw/AS/7.1.3/modules/org/osgi/core/main/org.osgi.core-4.2.0.jar
+7f49c9d74000-7f49c9d8d000 r--s 001cc000 08:02 5375318                    /home/ondra/sw/AS/7.1.3/modules/com/sun/jsf-impl/main/jsf-impl-2.1.11-jbossorg-3.jar
+7f49c9d8d000-7f49c9d90000 r--s 0000b000 08:02 7738067                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/osgi/metadata/main/jbosgi-metadata-2.1.0.Final.jar
+7f49c9d90000-7f49c9dab000 r--s 00154000 08:02 7738289                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/jts/main/jbossjts-4.16.4.Final.jar
+7f49c9dab000-7f49c9dcc000 r--s 00172000 08:02 5375304                    /home/ondra/sw/AS/7.1.3/modules/com/google/guava/main/guava-11.0.2.jar
+7f49c9dcc000-7f49c9e3f000 r--s 0058e000 08:02 7340463                    /home/ondra/sw/AS/7.1.3/modules/org/jacorb/main/jacorb-2.3.2.jbossorg-0.jar
+7f49c9e3f000-7f49c9e40000 r--s 0000d000 08:02 7738186                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ironjacamar/impl/main/ironjacamar-deployers-common-1.0.12.Final.jar
+7f49c9e40000-7f49c9e45000 r--s 0002d000 08:02 5388692                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/osgi/main/jboss-as-osgi-service-7.1.3.Final.jar
+7f49c9e45000-7f49c9e48000 ---p 00000000 00:00 0 
+7f49c9e48000-7f49c9f46000 rw-p 00000000 00:00 0 
+7f49c9f46000-7f49c9f4d000 r--s 00072000 08:02 7864635                    /home/ondra/sw/AS/7.1.3/modules/javax/mail/api/main/mail-1.4.4.jar
+7f49c9f4d000-7f49c9f50000 ---p 00000000 00:00 0 
+7f49c9f50000-7f49ca04e000 rw-p 00000000 00:00 0 
+7f49ca04e000-7f49ca051000 ---p 00000000 00:00 0 
+7f49ca051000-7f49ca14f000 rw-p 00000000 00:00 0 
+7f49ca14f000-7f49ca152000 r--s 0000c000 08:02 5376135                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/mail/main/jboss-as-mail-7.1.3.Final.jar
+7f49ca152000-7f49ca156000 r--s 00027000 08:02 5378451                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/jpa/main/jboss-as-jpa-7.1.3.Final.jar
+7f49ca156000-7f49ca159000 ---p 00000000 00:00 0 
+7f49ca159000-7f49ca257000 rw-p 00000000 00:00 0 
+7f49ca257000-7f49ca26b000 r--s 001a3000 08:02 7083293                    /home/ondra/sw/AS/7.1.3/modules/org/jgroups/main/jgroups-3.0.14.Final.jar
+7f49ca26b000-7f49ca270000 r--s 0003c000 08:02 7738184                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ironjacamar/impl/main/ironjacamar-core-impl-1.0.12.Final.jar
+7f49ca270000-7f49ca273000 r--s 00013000 08:02 5388889                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/sar/main/jboss-as-sar-7.1.3.Final.jar
+7f49ca273000-7f49ca275000 r--s 00003000 08:02 5376122                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/clustering/service/main/jboss-as-clustering-service-7.1.3.Final.jar
+7f49ca275000-7f49ca278000 ---p 00000000 00:00 0 
+7f49ca278000-7f49ca376000 rw-p 00000000 00:00 0 
+7f49ca376000-7f49ca379000 ---p 00000000 00:00 0 
+7f49ca379000-7f49ca477000 rw-p 00000000 00:00 0 
+7f49ca477000-7f49ca47a000 ---p 00000000 00:00 0 
+7f49ca47a000-7f49ca578000 rw-p 00000000 00:00 0 
+7f49ca578000-7f49ca57b000 ---p 00000000 00:00 0 
+7f49ca57b000-7f49ca679000 rw-p 00000000 00:00 0 
+7f49ca679000-7f49ca67e000 r--s 0001f000 08:02 5376110                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/clustering/jgroups/main/jboss-as-clustering-jgroups-7.1.3.Final.jar
+7f49ca67e000-7f49ca693000 r--s 000e6000 08:02 7864653                    /home/ondra/sw/AS/7.1.3/modules/javax/rmi/api/main/jboss-rmi-api_1.0_spec-1.0.4.Final.jar
+7f49ca693000-7f49ca695000 r--s 00008000 08:02 7864737                    /home/ondra/sw/AS/7.1.3/modules/javax/xml/rpc/api/main/jboss-jaxrpc-api_1.1_spec-1.0.1.Final.jar
+7f49ca695000-7f49ca69b000 r--s 0002f000 08:02 5388910                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/weld/main/jboss-as-weld-7.1.3.Final.jar
+7f49ca69b000-7f49ca730000 r--s 0093a000 08:02 5375633                    /home/ondra/sw/AS/7.1.3/modules/org/python/jython/standalone/main/jython-standalone-2.5.2.jar
+7f49ca730000-7f49ca736000 r--s 00045000 08:02 5388914                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/logging/main/jboss-as-logging-7.1.3.Final.jar
+7f49ca736000-7f49ca73a000 r--s 00015000 08:02 5376080                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/clustering/impl/main/jboss-as-clustering-impl-7.1.3.Final.jar
+7f49ca73a000-7f49ca73d000 r--s 00006000 08:02 7738273                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ironjacamar/api/main/ironjacamar-core-api-1.0.12.Final.jar
+7f49ca73d000-7f49ca73e000 r--s 00000000 08:02 7738275                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ironjacamar/api/main/ironjacamar-common-spi-1.0.12.Final.jar
+7f49ca73e000-7f49ca744000 r--s 0002e000 08:02 7738269                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ironjacamar/api/main/ironjacamar-common-api-1.0.12.Final.jar
+7f49ca744000-7f49ca746000 r--s 00004000 08:02 7739029                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/jboss-transaction-spi/main/jboss-transaction-spi-7.0.0.Final.jar
+7f49ca746000-7f49ca749000 ---p 00000000 00:00 0 
+7f49ca749000-7f49ca847000 rw-p 00000000 00:00 0 
+7f49ca847000-7f49ca84a000 ---p 00000000 00:00 0 
+7f49ca84a000-7f49ca948000 rw-p 00000000 00:00 0 
+7f49ca948000-7f49ca966000 r--s 0020b000 08:02 5388507                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/web/main/jbossweb-7.0.17.Final.jar
+7f49ca966000-7f49ca973000 r--s 00167000 08:02 5387769                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/web/main/jasper-jdt-7.0.3.Final.jar
+7f49ca973000-7f49ca97b000 r--s 00087000 08:02 5388508                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/web/main/jboss-as-web-7.1.3.Final.jar
+7f49ca97b000-7f49ca97c000 r--s 00003000 08:02 5376115                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/clustering/common/main/jboss-as-clustering-common-7.1.3.Final.jar
+7f49ca97c000-7f49ca980000 r--s 00010000 08:02 5376107                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/clustering/api/main/jboss-as-clustering-api-7.1.3.Final.jar
+7f49ca980000-7f49ca984000 r--s 00020000 08:02 5375618                    /home/ondra/sw/AS/7.1.3/modules/org/infinispan/client/hotrod/main/infinispan-client-hotrod-5.1.7.Final.jar
+7f49ca984000-7f49ca985000 r--s 00001000 08:02 7738928                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-jaxrs/main/resteasy-jaxrs-2.3.3.Final-jandex.jar
+7f49ca985000-7f49ca987000 r--s 00009000 08:02 5375623                    /home/ondra/sw/AS/7.1.3/modules/org/infinispan/cachestore/remote/main/infinispan-cachestore-remote-5.1.7.Final.jar
+7f49ca987000-7f49ca98b000 r--s 0000e000 08:02 7864675                    /home/ondra/sw/AS/7.1.3/modules/javax/resource/api/main/jboss-connector-api_1.6_spec-1.0.1.Final.jar
+7f49ca98b000-7f49ca98e000 ---p 00000000 00:00 0 
+7f49ca98e000-7f49caa8c000 rw-p 00000000 00:00 0 
+7f49caa8c000-7f49caa90000 r--s 00023000 08:02 5388535                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/deployment-scanner/main/jboss-as-deployment-scanner-7.1.3.Final.jar
+7f49caa90000-7f49caa9c000 r--s 00088000 08:02 7738926                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-jaxrs/main/resteasy-jaxrs-2.3.3.Final.jar
+7f49caa9c000-7f49caa9d000 r--s 00001000 08:02 7738930                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-jaxrs/main/async-http-servlet-3.0-2.3.3.Final.jar
+7f49caa9d000-7f49caaa6000 r--s 00051000 08:02 5375414                    /home/ondra/sw/AS/7.1.3/modules/org/hibernate/validator/main/hibernate-validator-4.2.0.Final.jar
+7f49caaa6000-7f49caaa8000 r--s 00007000 08:02 7864756                    /home/ondra/sw/AS/7.1.3/modules/javax/xml/soap/api/main/jboss-saaj-api_1.3_spec-1.0.2.Final.jar
+7f49caaa8000-7f49caaaa000 r--s 0000a000 08:02 7864701                    /home/ondra/sw/AS/7.1.3/modules/javax/ws/rs/api/main/jboss-jaxrs-api_1.1_spec-1.0.1.Final.jar
+7f49caaaa000-7f49caaad000 r--s 00039000 08:02 5532434                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/jdr/main/jboss-as-sos-7.1.3.Final.jar
+7f49caaad000-7f49caaaf000 r--s 0000d000 08:02 5532436                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/jdr/main/jboss-as-jdr-7.1.3.Final.jar
+7f49caaaf000-7f49caab1000 r--s 0000f000 08:02 7865306                    /home/ondra/sw/AS/7.1.3/modules/javax/activation/api/main/activation-1.1.1.jar
+7f49caab1000-7f49caab4000 ---p 00000000 00:00 0 
+7f49caab4000-7f49cabb2000 rw-p 00000000 00:00 0 
+7f49cabb2000-7f49cabb5000 ---p 00000000 00:00 0 
+7f49cabb5000-7f49cacb3000 rw-p 00000000 00:00 0 
+7f49cacb3000-7f49cacb6000 ---p 00000000 00:00 0 
+7f49cacb6000-7f49cadb4000 rw-p 00000000 00:00 0 
+7f49cadb4000-7f49cadb7000 ---p 00000000 00:00 0 
+7f49cadb7000-7f49caeb5000 rw-p 00000000 00:00 0 
+7f49caeb5000-7f49caeb8000 ---p 00000000 00:00 0 
+7f49caeb8000-7f49cafb6000 rw-p 00000000 00:00 0 
+7f49cafb6000-7f49cafb9000 ---p 00000000 00:00 0 
+7f49cafb9000-7f49cb0b7000 rw-p 00000000 00:00 0 
+7f49cb0b7000-7f49cb0ba000 ---p 00000000 00:00 0 
+7f49cb0ba000-7f49cb1b8000 rw-p 00000000 00:00 0 
+7f49cb1b8000-7f49cb1bb000 ---p 00000000 00:00 0 
+7f49cb1bb000-7f49cb2b9000 rw-p 00000000 00:00 0 
+7f49cb2b9000-7f49cb2bc000 ---p 00000000 00:00 0 
+7f49cb2bc000-7f49cb3ba000 rw-p 00000000 00:00 0 
+7f49cb3ba000-7f49cb3bd000 ---p 00000000 00:00 0 
+7f49cb3bd000-7f49cb5bb000 rw-p 00000000 00:00 0                          [stack:21799]
+7f49cb5bb000-7f49cb5be000 ---p 00000000 00:00 0 
+7f49cb5be000-7f49cb6bc000 rw-p 00000000 00:00 0                          [stack:21721]
+7f49cb6bc000-7f49cb6bf000 ---p 00000000 00:00 0 
+7f49cb6bf000-7f49cb7bd000 rw-p 00000000 00:00 0                          [stack:21720]
+7f49cb7bd000-7f49cb7c0000 ---p 00000000 00:00 0 
+7f49cb7c0000-7f49cb8be000 rw-p 00000000 00:00 0                          [stack:21719]
+7f49cb8be000-7f49cb8c1000 ---p 00000000 00:00 0 
+7f49cb8c1000-7f49cb9bf000 rw-p 00000000 00:00 0                          [stack:21718]
+7f49cb9bf000-7f49cb9c2000 ---p 00000000 00:00 0 
+7f49cb9c2000-7f49cbac0000 rw-p 00000000 00:00 0                          [stack:21717]
+7f49cbac0000-7f49cbac3000 ---p 00000000 00:00 0 
+7f49cbac3000-7f49cbbc1000 rw-p 00000000 00:00 0                          [stack:21716]
+7f49cbbc1000-7f49cbbc4000 ---p 00000000 00:00 0 
+7f49cbbc4000-7f49cbcc2000 rw-p 00000000 00:00 0                          [stack:21715]
+7f49cbcc2000-7f49cbcc5000 ---p 00000000 00:00 0 
+7f49cbcc5000-7f49cbdc3000 rw-p 00000000 00:00 0                          [stack:21714]
+7f49cbdc3000-7f49cbdff000 r-xp 00000000 08:02 8126552                    /lib/x86_64-linux-gnu/libpcre.so.3.13.1
+7f49cbdff000-7f49cbffe000 ---p 0003c000 08:02 8126552                    /lib/x86_64-linux-gnu/libpcre.so.3.13.1
+7f49cbffe000-7f49cbfff000 r--p 0003b000 08:02 8126552                    /lib/x86_64-linux-gnu/libpcre.so.3.13.1
+7f49cbfff000-7f49cc000000 rw-p 0003c000 08:02 8126552                    /lib/x86_64-linux-gnu/libpcre.so.3.13.1
+7f49cc000000-7f49cc05a000 rw-p 00000000 00:00 0 
+7f49cc05a000-7f49d0000000 ---p 00000000 00:00 0 
+7f49d0000000-7f49d0002000 r--s 0000d000 08:02 7864503                    /home/ondra/sw/AS/7.1.3/modules/org/apache/commons/codec/main/commons-codec-1.4.jar
+7f49d0002000-7f49d0007000 r--s 00068000 08:02 7864624                    /home/ondra/sw/AS/7.1.3/modules/org/antlr/main/antlr-2.7.7.jar
+7f49d0007000-7f49d000e000 r--s 00056000 08:02 7738064                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/osgi/framework/main/jbosgi-framework-core-1.3.1.CR1.jar
+7f49d000e000-7f49d0010000 r--s 00005000 08:02 7738062                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/osgi/framework/main/jbosgi-deployment-1.1.0.Final.jar
+7f49d0010000-7f49d0014000 r--s 0002e000 08:02 7738283                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ironjacamar/jdbcadapters/main/ironjacamar-jdbc-1.0.12.Final.jar
+7f49d0014000-7f49d0018000 r--s 00023000 08:02 5388539                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/pojo/main/jboss-as-pojo-7.1.3.Final.jar
+7f49d0018000-7f49d001a000 r--s 00006000 08:02 5375298                    /home/ondra/sw/AS/7.1.3/modules/ch/qos/cal10n/main/cal10n-api-0.7.3.jar
+7f49d001a000-7f49d001c000 r--s 0000c000 08:02 7738182                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ironjacamar/impl/main/ironjacamar-validator-1.0.12.Final.jar
+7f49d001c000-7f49d0020000 r--s 0000a000 08:02 7738383                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/weld/spi/main/weld-spi-1.1.Final.jar
+7f49d0020000-7f49d0022000 r--s 00003000 08:02 7738906                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/resteasy/resteasy-cdi/main/resteasy-cdi-2.3.3.Final.jar
+7f49d0022000-7f49d0026000 r--s 0003a000 08:02 7738188                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/ironjacamar/impl/main/ironjacamar-common-impl-1.0.12.Final.jar
+7f49d0026000-7f49d002a000 r--s 00023000 08:02 7738335                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/remote-naming/main/jboss-remote-naming-1.0.4.Final.jar
+7f49d002a000-7f49d002e000 r--s 00023000 08:02 5388759                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/threads/main/jboss-as-threads-7.1.3.Final.jar
+7f49d002e000-7f49d0030000 r--s 00009000 08:02 7739059                    /home/ondra/sw/AS/7.1.3/modules/org/apache/commons/cli/main/commons-cli-1.2.jar
+7f49d0030000-7f49d0033000 r--s 0000a000 08:02 7864630                    /home/ondra/sw/AS/7.1.3/modules/javax/ejb/api/main/jboss-ejb-api_3.1_spec-1.0.2.Final.jar
+7f49d0033000-7f49d0036000 r--s 00017000 08:02 7864751                    /home/ondra/sw/AS/7.1.3/modules/javax/xml/bind/api/main/jboss-jaxb-api_2.2_spec-1.0.4.Final.jar
+7f49d0036000-7f49d0038000 r--s 0000a000 08:02 7864690                    /home/ondra/sw/AS/7.1.3/modules/javax/el/api/main/jboss-el-api_2.2_spec-1.0.2.Final.jar
+7f49d0038000-7f49d003b000 r--s 00009000 08:02 7864719                    /home/ondra/sw/AS/7.1.3/modules/javax/xml/ws/api/main/jboss-jaxws-api_2.2_spec-2.0.1.Final.jar
+7f49d003b000-7f49d003e000 r--s 0000a000 08:02 7864710                    /home/ondra/sw/AS/7.1.3/modules/javax/enterprise/api/main/cdi-api-1.0-SP4.jar
+7f49d003e000-7f49d0041000 r--s 00009000 08:02 7864647                    /home/ondra/sw/AS/7.1.3/modules/javax/validation/api/main/validation-api-1.0.0.GA.jar
+7f49d0041000-7f49d0042000 r--s 00004000 08:02 7864902                    /home/ondra/sw/AS/7.1.3/modules/javax/interceptor/api/main/jboss-interceptors-api_1.1_spec-1.0.1.Final.jar
+7f49d0042000-7f49d0045000 r--s 00010000 08:02 5388927                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/jaxrs/main/jboss-as-jaxrs-7.1.3.Final.jar
+7f49d0045000-7f49d0046000 r--s 00004000 08:02 7864694                    /home/ondra/sw/AS/7.1.3/modules/javax/annotation/api/main/jboss-annotations-api_1.1_spec-1.0.1.Final.jar
+7f49d0046000-7f49d0053000 r--s 0009d000 08:02 5387766                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/connector/main/jboss-as-connector-7.1.3.Final.jar
+7f49d0053000-7f49d006f000 r--s 00167000 08:02 5388718                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/ejb3/main/jboss-as-ejb3-7.1.3.Final.jar
+7f49d006f000-7f49d0071000 r--s 0000b000 08:02 7605383                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/osgi/spi/main/jbosgi-spi-3.1.0.Final.jar
+7f49d0071000-7f49d0073000 r--s 00016000 08:02 5375627                    /home/ondra/sw/AS/7.1.3/modules/org/infinispan/cachestore/jdbc/main/infinispan-cachestore-jdbc-5.1.7.Final.jar
+7f49d0073000-7f49d0076000 r--s 0000d000 08:02 5388859                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/configadmin/main/jboss-as-configadmin-7.1.3.Final.jar
+7f49d0076000-7f49d0078000 r--s 00012000 08:02 5376075                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/xnio/nio/main/xnio-nio-3.0.6.GA.jar
+7f49d0078000-7f49d0079000 r--s 00006000 08:02 7738353                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/security/negotiation/main/jboss-negotiation-spnego-2.2.1.Final.jar
+7f49d0079000-7f49d007b000 r--s 00002000 08:02 7738359                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/security/negotiation/main/jboss-negotiation-ntlm-2.2.1.Final.jar
+7f49d007b000-7f49d007d000 r--s 00003000 08:02 7738355                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/security/negotiation/main/jboss-negotiation-net-2.2.1.Final.jar
+7f49d007d000-7f49d007f000 r--s 00003000 08:02 7738361                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/security/negotiation/main/jboss-negotiation-extras-2.2.1.Final.jar
+7f49d007f000-7f49d0081000 r--s 00008000 08:02 7738363                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/security/negotiation/main/jboss-negotiation-common-2.2.1.Final.jar
+7f49d0081000-7f49d0084000 r--s 0000e000 08:02 7738323                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/metadata/main/jboss-metadata-ear-7.0.4.Final.jar
+7f49d0084000-7f49d008b000 r--s 0005b000 08:02 7738317                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/metadata/main/jboss-metadata-web-7.0.4.Final.jar
+7f49d008b000-7f49d0095000 r--s 00090000 08:02 7738319                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/metadata/main/jboss-metadata-ejb-7.0.4.Final.jar
+7f49d0095000-7f49d0097000 r--s 00004000 08:02 7738313                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/metadata/main/jboss-metadata-appclient-7.0.4.Final.jar
+7f49d0097000-7f49d00a1000 r--s 00058000 08:02 7738321                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/metadata/main/jboss-metadata-common-7.0.4.Final.jar
+7f49d00a1000-7f49d00a5000 r--s 0001f000 08:02 6293802                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/transactions/main/jboss-as-transactions-7.1.3.Final.jar
+7f49d00a5000-7f49d00ab000 r--s 00035000 08:02 5388710                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/naming/main/jboss-as-naming-7.1.3.Final.jar
+7f49d00ab000-7f49d00b4000 r--s 00069000 08:02 5532440                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/ee/main/jboss-as-ee-7.1.3.Final.jar
+7f49d00b4000-7f49d00bc000 r--s 0004b000 08:02 5376093                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/clustering/infinispan/main/jboss-as-clustering-infinispan-7.1.3.Final.jar
+7f49d00bc000-7f49d00df000 r--s 001cc000 08:02 5375508                    /home/ondra/sw/AS/7.1.3/modules/org/infinispan/main/infinispan-core-5.1.7.Final.jar
+7f49d00df000-7f49d00e1000 r--s 00005000 08:02 7864659                    /home/ondra/sw/AS/7.1.3/modules/javax/transaction/api/main/jboss-transaction-api_1.1_spec-1.0.1.Final.jar
+7f49d00e1000-7f49d00e4000 r--s 00011000 08:02 7864774                    /home/ondra/sw/AS/7.1.3/modules/javax/servlet/api/main/jboss-servlet-api_3.0_spec-1.0.1.Final.jar
+7f49d00e4000-7f49d00e9000 r--s 0004b000 08:02 8524860                    /usr/lib/jvm/java-7-openjdk-common/jre/lib/jsse.jar
+7f49d00e9000-7f49d00f5000 r--s 0007a000 08:02 6947727                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/common-core/main/jboss-common-core-2.2.17.GA.jar
+7f49d00f5000-7f49d00f7000 r--s 00004000 08:02 5375504                    /home/ondra/sw/AS/7.1.3/modules/org/picketbox/main/picketbox-commons-1.0.0.final.jar
+7f49d00f7000-7f49d00f9000 r--s 00004000 08:02 5375503                    /home/ondra/sw/AS/7.1.3/modules/org/picketbox/main/picketbox-infinispan-4.0.13.Final.jar
+7f49d00f9000-7f49d010b000 r--s 000c7000 08:02 5375501                    /home/ondra/sw/AS/7.1.3/modules/org/picketbox/main/picketbox-4.0.13.Final.jar
+7f49d010b000-7f49d0111000 r--s 0003b000 08:02 5388885                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/security/main/jboss-as-security-7.1.3.Final.jar
+7f49d0111000-7f49d0115000 r--s 00019000 08:02 5388714                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/protocol/main/jboss-as-protocol-7.1.3.Final.jar
+7f49d0115000-7f49d011a000 r--s 0002e000 08:02 5388528                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/process-controller/main/jboss-as-process-controller-7.1.3.Final.jar
+7f49d011a000-7f49d011d000 r--s 00026000 08:02 5388524                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/platform-mbean/main/jboss-as-platform-mbean-7.1.3.Final.jar
+7f49d011d000-7f49d011f000 r--s 0000d000 08:02 5532423                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/embedded/main/jboss-as-embedded-7.1.3.Final.jar
+7f49d011f000-7f49d0125000 r--s 00039000 08:02 5388863                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/domain-management/main/jboss-as-domain-management-7.1.3.Final.jar
+7f49d0125000-7f49d0128000 r--s 00017000 08:02 5388880                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/domain-http-interface/main/jboss-as-domain-http-interface-7.1.3.Final.jar
+7f49d0128000-7f49d012b000 r--s 00008000 08:02 5388866                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/deployment-repository/main/jboss-as-deployment-repository-7.1.3.Final.jar
+7f49d012b000-7f49d012e000 r--s 00018000 08:02 7212916                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/vfs/main/jboss-vfs-3.1.0.Final.jar
+7f49d012e000-7f49d0132000 r--s 0001a000 08:02 7738172                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/threads/main/jboss-threads-2.0.0.GA.jar
+7f49d0132000-7f49d0134000 r--s 00003000 08:02 7738989                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/stdio/main/jboss-stdio-1.0.1.GA.jar
+7f49d0134000-7f49d0136000 r--s 00014000 08:02 7738800                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/sasl/main/jboss-sasl-1.0.3.Final.jar
+7f49d0136000-7f49d013e000 r--s 0006e000 08:02 7738975                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/log4j/logmanager/main/log4j-jboss-logmanager-1.0.1.Final.jar
+7f49d013e000-7f49d0141000 r--s 00012000 08:02 6722276                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/marshalling/river/main/jboss-marshalling-river-1.3.15.GA.jar
+7f49d0141000-7f49d0143000 r--s 00010000 08:02 7476522                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/jandex/main/jandex-1.0.3.Final.jar
+7f49d0143000-7f49d0146000 r--s 0000e000 08:02 6947723                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/invocation/main/jboss-invocation-1.1.1.Final.jar
+7f49d0146000-7f49d0148000 r--s 0000c000 08:02 7739009                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/common-beans/main/jboss-common-beans-1.0.0.Final.jar
+7f49d0148000-7f49d014a000 r--s 0000c000 08:02 7738846                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/logging/main/jboss-logging-3.1.2.GA.jar
+7f49d014a000-7f49d014f000 r--s 00021000 08:02 7738864                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/remoting3/remoting-jmx/main/remoting-jmx-1.0.4.Final.jar
+7f49d014f000-7f49d0156000 r-xp 00000000 08:02 8519807                    /usr/lib/x86_64-linux-gnu/libffi.so.6.0.0
+7f49d0156000-7f49d0355000 ---p 00007000 08:02 8519807                    /usr/lib/x86_64-linux-gnu/libffi.so.6.0.0
+7f49d0355000-7f49d0356000 r--p 00006000 08:02 8519807                    /usr/lib/x86_64-linux-gnu/libffi.so.6.0.0
+7f49d0356000-7f49d0357000 rw-p 00007000 08:02 8519807                    /usr/lib/x86_64-linux-gnu/libffi.so.6.0.0
+7f49d0357000-7f49d036f000 r-xp 00000000 08:02 8126934                    /lib/x86_64-linux-gnu/libresolv-2.15.so
+7f49d036f000-7f49d056f000 ---p 00018000 08:02 8126934                    /lib/x86_64-linux-gnu/libresolv-2.15.so
+7f49d056f000-7f49d0570000 r--p 00018000 08:02 8126934                    /lib/x86_64-linux-gnu/libresolv-2.15.so
+7f49d0570000-7f49d0571000 rw-p 00019000 08:02 8126934                    /lib/x86_64-linux-gnu/libresolv-2.15.so
+7f49d0571000-7f49d0573000 rw-p 00000000 00:00 0 
+7f49d0573000-7f49d0590000 r-xp 00000000 08:02 8130112                    /lib/x86_64-linux-gnu/libselinux.so.1
+7f49d0590000-7f49d078f000 ---p 0001d000 08:02 8130112                    /lib/x86_64-linux-gnu/libselinux.so.1
+7f49d078f000-7f49d0790000 r--p 0001c000 08:02 8130112                    /lib/x86_64-linux-gnu/libselinux.so.1
+7f49d0790000-7f49d0791000 rw-p 0001d000 08:02 8130112                    /lib/x86_64-linux-gnu/libselinux.so.1
+7f49d0791000-7f49d0792000 rw-p 00000000 00:00 0 
+7f49d0792000-7f49d0795000 r-xp 00000000 08:02 8531405                    /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.3400.0
+7f49d0795000-7f49d0994000 ---p 00003000 08:02 8531405                    /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.3400.0
+7f49d0994000-7f49d0995000 r--p 00002000 08:02 8531405                    /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.3400.0
+7f49d0995000-7f49d0996000 rw-p 00003000 08:02 8531405                    /usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.3400.0
+7f49d0996000-7f49d0a8b000 r-xp 00000000 08:02 8126554                    /lib/x86_64-linux-gnu/libglib-2.0.so.0.3400.0
+7f49d0a8b000-7f49d0c8a000 ---p 000f5000 08:02 8126554                    /lib/x86_64-linux-gnu/libglib-2.0.so.0.3400.0
+7f49d0c8a000-7f49d0c8b000 r--p 000f4000 08:02 8126554                    /lib/x86_64-linux-gnu/libglib-2.0.so.0.3400.0
+7f49d0c8b000-7f49d0c8c000 rw-p 000f5000 08:02 8126554                    /lib/x86_64-linux-gnu/libglib-2.0.so.0.3400.0
+7f49d0c8c000-7f49d0c8d000 rw-p 00000000 00:00 0 
+7f49d0c8d000-7f49d0cda000 r-xp 00000000 08:02 8531403                    /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.3400.0
+7f49d0cda000-7f49d0eda000 ---p 0004d000 08:02 8531403                    /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.3400.0
+7f49d0eda000-7f49d0edb000 r--p 0004d000 08:02 8531403                    /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.3400.0
+7f49d0edb000-7f49d0edc000 rw-p 0004e000 08:02 8531403                    /usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.3400.0
+7f49d0edc000-7f49d102a000 r-xp 00000000 08:02 8526746                    /usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.3400.0
+7f49d102a000-7f49d1229000 ---p 0014e000 08:02 8526746                    /usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.3400.0
+7f49d1229000-7f49d122d000 r--p 0014d000 08:02 8526746                    /usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.3400.0
+7f49d122d000-7f49d122f000 rw-p 00151000 08:02 8526746                    /usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.3400.0
+7f49d122f000-7f49d1231000 rw-p 00000000 00:00 0 
+7f49d1231000-7f49d1232000 r--s 0000a000 08:02 5375367                    /home/ondra/sw/AS/7.1.3/modules/asm/asm/main/asm-3.3.1.jar
+7f49d1232000-7f49d1238000 r--s 00036000 08:02 5376071                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/xnio/main/xnio-api-3.0.6.GA.jar
+7f49d1238000-7f49d123e000 r--s 00033000 08:02 6559631                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/marshalling/main/jboss-marshalling-1.3.15.GA.jar
+7f49d123e000-7f49d1243000 r--s 00034000 08:02 7738868                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/remoting3/main/jboss-remoting-3.2.8.SP1.jar
+7f49d1243000-7f49d1247000 r--s 00028000 08:02 5388877                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/remoting/main/jboss-as-remoting-7.1.3.Final.jar
+7f49d1247000-7f49d124a000 r--s 0000a000 08:02 5387407                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/network/main/jboss-as-network-7.1.3.Final.jar
+7f49d124a000-7f49d124c000 r--s 00014000 08:02 6831428                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/dmr/main/jboss-dmr-1.1.1.Final.jar
+7f49d124c000-7f49d1253000 r--s 0002b000 08:02 5532430                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/controller-client/main/jboss-as-controller-client-7.1.3.Final.jar
+7f49d1253000-7f49d1269000 r-xp 00000000 08:02 8538356                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnet.so
+7f49d1269000-7f49d1468000 ---p 00016000 08:02 8538356                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnet.so
+7f49d1468000-7f49d1469000 r--p 00015000 08:02 8538356                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnet.so
+7f49d1469000-7f49d146a000 rw-p 00016000 08:02 8538356                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnet.so
+7f49d146a000-7f49d147a000 r-xp 00000000 08:02 8538352                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnio.so
+7f49d147a000-7f49d167a000 ---p 00010000 08:02 8538352                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnio.so
+7f49d167a000-7f49d167b000 r--p 00010000 08:02 8538352                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnio.so
+7f49d167b000-7f49d167c000 rw-p 00011000 08:02 8538352                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnio.so
+7f49d167c000-7f49d1684000 r-xp 00000000 08:02 8538362                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7f49d1684000-7f49d1883000 ---p 00008000 08:02 8538362                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7f49d1883000-7f49d1884000 r--p 00007000 08:02 8538362                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7f49d1884000-7f49d1885000 rw-p 00008000 08:02 8538362                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7f49d1885000-7f49d1888000 ---p 00000000 00:00 0 
+7f49d1888000-7f49d1986000 rw-p 00000000 00:00 0                          [stack:21713]
+7f49d1986000-7f49d1987000 ---p 00000000 00:00 0 
+7f49d1987000-7f49d1a87000 rw-p 00000000 00:00 0                          [stack:21712]
+7f49d1a87000-7f49d1a8a000 ---p 00000000 00:00 0 
+7f49d1a8a000-7f49d1b88000 rw-p 00000000 00:00 0                          [stack:21711]
+7f49d1b88000-7f49d1b8b000 ---p 00000000 00:00 0 
+7f49d1b8b000-7f49d1c89000 rw-p 00000000 00:00 0                          [stack:21710]
+7f49d1c89000-7f49d1c8c000 ---p 00000000 00:00 0 
+7f49d1c8c000-7f49d1d8a000 rw-p 00000000 00:00 0                          [stack:21709]
+7f49d1d8a000-7f49d1d8d000 ---p 00000000 00:00 0 
+7f49d1d8d000-7f49d1e8b000 rw-p 00000000 00:00 0                          [stack:21708]
+7f49d1e8b000-7f49d1e8e000 ---p 00000000 00:00 0 
+7f49d1e8e000-7f49d1f8c000 rw-p 00000000 00:00 0                          [stack:21707]
+7f49d1f8c000-7f49d1f90000 r-xp 00000000 08:02 8538379                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libdt_socket.so
+7f49d1f90000-7f49d218f000 ---p 00004000 08:02 8538379                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libdt_socket.so
+7f49d218f000-7f49d2190000 r--p 00003000 08:02 8538379                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libdt_socket.so
+7f49d2190000-7f49d2191000 rw-p 00004000 08:02 8538379                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libdt_socket.so
+7f49d2191000-7f49d2194000 ---p 00000000 00:00 0 
+7f49d2194000-7f49d2292000 rw-p 00000000 00:00 0                          [stack:21706]
+7f49d2292000-7f49d2295000 ---p 00000000 00:00 0 
+7f49d2295000-7f49d2393000 rw-p 00000000 00:00 0                          [stack:21705]
+7f49d2393000-7f49d2396000 ---p 00000000 00:00 0 
+7f49d2396000-7f49d2494000 rw-p 00000000 00:00 0                          [stack:21704]
+7f49d2494000-7f49d2495000 ---p 00000000 00:00 0 
+7f49d2495000-7f49d4000000 rw-p 00000000 00:00 0                          [stack:21703]
+7f49d4000000-7f49d4042000 rw-p 00000000 00:00 0 
+7f49d4042000-7f49d8000000 ---p 00000000 00:00 0 
+7f49d8000000-7f49d8001000 r--s 00000000 08:02 5375287                    /home/ondra/sw/AS/7.1.3/modules/net/jcip/main/jcip-annotations-1.0.jar
+7f49d8001000-7f49d8015000 r--s 00108000 08:02 6163929                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/controller/main/jboss-as-controller-7.1.3.Final.jar
+7f49d8015000-7f49d8017000 r--s 00007000 08:02 7083285                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/staxmapper/main/staxmapper-1.1.0.Final.jar
+7f49d8017000-7f49d801b000 r--s 00030000 08:02 7738329                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/msc/main/jboss-msc-1.0.2.GA.jar
+7f49d801b000-7f49d8027000 r--s 000b4000 08:02 5388519                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/server/main/jboss-as-server-7.1.3.Final.jar
+7f49d8027000-7f49d804c000 r--s 002ef000 08:02 7864565                    /home/ondra/sw/AS/7.1.3/modules/org/apache/xalan/main/xalan-2.7.1.jbossorg-1.jar
+7f49d804c000-7f49d88c0000 rw-p 00000000 00:00 0 
+7f49d88c0000-7f49d8a6c000 r--s 01cdb000 08:02 8538344                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar
+7f49d8a6c000-7f49d8a6d000 ---p 00000000 00:00 0 
+7f49d8a6d000-7f49d8b6d000 rw-p 00000000 00:00 0                          [stack:21702]
+7f49d8b6d000-7f49d8b6e000 ---p 00000000 00:00 0 
+7f49d8b6e000-7f49d8c6e000 rw-p 00000000 00:00 0                          [stack:21701]
+7f49d8c6e000-7f49d8c6f000 ---p 00000000 00:00 0 
+7f49d8c6f000-7f49d8d99000 rw-p 00000000 00:00 0                          [stack:21700]
+7f49d8d99000-7f49d9000000 rw-p 00000000 00:00 0 
+7f49d9000000-7f49d9310000 rwxp 00000000 00:00 0 
+7f49d9310000-7f49dcc7c000 rw-p 00000000 00:00 0 
+7f49dcc7c000-7f49e0000000 ---p 00000000 00:00 0 
+7f49e0000000-7f49e0001000 r--s 00008000 08:02 7864801                    /home/ondra/sw/AS/7.1.3/modules/javax/security/jacc/api/main/jboss-jacc-api_1.4_spec-1.0.2.Final.jar
+7f49e0001000-7f49e0002000 ---p 00000000 00:00 0 
+7f49e0002000-7f49e0129000 rw-p 00000000 00:00 0                          [stack:21699]
+7f49e0129000-7f49e0202000 rw-p 00000000 00:00 0 
+7f49e0202000-7f49e0229000 rw-p 00000000 00:00 0 
+7f49e0229000-7f49e0302000 rw-p 00000000 00:00 0 
+7f49e0302000-7f49e032c000 rw-p 00000000 00:00 0 
+7f49e032c000-7f49e0592000 rw-p 00000000 00:00 0 
+7f49e0592000-7f49e0631000 rw-p 00000000 00:00 0 
+7f49e0631000-7f49e06db000 rw-p 00000000 00:00 0 
+7f49e06db000-7f49e06dc000 rw-p 00000000 00:00 0 
+7f49e06dc000-7f49e06e4000 r-xp 00000000 08:02 8538381                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libzip.so
+7f49e06e4000-7f49e08e3000 ---p 00008000 08:02 8538381                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libzip.so
+7f49e08e3000-7f49e08e4000 r--p 00007000 08:02 8538381                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libzip.so
+7f49e08e4000-7f49e08e5000 rw-p 00008000 08:02 8538381                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libzip.so
+7f49e08e5000-7f49e08f1000 r-xp 00000000 08:02 8127095                    /lib/x86_64-linux-gnu/libnss_files-2.15.so
+7f49e08f1000-7f49e0af0000 ---p 0000c000 08:02 8127095                    /lib/x86_64-linux-gnu/libnss_files-2.15.so
+7f49e0af0000-7f49e0af1000 r--p 0000b000 08:02 8127095                    /lib/x86_64-linux-gnu/libnss_files-2.15.so
+7f49e0af1000-7f49e0af2000 rw-p 0000c000 08:02 8127095                    /lib/x86_64-linux-gnu/libnss_files-2.15.so
+7f49e0af2000-7f49e0afc000 r-xp 00000000 08:02 8127010                    /lib/x86_64-linux-gnu/libnss_nis-2.15.so
+7f49e0afc000-7f49e0cfc000 ---p 0000a000 08:02 8127010                    /lib/x86_64-linux-gnu/libnss_nis-2.15.so
+7f49e0cfc000-7f49e0cfd000 r--p 0000a000 08:02 8127010                    /lib/x86_64-linux-gnu/libnss_nis-2.15.so
+7f49e0cfd000-7f49e0cfe000 rw-p 0000b000 08:02 8127010                    /lib/x86_64-linux-gnu/libnss_nis-2.15.so
+7f49e0cfe000-7f49e0d15000 r-xp 00000000 08:02 8127373                    /lib/x86_64-linux-gnu/libnsl-2.15.so
+7f49e0d15000-7f49e0f14000 ---p 00017000 08:02 8127373                    /lib/x86_64-linux-gnu/libnsl-2.15.so
+7f49e0f14000-7f49e0f15000 r--p 00016000 08:02 8127373                    /lib/x86_64-linux-gnu/libnsl-2.15.so
+7f49e0f15000-7f49e0f16000 rw-p 00017000 08:02 8127373                    /lib/x86_64-linux-gnu/libnsl-2.15.so
+7f49e0f16000-7f49e0f18000 rw-p 00000000 00:00 0 
+7f49e0f18000-7f49e0f20000 r-xp 00000000 08:02 8127118                    /lib/x86_64-linux-gnu/libnss_compat-2.15.so
+7f49e0f20000-7f49e111f000 ---p 00008000 08:02 8127118                    /lib/x86_64-linux-gnu/libnss_compat-2.15.so
+7f49e111f000-7f49e1120000 r--p 00007000 08:02 8127118                    /lib/x86_64-linux-gnu/libnss_compat-2.15.so
+7f49e1120000-7f49e1121000 rw-p 00008000 08:02 8127118                    /lib/x86_64-linux-gnu/libnss_compat-2.15.so
+7f49e1121000-7f49e1821000 r--p 00000000 08:02 8526171                    /usr/lib/locale/locale-archive
+7f49e1821000-7f49e1824000 r-xp 00000000 08:02 8538348                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnpt.so
+7f49e1824000-7f49e1a23000 ---p 00003000 08:02 8538348                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnpt.so
+7f49e1a23000-7f49e1a24000 r--p 00002000 08:02 8538348                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnpt.so
+7f49e1a24000-7f49e1a25000 rw-p 00003000 08:02 8538348                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libnpt.so
+7f49e1a25000-7f49e1a5f000 r-xp 00000000 08:02 8538353                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libjdwp.so
+7f49e1a5f000-7f49e1c5e000 ---p 0003a000 08:02 8538353                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libjdwp.so
+7f49e1c5e000-7f49e1c5f000 r--p 00039000 08:02 8538353                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libjdwp.so
+7f49e1c5f000-7f49e1c60000 rw-p 0003a000 08:02 8538353                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libjdwp.so
+7f49e1c60000-7f49e1c8b000 r-xp 00000000 08:02 8538366                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libjava.so
+7f49e1c8b000-7f49e1e8a000 ---p 0002b000 08:02 8538366                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libjava.so
+7f49e1e8a000-7f49e1e8b000 r--p 0002a000 08:02 8538366                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libjava.so
+7f49e1e8b000-7f49e1e8d000 rw-p 0002b000 08:02 8538366                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libjava.so
+7f49e1e8d000-7f49e1e9c000 r-xp 00000000 08:02 8538365                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libverify.so
+7f49e1e9c000-7f49e209b000 ---p 0000f000 08:02 8538365                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libverify.so
+7f49e209b000-7f49e209d000 r--p 0000e000 08:02 8538365                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libverify.so
+7f49e209d000-7f49e209e000 rw-p 00010000 08:02 8538365                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/libverify.so
+7f49e209e000-7f49e20a5000 r-xp 00000000 08:02 8126933                    /lib/x86_64-linux-gnu/librt-2.15.so
+7f49e20a5000-7f49e22a4000 ---p 00007000 08:02 8126933                    /lib/x86_64-linux-gnu/librt-2.15.so
+7f49e22a4000-7f49e22a5000 r--p 00006000 08:02 8126933                    /lib/x86_64-linux-gnu/librt-2.15.so
+7f49e22a5000-7f49e22a6000 rw-p 00007000 08:02 8126933                    /lib/x86_64-linux-gnu/librt-2.15.so
+7f49e22a6000-7f49e22bb000 r-xp 00000000 08:02 8130127                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f49e22bb000-7f49e24ba000 ---p 00015000 08:02 8130127                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f49e24ba000-7f49e24bb000 r--p 00014000 08:02 8130127                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f49e24bb000-7f49e24bc000 rw-p 00015000 08:02 8130127                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7f49e24bc000-7f49e25b7000 r-xp 00000000 08:02 8127068                    /lib/x86_64-linux-gnu/libm-2.15.so
+7f49e25b7000-7f49e27b6000 ---p 000fb000 08:02 8127068                    /lib/x86_64-linux-gnu/libm-2.15.so
+7f49e27b6000-7f49e27b7000 r--p 000fa000 08:02 8127068                    /lib/x86_64-linux-gnu/libm-2.15.so
+7f49e27b7000-7f49e27b8000 rw-p 000fb000 08:02 8127068                    /lib/x86_64-linux-gnu/libm-2.15.so
+7f49e27b8000-7f49e289d000 r-xp 00000000 08:02 8530104                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.17
+7f49e289d000-7f49e2a9c000 ---p 000e5000 08:02 8530104                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.17
+7f49e2a9c000-7f49e2aa4000 r--p 000e4000 08:02 8530104                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.17
+7f49e2aa4000-7f49e2aa6000 rw-p 000ec000 08:02 8530104                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.17
+7f49e2aa6000-7f49e2abb000 rw-p 00000000 00:00 0 
+7f49e2abb000-7f49e34b6000 r-xp 00000000 08:02 8538370                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f49e34b6000-7f49e36b5000 ---p 009fb000 08:02 8538370                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f49e36b5000-7f49e3734000 r--p 009fa000 08:02 8538370                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f49e3734000-7f49e3757000 rw-p 00a79000 08:02 8538370                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7f49e3757000-7f49e3782000 rw-p 00000000 00:00 0 
+7f49e3782000-7f49e3798000 r-xp 00000000 08:02 8130048                    /lib/x86_64-linux-gnu/libz.so.1.2.7
+7f49e3798000-7f49e3997000 ---p 00016000 08:02 8130048                    /lib/x86_64-linux-gnu/libz.so.1.2.7
+7f49e3997000-7f49e3998000 r--p 00015000 08:02 8130048                    /lib/x86_64-linux-gnu/libz.so.1.2.7
+7f49e3998000-7f49e3999000 rw-p 00016000 08:02 8130048                    /lib/x86_64-linux-gnu/libz.so.1.2.7
+7f49e3999000-7f49e39b1000 r-xp 00000000 08:02 8126722                    /lib/x86_64-linux-gnu/libpthread-2.15.so
+7f49e39b1000-7f49e3bb0000 ---p 00018000 08:02 8126722                    /lib/x86_64-linux-gnu/libpthread-2.15.so
+7f49e3bb0000-7f49e3bb1000 r--p 00017000 08:02 8126722                    /lib/x86_64-linux-gnu/libpthread-2.15.so
+7f49e3bb1000-7f49e3bb2000 rw-p 00018000 08:02 8126722                    /lib/x86_64-linux-gnu/libpthread-2.15.so
+7f49e3bb2000-7f49e3bb6000 rw-p 00000000 00:00 0 
+7f49e3bb6000-7f49e3bb8000 r-xp 00000000 08:02 8126529                    /lib/x86_64-linux-gnu/libdl-2.15.so
+7f49e3bb8000-7f49e3db8000 ---p 00002000 08:02 8126529                    /lib/x86_64-linux-gnu/libdl-2.15.so
+7f49e3db8000-7f49e3db9000 r--p 00002000 08:02 8126529                    /lib/x86_64-linux-gnu/libdl-2.15.so
+7f49e3db9000-7f49e3dba000 rw-p 00003000 08:02 8126529                    /lib/x86_64-linux-gnu/libdl-2.15.so
+7f49e3dba000-7f49e3f6f000 r-xp 00000000 08:02 8126718                    /lib/x86_64-linux-gnu/libc-2.15.so
+7f49e3f6f000-7f49e416e000 ---p 001b5000 08:02 8126718                    /lib/x86_64-linux-gnu/libc-2.15.so
+7f49e416e000-7f49e4172000 r--p 001b4000 08:02 8126718                    /lib/x86_64-linux-gnu/libc-2.15.so
+7f49e4172000-7f49e4174000 rw-p 001b8000 08:02 8126718                    /lib/x86_64-linux-gnu/libc-2.15.so
+7f49e4174000-7f49e4179000 rw-p 00000000 00:00 0 
+7f49e4179000-7f49e417a000 r--s 00000000 08:02 7864685                    /home/ondra/sw/AS/7.1.3/modules/javax/inject/api/main/javax.inject-1.jar
+7f49e417a000-7f49e417e000 r--s 00020000 08:02 5388766                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/as/jmx/main/jboss-as-jmx-7.1.3.Final.jar
+7f49e417e000-7f49e4184000 r--s 00039000 08:02 7738854                    /home/ondra/sw/AS/7.1.3/modules/org/jboss/logmanager/main/jboss-logmanager-1.3.2.Final.jar
+7f49e4184000-7f49e419b000 r--s 00123000 08:02 7864511                    /home/ondra/sw/AS/7.1.3/modules/org/apache/xerces/main/xercesImpl-2.9.1-jbossas-2.jar
+7f49e419b000-7f49e41a8000 r-xp 00000000 08:02 8538349                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f49e41a8000-7f49e43a7000 ---p 0000d000 08:02 8538349                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f49e43a7000-7f49e43a8000 r--p 0000c000 08:02 8538349                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f49e43a8000-7f49e43a9000 rw-p 0000d000 08:02 8538349                    /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7f49e43a9000-7f49e43cb000 r-xp 00000000 08:02 8127168                    /lib/x86_64-linux-gnu/ld-2.15.so
+7f49e43cb000-7f49e43cf000 r--s 00029000 08:02 5375494                    /home/ondra/sw/AS/7.1.3/modules/org/codehaus/woodstox/main/stax2-api-3.1.1.jar
+7f49e43cf000-7f49e43d4000 r--s 00070000 08:02 5375492                    /home/ondra/sw/AS/7.1.3/modules/org/codehaus/woodstox/main/woodstox-core-asl-4.1.1.jar
+7f49e43d4000-7f49e43d8000 r--s 00042000 08:02 7864561                    /home/ondra/sw/AS/7.1.3/modules/org/apache/xalan/main/serializer-2.7.1.jbossorg-1.jar
+7f49e43d8000-7f49e43e1000 r--s 000bc000 08:02 8524826                    /usr/lib/jvm/java-7-openjdk-common/jre/lib/resources.jar
+7f49e43e1000-7f49e43e6000 r--s 0003d000 08:02 5253019                    /home/ondra/sw/AS/7.1.3/jboss-modules.jar
+7f49e43e6000-7f49e43e9000 r--s 0003c000 08:02 8524827                    /usr/lib/jvm/java-7-openjdk-common/jre/lib/ext/sunpkcs11.jar
+7f49e43e9000-7f49e43ec000 r--s 00032000 08:02 8524829                    /usr/lib/jvm/java-7-openjdk-common/jre/lib/ext/sunjce_provider.jar
+7f49e43ec000-7f49e43ef000 r--s 0000f000 08:02 8524830                    /usr/lib/jvm/java-7-openjdk-common/jre/lib/ext/pulse-java.jar
+7f49e43ef000-7f49e43f3000 r--s 00085000 08:02 8524828                    /usr/lib/jvm/java-7-openjdk-common/jre/lib/ext/localedata.jar
+7f49e43f3000-7f49e43f5000 r--s 00012000 08:02 8524832                    /usr/lib/jvm/java-7-openjdk-common/jre/lib/ext/zipfs.jar
+7f49e43f5000-7f49e43f7000 r--s 00006000 08:02 8782955                    /usr/share/java/java-atk-wrapper.jar
+7f49e43f7000-7f49e43f8000 r--s 00002000 08:02 8524831                    /usr/lib/jvm/java-7-openjdk-common/jre/lib/ext/dnsns.jar
+7f49e43f8000-7f49e4406000 rw-p 00000000 00:00 0 
+7f49e4406000-7f49e44b9000 rw-p 00000000 00:00 0 
+7f49e44b9000-7f49e44c1000 rw-s 00000000 08:02 6558935                    /tmp/hsperfdata_ondra/21697
+7f49e44c1000-7f49e44c2000 rw-p 00000000 00:00 0 
+7f49e44c2000-7f49e44c3000 r--p 00000000 00:00 0 
+7f49e44c3000-7f49e44c6000 ---p 00000000 00:00 0 
+7f49e44c6000-7f49e45cb000 rw-p 00000000 00:00 0                          [stack:21698]
+7f49e45cb000-7f49e45cc000 r--p 00022000 08:02 8127168                    /lib/x86_64-linux-gnu/ld-2.15.so
+7f49e45cc000-7f49e45ce000 rw-p 00023000 08:02 8127168                    /lib/x86_64-linux-gnu/ld-2.15.so
+7fffec2d6000-7fffec2f7000 rw-p 00000000 00:00 0                          [stack]
+7fffec337000-7fffec338000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -D[Standalone] -XX:+UseCompressedOops -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n -XX:MaxPermSize=512m -Dorg.jboss.boot.log.file=/home/ondra/sw/AS/7.1.3/standalone/log/boot.log -Dlogging.configuration=file:/home/ondra/sw/AS/7.1.3/standalone/configuration/logging.properties 
+java_command: /home/ondra/sw/AS/7.1.3/jboss-modules.jar -mp /home/ondra/sw/AS/7.1.3/modules -jaxpmodule javax.xml.jaxp-provider org.jboss.as.standalone -Djboss.home.dir=/home/ondra/sw/AS/7.1.3 -Djboss.server.base.dir=/home/ondra/sw/AS/7.1.3/standalone
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+SHELL=/bin/bash
+DISPLAY=:0.0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x8574f0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGBUS: [libjvm.so+0x8574f0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGFPE: [libjvm.so+0x6f81f0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGPIPE: [libjvm.so+0x6f81f0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGXFSZ: [libjvm.so+0x6f81f0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGILL: [libjvm.so+0x6f81f0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGUSR1: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGUSR2: [libjvm.so+0x6f8440], sa_mask[0]=0x00000000, sa_flags=0x10000004
+SIGHUP: [libjvm.so+0x6f8580], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGINT: [libjvm.so+0x6f8580], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGTERM: [libjvm.so+0x6f8580], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGQUIT: [libjvm.so+0x6f8580], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+
+
+---------------  S Y S T E M  ---------------
+
+OS:Ubuntu 12.10 (quantal)
+uname:Linux 3.5.0-21-generic #32-Ubuntu SMP Tue Dec 11 18:51:59 UTC 2012 x86_64
+libc:glibc 2.15 NPTL 2.15 
+rlimit: STACK 8192k, CORE 0k, NPROC 62794, NOFILE 4096, AS infinity
+load average:0.98 1.02 0.87
+
+/proc/meminfo:
+MemTotal:        8062692 kB
+MemFree:         2147384 kB
+Buffers:           62608 kB
+Cached:          1108788 kB
+SwapCached:       133280 kB
+Active:          4331460 kB
+Inactive:        1199004 kB
+Active(anon):    3858808 kB
+Inactive(anon):   711548 kB
+Active(file):     472652 kB
+Inactive(file):   487456 kB
+Unevictable:       31480 kB
+Mlocked:           31480 kB
+SwapTotal:       2096124 kB
+SwapFree:        1606428 kB
+Dirty:              1928 kB
+Writeback:             0 kB
+AnonPages:       4318472 kB
+Mapped:           156396 kB
+Shmem:            204792 kB
+Slab:             198368 kB
+SReclaimable:     156308 kB
+SUnreclaim:        42060 kB
+KernelStack:        5480 kB
+PageTables:        51552 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     6127468 kB
+Committed_AS:    9124476 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      376968 kB
+VmallocChunk:   34359281000 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      120832 kB
+DirectMap2M:     8159232 kB
+
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 42 stepping 7, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, ht, tsc, tscinvbit
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 42
+model name	: Intel(R) Core(TM) i7-2620M CPU @ 2.70GHz
+stepping	: 7
+microcode	: 0x18
+cpu MHz		: 2700.000
+cache size	: 4096 KB
+physical id	: 0
+siblings	: 4
+core id		: 0
+cpu cores	: 2
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5382.66
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 42
+model name	: Intel(R) Core(TM) i7-2620M CPU @ 2.70GHz
+stepping	: 7
+microcode	: 0x18
+cpu MHz		: 2700.000
+cache size	: 4096 KB
+physical id	: 0
+siblings	: 4
+core id		: 0
+cpu cores	: 2
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5382.66
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 42
+model name	: Intel(R) Core(TM) i7-2620M CPU @ 2.70GHz
+stepping	: 7
+microcode	: 0x18
+cpu MHz		: 1000.000
+cache size	: 4096 KB
+physical id	: 0
+siblings	: 4
+core id		: 1
+cpu cores	: 2
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5382.66
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 42
+model name	: Intel(R) Core(TM) i7-2620M CPU @ 2.70GHz
+stepping	: 7
+microcode	: 0x18
+cpu MHz		: 2701.000
+cache size	: 4096 KB
+physical id	: 0
+siblings	: 4
+core id		: 1
+cpu cores	: 2
+apicid		: 3
+initial apicid	: 3
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx lahf_lm ida arat epb xsaveopt pln pts dtherm tpr_shadow vnmi flexpriority ept vpid
+bogomips	: 5382.66
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 8062692k(2147384k free), swap 2096124k(1606428k free)
+
+vm_info: OpenJDK 64-Bit Server VM (23.2-b09) for linux-amd64 JRE (1.7.0_09-b30), built on Jan 16 2013 03:28:09 by "buildd" with gcc 4.7.2
+
+time: Tue Jan 22 02:14:07 2013
+elapsed time: 438 seconds
+
