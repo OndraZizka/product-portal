@@ -5,6 +5,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import org.jboss.essc.web.model.MavenArtifact;
 import org.jboss.essc.web.model.Release;
 
@@ -36,7 +37,7 @@ public class MavenArtifactDao {
     
     
     public MavenArtifact findMavenArtifact(MavenArtifact ma) {
-        return this.findMavenArtifact(ma.getGroupId(), ma.getGroupId(), ma.getVersion(), ma.getPackaging(), ma.getClassifier());
+        return this.findMavenArtifact(ma.getGroupId(), ma.getArtifactId(), ma.getVersion(), ma.getPackaging(), ma.getClassifier());
     }
     
     
@@ -45,19 +46,35 @@ public class MavenArtifactDao {
      *  @throws  NoResultException if not found.
      */
     public MavenArtifact getMavenArtifact( String groupId, String artifactId, String version, String packaging, String classifier ) throws  NoResultException {
-        return this.em.createQuery("SELECT ma FROM MavenArtifact ma "
-                + " WHERE ma.groupId  = ?1"
-                + " AND ma.artifactId = ?2"
-                + " AND ma.version    = ?3"
-                + " AND ma.packaging  = ?4"
-                + " AND ma.classifier = ?5"
-                , MavenArtifact.class)
-                .setParameter(1, groupId)
-                .setParameter(2, artifactId)
-                .setParameter(3, version)
-                .setParameter(4, packaging)
-                .setParameter(5, classifier)
-                .getSingleResult();
+        if( null == groupId )    throw new IllegalArgumentException("groupId must be defined.");
+        if( null == artifactId ) throw new IllegalArgumentException("artifactId must be defined.");
+        if( null == version )    throw new IllegalArgumentException("version must be defined.");
+        if( null == packaging )  packaging = "jar";
+        
+        // Packaging could be null in db (shouldn't, though)
+        boolean nonJar = "jar".equals(packaging);
+        String packCond = (nonJar ? "ma.packaging  = :P" : "ma.packaging = 'jar' OR ma.packaging IS NULL");
+        
+        // Classifier
+        boolean hasClas = null != classifier;
+        String clasCond = (hasClas ? "= :C" : "IS NULL");
+        
+        TypedQuery<MavenArtifact> q = 
+        this.em.createQuery("SELECT ma FROM MavenArtifact ma "
+                + " WHERE ma.groupId  = :G"
+                + " AND ma.artifactId = :A"
+                + " AND ma.version    = :V"
+                + " AND (" + packCond + ") "
+                + " AND ma.classifier " + clasCond, MavenArtifact.class);
+        
+        q.setParameter("G", groupId);
+        q.setParameter("A", artifactId);
+        q.setParameter("V", version);
+        if( nonJar )
+            q.setParameter("P", packaging);
+        if( hasClas )
+            q.setParameter("C", classifier);
+        return q.getSingleResult();
     }
     
     /**

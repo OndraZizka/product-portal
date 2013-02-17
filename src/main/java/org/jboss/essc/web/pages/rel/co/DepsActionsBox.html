@@ -7,6 +7,8 @@
         
         <h2><span wicket:id="productName">EAP</span> <span wicket:id="version">6.0.1.ER1</span> - dependencies</h2>
 
+        <div wicket:id="feedback"/>
+
         <!-- Actions -->
         <fieldset title="Actions">
             <legend>Actions
@@ -15,9 +17,8 @@
                     onclick="toggleVisibility(this.parentElement.parentElement.getElementsByTagName('div')[0]);"/>
                 </wicket:link>
             </legend>
+            
             <div style="display: none;">
-                
-                <div wicket:id="feedback"/>
                 
                 <!-- Propose change -->
                 <form wicket:id="proposeChangeForm">

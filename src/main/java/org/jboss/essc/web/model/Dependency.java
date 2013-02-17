@@ -11,7 +11,7 @@ import javax.persistence.*;
  *  @deprecated  Currently using just @ManyToMany.
  */
 @SuppressWarnings("serial")
-@Entity @Table(name="dep")
+//@Entity @Table(name="dep")
 public class Dependency implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

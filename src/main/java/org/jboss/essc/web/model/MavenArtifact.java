@@ -21,10 +21,15 @@ public class MavenArtifact implements Serializable {
     private Long id;
 
     // Unique pentad
+    @Column(length = 80, nullable = false)
     private String groupId;
+    @Column(length = 60, nullable = false)
     private String artifactId;
+    @Column(length = 40, nullable = false)
     private String version;
+    @Column(length = 10, nullable = false)
     private String packaging;
+    @Column(length = 20, nullable = true)
     private String classifier;
 
     
@@ -128,6 +133,11 @@ public class MavenArtifact implements Serializable {
         //    ma.setScope(parts[4] );
 
         return ma;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("MavenArtifact #%d { GAVPC: %s:%s:%s:%s:%s }", groupId, artifactId, version, packaging, classifier);
     }
 
 }// class
