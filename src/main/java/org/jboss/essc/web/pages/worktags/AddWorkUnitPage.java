@@ -1,13 +1,14 @@
 package org.jboss.essc.web.pages.worktags;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.inject.Inject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextArea;
-import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -76,11 +77,11 @@ public class AddWorkUnitPage extends BaseLayoutPage {
      */
     private static class TagsToStringModel implements IModel<String> {
         
-        private IModel<Iterable<WorkTag>> tagsModel;
+        private IModel<Set<WorkTag>> tagsModel;
         private WorkDao daoWorkTag;
 
         
-        private TagsToStringModel(PropertyModel<Iterable<WorkTag>> tagsModel, WorkDao daoWorkTag) {
+        private TagsToStringModel(PropertyModel<Set<WorkTag>> tagsModel, WorkDao daoWorkTag) {
             this.tagsModel = tagsModel;
             this.daoWorkTag = daoWorkTag;
         }
@@ -92,7 +93,8 @@ public class AddWorkUnitPage extends BaseLayoutPage {
 
         @Override public void setObject(String inputValue) {
             List<WorkTag> tagsByNames = this.daoWorkTag.getTagsByNames(inputValue);
-            this.tagsModel.setObject( tagsByNames );
+            HashSet tags = new HashSet(tagsByNames);
+            this.tagsModel.setObject( tags );
         }
 
         @Override public void detach() {}

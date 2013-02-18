@@ -38,8 +38,8 @@ public class WorkDao {
     }
 
     
-    public void createWorkUnit( WorkUnit modelObject ) {
-        this.em.persist(this);
+    public void createWorkUnit( WorkUnit wu ) {
+        this.em.persist( wu );
     }
     
     /**
