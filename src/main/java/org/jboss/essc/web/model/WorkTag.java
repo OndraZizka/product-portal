@@ -1,6 +1,7 @@
 package org.jboss.essc.web.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.*;
 
 
@@ -18,6 +19,13 @@ public class WorkTag implements Serializable {
     private Long id;
     
     private String name;
+
+    
+    public WorkTag() { }
+    
+    public WorkTag(String name) {
+        this.name = name;
+    }
     
     
     //<editor-fold defaultstate="collapsed" desc="get/set">
@@ -26,13 +34,34 @@ public class WorkTag implements Serializable {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
+
     //</editor-fold>
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.name == null ? null : this.name.toLowerCase());
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        final WorkTag other = (WorkTag) obj;
+        return safeToLowerEquals(this.name, other.name);
+    }
     
     
 
     @Override
     public String toString() {
-        return "WorkTag " + id + "{ " + name + '}';
+        return "WorkTag #" + id + " { " + name + '}';
     }
     
+    static boolean safeToLowerEquals( String a, String b ){
+        if( a == b ) return true;
+        if( a == null ) return false;
+        if( b == null ) return false;
+        return a.toLowerCase().equals(b.toLowerCase());
+    }
 }// class

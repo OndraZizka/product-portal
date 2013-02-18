@@ -35,7 +35,7 @@ public class WorkUnit implements Serializable {
     /**
      *  Who participated.
      */
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(joinColumns = {@JoinColumn(name = "worker_id")}, inverseJoinColumns = {@JoinColumn(name = "workUnit_id")})
     @OrderBy("name")
     private Set<User> workers;
@@ -43,7 +43,7 @@ public class WorkUnit implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
     
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(
             uniqueConstraints = @UniqueConstraint(columnNames = {"tag_id", "workUnit_id"}),
             joinColumns = {@JoinColumn(name = "tag_id")}, inverseJoinColumns = {@JoinColumn(name = "workUnit_id")}

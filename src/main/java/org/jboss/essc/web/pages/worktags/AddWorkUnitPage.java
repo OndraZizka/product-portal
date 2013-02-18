@@ -45,7 +45,10 @@ public class AddWorkUnitPage extends BaseLayoutPage {
         add(feedbackPanel);
 
         // Components
+        
+        // Form
         Form<WorkUnit> form = new Form<WorkUnit>("form", new CompoundPropertyModel<WorkUnit>(new PropertyModel(this, "newWorkUnit"))){
+            // Submit
             @Override protected void onSubmit() {
                 daoWork.createWorkUnit( this.getModelObject() );
                 info("Work unit created.");
@@ -64,12 +67,9 @@ public class AddWorkUnitPage extends BaseLayoutPage {
         
         form.add( new TextArea<>("note") );
         
-        
-        
         add( new WorkUnitListingPanel("similarWorkUnits", 
                 new SimilarWorkUnitsModel(new PropertyModel(this, "newWorkUnit"), daoWork)) );
-
-    }
+    }// const
 
     
     /**
@@ -92,7 +92,7 @@ public class AddWorkUnitPage extends BaseLayoutPage {
         }
 
         @Override public void setObject(String inputValue) {
-            List<WorkTag> tagsByNames = this.daoWorkTag.getTagsByNames(inputValue);
+            List<WorkTag> tagsByNames = this.daoWorkTag.loadOrCreateTagsByNames( StringUtils.split(inputValue) );
             HashSet tags = new HashSet(tagsByNames);
             this.tagsModel.setObject( tags );
         }

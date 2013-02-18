@@ -3,12 +3,13 @@ package org.jboss.essc.web.dao;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
 import org.jboss.essc.web.model.WorkTag;
 import org.jboss.essc.web.model.WorkUnit;
 
@@ -30,11 +31,34 @@ public class WorkDao {
                 .getResultList();
     }
     
-    public List<WorkTag> getTagsByNames(String inputValue) {
-        List<String> tagNames = Arrays.asList( StringUtils.split(inputValue) );
+    public List<WorkTag> getTagsByNames( String[] tagNamesA ) {
+        List<String> tagNames = Arrays.asList( tagNamesA );
         return em.createQuery("SELECT wt FROM WorkTag wt WHERE wt.name IN ?1")
                 .setParameter(1, tagNames)
                 .getResultList();
+    }
+
+    
+    /**
+     *  Loads tags from DB by name; if given tag doens't exist, creates non-persisted object.
+     */
+    public List<WorkTag> loadOrCreateTagsByNames( String[] tagNamesA ) {
+        
+        List<WorkTag> tagsByNames = getTagsByNames(tagNamesA);
+        //CollectionUtils.toMap() // Needs commons-collections
+        Map<String, WorkTag> map = new HashMap(tagNamesA.length);
+        for( WorkTag workTag : tagsByNames ) {
+            map.put( workTag.getName(), workTag);
+        }
+        
+        List<WorkTag> tags = new ArrayList<>( tagNamesA.length );
+        for( String tagName : tagNamesA ) {
+            WorkTag tag = map.get( tagName );
+            if( tag == null )
+                tag = new WorkTag(tagName);
+            tags.add(tag);
+        }
+        return tags;
     }
 
     
@@ -54,10 +78,11 @@ public class WorkDao {
         // Sum - 1pt for each tag: ( IF('foo' IN wu.tags, 1,0) + IF('bar' IN wu.tags, 1,0) + ...)
         StringBuilder sb = new StringBuilder();
         for( WorkTag wt : wu.getTags() ){
-            sb.append("IF('").append( StringEscapeUtils.escapeSql(wt.getName()) ).append("' IN wu.tags, 1,0)");
+            sb.append("IF('").append( StringEscapeUtils.escapeSql(wt.getName()) ).append("' IN wu.tags, 1,0) + ");
         }
+
         return em.createQuery(
-            "SELECT wu.tags, (" + sb.toString() + ") AS score "
+            "SELECT wu.tags, (" + sb.toString() + " 0) AS score "
             + "  FROM WorkUnit wu WHERE wu.tags IN ?1")
                 .setParameter(1, wu.getTags())
                 .setMaxResults(maxResults)
