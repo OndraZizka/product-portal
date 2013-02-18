@@ -13,9 +13,11 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.jboss.essc.web.dao.WorkTagDao;
+import org.jboss.essc.web.dao.WorkDao;
 import org.jboss.essc.web.model.WorkTag;
 import org.jboss.essc.web.model.WorkUnit;
+import org.jboss.essc.web.pages.user.UserAccountPage;
+import org.jboss.essc.web.pages.user.UserProfilePage;
 
 /**
  * A listing of WorkUnits.
@@ -24,7 +26,7 @@ import org.jboss.essc.web.model.WorkUnit;
  */
 public class WorkUnitListingPanel extends Panel {
 
-    @Inject protected WorkTagDao dao;
+    @Inject protected WorkDao dao;
     
 
     protected int numWorkUnits = 15;
@@ -42,8 +44,12 @@ public class WorkUnitListingPanel extends Panel {
                 final WorkUnit wu = item.getModelObject();
                 
                 item.add( new DateLabel("created", Model.of(wu.getCreated()), new PatternDateConverter("yyyy-MM-dd", true)) );
-                item.add( new Label("author", wu.getAuthor().getName()) );
-                item.add( new Label("name",   wu.getName()) );
+                item.add( new BookmarkablePageLink("author", UserProfilePage.class, UserProfilePage.params(wu.getAuthor().getName()))
+                        .add( new Label("label", wu.getAuthor().getName()) ) 
+                );
+                item.add( new BookmarkablePageLink("title",  WorkUnitPage.class, WorkUnitPage.params(wu.getId()))
+                        .add( new Label("label", wu.getTitle()) ) 
+                );
                 //item.add( new Label("tags",   wu.getTagsAsString()) );
                 item.add( new ListView<WorkTag>("tags", new ArrayList(wu.getTags())) {
                     @Override

@@ -2,6 +2,7 @@ package org.jboss.essc.web.dao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,7 +17,7 @@ import org.jboss.essc.web.model.WorkUnit;
  * A bean which manages WorkTag entities.
  */
 @Stateless
-public class WorkTagDao {
+public class WorkDao {
 
     @PersistenceContext
     private EntityManager em;
@@ -35,8 +36,21 @@ public class WorkTagDao {
                 .setParameter(1, tagNames)
                 .getResultList();
     }
+
     
-    public List<WorkUnit> getWorkUnitsSimilarTo(WorkUnit wu) {
+    public void createWorkUnit( WorkUnit modelObject ) {
+        this.em.persist(this);
+    }
+    
+    /**
+     * Returns work units which are similar to the given one;
+     * currently it means that it has some same tags.
+     */
+    public List<WorkUnit> getWorkUnitsSimilarTo(WorkUnit wu, int maxResults) {
+        
+        if( wu.getTags() == null || wu.getTags().isEmpty() )
+            return Collections.EMPTY_LIST;
+        
         // Sum - 1pt for each tag: ( IF('foo' IN wu.tags, 1,0) + IF('bar' IN wu.tags, 1,0) + ...)
         StringBuilder sb = new StringBuilder();
         for( WorkTag wt : wu.getTags() ){
@@ -46,6 +60,7 @@ public class WorkTagDao {
             "SELECT wu.tags, (" + sb.toString() + ") AS score "
             + "  FROM WorkUnit wu WHERE wu.tags IN ?1")
                 .setParameter(1, wu.getTags())
+                .setMaxResults(maxResults)
                 .getResultList();
         
         /*   2nd option:

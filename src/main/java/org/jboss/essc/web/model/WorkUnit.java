@@ -2,6 +2,7 @@ package org.jboss.essc.web.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import org.apache.commons.lang.StringUtils;
@@ -20,7 +21,7 @@ public class WorkUnit implements Serializable {
     @Column(columnDefinition = "INT UNSIGNED")
     private Long id;
     
-    private String name;
+    private String title;
     private String note;
     private String url;
     
@@ -47,15 +48,15 @@ public class WorkUnit implements Serializable {
             uniqueConstraints = @UniqueConstraint(columnNames = {"tag_id", "workUnit_id"}),
             joinColumns = {@JoinColumn(name = "tag_id")}, inverseJoinColumns = {@JoinColumn(name = "workUnit_id")}
     )
-    private Set<WorkTag> tags;
+    private Set<WorkTag> tags = new HashSet<>();
     
     
     //<editor-fold defaultstate="collapsed" desc="get/set">
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }    
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }    
     public String getNote() { return note; }
     public void setNote(String note) { this.note = note; }
     public String getUrl() { return url; }
@@ -104,7 +105,7 @@ public class WorkUnit implements Serializable {
 
     @Override
     public String toString() {
-        return "WorkUnit #" + id + " from " + created + " by " + author + " { name: " + name + '}';
+        return "WorkUnit #" + id + " from " + created + " by " + author + " { name: " + title + '}';
     }
 
     public String getTagsAsString() {

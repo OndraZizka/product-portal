@@ -30,7 +30,7 @@ import org.jboss.essc.web.pages.statics.Http404;
 import org.jboss.essc.web.pages.test.AdminPage;
 import org.jboss.essc.web.pages.test.JpaQueryPage;
 import org.jboss.essc.web.pages.user.LoginPage;
-import org.jboss.essc.web.pages.user.UserPage;
+import org.jboss.essc.web.pages.user.UserAccountPage;
 import org.jboss.essc.web.pages.worktags.AddWorkUnitPage;
 import org.jboss.essc.web.pages.worktags.WorkTagPage;
 import org.jboss.essc.web.pages.worktags.WorkUnitPage;
@@ -82,7 +82,7 @@ public class WicketJavaEEApplication extends WebApplication {
         mountPage("/about", AboutPage.class);
         mountPage("/404",   Http404.class);
         mountPage("/login", LoginPage.class);
-        mountPage("/user",  UserPage.class);
+        mountPage("/user",  UserAccountPage.class);
         mountPage("/test",  EditableTestPage.class);
         mountPage("/jpa",   JpaQueryPage.class);
         mountPage("/admin", AdminPage.class);

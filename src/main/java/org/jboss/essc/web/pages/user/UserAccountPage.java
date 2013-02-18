@@ -24,7 +24,7 @@ import org.jboss.essc.web.security.EsscAuthSession;
  * @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
-public class UserPage extends BaseLayoutPage {
+public class UserAccountPage extends BaseLayoutPage {
 
     @Inject private UserDaoBean daoUser;
 
@@ -45,7 +45,7 @@ public class UserPage extends BaseLayoutPage {
 
 
     //@AuthorizeAction(roles="authenticated")
-    public UserPage(PageParameters params) {
+    public UserAccountPage(PageParameters params) {
         
         // If not logged in, redirect to a login page.
         User user = ((EsscAuthSession)getSession()).getUser();
@@ -83,8 +83,8 @@ public class UserPage extends BaseLayoutPage {
 
         
         // Reset Password form
-        final PasswordTextField oldPassField  = new PasswordTextField("oldPass",  new PropertyModel(UserPage.this, "oldPass"));
-        final PasswordTextField newPass1Field = new PasswordTextField("newPass1", new PropertyModel(UserPage.this, "newPass1"));
+        final PasswordTextField oldPassField  = new PasswordTextField("oldPass",  new PropertyModel(UserAccountPage.this, "oldPass"));
+        final PasswordTextField newPass1Field = new PasswordTextField("newPass1", new PropertyModel(UserAccountPage.this, "newPass1"));
         
         add( this.resetPassForm = new Form<User>("resetPassForm") {
             @Override protected void onSubmit() {
@@ -114,7 +114,7 @@ public class UserPage extends BaseLayoutPage {
         
         this.resetPassForm.add( oldPassField );
         this.resetPassForm.add( newPass1Field );
-        this.resetPassForm.add( new PasswordTextField("newPass2", new PropertyModel(UserPage.this, "newPass2"))
+        this.resetPassForm.add( new PasswordTextField("newPass2", new PropertyModel(UserAccountPage.this, "newPass2"))
             .add( new AbstractValidator<String> () {
                 @Override protected void onValidate( IValidatable<String> validatable ) {
                     if( ! validatable.getValue().equals( newPass1Field.getValue() ) ){

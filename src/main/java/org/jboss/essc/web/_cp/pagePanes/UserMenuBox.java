@@ -6,7 +6,7 @@ import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.jboss.essc.web.pages.user.LoginPage;
-import org.jboss.essc.web.pages.user.UserPage;
+import org.jboss.essc.web.pages.user.UserAccountPage;
 import org.jboss.essc.web.security.EsscAuthSession;
 
 
@@ -34,7 +34,7 @@ public class UserMenuBox extends Panel {
                 .add( new Label("label", "Login / Register") ) );
         } else {
             // Logout link
-            add( new BookmarkablePageLink("accountSettings", UserPage.class).add( new Label("label", "Account Settings") ) );
+            add( new BookmarkablePageLink("accountSettings", UserAccountPage.class).add( new Label("label", "Account Settings") ) );
             add( new Link("loginLink") {
                     @Override public void onClick() {
                         getSession().invalidate();

@@ -5,13 +5,15 @@ import javax.inject.Inject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.RequiredTextField;
+import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.jboss.essc.web.dao.WorkTagDao;
+import org.jboss.essc.web.dao.WorkDao;
 import org.jboss.essc.web.model.WorkTag;
 import org.jboss.essc.web.model.WorkUnit;
 import org.jboss.essc.web.pages.BaseLayoutPage;
@@ -24,7 +26,7 @@ import org.wicketstuff.tagit.TagItTextField;
 @SuppressWarnings("serial")
 public class AddWorkUnitPage extends BaseLayoutPage {
 
-    @Inject private WorkTagDao daoWorkTag;
+    @Inject private WorkDao daoWork;
     
     // Data
     private WorkUnit newWorkUnit = new WorkUnit();
@@ -42,19 +44,29 @@ public class AddWorkUnitPage extends BaseLayoutPage {
         add(feedbackPanel);
 
         // Components
-        Form<WorkUnit> form = new Form("form", new CompoundPropertyModel<WorkUnit>(new PropertyModel(this, "newWorkUnit")));
+        Form<WorkUnit> form = new Form<WorkUnit>("form", new CompoundPropertyModel<WorkUnit>(new PropertyModel(this, "newWorkUnit"))){
+            @Override protected void onSubmit() {
+                daoWork.createWorkUnit( this.getModelObject() );
+                info("Work unit created.");
+            }
+        };
+        add(form);
         
-        form.add( new TextField("title"));
+        form.add( new RequiredTextField("title"));
         
-        form.add( new TagItTextField("tags", new TagsToStringModel(new PropertyModel(this, "tags"), this.daoWorkTag)) {
+        form.add( new TagItTextField("tags", new TagsToStringModel(new PropertyModel(this, "newWorkUnit.tags"), this.daoWork)) {
             @Override
             protected Iterable getChoices(String input) {
-                return daoWorkTag.getTagStartingWith(input);
+                return daoWork.getTagStartingWith(input);
             }
         });
         
-        form.add( new WorkUnitListingPanel("similarWorkUnits", 
-                new SimilarWorkUnitsModel(new PropertyModel(this, "newWorkUnit"), daoWorkTag)) );
+        form.add( new TextArea<>("note") );
+        
+        
+        
+        add( new WorkUnitListingPanel("similarWorkUnits", 
+                new SimilarWorkUnitsModel(new PropertyModel(this, "newWorkUnit"), daoWork)) );
 
     }
 
@@ -65,22 +77,22 @@ public class AddWorkUnitPage extends BaseLayoutPage {
     private static class TagsToStringModel implements IModel<String> {
         
         private IModel<Iterable<WorkTag>> tagsModel;
-        private WorkTagDao daoWorkTag;
+        private WorkDao daoWorkTag;
 
         
-        private TagsToStringModel(PropertyModel<Iterable<WorkTag>> tagsModel, WorkTagDao daoWorkTag) {
+        private TagsToStringModel(PropertyModel<Iterable<WorkTag>> tagsModel, WorkDao daoWorkTag) {
             this.tagsModel = tagsModel;
             this.daoWorkTag = daoWorkTag;
         }
 
         @Override public String getObject() {
-            Iterable<WorkTag> tagObjects = tagsModel.getObject();
+            Iterable<WorkTag> tagObjects = this.tagsModel.getObject();
             return StringUtils.join(tagObjects.iterator(), " ");
         }
 
         @Override public void setObject(String inputValue) {
             List<WorkTag> tagsByNames = this.daoWorkTag.getTagsByNames(inputValue);
-            tagsModel.setObject( tagsByNames );
+            this.tagsModel.setObject( tagsByNames );
         }
 
         @Override public void detach() {}
@@ -93,16 +105,17 @@ public class AddWorkUnitPage extends BaseLayoutPage {
     private static class SimilarWorkUnitsModel implements IModel<List<WorkUnit>>{
 
         private final IModel<WorkUnit> compareToModel;
-        private final WorkTagDao daoWorkTag;
+        private final WorkDao daoWorkTag;
+        private       int maxResults = 15;
 
         
-        private SimilarWorkUnitsModel(PropertyModel<WorkUnit> compareToModel, WorkTagDao daoWorkTag) {
+        private SimilarWorkUnitsModel(PropertyModel<WorkUnit> compareToModel, WorkDao daoWorkTag) {
             this.daoWorkTag = daoWorkTag;
             this.compareToModel = compareToModel;
         }
 
         @Override public List<WorkUnit> getObject() {
-            return this.daoWorkTag.getWorkUnitsSimilarTo( compareToModel.getObject() );
+            return this.daoWorkTag.getWorkUnitsSimilarTo( compareToModel.getObject(), maxResults );
         }
 
         @Override public void setObject(List<WorkUnit> inputValue) {
