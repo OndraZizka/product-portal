@@ -41,9 +41,9 @@ public class WorkUnit implements Serializable {
     private Set<User> workers;
     
     @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
+    private Date created = new Date();
     
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(
             uniqueConstraints = @UniqueConstraint(columnNames = {"tag_id", "workUnit_id"}),
             joinColumns = {@JoinColumn(name = "tag_id")}, inverseJoinColumns = {@JoinColumn(name = "workUnit_id")}

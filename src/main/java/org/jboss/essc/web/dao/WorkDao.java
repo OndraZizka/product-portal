@@ -62,8 +62,10 @@ public class WorkDao {
     }
 
     
-    public void createWorkUnit( WorkUnit wu ) {
-        this.em.persist( wu );
+    public WorkUnit createWorkUnit( WorkUnit wu ) {
+        WorkUnit wu2 = this.em.merge( wu );
+        this.em.persist( wu2 );
+        return wu2;
     }
     
     /**
@@ -81,20 +83,24 @@ public class WorkDao {
             sb.append("IF('").append( StringEscapeUtils.escapeSql(wt.getName()) ).append("' IN wu.tags, 1,0) + ");
         }
 
-        return em.createQuery(
+        String jpql =
+        /* Doesn't work - IN can't be used in SELECT clause :-/
             "SELECT wu.tags, (" + sb.toString() + " 0) AS score "
-            + "  FROM WorkUnit wu WHERE wu.tags IN ?1")
+            + "  FROM WorkUnit wu WHERE wu.tags IN (?1)";
+        */
+           "SELECT wuSimilar, COUNT(*) AS score FROM WorkUnit wuBase "
+           + "  LEFT JOIN wuBase.tags AS wubTags "
+           + "  , WorkUnit wuSimilar  " // ON wubTags IN (wuSimilar.tags) - JPQL JOINS don't support ON...
+           + "  WHERE wuBase = :base "
+           + "    AND wubTags IN (wuSimilar.tags) "
+           + "  GROUP BY wuSimilar "
+           + "  ORDER BY score DESC ";
+        return em.createQuery( jpql )
                 .setParameter(1, wu.getTags())
-                .setMaxResults(maxResults)
+                //.setMaxResults(maxResults)
                 .getResultList();
         
         /*   2nd option:
-           SELECT wuSimilar, COUNT(*) AS score FROM WorkUnit wuBase 
-               LEFT JOIN wuBase.tags AS wubTags
-               LEFT JOIN WorkUnit wuSimilar ON wubTags IN wuSimilar.tags
-               WHERE wuBase = :base
-               GROUP BY wuSimilar
-               ORDER BY score DESC
          */
     }
 

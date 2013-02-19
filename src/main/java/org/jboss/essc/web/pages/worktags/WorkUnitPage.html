@@ -16,17 +16,22 @@
             <!-- Add work unit form box -->
             <div class="workUnit box">
                 <h2>Work unit: <span wicket:id="title"></span></h2>
+
+                <div class="byAndCreated">
+                    created <span class="created" wicket:id="created">2013-01-01</span>
+                    by <span class="author" wicket:id="author">ozizka</span>
+                </div>
                 
-                <div wicket:id="feedback"/>
-                    
-                <form wicket:id="form" action="#">
-                </form>
+                <div wicket:id="tags" class="tags">tag1 tag2</div>
+                
+                <div wicket:id="note" class="title">
+                    Blah blah blah...
+                </div>
             </div>
 
         </wicket:extend>
         
     </div>
-    <!-- end content -->
     
 </div>
 </body>
