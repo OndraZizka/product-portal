@@ -13,6 +13,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.http.WebResponse;
 import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jboss.essc.web.CookieNames;
@@ -31,6 +32,12 @@ public class SidebarPanel extends Panel {
 
     @Inject private transient ProductDaoBean dao;
     @Inject private transient MailSender mailSender;
+    
+    
+    // Data
+    private String text;
+    public String getText() { return text; }
+    public void setText(String text) { this.text = text; }    
     
     
     public SidebarPanel( String id ) {
@@ -79,7 +86,7 @@ public class SidebarPanel extends Panel {
         } );
         
         // Quick message
-        final TextArea ta = new TextArea("text");
+        final TextArea ta = new TextArea("text", new PropertyModel(this, "text"));
         add( new Form("quickMessageForm"){
             @Override protected void onSubmit() {
                 try {
