@@ -87,7 +87,10 @@ public class WorkDao {
         /* Doesn't work - IN can't be used in SELECT clause :-/
             "SELECT wu.tags, (" + sb.toString() + " 0) AS score "
             + "  FROM WorkUnit wu WHERE wu.tags IN (?1)";
+                .setParameter(1, wu.getTags())
         */
+        
+        // 2nd way.
            "SELECT wuSimilar, COUNT(*) AS score FROM WorkUnit wuBase "
            + "  LEFT JOIN wuBase.tags AS wubTags "
            + "  , WorkUnit wuSimilar  " // ON wubTags IN (wuSimilar.tags) - JPQL JOINS don't support ON...
@@ -96,12 +99,10 @@ public class WorkDao {
            + "  GROUP BY wuSimilar "
            + "  ORDER BY score DESC ";
         return em.createQuery( jpql )
-                .setParameter(1, wu.getTags())
+                .setParameter("base", wu)
                 //.setMaxResults(maxResults)
                 .getResultList();
         
-        /*   2nd option:
-         */
     }
 
     
