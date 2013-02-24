@@ -9,7 +9,6 @@ import org.apache.wicket.datetime.PatternDateConverter;
 import org.apache.wicket.datetime.markup.html.basic.DateLabel;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.basic.MultiLineLabel;
-import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
@@ -36,6 +35,8 @@ public class WorkUnitPage extends BaseLayoutPage {
     private IModel<WorkUnit> model;    
 
     public WorkUnitPage( PageParameters params ) {
+        
+        setVersioned(false);
         
         // Process the ID
         try {

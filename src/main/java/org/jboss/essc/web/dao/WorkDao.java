@@ -10,6 +10,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
+import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.model.WorkTag;
 import org.jboss.essc.web.model.WorkUnit;
 
@@ -24,8 +26,15 @@ public class WorkDao {
     private EntityManager em;
 
     
+    public WorkTag findTagByName(String name) {
+        List<WorkTag> res = em.createQuery("SELECT wt FROM WorkTag wt WHERE wt.name = ?1", WorkTag.class)
+                                  .setParameter(1, name)
+                                  .getResultList();
+        return res.isEmpty() ? null : res.get(0);
+    }
+   
     
-    public Iterable getTagStartingWith(String string) {
+    public Iterable getTagsStartingWith(String string) {
         return em.createQuery("SELECT wt FROM WorkTag wt WHERE wt.name LIKE CONCAT(?1, '%') OR wt.name LIKE CONCAT('%-', ?1, '%')")
                 .setParameter(1, string)
                 .getResultList();
@@ -37,7 +46,7 @@ public class WorkDao {
                 .setParameter(1, tagNames)
                 .getResultList();
     }
-
+    
     
     /**
      *  Loads tags from DB by name; if given tag doens't exist, creates non-persisted object.
@@ -67,7 +76,7 @@ public class WorkDao {
         this.em.persist( wu2 );
         return wu2;
     }
-    
+
     /**
      * Returns work units which are similar to the given one;
      * currently it means that it has some same tags.
@@ -91,21 +100,66 @@ public class WorkDao {
         */
         
         // 2nd way.
-           "SELECT wuSimilar, COUNT(*) AS score FROM WorkUnit wuBase "
+           "SELECT NEW org.jboss.essc.web.dao.WorkDao.WorkUnitWithCount(wuSimilar, COUNT(*)) FROM WorkUnit wuBase "
            + "  LEFT JOIN wuBase.tags AS wubTags "
            + "  , WorkUnit wuSimilar  " // ON wubTags IN (wuSimilar.tags) - JPQL JOINS don't support ON...
            + "  WHERE wuBase = :base "
-           + "    AND wubTags IN (wuSimilar.tags) "
+           + "    AND wubTags MEMBER OF wuSimilar.tags "
            + "  GROUP BY wuSimilar "
            + "  ORDER BY score DESC ";
         return em.createQuery( jpql )
                 .setParameter("base", wu)
                 //.setMaxResults(maxResults)
-                .getResultList();
-        
+                .getResultList();        
     }
 
+
+
+    /**
+     *  Returns work units with a tag of given name.
+     */
+    public List<WorkUnit> getWorkUnitsWithTag( String tagName ) {
+        //String jpql = "SELECT wu FROM WorkUnit wu WHERE :tag IN (wu.tags)";
+        //String jpql = "SELECT wu FROM WorkUnit wu WHERE (SELECT wt FROM WorkTag wt WHERE wt.name = :tagName) IN wu.tags";
+        //String jpql = "SELECT wu FROM WorkUnit wu, (SELECT wt FROM WorkTag wt WHERE wt.name = 'tag1') wt" +
+        //              " WHERE wt IN wu.tags";
+        String jpql = "SELECT wu FROM WorkUnit wu, WorkTag wt WHERE wt.name = LOWER(:tagName) AND wt MEMBER OF wu.tags";
+        
+        return em.createQuery( jpql )
+                .setParameter("tagName", tagName)
+                .getResultList();
+    }
     
+    /**
+     *  Returns work units with tags of given comma-separated list of names.
+     */
+    public List<WorkUnit> getWorkUnitsWithTags(String tagNames) {
+        String[] tags = StringUtils.split(tagNames,',');
+        if( StringUtils.contains(tagNames, ' ')){
+            for (int i = 0; i < tags.length; i++) {
+                tags[i] = tags[i].trim();
+            }
+        }
+        String jpql = "SELECT wu FROM WorkUnit wu, WorkTag wt WHERE wt.name IN (:tagNames) AND wt MEMBER OF wu.tags";
+        
+        return em.createQuery( jpql )
+                .setParameter("tagNames", Arrays.asList(tags))
+                .getResultList();
+    }
+    
+    
+    
+    
+    /**
+     *  Returns authors with most work units having given tag.
+     */
+    public List<User> getTopAuthorsOfWorkUnitsWithTag( String tagName, int maxResults ) {
+        return em.createQuery("SELECT u FROM User u, WorkUnit wu, WorkTag wt WHERE wt.name = :tagName AND wt MEMBER OF wu.tags AND u = wu.author")
+                .setParameter("tagName", tagName)
+                .setMaxResults(maxResults)
+                .getResultList();        
+    }
+
 
     /**
      * Get WorkTag by ID.
@@ -129,5 +183,22 @@ public class WorkDao {
         WorkTag managed = this.em.merge(tag);
         return managed;
     }
-   
+    
+    
+    public static class WorkUnitWithCount {
+        private WorkUnit wu;
+        private int count;
+
+        public WorkUnitWithCount(WorkUnit wu, int count) {
+            this.wu = wu;
+            this.count = count;
+        }
+
+        public WorkUnit getWu() { return wu; }
+        public void setWu(WorkUnit wu) { this.wu = wu; }
+        public int getCount() { return count; }
+        public void setCount(int count) { this.count = count; }        
+        
+    }
+
 }// class

@@ -3,6 +3,7 @@ package org.jboss.essc.web.dao;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import org.jboss.essc.web.model.User;
 
@@ -31,7 +32,7 @@ public class UserDaoBean {
     /**
      * Get User by name.
      */
-    public User getUserByName( String name ) {
+    public User getUserByName( String name ) throws NoResultException {
         return this.em.createQuery("SELECT u FROM User u WHERE u.name = ?1", User.class).setParameter(1, name).getSingleResult();
     }
     

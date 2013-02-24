@@ -58,7 +58,7 @@ public class AddWorkUnitPage extends BaseLayoutPage {
         form.add( new TagItTextField("tags", new TagsToStringModel(new PropertyModel(this, "newWorkUnit.tags"), this.daoWork)) {
             @Override
             protected Iterable getChoices(String input) {
-                return daoWork.getTagStartingWith(input);
+                return daoWork.getTagsStartingWith(input);
             }
         });
         

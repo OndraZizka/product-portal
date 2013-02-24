@@ -11,6 +11,8 @@ import org.apache.commons.lang.StringUtils;
 /**
  *  Work tag. Belongs to a different app.
  * 
+ *  Tags are fetched EAGERly.
+ * 
  *  @author Ondrej Zizka
  */
 @SuppressWarnings("serial")
@@ -67,16 +69,10 @@ public class WorkUnit implements Serializable {
     public void setCreated(Date created) { this.created = created; }
     public Set<WorkTag> getTags() { return tags; }
     public void setTags(Set<WorkTag> tags) { this.tags = tags; }
+    public Set<User> getWorkers() { return workers; }
+    public void setWorkers(Set<User> workers) { this.workers = workers; }    
     //</editor-fold>
 
-    public Set<User> getWorkers() {
-        return workers;
-    }
-
-    public void setWorkers(Set<User> workers) {
-        this.workers = workers;
-    }
-    
     
     //<editor-fold defaultstate="collapsed" desc="hash/eq">
     @Override

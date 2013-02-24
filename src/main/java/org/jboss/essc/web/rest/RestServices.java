@@ -15,6 +15,7 @@ import org.jboss.essc.web.dao.ProductDaoBean;
 import org.jboss.essc.web.dao.ReleaseDaoBean;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
+import org.jboss.essc.web.util.RestUtils;
 import org.jboss.resteasy.annotations.providers.jaxb.Formatted;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +49,7 @@ public class RestServices {
             prod.setTraits(null);
         }
         //return rewrap(prods);
-        return rewrap(prods, "product");
+        return RestUtils.rewrap(prods, "product");
     }
     
     @GET
@@ -67,7 +68,7 @@ public class RestServices {
             rel.setDeps(null);
         }
         //return rel;
-        return rewrap(releases, "release");
+        return RestUtils.rewrap(releases, "release");
     }
     
     @GET
@@ -145,20 +146,6 @@ public class RestServices {
         }
         return p2;
     }
-    
-    /**
-     *  Map-based generic wrapper - needed for JSON client.
-     */
-    private List rewrap(List items, String wrapName) {
-        List p2 = new ArrayList(items.size());
-        for( Object item : items){
-            Map map = new HashMap();
-            map.put(wrapName, item);
-            p2.add( map );
-        }
-        return p2;
-    }
-
     
     
     /**
