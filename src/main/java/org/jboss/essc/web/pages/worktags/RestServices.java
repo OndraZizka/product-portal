@@ -1,6 +1,5 @@
 package org.jboss.essc.web.pages.worktags;
 
-import com.sun.tools.javac.resources.version;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +13,6 @@ import javax.ws.rs.core.Context;
 import org.apache.commons.lang.StringUtils;
 import org.jboss.essc.web.dao.UserDaoBean;
 import org.jboss.essc.web.dao.WorkDao;
-import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.model.WorkTag;
 import org.jboss.essc.web.model.WorkUnit;
