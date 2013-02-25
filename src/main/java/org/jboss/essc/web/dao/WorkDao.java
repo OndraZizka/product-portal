@@ -34,7 +34,7 @@ public class WorkDao {
     }
    
     
-    public Iterable getTagsStartingWith(String string) {
+    public List<WorkTag> getTagsStartingWith(String string) {
         return em.createQuery("SELECT wt FROM WorkTag wt WHERE wt.name LIKE CONCAT(?1, '%') OR wt.name LIKE CONCAT('%-', ?1, '%')")
                 .setParameter(1, string)
                 .getResultList();
@@ -140,7 +140,7 @@ public class WorkDao {
                 tags[i] = tags[i].trim();
             }
         }
-        String jpql = "SELECT wu FROM WorkUnit wu, WorkTag wt WHERE wt.name IN (:tagNames) AND wt MEMBER OF wu.tags";
+        String jpql = "SELECT wu FROM WorkUnit wu, WorkTag wt WHERE wt.name IN (:tagNames) AND wt MEMBER OF wu.tags GROUP BY wu.id";
         
         return em.createQuery( jpql )
                 .setParameter("tagNames", Arrays.asList(tags))
