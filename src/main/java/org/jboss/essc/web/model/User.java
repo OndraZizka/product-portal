@@ -29,8 +29,8 @@ public class User implements Serializable {
     @XmlTransient @JsonIgnore
     private String pass;
     
-    @XmlTransient @JsonIgnore
     @Column(columnDefinition = "CHAR(32)", length = 32)
+    @XmlTransient @JsonIgnore
     private String passTemp;
     
     @Column(unique=true)
