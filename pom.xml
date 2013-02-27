@@ -25,7 +25,7 @@
 
         <!-- Define the version of JBoss' Java EE 6 APIs we want to import. -->
         <jboss.spec.version>3.0.2.Final</jboss.spec.version>
-        <version.wicket>1.5.9</version.wicket>
+        <version.wicket>1.5.10</version.wicket>
         <version.wicket.cdi>1.2</version.wicket.cdi>
 
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
