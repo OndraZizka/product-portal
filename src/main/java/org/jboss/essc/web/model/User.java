@@ -25,9 +25,13 @@ public class User implements Serializable {
     @Column(unique=true, nullable=false)
     private String name;
     
-    @Column(nullable=false)
+    @Column(nullable=false, columnDefinition = "CHAR(32)", length = 32)
     @XmlTransient @JsonIgnore
     private String pass;
+    
+    @XmlTransient @JsonIgnore
+    @Column(columnDefinition = "CHAR(32)", length = 32)
+    private String passTemp;
     
     @Column(unique=true)
     private String mail;
@@ -59,6 +63,9 @@ public class User implements Serializable {
     public void setName( String name ) { this.name = name; }
     public String getPass() { return pass; }
     public void setPass( String pass ) { this.pass = pass; }
+    /** Temporary; for password reset. */
+    public String getPassTemp() { return passTemp; }
+    public void setPassTemp(String passTemp) { this.passTemp = passTemp; }    
 
     public boolean isShowProd() { return showProd; }
     public void setShowProd( boolean showProd ) { this.showProd = showProd; }
@@ -86,5 +93,11 @@ public class User implements Serializable {
         else if (!name.equals(other.name)) return false;
         return true;
     }
-   
+
+    
+    @Override
+    public String toString() {
+        return "User #" + id + "{ " + name + " / " + pass + ", " + mail + " showProd=" + showProd + '}';
+    }
+    
 }
