@@ -30,7 +30,6 @@
     <filter-mapping>
         <filter-name>Wicket</filter-name>
         <url-pattern>/*</url-pattern>
-        <init-param> <param-name>ignorePaths</param-name> <param-value>images/,rest/</param-value> </init-param>
         <dispatcher>REQUEST</dispatcher>
         <!-- <dispatcher>ERROR</dispatcher>  Let 404 etc go through Wicket. -->
     </filter-mapping>
