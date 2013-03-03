@@ -2,7 +2,6 @@ package org.jboss.essc.web._cp.pagePanes;
 
 import javax.inject.Inject;
 import javax.servlet.http.Cookie;
-import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxCheckBox;
 import org.apache.wicket.markup.html.form.Form;
@@ -23,12 +22,14 @@ import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.pages.prod.AddProductPage;
 import org.jboss.essc.web.security.EsscAuthSession;
 import org.jboss.essc.web.util.MailSender;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * @author Ondrej Zizka
  */
 public class SidebarPanel extends Panel {
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(SidebarPanel.class);
 
     @Inject private transient ProductDaoBean dao;
     @Inject private transient MailSender mailSender;
@@ -45,7 +46,7 @@ public class SidebarPanel extends Panel {
         this.setRenderBodyOnly( true );
         
         // User box
-        add( new UserMenuBox("userBox").setVisibilityAllowed( false ) );
+        add( new UserMenuBox("userBox") );
         
         // Administration
         /*add( new WebMarkupContainer("adminBox")
@@ -91,8 +92,10 @@ public class SidebarPanel extends Panel {
             @Override protected void onSubmit() {
                 try {
                     mailSender.sendMail( "essc-list@redhat.com", "ESSC portal feedback", ta.getValue() );
+                    info("Thank you for your feedback.");
                 }
                 catch( Exception ex ) {
+                    log.error("Can't send mail: " + ex.toString(), ex);
                     error( "Can't send: " + ex.toString() );
                 }
             }
