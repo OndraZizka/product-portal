@@ -30,6 +30,9 @@ import org.slf4j.LoggerFactory;
  */
 public class SidebarPanel extends Panel {
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(SidebarPanel.class);
+    
+    private static final String FEEDBACK_EMAIL = "ozizka@redhat.com";
+    
 
     @Inject private transient ProductDaoBean dao;
     @Inject private transient MailSender mailSender;
@@ -91,7 +94,7 @@ public class SidebarPanel extends Panel {
         add( new Form("quickMessageForm"){
             @Override protected void onSubmit() {
                 try {
-                    mailSender.sendMail( "essc-list@redhat.com", "ESSC portal feedback", ta.getValue() );
+                    mailSender.sendMail(FEEDBACK_EMAIL, "ESSC portal feedback", ta.getValue() );
                     info("Thank you for your feedback.");
                 }
                 catch( Exception ex ) {
