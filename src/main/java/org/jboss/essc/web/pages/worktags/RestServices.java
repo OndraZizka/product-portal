@@ -34,8 +34,7 @@ public class RestServices {
 
 
     /**
-     * WorkTag
-     * [{"product":{"id":1,"name":"EAP","note":null,"extIdJira":null,"extIdBugzilla":"226"}]
+     * WorkTag of given name.
      */
     @GET @Path("/workTag/{name}")
     @Produces("application/json")
@@ -48,6 +47,20 @@ public class RestServices {
         return tag;
     }
     
+    /**
+     * WorkTags by prefix.
+     */
+    @GET @Path("/workTags/byPrefix/{prefix}")
+    @Produces("application/json")
+    @Formatted
+    public List<WorkTag> getWorkTagsByPrefix( @PathParam("prefix") String prefix, @Context HttpServletResponse res ) throws IOException {
+        final List<WorkTag> tags = daoWork.getTagsStartingWith(prefix);
+        return tags;
+    }
+    
+    /**
+     * Work units with given tags.
+     */
     @GET @Path("/workUnits/byTags/{tags}")
     @Produces("application/json")
     @Formatted
@@ -62,19 +75,27 @@ public class RestServices {
     }
         
     
-    @PUT
-    @Path("/workUnit/{tags}")
-    @Consumes("application/json")
+    /**
+     *  Create a work unit.
+     * 
+     *  Ex.:  http://localhost:8080/essc-portal/rest/workUnit/foo,bar?author=ozizka&title=Hi+there!&note=Note
+     */
+    @GET @Path("workUnit/{tags}")
+    //@Consumes("application/json")
     @Produces("application/json")
-    public WorkUnit addRelease( @PathParam("tags") String tagNames, 
-                                @QueryParam("author") String author, 
-                                @QueryParam("title") String title, 
-                                @QueryParam("note") String note, 
-                                @QueryParam("url") String url, 
-                                @QueryParam("workers") String workerNames, 
-                                @Context HttpServletResponse res ) throws IOException
+    public WorkUnit addWorkUnit( @PathParam("tags") String tagNames, 
+                                 @QueryParam("author") String author, 
+                                 @QueryParam("title") String title, 
+                                 @QueryParam("note") String note, 
+                                 @QueryParam("url") String url, 
+                                 @QueryParam("workers") String workerNames, 
+                                 @Context HttpServletResponse res ) throws IOException
     {
-        log.debug("Creating work unit: " + tagNames );
+        if( StringUtils.isBlank(tagNames) || StringUtils.isBlank(author) || StringUtils.isBlank(title) ){
+            res.sendError(400, "tags, author and title must be set.");
+        }
+        
+        log.info("Creating work unit: " + tagNames );
         
         WorkUnit wu = new WorkUnit();
         wu.setCreated( new Date() );
@@ -95,16 +116,18 @@ public class RestServices {
             res.sendError(404, "User not found: " + author); return null;
         }
         // Workers
-        String[] userNames = StringUtils.split(workerNames,',');
-        List<User> workers = new ArrayList(userNames.length);
-        for( String name : userNames ) {
-            try {
-                workers.add( daoUser.getUserByName(name));
-            }catch( Throwable ex ){
-                log.warn("User not found, not adding work unit worker: " + name);
+        if( null != workerNames ){
+            String[] userNames = StringUtils.split(workerNames,',');
+            List<User> workers = new ArrayList(userNames.length);
+            for( String name : userNames ) {
+                try {
+                    workers.add( daoUser.getUserByName(name));
+                }catch( Throwable ex ){
+                    log.warn("User not found, not adding work unit worker: " + name);
+                }
             }
+            wu.setWorkers( new HashSet(workers) );
         }
-        wu.setWorkers( new HashSet(workers) );
 
         
         // Add a work unit.
