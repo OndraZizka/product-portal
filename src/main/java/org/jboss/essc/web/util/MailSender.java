@@ -12,16 +12,17 @@ import org.slf4j.LoggerFactory;
 public class MailSender {
     private static final Logger log = LoggerFactory.getLogger(MailSender.class);
     
-    
-    /**
-     * Resource for sending the email.  The mail subsystem is defined in either standalone.xml or domain.xml in your 
-     * respective configuration directory. 
-     */
+    // Default - probably localhost.
     @Resource(mappedName="java:jboss/mail/Default")
-    private Session mailSessionSeznam;
+    private Session mailSessionDefault;
     
+    // Needs VPN
     @Resource(mappedName="java:jboss/mail/RedHat")
     private Session mailSessionRedHat;
+
+    // If everything else fails (devel purposes)
+    @Resource(mappedName="java:jboss/mail/Seznam")
+    private Session mailSessionSeznam;
     
     private String mailFrom    = "essc-list@redhat.com";
     private String mailReplyTo = "essc-list@redhat.com";
@@ -39,16 +40,26 @@ public class MailSender {
 
         log.info("Sending mail to " + sMailTo + " - " + StringUtils.abbreviate(sSubject, 30));
         
+        // Localhost
         try {
-            sendMail_( mailSessionRedHat, this.mailFrom, sMailTo, sSubject, sMailText);
-        }catch( MessagingException ex ){
-            log.warn("Error sending mail over RedHat: " + ex.getMessage());
+            sendMail_( mailSessionDefault, this.mailFrom, sMailTo, sSubject, sMailText);
+        }
+        catch( MessagingException ex ){
+            log.warn("Error sending mail over localhost SMTP: " + ex.getMessage());
+            // Red Hat
             try {
-                sendMail_( mailSessionSeznam, MAIL_FROM_SEZNAM, sMailTo, sSubject, sMailText);
+                sendMail_( mailSessionRedHat, this.mailFrom, sMailTo, sSubject, sMailText);
             }
             catch( MessagingException ex2 ){
-                log.error("Error sending mail: " + ex.getMessage());
-                throw new Exception( "Error sending mail: " + ex.getMessage(), ex );
+                log.warn("Error sending mail over RedHat SMTP: " + ex2.getMessage());
+                // Seznam
+                try {
+                    sendMail_( mailSessionSeznam, MAIL_FROM_SEZNAM, sMailTo, sSubject, sMailText);
+                }
+                catch( MessagingException ex3 ){
+                    log.error("Error sending mail: " + ex3.getMessage());
+                    throw new Exception( "Error sending mail over failover SMTP: " + ex3.getMessage(), ex3 );
+                }
             }
         }
 
