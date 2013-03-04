@@ -81,6 +81,7 @@ public class User implements Serializable {
     //</editor-fold>
 
 
+    //<editor-fold defaultstate="collapsed" desc="hash/eq">
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -102,6 +103,7 @@ public class User implements Serializable {
         else if (!name.equals(other.name)) return false;
         return true;
     }
+    //</editor-fold>
 
     
     @Override
