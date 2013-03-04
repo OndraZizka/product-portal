@@ -87,6 +87,10 @@ public class LoginPage extends BaseLayoutPage {
                     //if( !  LoginPage.this.getSession().authenticate( user ) )
                     if( !  LoginPage.this.getSession().signIn( user.getName(), user.getPass() ) )
                         throw new NoResultException("No such user.");
+                    // TODO:
+                    //if( userDao.isTempPassword( user.getName(), user.getPass() ) )
+                    //    setResponsePage(UserChangePassword.class);
+                    //else
                     setResponsePage(HomePage.class);
                 }
                 catch( NoResultException ex ){
