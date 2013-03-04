@@ -33,8 +33,6 @@ public class MailSender {
 
     /**
     * Sends a mail to specified address.
-    * @param sAddress
-    * @param sMailText
     */
     public void sendMail( String sMailTo, String sSubject, String sMailText ) throws Exception {
 
