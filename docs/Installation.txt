@@ -49,15 +49,33 @@ Mail config in AS:
 ==================
 Set SMTP host, user and pass.
 
+        <subsystem xmlns="urn:jboss:domain:mail:1.0">
             <mail-session jndi-name="java:jboss/mail/Default">
-                <smtp-server outbound-socket-binding-ref="mail-smtp">
-                    <!-- <login name="user" password="pass"/> -->
+                <smtp-server ssl="true" outbound-socket-binding-ref="smtp-localhost"/>
+            </mail-session>
+            <mail-session jndi-name="java:jboss/mail/RedHat">
+                <smtp-server ssl="true" outbound-socket-binding-ref="smtp-redhat"/>
+            </mail-session>
+            <mail-session jndi-name="java:jboss/mail/Seznam">
+                <smtp-server ssl="true" outbound-socket-binding-ref="smtp-seznam">
+                    <login name="zizka@seznam.cz" password="..."/>
                 </smtp-server>
             </mail-session>
+        </subsystem>
 
-        <outbound-socket-binding name="mail-smtp">
-            <remote-destination host="mail.upcmail.cz" port="25"/>
+    <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
+        ...
+        <outbound-socket-binding name="smtp-localhost">
+            <remote-destination host="localhost" port="25"/>
         </outbound-socket-binding>
+        <outbound-socket-binding name="smtp-redhat">
+            <remote-destination host="smtp.corp.redhat.com" port="465"/>
+        </outbound-socket-binding>
+        <outbound-socket-binding name="smtp-seznam">
+            <remote-destination host="smtp.seznam.cz" port="465"/>
+        </outbound-socket-binding>
+    </socket-binding-group>
+
 
 Security config in AS (devel purposes):
 =======================================
