@@ -44,10 +44,11 @@ public class UserDaoBean {
     
     
     /**
-     * Get User by name.
+     * Get User, verify the password or temp password.
+     * @returns User if auth succeeded.
      */
     public User loadUserIfPasswordMatches( User user ) {
-        return this.em.createQuery("SELECT u FROM User u WHERE u.name = :name AND u.pass = MD5(:pass)", User.class)
+        return this.em.createQuery("SELECT u FROM User u WHERE u.name = :name AND (u.pass = MD5(:pass) OR u.passTemp = MD5(:pass))", User.class)
                 .setParameter("name", user.getName())
                 .setParameter("pass", user.getPass())
                 .getSingleResult();
@@ -92,6 +93,13 @@ public class UserDaoBean {
         List list = this.em.createQuery("SELECT 1 FROM User u WHERE u.mail = :mail", Object.class)
                 .setParameter("mail", mail) .getResultList();
         return ! list.isEmpty();
+    }
+
+    /**
+     *  Sets all temp passwords to NULL. To be executed regularly.
+     */
+    public void eraseTempPasswords() {
+        em.createQuery("UPDATE User u SET u.passTemp = NULL").executeUpdate();
     }
 
 }// class
