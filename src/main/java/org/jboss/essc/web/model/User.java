@@ -1,6 +1,7 @@
 package org.jboss.essc.web.model;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -39,6 +40,11 @@ public class User implements Serializable {
     @Column(nullable=false)
     private boolean showProd;
     
+    @ManyToMany 
+    @JoinTable(name = "user_groups", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "group_id")})
+    private Set<User> groups;
+
+    
     
     public User() {
     }
@@ -69,6 +75,9 @@ public class User implements Serializable {
 
     public boolean isShowProd() { return showProd; }
     public void setShowProd( boolean showProd ) { this.showProd = showProd; }
+
+    public Set<User> getGroups() { return groups; }
+    public void setGroups(Set<User> groups) { this.groups = groups; }    
     //</editor-fold>
 
 

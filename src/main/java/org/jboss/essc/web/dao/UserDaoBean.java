@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.jboss.essc.ex.UserMailAlreadyExistsException;
 import org.jboss.essc.ex.UserNameAlreadyExistsException;
 import org.jboss.essc.web.model.User;
+import org.jboss.essc.web.model.UserGroup;
 
 
 /**
@@ -100,6 +101,14 @@ public class UserDaoBean {
      */
     public void eraseTempPasswords() {
         em.createQuery("UPDATE User u SET u.passTemp = NULL").executeUpdate();
+    }
+    
+    /**
+     *  @returns true if given user is a member of given user group.
+     */
+    public boolean isUserInGroup( User user, UserGroup group ){
+        List res = em.createQuery("SELECT 1 FROM User u, UserGroup g WHERE u = :user AND g = :group AND g MEMBER OF u.groups").getResultList();
+        return res.size() > 0;
     }
 
 }// class
