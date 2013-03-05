@@ -11,12 +11,10 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
-import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
-import org.apache.wicket.request.http.handler.ErrorCodeRequestHandler;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 import org.jboss.essc.ex.UserMailAlreadyExistsException;
@@ -139,6 +137,7 @@ public class LoginPage extends BaseLayoutPage {
 
                     try {
                         userDao.addUser(user);
+                        setResponsePage(UserAccountPage.class);
                     }
                     catch( UserNameAlreadyExistsException ex){
                         this.error("User name '" + user.getName() + "' is already taken, please choose other.");
