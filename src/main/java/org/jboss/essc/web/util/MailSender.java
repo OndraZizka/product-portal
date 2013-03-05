@@ -13,6 +13,7 @@ public class MailSender {
     private static final Logger log = LoggerFactory.getLogger(MailSender.class);
     
     // Default - probably localhost.
+    // TODO: @Inject Instance<Session> ?
     @Resource(mappedName="java:jboss/mail/Default")
     private Session mailSessionDefault;
     
@@ -62,6 +63,7 @@ public class MailSender {
         }
 
     }// sendMail()
+    
     private static final String MAIL_FROM_SEZNAM = "zizka@seznam.cz";
     
     
