@@ -89,13 +89,14 @@ public class SidebarPanel extends Panel {
             }
         } );
         
-        // Quick message
+        // Quick message.   TODO: Make AJAX.
         final TextArea ta = new TextArea("text", new PropertyModel(this, "text"));
         add( new Form("quickMessageForm"){
             @Override protected void onSubmit() {
                 try {
                     mailSender.sendMail(FEEDBACK_EMAIL, "ESSC portal feedback", ta.getValue() );
-                    info("Thank you for your feedback.");
+                    text = "Thank you for your feedback.";
+                    info(text);
                 }
                 catch( Exception ex ) {
                     log.error("Can't send mail: " + ex.toString(), ex);
