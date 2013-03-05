@@ -24,7 +24,7 @@ import org.jboss.essc.web.pages.prod.co.CustomFieldsPanel;
 import org.jboss.essc.web.pages.rel.co.ReleaseTraitRowPanel;
 import org.jboss.essc.web.pages.rel.co.ReleaseTraitsPanel;
 import org.jboss.essc.web.pages.prod.co.ReleasesBox;
-import org.jboss.essc.web.dao.ProductDaoBean;
+import org.jboss.essc.web.dao.ProductDao;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.ReleaseTraits;
 import org.jboss.essc.web.pages.BaseLayoutPage;
@@ -41,7 +41,7 @@ import org.jboss.essc.wicket.comp.editable.EditableLabel;
 @SuppressWarnings("serial")
 public class ProductPage extends BaseLayoutPage {
 
-    @Inject private ProductDaoBean productDao;
+    @Inject private ProductDao productDao;
     
     
     // Components

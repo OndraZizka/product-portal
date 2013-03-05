@@ -3,7 +3,7 @@ package org.jboss.essc.web.pages.user;
 
 import javax.inject.Inject;
 import org.apache.wicket.model.LoadableDetachableModel;
-import org.jboss.essc.web.dao.UserDaoBean;
+import org.jboss.essc.web.dao.UserDao;
 import org.jboss.essc.web.model.User;
 
 
@@ -13,7 +13,7 @@ import org.jboss.essc.web.model.User;
  */
 public class UserModel extends LoadableDetachableModel<User> {
     
-    @Inject private UserDaoBean userDao;
+    @Inject private UserDao userDao;
     
     // Data
     Long id;
@@ -47,7 +47,7 @@ public class UserModel extends LoadableDetachableModel<User> {
     public long getId() { return id; }
     public UserModel setId( long id ) { this.id = id; return this; }
 
-    public UserDaoBean getUserDao() { return userDao; }
-    public UserModel setUserDao( UserDaoBean daoUser ) { this.userDao = daoUser; return this; }
+    public UserDao getUserDao() { return userDao; }
+    public UserModel setUserDao( UserDao daoUser ) { this.userDao = daoUser; return this; }
     
 }// class

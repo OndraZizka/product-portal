@@ -17,7 +17,7 @@ import org.apache.wicket.request.http.WebResponse;
 import org.apache.wicket.request.resource.SharedResourceReference;
 import org.jboss.essc.web.CookieNames;
 import org.jboss.essc.web._cp.links.ProductLink;
-import org.jboss.essc.web.dao.ProductDaoBean;
+import org.jboss.essc.web.dao.ProductDao;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.pages.prod.AddProductPage;
 import org.jboss.essc.web.security.EsscAuthSession;
@@ -34,7 +34,7 @@ public class SidebarPanel extends Panel {
     private static final String FEEDBACK_EMAIL = "ozizka@redhat.com";
     
 
-    @Inject private transient ProductDaoBean dao;
+    @Inject private transient ProductDao dao;
     @Inject private transient MailSender mailSender;
     
     

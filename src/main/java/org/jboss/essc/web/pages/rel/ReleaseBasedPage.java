@@ -7,7 +7,7 @@ import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.dao.ReleaseDao;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 
@@ -23,7 +23,7 @@ import org.jboss.essc.web.pages.BaseLayoutPage;
 @SuppressWarnings("serial")
 public class ReleaseBasedPage extends BaseLayoutPage {
 
-    @Inject protected ReleaseDaoBean releaseDao;
+    @Inject protected ReleaseDao releaseDao;
 
     // Data
     protected Release release;

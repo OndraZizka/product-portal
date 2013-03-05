@@ -12,8 +12,8 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.ex.ProductPortalException;
-import org.jboss.essc.web.dao.ProductDaoBean;
-import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.dao.ProductDao;
+import org.jboss.essc.web.dao.ReleaseDao;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.pages.BaseLayoutPage;
@@ -27,8 +27,8 @@ import org.jboss.logging.Logger;
 @SuppressWarnings("serial")
 public class AddReleasePage extends BaseLayoutPage {
 
-    @Inject private ReleaseDaoBean releaseDao;
-    @Inject private ProductDaoBean prodDao;
+    @Inject private ReleaseDao releaseDao;
+    @Inject private ProductDao prodDao;
 
     // Components
     private Form<Release> form;

@@ -16,7 +16,7 @@ import org.jboss.essc.web.model.UserGroup;
  * A bean which manages Contact entities.
  */
 @Stateless
-public class UserDaoBean {
+public class UserDao {
 
     @PersistenceContext
     private EntityManager em;

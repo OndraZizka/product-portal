@@ -8,7 +8,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
-import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.dao.ReleaseDao;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.qualifiers.LoggedIn;
@@ -22,7 +22,7 @@ import org.jboss.essc.web.qualifiers.ShowInternals;
  */
 public class RecentChangesBox extends Panel {
 
-    @Inject private ReleaseDaoBean dao;
+    @Inject private ReleaseDao dao;
     @Inject @LoggedIn private User currentUser;
     @Inject @ShowInternals private Boolean showInternals;
     

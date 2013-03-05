@@ -15,7 +15,7 @@ import org.jboss.essc.web.model.ReleaseCustomField;
  * A bean which manages Contact entities.
  */
 @Stateless
-public class ReleaseDaoBean {
+public class ReleaseDao {
 
     public static final boolean WITH_DEPS = true;
     public static final boolean WITHOUT_DEPS = false;

@@ -10,8 +10,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.lang.StringUtils;
-import org.jboss.essc.web.dao.ProductDaoBean;
-import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.dao.ProductDao;
+import org.jboss.essc.web.dao.ReleaseDao;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 import org.slf4j.Logger;
@@ -34,8 +34,8 @@ public class TrackersScheduledSynchronizer {
     
     @PersistenceContext private EntityManager em;
     
-    @Inject private ProductDaoBean daoProduct;
-    @Inject private ReleaseDaoBean daoRelease;
+    @Inject private ProductDao daoProduct;
+    @Inject private ReleaseDao daoRelease;
     
     
     /**

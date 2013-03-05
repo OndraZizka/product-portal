@@ -17,7 +17,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web.pages.rel.co.ReleaseBox;
 import org.jboss.essc.web.pages.rel.co.ReleaseCustomFieldsPanel;
-import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.dao.ReleaseDao;
 import org.jboss.essc.web.model.ProductCustomField;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.pages.BaseLayoutPage;
@@ -29,7 +29,7 @@ import org.jboss.essc.web.pages.BaseLayoutPage;
 @SuppressWarnings("serial")
 public class ReleasePage extends BaseLayoutPage {
 
-    @Inject private ReleaseDaoBean releaseDao;
+    @Inject private ReleaseDao releaseDao;
 
     // Data
     private Release release;

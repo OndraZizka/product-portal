@@ -19,7 +19,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 import org.jboss.essc.ex.UserMailAlreadyExistsException;
 import org.jboss.essc.ex.UserNameAlreadyExistsException;
-import org.jboss.essc.web.dao.UserDaoBean;
+import org.jboss.essc.web.dao.UserDao;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.pages.home.HomePage;
@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 public class LoginPage extends BaseLayoutPage {
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(LoginPage.class);
 
-    @Inject private transient UserDaoBean userDao;
+    @Inject private transient UserDao userDao;
     @Inject private transient MailSender mailSender;
     
     

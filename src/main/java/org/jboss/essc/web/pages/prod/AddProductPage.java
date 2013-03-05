@@ -8,8 +8,8 @@ import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.jboss.essc.web.dao.ProductDaoBean;
-import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.dao.ProductDao;
+import org.jboss.essc.web.dao.ReleaseDao;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 
@@ -20,8 +20,8 @@ import org.jboss.essc.web.pages.BaseLayoutPage;
 @SuppressWarnings("serial")
 public class AddProductPage extends BaseLayoutPage {
 
-    @Inject private ReleaseDaoBean prodRelDao;
-    @Inject private ProductDaoBean prodDao;
+    @Inject private ReleaseDao prodRelDao;
+    @Inject private ProductDao prodDao;
 
     // Components
     private Form<Product> insertForm;

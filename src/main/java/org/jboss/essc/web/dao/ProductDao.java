@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
  * A bean which manages Contact entities.
  */
 @Stateless
-public class ProductDaoBean {
-    private static final Logger log = LoggerFactory.getLogger(ProductDaoBean.class);
+public class ProductDao {
+    private static final Logger log = LoggerFactory.getLogger(ProductDao.class);
 
     @PersistenceContext
     private EntityManager em;

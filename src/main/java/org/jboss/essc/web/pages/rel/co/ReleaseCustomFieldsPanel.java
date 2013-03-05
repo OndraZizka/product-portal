@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
-import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.dao.ReleaseDao;
 import org.jboss.essc.web.model.ProductCustomField;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.ReleaseCustomField;
@@ -20,7 +20,7 @@ import org.jboss.essc.web.model.ReleaseCustomField;
  */
 public class ReleaseCustomFieldsPanel extends Panel {
 
-    @Inject private ReleaseDaoBean releaseDao;
+    @Inject private ReleaseDao releaseDao;
     
 
     //public ReleaseCustomFieldsPanel( String id, IModel<List<ReleaseCustomField>> listModel ) {
@@ -53,7 +53,7 @@ public class ReleaseCustomFieldsPanel extends Panel {
      */
     static class CustomFieldPrototypeInstanceModel implements IModel<String> {
 
-        private ReleaseDaoBean releaseDao; // Not injected by wicket-cdi; -> via set().
+        private ReleaseDao releaseDao; // Not injected by wicket-cdi; -> via set().
 
         ProductCustomField protoField;
         Release release;
@@ -95,7 +95,7 @@ public class ReleaseCustomFieldsPanel extends Panel {
 
         @Override public void detach() { }
 
-        private void setDao( ReleaseDaoBean releaseDao ) {
+        private void setDao( ReleaseDao releaseDao ) {
             this.releaseDao = releaseDao;
         }
     }

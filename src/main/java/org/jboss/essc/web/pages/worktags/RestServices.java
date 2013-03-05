@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import org.apache.commons.lang.StringUtils;
-import org.jboss.essc.web.dao.UserDaoBean;
+import org.jboss.essc.web.dao.UserDao;
 import org.jboss.essc.web.dao.WorkDao;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.model.WorkTag;
@@ -30,7 +30,7 @@ public class RestServices {
     private static final Logger log = LoggerFactory.getLogger(RestServices.class);
     
     @Inject private WorkDao daoWork; 
-    @Inject private UserDaoBean daoUser; 
+    @Inject private UserDao daoUser; 
 
 
     /**

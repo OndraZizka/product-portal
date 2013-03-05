@@ -24,7 +24,7 @@ import org.jboss.essc.web.WicketJavaEEApplication;
 import org.jboss.essc.web.dao.CommentDao;
 import org.jboss.essc.web.dao.DepChangeDao;
 import org.jboss.essc.web.dao.MavenArtifactDao;
-import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.dao.ReleaseDao;
 import org.jboss.essc.web.model.DepChangeProposal;
 import org.jboss.essc.web.model.MavenArtifact;
 import org.jboss.essc.web.model.Release;
@@ -42,7 +42,7 @@ public class DepsActionsBox extends Panel {
     private static final Logger log = LoggerFactory.getLogger(DepsActionsBox.class);
     
     
-    @Inject private ReleaseDaoBean daoRelease;
+    @Inject private ReleaseDao daoRelease;
     @Inject private CommentDao     daoComment;
     @Inject private DepChangeDao   daoDepChange;
     @Inject private MavenArtifactDao  daoMavenArtifact;

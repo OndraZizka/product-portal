@@ -6,7 +6,7 @@ import javax.persistence.NoResultException;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
-import org.jboss.essc.web.dao.UserDaoBean;
+import org.jboss.essc.web.dao.UserDao;
 import org.jboss.essc.web.model.User;
 
 
@@ -17,7 +17,7 @@ import org.jboss.essc.web.model.User;
  */
 public class EsscAuthSession extends AuthenticatedWebSession {
     
-    @Inject private UserDaoBean userDao;
+    @Inject private UserDao userDao;
     
     
     private User user;

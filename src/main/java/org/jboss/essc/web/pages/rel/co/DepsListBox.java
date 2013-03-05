@@ -11,7 +11,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.jboss.essc.web.dao.CommentDao;
 import org.jboss.essc.web.dao.DepChangeDao;
-import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.dao.ReleaseDao;
 import org.jboss.essc.web.model.MavenArtifact;
 import org.jboss.essc.web.model.Release;
 
@@ -23,7 +23,7 @@ import org.jboss.essc.web.model.Release;
  */
 public class DepsListBox extends Panel {
     
-    @Inject private ReleaseDaoBean daoRelease;
+    @Inject private ReleaseDao daoRelease;
     @Inject private CommentDao     daoComment;
     @Inject private DepChangeDao   daoDepChange;
 

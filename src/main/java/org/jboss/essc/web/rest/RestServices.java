@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
-import org.jboss.essc.web.dao.ProductDaoBean;
-import org.jboss.essc.web.dao.ReleaseDaoBean;
+import org.jboss.essc.web.dao.ProductDao;
+import org.jboss.essc.web.dao.ReleaseDao;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.util.RestUtils;
@@ -28,8 +28,8 @@ import org.slf4j.LoggerFactory;
 public class RestServices {
     private static final Logger log = LoggerFactory.getLogger(RestServices.class);
     
-    @Inject private ReleaseDaoBean daoRel; 
-    @Inject private ProductDaoBean daoProd; 
+    @Inject private ReleaseDao daoRel; 
+    @Inject private ProductDao daoProd; 
 
 
     /**
