@@ -42,7 +42,7 @@ public class User implements Serializable {
     
     @ManyToMany 
     @JoinTable(name = "user_groups", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "group_id")})
-    private Set<User> groups;
+    private Set<UserGroup> groups;
 
     
     
@@ -53,9 +53,6 @@ public class User implements Serializable {
         this.name = name;
         this.pass = pass;
     }
-    
-    
-
     
     
     
@@ -76,8 +73,8 @@ public class User implements Serializable {
     public boolean isShowProd() { return showProd; }
     public void setShowProd( boolean showProd ) { this.showProd = showProd; }
 
-    public Set<User> getGroups() { return groups; }
-    public void setGroups(Set<User> groups) { this.groups = groups; }    
+    public Set<UserGroup> getGroups() { return groups; }
+    public void setGroups(Set<UserGroup> groups) { this.groups = groups; }    
     //</editor-fold>
 
 
@@ -108,7 +105,7 @@ public class User implements Serializable {
     
     @Override
     public String toString() {
-        return "User #" + id + "{ " + name + " / " + pass + ", " + mail + " showProd=" + showProd + '}';
+        return "UserGroup #" + id + "{ " + name + " / " + pass + ", " + mail + " showProd=" + showProd + '}';
     }
     
 }

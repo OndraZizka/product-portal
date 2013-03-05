@@ -31,6 +31,7 @@ import org.jboss.essc.web.pages.test.AdminPage;
 import org.jboss.essc.web.pages.test.JpaQueryPage;
 import org.jboss.essc.web.pages.user.LoginPage;
 import org.jboss.essc.web.pages.user.UserAccountPage;
+import org.jboss.essc.web.pages.user.UserProfilePage;
 import org.jboss.essc.web.pages.worktags.AddWorkUnitPage;
 import org.jboss.essc.web.pages.worktags.WorkTagPage;
 import org.jboss.essc.web.pages.worktags.WorkUnitPage;
@@ -83,6 +84,7 @@ public class WicketJavaEEApplication extends WebApplication {
         mountPage("/404",   Http404.class);
         mountPage("/login", LoginPage.class);
         mountPage("/user",  UserAccountPage.class);
+        mountPage("/profile/#{name}",  UserProfilePage.class);
         mountPage("/test",  EditableTestPage.class);
         mountPage("/jpa",   JpaQueryPage.class);
         mountPage("/admin", AdminPage.class);
