@@ -93,7 +93,7 @@ public class LoginPage extends BaseLayoutPage {
                 }
                 catch( NoResultException ex ){
                     //setResponsePage(HomePage.class);
-                    error("Wrong password or non-existent user: " + user.getName() + " / " + user.getPass());
+                    error("Wrong password or non-existent user: " + user.getName() );
                     info( "To get forgotten password, fill in user name and/or email.");
                 }
             }
