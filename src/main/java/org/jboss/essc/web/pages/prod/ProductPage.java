@@ -83,8 +83,7 @@ public class ProductPage extends BaseLayoutPage {
         // Form
         this.form = new Form("form", new CompoundPropertyModel(getModel())) {
             @Override protected void onSubmit() {
-                product = productDao.update( product );
-                modelChanged();
+                doProductUpdate();
             }
         };
         this.form.setVersioned(false);
@@ -161,7 +160,11 @@ public class ProductPage extends BaseLayoutPage {
                 });
             }
             @Override protected void onSubmit() {
-                productDao.deleteIncludingReleases( (Product) product );
+                if( ! productDao.canBeUpdatedBy( product, ProductPage.this.getSession().getUser() ) ){
+                    error("You don't have permissions to update this product.");
+                    return; 
+                }
+                productDao.deleteIncludingReleases( product );
                 setResponsePage(HomePage.class);
             }
         });
@@ -177,8 +180,7 @@ public class ProductPage extends BaseLayoutPage {
     private void onProductUpdate( AjaxRequestTarget target ) {
         if( target != null )  target.add( this.feedbackPanel );
         try {
-            product = productDao.update( product );
-            modelChanged();
+            doProductUpdate();
             this.feedbackPanel.info("Product saved.");
             if( target != null )
                 target.appendJavaScript("window.notifyFlash('Product saved.')");
@@ -186,7 +188,20 @@ public class ProductPage extends BaseLayoutPage {
             this.feedbackPanel.info("Saving product failed: " + ex.toString());
         }
     }
-
+    
+    /**
+     *  Actually saves the product - after a security check.
+     */
+    private void doProductUpdate(){
+        // Security check.
+        if( ! productDao.canBeUpdatedBy( product, ProductPage.this.getSession().getUser() ) ){
+            error("You don't have permissions to modify this product's data.");
+            return; 
+        }
+        
+        product = productDao.update( product );
+        modelChanged();
+    }
     
     
     public static PageParameters createPageParameters( Product prod ){

@@ -63,11 +63,13 @@ public class EsscAuthSession extends AuthenticatedWebSession {
         if( ! isSignedIn() )  return null;
         
         // If the user is signed in, they have these roles
-        return new Roles( Roles.ADMIN );
+        //return new Roles( Roles.ADMIN ); // TODO
+        return new Roles( (String[]) getUser().getGroupsNames().toArray());
     }
 
     public EsscSettings getSettings() { return settings; }
     
+    /**  @returns currently logged user (full object), or null. */
     public User getUser() { return user; }
     public void setUser( User user ) { this.user = user; }
 

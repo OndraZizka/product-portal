@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import org.jboss.essc.web.model.Product;
+import org.jboss.essc.web.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -88,6 +89,17 @@ public class ProductDao {
         
         this.em.remove(prod);
         this.em.flush();
+    }
+
+
+    /**
+     *  Is user in at least one of groups which can edit the product?
+     */
+    public boolean canBeUpdatedBy( Product prod, User user ) {
+        this.em.createQuery("SELECT COUNT(*) FROM Product p, User u WHERE p = :prod AND u.groups CONTAINS (SELECT p FROM Product p WHERE p.name = ?1)" ).setParameter( 1, prod.getName() ).executeUpdate();
+        
+        String editorsGroupPrefix = prod.getEditorsGroupPrefix();
+        return user.isInGroups( editorsGroupPrefix );
     }
     
 }// class

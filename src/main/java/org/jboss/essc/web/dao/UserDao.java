@@ -55,9 +55,11 @@ public class UserDao {
      * @returns User if auth succeeded.
      */
     public User loadUserIfPasswordMatches( User user ) {
-        return this.em.createQuery("SELECT u FROM User u WHERE u.name = :name AND (u.pass = MD5(:pass) OR u.passTemp = MD5(:pass))", User.class)
-                .setParameter("name", user.getName())
-                .setParameter("pass", user.getPass())
+        return this.em.createQuery(
+            "SELECT u FROM User u LEFT JOIN FETCH u.groups "
+            + " WHERE u.name = :name AND (u.passHash = :passHash OR u.passTemp = :passHash)", User.class)
+                .setParameter("name",     user.getName())
+                .setParameter("passHash", user.rehashPass())
                 .getSingleResult();
     }
     

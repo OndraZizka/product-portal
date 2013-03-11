@@ -44,4 +44,16 @@
                 <skipTests>true</skipTests>
             </properties>
         </action>
+        <action>
+            <actionName>clean</actionName>
+            <goals>
+                <goal>clean</goal>
+                <goal>package</goal>
+                <goal>jboss-as:redeploy</goal>
+            </goals>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+                
+            </properties>
+        </action>
     </actions>

@@ -16,6 +16,7 @@ import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.util.cookies.CookieUtils;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 import org.jboss.essc.ex.UserMailAlreadyExistsException;
 import org.jboss.essc.ex.UserNameAlreadyExistsException;
@@ -40,6 +41,8 @@ public class LoginPage extends BaseLayoutPage {
     @Inject private transient UserDao userDao;
     @Inject private transient MailSender mailSender;
     
+    private static final String COOKIE_LAST_LOGGING_USER = "lastLoggingUser";
+    
     
     // Components
     private Form<User> form;
@@ -53,9 +56,10 @@ public class LoginPage extends BaseLayoutPage {
     public LoginPage(PageParameters params) {
         
         //String userName = params.get("user").toOptionalString();
+        user.setName( new CookieUtils().load(COOKIE_LAST_LOGGING_USER) );
         
 
-        this.form = new Form<User>("form");
+        this.form = new Form<>("form");
         this.form.setOutputMarkupId(true);
         
         // Feedback
@@ -74,15 +78,17 @@ public class LoginPage extends BaseLayoutPage {
             protected void onSubmit( AjaxRequestTarget target, Form<?> form ) {
                 target.add( feedback );
                 
-                if( "".equals(user.getName()) || "".equals(user.getPass()) ){
-                    getPage().get("user").error("Please fill the username and password.");
+                // if( rememberMe )
+                new CookieUtils().save(COOKIE_LAST_LOGGING_USER, user.getName());
+                
+                if( StringUtils.isBlank(user.getName())  ||  StringUtils.isBlank(user.getPass()) ){
+                    getPage().get("form:user").error("Please fill the username and password.");
                     return;
                 }
                 
                 //checkLoginWithPicketBox();
                 try {
                     //User user_ = userDao.loadUserIfPasswordMatches( user );
-                    //if( !  LoginPage.this.getSession().authenticate( user ) )
                     if( !  LoginPage.this.getSession().signIn( user.getName(), user.getPass() ) )
                         throw new NoResultException("No such user.");
                     // TODO:
@@ -116,8 +122,6 @@ public class LoginPage extends BaseLayoutPage {
                 }
 
                 
-                log.info("Registering user: " + user.toString());
-                
                 // Email already registered?
                 if( userDao.userMailExists(user.getMail()) ){
                     // Reset password.
@@ -135,6 +139,7 @@ public class LoginPage extends BaseLayoutPage {
                         return;
                     }
 
+                    log.info("Registering user: " + user.toString());
                     try {
                         userDao.addUser(user);
                         setResponsePage(UserAccountPage.class);

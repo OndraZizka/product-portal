@@ -1,14 +1,17 @@
 package org.jboss.essc.web.model;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.apache.commons.codec.binary.Hex;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -20,6 +23,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity @Table(name="user")
 @XmlRootElement(name="user")
 public class User implements Serializable {
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(User.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +33,12 @@ public class User implements Serializable {
     @Column(unique=true, nullable=false)
     private String name;
     
-    @Column(nullable=false, columnDefinition = "CHAR(32)", length = 32)
+    @Transient @XmlTransient @JsonIgnore
+    private transient String pass;
+    
+    @Column(name = "pass", nullable=false, columnDefinition = "CHAR(32)", length = 32)
     @XmlTransient @JsonIgnore
-    private String pass;
+    private String passHash;
     
     @Column(columnDefinition = "CHAR(32)", length = 32)
     @XmlTransient @JsonIgnore
@@ -53,8 +60,8 @@ public class User implements Serializable {
     }
 
     public User( String name, String pass ) {
-        this.name = name;
-        this.pass = pass;
+        this.setName(name);
+        this.setPass(pass);
     }
     
     
@@ -91,8 +98,21 @@ public class User implements Serializable {
     public void setMail( String mail ) { this.mail = mail; }
     public String getName() { return name; }
     public void setName( String name ) { this.name = name; }
+    
+    // Passwords.
     public String getPass() { return pass; }
-    public void setPass( String pass ) { this.pass = pass; }
+    public void setPass( String pass ) { 
+        this.pass = pass;
+        this.setPassHash( md5(pass) ); 
+    }
+    public String getPassHash() { return passHash; }
+    protected void setPassHash( String passHash ) { this.passHash = passHash; }
+    public String rehashPass() { 
+        String hash = md5(pass); 
+        this.setPassHash( hash ); 
+        return hash; 
+    }
+    
     /** Temporary; for password reset. */
     public String getPassTemp() { return passTemp; }
     public void setPassTemp(String passTemp) { this.passTemp = passTemp; }    
@@ -133,6 +153,15 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "UserGroup #" + id + "{ " + name + " / " + pass + ", " + mail + " showProd=" + showProd + '}';
+    }
+
+    private String md5(String pass) {
+        try {
+            byte[] digest = MessageDigest.getInstance("MD5").digest(pass.getBytes());
+            return Hex.encodeHexString(digest);
+        } catch (NoSuchAlgorithmException ex) {
+            throw new RuntimeException("Unexpected: MD5 algorithm not found.");
+        }
     }
 
 }

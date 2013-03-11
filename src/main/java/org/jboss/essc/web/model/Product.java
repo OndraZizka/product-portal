@@ -28,6 +28,9 @@ public class Product implements Serializable, IHasTraits {
     private String name;
     
     private String note;
+    
+    private String editorsGroupPrefix;
+    
 
     // External ID of this product - Jira and Bugzilla.
     private String extIdJira;
@@ -73,6 +76,10 @@ public class Product implements Serializable, IHasTraits {
     public void setExtIdJira(String extIdJira) { this.extIdJira = extIdJira; }
     public String getExtIdBugzilla() { return extIdBugzilla; }
     public void setExtIdBugzilla(String extIdBugzilla) { this.extIdBugzilla = extIdBugzilla; }    
+
+    /** Prefix of groups allowed to edit - for example, "prod". */
+    public String getEditorsGroupPrefix() { return editorsGroupPrefix; }
+    public void setEditorsGroupPrefix(String editorsGroupPrefix) { this.editorsGroupPrefix = editorsGroupPrefix; }    
 
     public Map<String, ProductCustomField> getCustomFields() { return customFields; }
     public void setCustomFields( Map<String, ProductCustomField> customFields ) { this.customFields = customFields; }
