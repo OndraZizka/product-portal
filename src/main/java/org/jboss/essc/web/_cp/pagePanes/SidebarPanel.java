@@ -11,16 +11,20 @@ import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.http.WebResponse;
 import org.apache.wicket.request.resource.SharedResourceReference;
+import org.apache.wicket.util.convert.IConverter;
+import org.apache.wicket.util.cookies.CookieUtils;
 import org.jboss.essc.web.CookieNames;
 import org.jboss.essc.web._cp.links.ProductLink;
 import org.jboss.essc.web.dao.ProductDao;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.pages.prod.AddProductPage;
 import org.jboss.essc.web.security.EsscAuthSession;
+import org.jboss.essc.web.security.EsscSettings;
 import org.jboss.essc.web.util.MailSender;
 import org.slf4j.LoggerFactory;
 
@@ -69,8 +73,11 @@ public class SidebarPanel extends Panel {
             }
         } );
         
-        // Settings
-        add( new AjaxCheckBox("showInternalReleases", new Model()) {
+        // Settings // TODO: create and use a model.
+        EsscAuthSession sess = (EsscAuthSession)getSession();
+        boolean showInt = sess.getSettings().isShowInternalReleases();
+        
+        add( new AjaxCheckBox("showInternalReleases", new Model(showInt)) {
             @Override protected void onUpdate( AjaxRequestTarget target ) {
                 target.add( getPage() );
                 
