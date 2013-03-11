@@ -33,7 +33,7 @@ public class UserProfilePage extends BaseLayoutPage {
         User user = getSession().getUser();
         
         String userName = params.get("name").toString();
-        if( null != userName ){
+        if( ! StringUtils.isBlank(userName) ){
             user = daoUser.getUserByName(userName, true);
             if( null == user )
                 throw new RestartResponseException( new NotFoundPage("User not found: " + userName) );
