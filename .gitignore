@@ -6,3 +6,4 @@ target
 !/.openshift/config/standalone.xml
 
 /essc.log
+/src/main/java/org/jboss/essc/web/pages/user/UserOrSessionOrCookieModel.java
