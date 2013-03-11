@@ -82,7 +82,7 @@ public class RestServices {
      */
     @GET @Path("workUnit/{tags}")
     //@Consumes("application/json")
-    @Produces("application/json")
+    @Produces("application/json") @Formatted
     public WorkUnit addWorkUnit( @PathParam("tags") String tagNames, 
                                  @QueryParam("author") String author, 
                                  @QueryParam("title") String title, 
@@ -132,7 +132,9 @@ public class RestServices {
         
         // Add a work unit.
         try {
-            return daoWork.createWorkUnit( wu );
+            wu = daoWork.createWorkUnit( wu );
+            wu.getAuthor().setGroups(null); // Delete Hibernate proxy.
+            return wu;
         } catch (Exception ex) {
             res.sendError(500, "Failed creating the work unit: " + ex);
             return null;

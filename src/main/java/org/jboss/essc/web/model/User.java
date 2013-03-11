@@ -1,6 +1,9 @@
 package org.jboss.essc.web.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -55,6 +58,30 @@ public class User implements Serializable {
     }
     
     
+    /**
+     *  Converts getGroups() to a list of names of the groups. Convenience method.
+     */
+    //@JsonIgnore @Transient
+    public List<String> getGroupsNames(){
+        if( getGroups() == null ) return null;
+        List<String> names = new ArrayList<>(getGroups().size());
+        for( UserGroup g : getGroups() )
+            names.add( g.getName() );
+        return names;
+    }
+    
+    /**
+     * @returns true if this user is at least in one group with given prefix.
+     *          E.g.  prefix = "prod" matches "prod", "prod.eap", but not "products".
+     */
+    public boolean isInGroups(String groupPattern) {
+        for( UserGroup g : getGroups() ){
+            if( g.getName().startsWith(groupPattern) )
+                return true;
+        }
+        return false;
+    }
+    
     
     //<editor-fold defaultstate="collapsed" desc="Get/set">
     public Long getId() { return id; }
@@ -107,5 +134,5 @@ public class User implements Serializable {
     public String toString() {
         return "UserGroup #" + id + "{ " + name + " / " + pass + ", " + mail + " showProd=" + showProd + '}';
     }
-    
+
 }

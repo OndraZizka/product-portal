@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import org.apache.commons.lang.StringUtils;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 
 /**
@@ -104,6 +105,7 @@ public class WorkUnit implements Serializable {
         return "WorkUnit #" + id + " from " + created + " by " + author + " { name: " + title + '}';
     }
 
+    @Transient @JsonIgnore
     public String getTagsAsString() {
         return StringUtils.join(this.getTags(), " ");
     }
