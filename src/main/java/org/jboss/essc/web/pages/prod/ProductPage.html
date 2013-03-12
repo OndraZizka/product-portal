@@ -59,6 +59,15 @@
                 </fieldset>
             </div>
 
+            <!-- Admin zone -->
+            <div wicket:id="adminZone" class="box adminZone">
+                <h4>Privileges</h4>
+                <form wicket:id="form" method="post" action="#">
+                    <span>Prefix of user groups allowed to edit this product:</span>
+                    <input wicket:id="editorsGroupPrefix" type="input"/>
+                </form>
+            </div>
+
             <!-- Danger zone -->
             <div wicket:id="dangerZone" class="box dangerZone">
                 <form wicket:id="form" method="post" action="#">

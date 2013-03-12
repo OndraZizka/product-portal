@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.feedback.ContainerFeedbackMessageFilter;
@@ -129,11 +130,25 @@ public class ProductPage extends BaseLayoutPage {
                 
                 ReleaseTraits traits = ((Product)getPage().getDefaultModelObject()).getTraits();
                 PropertiesUtils.applyToObjectFlat( traits, props );
-                //product = productDao.update( product );
-                //modelChanged();
                 onProductUpdate( null );
             }
         });
+        
+        
+        // Admin Zone
+        WebMarkupContainer adminZone = new WebMarkupContainer("adminZone");
+        this.add( adminZone );
+        //boolean isAdminLogged = getSession().isUserInGroup_Pattern("admin");
+        boolean isAdminLogged = getSession().isUserInGroup_Prefix("admin");
+        adminZone.setVisibilityAllowed( isAdminLogged );
+        adminZone.add( new EditableLabel("editorsGroupPrefix", new PropertyModel<String>(this.product, "editorsGroupPrefix"))
+                .add( new AjaxFormComponentUpdatingBehavior("change") {
+                    @Override protected void onUpdate(AjaxRequestTarget target) {
+                        onProductUpdate(target);
+                    }
+                })
+        );
+        
         
         
         // Danger Zone

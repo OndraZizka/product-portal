@@ -99,7 +99,7 @@ public class ProductDao {
         //this.em.createQuery("SELECT COUNT(*) FROM Product p, User u WHERE p = :prod AND u.groups CONTAINS (SELECT p FROM Product p WHERE p.name = ?1)" ).setParameter( 1, prod.getName() ).executeUpdate();
         
         String editorsGroupPrefix = prod.getEditorsGroupPrefix();
-        return user.isInGroups( editorsGroupPrefix );
+        return user.isInGroups_Prefix(editorsGroupPrefix );
     }
     
 }// class

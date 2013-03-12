@@ -10,7 +10,9 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.jboss.serial.util.StringUtil;
 import org.slf4j.LoggerFactory;
 
 
@@ -78,12 +80,35 @@ public class User implements Serializable {
     }
     
     /**
+     * @returns true if this user is in the given group.
+     */
+    public boolean isInGroup(String groupName) {
+        return getGroupsNames().contains( groupName );
+    }
+    
+    
+    /**
      * @returns true if this user is at least in one group with given prefix.
      *          E.g.  prefix = "prod" matches "prod", "prod.eap", but not "products".
      */
-    public boolean isInGroups(String groupPattern) {
+    public boolean isInGroups_Prefix(String groupPrefix) {
+        if( StringUtils.isBlank(groupPrefix) )  return false;
         for( UserGroup g : getGroups() ){
-            if( g.getName().startsWith(groupPattern) )
+            if( g.getName().startsWith(groupPrefix) )
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * @returns true if this user is at least in one group with given prefix.
+     *          E.g.  prefix = "prod" matches "prod", "prod.eap", but not "products".
+     */
+    public boolean isInGroups_Pattern(String groupPattern) {
+        if( StringUtils.isBlank(groupPattern) )  return false;
+        
+        for( UserGroup g : getGroups() ){
+            if( matchesGroupPattern(g.getName(), groupPattern) );
                 return true;
         }
         return false;
@@ -155,7 +180,7 @@ public class User implements Serializable {
         return "UserGroup #" + id + "{ " + name + " / " + pass + ", " + mail + " showProd=" + showProd + '}';
     }
 
-    private String md5(String pass) {
+    private static final String md5(String pass) {
         try {
             byte[] digest = MessageDigest.getInstance("MD5").digest(pass.getBytes());
             return Hex.encodeHexString(digest);
@@ -163,5 +188,60 @@ public class User implements Serializable {
             throw new RuntimeException("Unexpected: MD5 algorithm not found.");
         }
     }
+    
+    
+    /**
+     *   "admin"  matches just "admin"
+     *   "prod."  matches "prod", "prod.eap", but not "product" or "product.foo"
+     *   ".eap."  matches "prod.eap", "eap", "eap.prod" but not "reapers".
+     */
+    public static final boolean matchesGroupPattern( String groupName, String pattern ){
+        
+        if( null == groupName || groupName.length() == 0 || null == pattern || pattern.length() == 0)
+            return false;
+        
+        // "admin"  matches just "admin".
+        if( groupName.equals(pattern) ) return true;
+        
+        // ".eap." -> "eap"
+        String patCore = StringUtils.removeEnd(pattern, ".");
+        patCore = StringUtils.removeStart(patCore, ".");
+        
+        boolean dot1 = pattern.startsWith(".");
+        boolean dot2 = pattern.endsWith(".");
+        
+        // No dots at borders.
+        if( ! (dot1 || dot2) ) return groupName.equals(pattern);
+        
+        boolean core1 = groupName.startsWith(patCore + ".");
+        boolean core2 = groupName.endsWith("." + patCore + ".");
+        
+        // Dot at the end.
+        if( ! dot1 ) return core1;
+        // Dot at the start.
+        if( ! dot2 ) return core2;
 
-}
+        // Dots at both sides.
+        return core1 || core2 || groupName.contains(pattern);
+        
+    }
+    
+    // Alternative - use regex.
+    private static final boolean matchesGroupPattern2( String groupName, String pattern ){
+        boolean dot1 = pattern.startsWith(".");
+        boolean dot2 = pattern.endsWith(".");
+
+        // ".eap." -> "eap"
+        String patCore = StringUtils.removeEnd(pattern, ".");
+        patCore = StringUtils.removeStart(patCore, ".");
+        
+        String regex = patCore.replace(".", "\\.");
+        if( dot1 )
+            regex = "(.*\\.)?" + regex;
+        if( dot1 )
+            regex = regex + "(\\..*)?";
+        return groupName.matches(regex);
+    }
+    
+
+}// class

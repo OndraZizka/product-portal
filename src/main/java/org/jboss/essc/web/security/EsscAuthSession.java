@@ -73,4 +73,14 @@ public class EsscAuthSession extends AuthenticatedWebSession {
     public User getUser() { return user; }
     public void setUser( User user ) { this.user = user; }
 
+    public boolean isUserInGroup_Prefix(String groupPrefix) {
+        if( getUser() == null )  return false;
+        return getUser().isInGroups_Prefix(groupPrefix);
+    }
+
+    public boolean isUserInGroup_Pattern(String groupPattern) {
+        if( getUser() == null )  return false;
+        return getUser().isInGroups_Pattern(groupPattern);
+    }
+
 }// class
