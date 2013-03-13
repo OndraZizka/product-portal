@@ -202,16 +202,17 @@ public class User implements Serializable {
         
         // "admin"  matches just "admin".
         if( groupName.equals(pattern) ) return true;
+
+        boolean dot1 = pattern.startsWith(".");
+        boolean dot2 = pattern.endsWith(".");
+
+        // No dots at borders.
+        if( ! (dot1 || dot2) ) return false;
         
         // ".eap." -> "eap"
         String patCore = StringUtils.removeEnd(pattern, ".");
         patCore = StringUtils.removeStart(patCore, ".");
         
-        boolean dot1 = pattern.startsWith(".");
-        boolean dot2 = pattern.endsWith(".");
-        
-        // No dots at borders.
-        if( ! (dot1 || dot2) ) return groupName.equals(pattern);
         
         boolean core1 = groupName.startsWith(patCore + ".");
         boolean core2 = groupName.endsWith("." + patCore + ".");

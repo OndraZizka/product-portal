@@ -2,6 +2,8 @@ package org.jboss.essc.web.pages.prod;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import org.apache.wicket.RestartResponseException;
@@ -19,6 +21,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.jboss.essc.ex.AuthException;
 import org.jboss.essc.web._cp.PropertiesUploadForm;
 import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web.pages.prod.co.CustomFieldsPanel;
@@ -84,7 +87,12 @@ public class ProductPage extends BaseLayoutPage {
         // Form
         this.form = new Form("form", new CompoundPropertyModel(getModel())) {
             @Override protected void onSubmit() {
-                doProductUpdate();
+                /*try {
+                    doProductUpdate();
+                } catch (Exception ex) {
+                    error("Updating the product failed: " + ex.getMessage());
+                }*/
+                onProductUpdate(null);
             }
         };
         this.form.setVersioned(false);
@@ -133,26 +141,31 @@ public class ProductPage extends BaseLayoutPage {
                 onProductUpdate( null );
             }
         });
+
         
+        
+        final boolean isAdminLogged = getSession().isUserInGroup_Pattern("admin");
         
         // Admin Zone
         WebMarkupContainer adminZone = new WebMarkupContainer("adminZone");
         this.add( adminZone );
-        //boolean isAdminLogged = getSession().isUserInGroup_Pattern("admin");
-        boolean isAdminLogged = getSession().isUserInGroup_Prefix("admin");
         adminZone.setVisibilityAllowed( isAdminLogged );
-        adminZone.add( new EditableLabel("editorsGroupPrefix", new PropertyModel<String>(this.product, "editorsGroupPrefix"))
-                .add( new AjaxFormComponentUpdatingBehavior("change") {
+        adminZone.add( new Form("form")
+            .add( new EditableLabel("editorsGroupPrefix", new PropertyModel<String>(this.product, "editorsGroupPrefix"))
+                .add( new AjaxFormComponentUpdatingBehavior("onchange") {
                     @Override protected void onUpdate(AjaxRequestTarget target) {
+                        if( ! isAdminLogged ){  error("Only members of the admin group can alter the privileges."); return; }
                         onProductUpdate(target);
                     }
                 })
+            )
         );
         
         
         
         // Danger Zone
         WebMarkupContainer dangerZone = new WebMarkupContainer("dangerZone");
+        adminZone.setVisibilityAllowed( isAdminLogged );
         this.add( dangerZone );
         
         // Danger Zone Form
@@ -176,7 +189,7 @@ public class ProductPage extends BaseLayoutPage {
             }
             @Override protected void onSubmit() {
                 if( ! productDao.canBeUpdatedBy( product, ProductPage.this.getSession().getUser() ) ){
-                    error("You don't have permissions to update this product.");
+                    error("You don't have permissions to delete this product.");
                     return; 
                 }
                 productDao.deleteIncludingReleases( product );
@@ -188,12 +201,20 @@ public class ProductPage extends BaseLayoutPage {
 
 
     /**
-     *  Called when some of sub-components were updated.
+     *  Called when some of sub-components were updated - after a security check.
      *
      *  @param target  Ajax target, or null if not a result of AJAX.
      */
     private void onProductUpdate( AjaxRequestTarget target ) {
         if( target != null )  target.add( this.feedbackPanel );
+        
+        // Security check.
+        if( ! productDao.canBeUpdatedBy( product, ProductPage.this.getSession().getUser() ) ){
+            //throw new AuthException("You don't have permissions to modify this product's data.");
+            error("You don't have permissions to modify this product's data.");
+            return;
+        }
+        
         try {
             doProductUpdate();
             this.feedbackPanel.info("Product saved.");
@@ -205,15 +226,9 @@ public class ProductPage extends BaseLayoutPage {
     }
     
     /**
-     *  Actually saves the product - after a security check.
+     *  Actually saves the product.
      */
-    private void doProductUpdate(){
-        // Security check.
-        if( ! productDao.canBeUpdatedBy( product, ProductPage.this.getSession().getUser() ) ){
-            error("You don't have permissions to modify this product's data.");
-            return; 
-        }
-        
+    private void doProductUpdate(){  // TODO: throws AuthException?
         product = productDao.update( product );
         modelChanged();
     }

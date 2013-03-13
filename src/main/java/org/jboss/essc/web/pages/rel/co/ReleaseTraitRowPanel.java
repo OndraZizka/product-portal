@@ -4,10 +4,10 @@ package org.jboss.essc.web.pages.rel.co;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.form.AjaxFormComponentUpdatingBehavior;
-import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.feedback.ComponentFeedbackMessageFilter;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -20,8 +20,13 @@ import org.jboss.essc.web.model.Release;
 import org.jboss.essc.wicket.InvalidCssClassAppender;
 import org.jboss.essc.wicket.UrlHttpRequestValidator;
 import org.jboss.essc.wicket.UrlSimpleValidator;
+import org.jboss.essc.wicket.comp.editable.EditableLabel;
 import org.jboss.essc.wicket.comp.editable.EditableLink4;
 import org.jboss.essc.wicket.comp.editable.EditableLinkActivator;
+
+
+
+
 
 
 /**
@@ -30,7 +35,11 @@ import org.jboss.essc.wicket.comp.editable.EditableLinkActivator;
  */
 public class ReleaseTraitRowPanel extends Panel {
     
+    public enum Type { LINK, LABEL }
+    
     private IModel<IHasTraits> relModel;
+    
+    private Type traitType = Type.LINK;
 
     
     // Validators
@@ -42,11 +51,11 @@ public class ReleaseTraitRowPanel extends Panel {
     /**
      *  Defaults 'shouldBe' to the value of 'mustBe'.
      */
-    public ReleaseTraitRowPanel( String id, IModel<IHasTraits> relModel, String label,
+    public ReleaseTraitRowPanel( String id, Type type, IModel<IHasTraits> relModel, String label,
             Release.Status mustBe,
             ReleaseTraitsPanel rp )
     {
-        this( id, relModel, label, mustBe, mustBe, rp );
+        this( id, type, relModel, label, mustBe, mustBe, rp );
     }
     
     /**
@@ -58,7 +67,7 @@ public class ReleaseTraitRowPanel extends Panel {
      * @param shouldBe  Stage at which it should be filled.
      * @param rp        ReleaseTraitsPanel - backref. Needed for AJAX calls.
      */
-    public ReleaseTraitRowPanel( String id, IModel<IHasTraits> relModel, String label, 
+    public ReleaseTraitRowPanel( String id, Type type, IModel<IHasTraits> relModel, String label, 
             Release.Status mustBe, Release.Status shouldBe,  
             ReleaseTraitsPanel rp )
     {
@@ -72,18 +81,29 @@ public class ReleaseTraitRowPanel extends Panel {
         // Label
         this.add( new Label("name", label) );
 
+        FormComponent field = null;
+        
         // EditableLink.
         PropertyModel<String> traitModel = new PropertyModel( relModel.getObject().getTraits(), prop);
-        EditableLink4 link = new EditableLink4("link", traitModel){
-            // Pass the change notification to upper level. TODO: Does Wicket do this automatically?
-            @Override protected void onModelChanged() {
-                ReleaseTraitRowPanel.this.onModelChanged();
-            }
-        };
-        add( link );
+        if( this.traitType == Type.LINK ){
+            EditableLink4 link = new EditableLink4("field", traitModel){
+                // Pass the change notification to upper level. TODO: Does Wicket do this automatically?
+                @Override protected void onModelChanged() { ReleaseTraitRowPanel.this.onModelChanged(); }
+            };
+            // Activator icon.
+            add( new Image("iconEdit", "icoEdit.png").add( new EditableLinkActivator(link) ) );
+            field = link;
+        }
+        // EditableLabel
+        if( this.traitType == Type.LABEL ){
+            field = new EditableLabel("field", traitModel){
+                @Override protected void onModelChanged() { ReleaseTraitRowPanel.this.onModelChanged(); }
+            };
+        }
+        add( field );
 
         // OnChange - persist.
-        link.add( new AjaxFormComponentUpdatingBehavior("onchange"){
+        field.add( new AjaxFormComponentUpdatingBehavior("onchange"){
             @Override protected void onUpdate( AjaxRequestTarget target ) {
                 ReleaseTraitRowPanel.this.onUpdate( target );
             }
@@ -91,20 +111,16 @@ public class ReleaseTraitRowPanel extends Panel {
 
         // URL validators.
         if( false ){
-            link.add( urlFormatValidator );
-            link.add( urlHttpRequestValidator );
+            field.add( urlFormatValidator );
+            field.add( urlHttpRequestValidator );
         } else {
-            link.add( urlFormatSimpleValidator );
+            field.add( urlFormatSimpleValidator );
         }
 
         // Feedback.
-        add( new FeedbackPanel("feedback", new ComponentFeedbackMessageFilter( link ) ).setOutputMarkupId(true) );
+        add( new FeedbackPanel("feedback", new ComponentFeedbackMessageFilter( field ) ).setOutputMarkupId(true) );
 
-        link.add( InvalidCssClassAppender.INSTANCE );
-
-
-        // Activator icon.
-        add( new Image("iconEdit", "icoEdit.png").add( new EditableLinkActivator(link) ) );
+        field.add( InvalidCssClassAppender.INSTANCE );
 
 
         // For releases, colorize trait rows, showing the urgency to be filled.
@@ -142,7 +158,12 @@ public class ReleaseTraitRowPanel extends Panel {
         rtp.onTraitUpdate(this, target);
     }
 
+    public Type getTraitType() { return traitType; }
+    public void setTraitType(Type traitType) { this.traitType = traitType; }
+    
+
 }// class ReleaseTraitRowPanel
+
 
 
 
@@ -191,5 +212,5 @@ class RowColorByStatusClassModifier extends AttributeAppender {
         
         return "mustBe";
     }
-
+    
 }// class RowColorByStatusClassModifier
