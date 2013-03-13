@@ -1,5 +1,6 @@
 target
 /.openshift/*
+!/.openshift/markers/
 !/.openshift/config/
 
 /.openshift/config/*
@@ -7,3 +8,4 @@ target
 
 /essc.log
 /src/main/java/org/jboss/essc/web/pages/user/UserOrSessionOrCookieModel.java
+
