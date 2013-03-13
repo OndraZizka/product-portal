@@ -216,7 +216,7 @@
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
-                <version>1.0.0.Final</version>
+                <version>1.0.3.Final</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -539,7 +539,7 @@
         <!-- For PicketBox. -->
         <repository>
             <id>jboss</id>
-            <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+            <url>https://repository.jboss.org/nexus/content/repositories/public-jboss/</url>
         </repository>
         <repository>
             <id>visural-common</id>
