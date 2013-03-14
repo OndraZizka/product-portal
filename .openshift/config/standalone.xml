@@ -375,11 +375,6 @@
         <outbound-socket-binding name="smtp-localhost">
             <remote-destination host="localhost" port="25"/>
         </outbound-socket-binding>
-        <!--
-        <outbound-socket-binding name="smtp-redhat">
-            <remote-destination host="smtp.corp.redhat.com" port="465"/>
-        </outbound-socket-binding>
-        -->
         <outbound-socket-binding name="smtp-seznam">
             <remote-destination host="smtp.seznam.cz" port="465"/>
         </outbound-socket-binding>
