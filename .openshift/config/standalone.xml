@@ -286,7 +286,7 @@
             </mail-session>
             <mail-session jndi-name="java:jboss/mail/Seznam">
                 <smtp-server ssl="true" outbound-socket-binding-ref="smtp-seznam">
-                    <login name="trash.spam@seznam.cz" password=""/>
+                    <login name="trash.spam@seznam.cz" password="-------"/>
                 </smtp-server>
             </mail-session>
         </subsystem>
