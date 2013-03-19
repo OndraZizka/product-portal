@@ -12,6 +12,12 @@ mysql -u root;
 
    The tables are currently created by hbm2sql. That will change.
 
+AS Management role:
+===================
+
+  echo admin=16f7623bce7adb963157bf675a2aa697 > standalone/configuration/mgmt-users.properties
+
+
 Root context in AS: (for production)
 ===================
 
