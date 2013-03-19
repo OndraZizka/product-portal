@@ -1,7 +1,9 @@
 target
 /.openshift/*
+/.openshift/express.conf
 !/.openshift/markers/
 !/.openshift/config/
+
 
 /.openshift/config/*
 !/.openshift/config/standalone.xml
