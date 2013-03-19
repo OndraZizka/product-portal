@@ -95,7 +95,7 @@
             <plugin>
                 <groupId>org.jboss.as.plugins</groupId>
                 <artifactId>jboss-as-maven-plugin</artifactId>
-                <version>7.3.Final</version>
+                <version>7.4.Final</version>
                 <configuration>
                     <hostname>${jboss-as.deploy.hostname}</hostname>
                     <fileNames>
@@ -143,6 +143,7 @@
         <!-- Production. -->
         <profile>
             <id>prod</id>
+            <activation> <property><name>prod</name></property> </activation>
             <properties>
                 <wicket.mode>development</wicket.mode> <!-- development | deployment -->
                 <jboss-as.deploy.hostname>products.app.eng.bos.redhat.com</jboss-as.deploy.hostname>
