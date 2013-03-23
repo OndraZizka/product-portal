@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * A bean which manages Contact entities.
+ * Manages Product entities.
  */
 @Stateless
 public class ProductDao {
