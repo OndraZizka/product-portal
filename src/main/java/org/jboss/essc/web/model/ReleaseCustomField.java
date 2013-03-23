@@ -114,8 +114,8 @@ public class ReleaseCustomField implements Serializable {
 
     @Override
     public String toString() {
-        String prodName = release.getProduct().getName();
-        String relVer   = release.getVersion();
+        String prodName = release == null ? "-" : (release.getProduct() == null ? "" : release.getProduct().getName());
+        String relVer   = release == null ? "-" : release.getVersion();
         return "ReleaseCustomFields #" + id + " { " + prodName + ":" + relVer + ":" + field.getName() + " = " + value + " }";
     }
     //</editor-fold>
