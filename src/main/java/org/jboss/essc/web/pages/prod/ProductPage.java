@@ -2,8 +2,6 @@ package org.jboss.essc.web.pages.prod;
 
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import org.apache.wicket.RestartResponseException;
@@ -21,7 +19,6 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.jboss.essc.ex.AuthException;
 import org.jboss.essc.web._cp.PropertiesUploadForm;
 import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
 import org.jboss.essc.web.pages.prod.co.CustomFieldsPanel;
