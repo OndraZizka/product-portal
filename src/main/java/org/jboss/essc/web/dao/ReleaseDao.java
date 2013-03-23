@@ -12,7 +12,7 @@ import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.ReleaseCustomField;
 
 /**
- * A bean which manages Contact entities.
+ * Manages the Release entities.
  */
 @Stateless
 public class ReleaseDao {
