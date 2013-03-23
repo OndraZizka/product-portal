@@ -10,7 +10,7 @@ import org.jboss.essc.web.model.MavenArtifact;
 import org.jboss.essc.web.model.Release;
 
 /**
- * A bean which manages Contact entities.
+ * Manages Maven artifact entities.
  */
 @Stateless
 public class MavenArtifactDao {
