@@ -13,7 +13,7 @@ import org.jboss.essc.web.model.UserGroup;
 
 
 /**
- * A bean which manages Contact entities.
+ * Manages User entities.
  */
 @Stateless
 public class UserDao {

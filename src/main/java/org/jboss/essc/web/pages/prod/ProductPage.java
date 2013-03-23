@@ -38,7 +38,7 @@ import org.jboss.essc.wicket.comp.editable.EditableLabel;
 
 
 /**
- * Dynamic behavior for the ListContact page
+ * ProductPage
  * 
  * @author Ondrej Zizka
  */

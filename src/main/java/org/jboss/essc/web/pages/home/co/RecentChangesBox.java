@@ -41,7 +41,7 @@ public class RecentChangesBox extends Panel {
         
         add( new ListView<Release>("rows", dao.getReleases_orderDateDesc(this.numReleases, showInternals)) {
 
-            // Populate the table of contacts
+            // Populate the table of recent changes.
             @Override
             protected void populateItem( final ListItem<Release> item) {
                 Release pr = item.getModelObject();
