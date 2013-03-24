@@ -80,6 +80,10 @@ public class TrackersScheduledSynchronizer {
 
                 // For each version in Bugzilla...
                 for (ExternalVersionInfo verInfo : projInfo.getVersions() ) {
+                    
+                    if( IVersionNamesFilter.DEFAULT.isOK( verInfo.getName() ) )
+                        continue;
+                    
                     Release newRel = new Release(null, product, verInfo.getName());
                     newRel.setExtIdBugzilla( "" + verInfo.getExternalId() );
                     
