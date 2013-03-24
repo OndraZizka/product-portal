@@ -82,7 +82,7 @@ public class TrackersScheduledSynchronizer {
                 for (ExternalVersionInfo verInfo : projInfo.getVersions() ) {
                     
                     // Filter garbage.
-                    if( IVersionNamesFilter.DEFAULT.isOK( verInfo.getName() ) )
+                    if( ! IVersionNamesFilter.DEFAULT.isOK( verInfo.getName() ) )
                         continue;
                     
                     // Remove product name.
