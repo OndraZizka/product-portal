@@ -20,15 +20,16 @@ public class TrackersDao {
      *  Returns the versions of given project, or null if no such project is found.
      */
     public List<ExternalVersionInfo> getVersionsForProject( String name ){
-        Long extId =  DaoUtils.getSingleOrNoneResult( 
-                em.createQuery("SELECT p.externalId FROM ExternalProjectInfo p WHERE p.name = ?1", Long.class)
+        String extId =  DaoUtils.getSingleOrNoneResult( 
+                //em.createQuery("SELECT p.externalId FROM ExternalProjectInfo p WHERE p.name = ?1", Long.class)
+                em.createQuery("SELECT p.extIdBugzilla FROM Product p WHERE p.name = ?1", String.class)
                 .setParameter(1, name) );
         if( null == extId )
             return null;
         
         // SELECT ver FROM ExternalVersionInfo ver WHERE ver.project.name = ?1
         return em.createQuery("SELECT ver FROM ExternalVersionInfo ver WHERE ver.project.externalId = ?1", ExternalVersionInfo.class)
-                .setParameter(1, extId.toString())
+                .setParameter(1, extId)
                 .getResultList();
         
         // Trying outer join to get all the info in one step... no success.

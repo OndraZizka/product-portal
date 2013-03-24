@@ -30,9 +30,9 @@ public class ExternalProjectInfo {
     //private String sourceRepo;
     
     // ID from External tracker.
-    @Column(columnDefinition = "INT UNSIGNED", unique = true)
+    @Column(columnDefinition = "CHAR(12)", unique = true)
     @JsonProperty("id")
-    private Long externalId;
+    private String externalId;
     
     // Prefix - e.g. JBDS-... for Jira.
     @Column(unique = true)
@@ -55,8 +55,8 @@ public class ExternalProjectInfo {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     
-    public Long getExternalId() { return externalId; }
-    public void setExternalId(Long externalId) { this.externalId = externalId; }
+    public String getExternalId() { return externalId; }
+    public void setExternalId(String externalId) { this.externalId = externalId; }
     public String getPrefix() { return prefix; }
     public void setPrefix(String prefix) { this.prefix = prefix; }
     public String getName() { return name; }
