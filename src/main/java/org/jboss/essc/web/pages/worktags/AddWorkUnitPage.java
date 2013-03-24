@@ -11,7 +11,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.jboss.essc.web.dao.WorkDao;
+import org.jboss.essc.web.DAO.WorkDao;
 import org.jboss.essc.web.model.WorkUnit;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.wicketstuff.tagit.TagItTextField;

@@ -3,7 +3,7 @@ package org.jboss.essc.web.pages.user;
 
 import javax.inject.Inject;
 import org.apache.wicket.model.LoadableDetachableModel;
-import org.jboss.essc.web.dao.UserDao;
+import org.jboss.essc.web.DAO.UserDao;
 import org.jboss.essc.web.model.User;
 
 

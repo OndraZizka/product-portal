@@ -1,4 +1,4 @@
-package org.jboss.essc.web.dao;
+package org.jboss.essc.web.DAO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

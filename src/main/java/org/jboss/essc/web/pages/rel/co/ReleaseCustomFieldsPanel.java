@@ -9,7 +9,7 @@ import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
-import org.jboss.essc.web.dao.ReleaseDao;
+import org.jboss.essc.web.DAO.ReleaseDao;
 import org.jboss.essc.web.model.ProductCustomField;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.ReleaseCustomField;

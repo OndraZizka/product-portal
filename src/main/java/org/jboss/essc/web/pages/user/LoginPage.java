@@ -20,7 +20,7 @@ import org.apache.wicket.util.cookies.CookieUtils;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 import org.jboss.essc.ex.UserMailAlreadyExistsException;
 import org.jboss.essc.ex.UserNameAlreadyExistsException;
-import org.jboss.essc.web.dao.UserDao;
+import org.jboss.essc.web.DAO.UserDao;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.pages.home.HomePage;

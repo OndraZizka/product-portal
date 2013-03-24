@@ -14,7 +14,7 @@ import org.apache.wicket.validation.IErrorMessageSource;
 import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.IValidationError;
 import org.apache.wicket.validation.validator.AbstractValidator;
-import org.jboss.essc.web.dao.UserDao;
+import org.jboss.essc.web.DAO.UserDao;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 import org.jboss.essc.web.security.EsscAuthSession;

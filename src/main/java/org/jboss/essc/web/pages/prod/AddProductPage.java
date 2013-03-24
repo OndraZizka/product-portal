@@ -8,8 +8,8 @@ import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.jboss.essc.web.dao.ProductDao;
-import org.jboss.essc.web.dao.ReleaseDao;
+import org.jboss.essc.web.DAO.ProductDao;
+import org.jboss.essc.web.DAO.ReleaseDao;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.pages.BaseLayoutPage;
 

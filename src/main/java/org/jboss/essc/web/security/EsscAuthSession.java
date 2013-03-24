@@ -6,7 +6,7 @@ import javax.persistence.NoResultException;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
-import org.jboss.essc.web.dao.UserDao;
+import org.jboss.essc.web.DAO.UserDao;
 import org.jboss.essc.web.model.User;
 
 

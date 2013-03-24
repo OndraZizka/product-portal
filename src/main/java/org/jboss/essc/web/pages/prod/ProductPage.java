@@ -25,7 +25,7 @@ import org.jboss.essc.web.pages.prod.co.CustomFieldsPanel;
 import org.jboss.essc.web.pages.rel.co.ReleaseTraitRowPanel;
 import org.jboss.essc.web.pages.rel.co.ReleaseTraitsPanel;
 import org.jboss.essc.web.pages.prod.co.ReleasesBox;
-import org.jboss.essc.web.dao.ProductDao;
+import org.jboss.essc.web.DAO.ProductDao;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.ReleaseTraits;
 import org.jboss.essc.web.pages.BaseLayoutPage;

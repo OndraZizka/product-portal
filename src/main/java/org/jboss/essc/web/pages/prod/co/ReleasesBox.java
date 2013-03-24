@@ -18,7 +18,7 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.jboss.essc.web._cp.links.ProductLink;
 import org.jboss.essc.web._cp.links.ReleaseLink;
-import org.jboss.essc.web.dao.ReleaseDao;
+import org.jboss.essc.web.DAO.ReleaseDao;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.User;

@@ -9,9 +9,9 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
-import org.jboss.essc.web.dao.CommentDao;
-import org.jboss.essc.web.dao.DepChangeDao;
-import org.jboss.essc.web.dao.ReleaseDao;
+import org.jboss.essc.web.DAO.CommentDao;
+import org.jboss.essc.web.DAO.DepChangeDao;
+import org.jboss.essc.web.DAO.ReleaseDao;
 import org.jboss.essc.web.model.MavenArtifact;
 import org.jboss.essc.web.model.Release;
 

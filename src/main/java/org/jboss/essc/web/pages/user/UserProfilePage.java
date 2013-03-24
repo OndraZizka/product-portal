@@ -7,7 +7,7 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.jboss.essc.web.dao.UserDao;
+import org.jboss.essc.web.DAO.UserDao;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.model.UserGroup;
 import org.jboss.essc.web.pages.BaseLayoutPage;

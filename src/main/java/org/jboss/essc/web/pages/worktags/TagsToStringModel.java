@@ -6,7 +6,7 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.PropertyModel;
-import org.jboss.essc.web.dao.WorkDao;
+import org.jboss.essc.web.DAO.WorkDao;
 import org.jboss.essc.web.model.WorkTag;
 
 /**

@@ -21,7 +21,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.PropertyModel;
 import org.jboss.essc.web._cp.PropertiesUploadForm;
 import org.jboss.essc.web._cp.links.PropertiesDownloadLink;
-import org.jboss.essc.web.dao.ReleaseDao;
+import org.jboss.essc.web.DAO.ReleaseDao;
 import org.jboss.essc.web.model.Release;
 import org.jboss.essc.web.model.ReleaseTraits;
 import org.jboss.essc.web.pages.rel.ReleaseBasedPage;

@@ -13,7 +13,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
-import org.jboss.essc.web.dao.WorkDao;
+import org.jboss.essc.web.DAO.WorkDao;
 import org.jboss.essc.web.model.WorkTag;
 import org.jboss.essc.web.model.WorkUnit;
 import org.jboss.essc.web.pages.user.UserAccountPage;
