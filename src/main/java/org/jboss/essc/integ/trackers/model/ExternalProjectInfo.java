@@ -15,7 +15,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 
-//@Entity
+@Entity
 @Table(name = "extProject")
 public class ExternalProjectInfo {
 
@@ -26,15 +26,17 @@ public class ExternalProjectInfo {
     private Long id;
     
     // ID from External tracker.
-    @Column(columnDefinition = "INT UNSIGNED")
+    @Column(columnDefinition = "INT UNSIGNED", unique = true)
     @JsonProperty("id")
     private Long externalId;
     
-    @Column(unique = true, nullable = false)
+    // Prefix - e.g. JBDS-... for Jira.
+    @Column(unique = true)
     @JsonProperty("key")
     private String prefix;
     
     @JsonProperty("name")
+    @Column(unique = true)
     private String name;
     
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
@@ -92,7 +94,7 @@ public class ExternalProjectInfo {
 
     @Override
     public String toString() {
-        return "JiraProject {id=" + id
+        return "ExternalProjectInfo {id=" + id
                 + ", key=" + prefix
                 + ", name=" + name
                 + ", lastUpdated=" + lastUpdated

@@ -3,7 +3,6 @@ package org.jboss.essc.integ.trackers;
 import org.jboss.essc.integ.trackers.model.ExternalVersionInfo;
 import org.jboss.essc.integ.trackers.model.ExternalProjectInfo;
 import java.util.List;
-import javax.ejb.Schedule;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -12,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.lang.StringUtils;
 import org.jboss.essc.web.dao.ProductDao;
 import org.jboss.essc.web.dao.ReleaseDao;
+import org.jboss.essc.web.dao.TrackersDao;
 import org.jboss.essc.web.model.Product;
 import org.jboss.essc.web.model.Release;
 import org.slf4j.Logger;
@@ -36,6 +36,9 @@ public class TrackersScheduledSynchronizer {
     
     @Inject private ProductDao daoProduct;
     @Inject private ReleaseDao daoRelease;
+    @Inject private TrackersDao daoTrackers;
+    
+    private static final int MAX_PRODUCTS_QUERIED = 500; // ...
     
     
     /**
@@ -44,15 +47,15 @@ public class TrackersScheduledSynchronizer {
      * 
      *  TODO: Filter out some like "No Release", Future, etc.
      */
-    @Schedule(dayOfWeek = "*", dayOfMonth = "*", hour = "*", minute = "23", info = "Issue tracker version -> Release synchronization")
-    public void createReleasesForNewVersionsOfAllProducts(){
+    public void createSyncNewVersionsOfAllProducts(){
         try {
             final BugzillaRetriever bz = new BugzillaRetriever();
             log.info("Starting synchronization with issue trackers.");
 
-            // For each product...
-            List<Product> products = daoProduct.getProducts_orderName(2000);
+            // For each (our) product...
+            List<Product> products = daoProduct.getProducts_orderName(MAX_PRODUCTS_QUERIED);
             for( Product product : products ) {
+                // No BZ project ID.
                 if( StringUtils.isBlank( product.getExtIdBugzilla() ))
                     continue;
 
@@ -65,37 +68,68 @@ public class TrackersScheduledSynchronizer {
                     log.error("  Failed downloading project info from Bugzilla.");
                     continue;
                 }
-                log.info("  " + projInfo.getVersions().size() + " versions to check.");
+                
+                // Get or create ext project entity.
+                projInfo = daoTrackers.getOrCreateProjectInfo( projInfo );
+                
+                log.debug("  " + projInfo.getVersions().size() + " versions to check.");
                 
                 // Local list of releases.
                 //List<Long> = daoProduct.getVersionsOfProduct();
-                List<Release> releases = daoRelease.getReleasesOfProduct( product, true );
+                List<Release> knownReleases = daoRelease.getReleasesOfProduct( product, true );
 
                 // For each version in Bugzilla...
                 for (ExternalVersionInfo verInfo : projInfo.getVersions() ) {
-                    
                     Release newRel = new Release(null, product, verInfo.getName());
                     newRel.setExtIdBugzilla( "" + verInfo.getExternalId() );
-                    if( releases.contains( newRel ) ) // Relies on equals()!
-                       continue;
                     
+                    // Is it new?
+                    if( knownReleases.contains( newRel ))  continue;
                     log.info("    Seems to be new: " + verInfo);
-                    newRel.setNote("Imported from Bugzilla");
-                    try {
-                        daoRelease.addRelease( newRel );
-                    }
-                    catch( Exception ex ){
-                        log.error("Couldn't store a release imported from Bugzilla: " + ex, ex);
-                    }
+                    //createReleaseIfNew( newRel );
+                    verInfo.setProject(projInfo);
+                    createExternalVersionInfo( verInfo, knownReleases );
                 }
             }// for each product
             log.info("Finished synchronization with issue trackers.");
         }
         catch( Exception ex ){
-            log.error("Couldn't imported releases from Bugzilla: " + ex, ex);
+            log.error("Couldn't import releases from Bugzilla: " + ex, ex);
         }
         
     }// createReleasesForNewVersionsOfAllProducts()
+
+    
+    
+    /**
+     *  Creates version info entity.
+     */
+    private boolean createExternalVersionInfo( ExternalVersionInfo verInfo, List<Release> knownReleases ) {
+        try {
+            daoTrackers.addVersionInfoIfNew( verInfo );
+            return true;
+        }
+        catch( Exception ex ){
+            log.error("Couldn't store a release imported from Bugzilla: " + ex, ex);
+            return false;
+        }
+    }
+
+    
+    /**
+     *  @deprecated  Data from Bugzilla are total mess. We will rather not create releases from that.
+     */
+    private boolean createReleaseIfNew(Release newRel) {
+        
+        newRel.setNote("Imported from Bugzilla");
+        try {
+            daoRelease.addRelease( newRel );
+        }
+        catch( Exception ex ){
+            log.error("Couldn't store a release imported from Bugzilla: " + ex, ex);
+        }
+        return false;
+    }
 
 
 }// class

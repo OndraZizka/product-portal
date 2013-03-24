@@ -18,9 +18,8 @@ import org.slf4j.LoggerFactory;
  *  and if a new one is found, it creates a Release in Product Portal.
  * 
  *  @author Ondrej Zizka
- *  @deprecated  We rather simply create Releases upfront.
  */
-//@Stateless
+@Stateless
 public class TrackersOnDemandSynchronizer {
     private static final Logger log = LoggerFactory.getLogger(TrackersOnDemandSynchronizer.class);
     

@@ -5,9 +5,9 @@ import javax.inject.Inject;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
-import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
+import org.jboss.essc.integ.trackers.Schedules;
 import org.jboss.essc.integ.trackers.TrackersScheduledSynchronizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class AdminPage extends WebPage {
     private static final Logger log = LoggerFactory.getLogger(TrackersScheduledSynchronizer.class);
     private static final org.jboss.logging.Logger log2 = org.jboss.logging.Logger.getLogger(TrackersScheduledSynchronizer.class);
     
-    @Inject private TrackersScheduledSynchronizer syncer;
+    @Inject private Schedules sched;
 
 
     public AdminPage() {
@@ -32,7 +32,7 @@ public class AdminPage extends WebPage {
         form.add( new AjaxButton("scanBugzilla"){
             @Override public void onSubmit(AjaxRequestTarget target, Form<?> form) {
                 //if( isDevel() )
-                    syncer.createReleasesForNewVersionsOfAllProducts();
+                    sched.syncReleases();
             }
         });
         

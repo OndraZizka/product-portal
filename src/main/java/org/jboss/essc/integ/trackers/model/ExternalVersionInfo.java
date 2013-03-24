@@ -5,15 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.hibernate.annotations.ForeignKey;
 
 
-//@Entity
-@Table(name = "extVersion")
+@Entity
+@Table(name = "extVersion",uniqueConstraints = @UniqueConstraint(columnNames = {"project_id","name"}))
 public class ExternalVersionInfo {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,14 +25,16 @@ public class ExternalVersionInfo {
     private Long id;
 
     @JsonProperty("id")
-    @Column(columnDefinition = "INT UNSIGNED")
+    @Column(columnDefinition = "INT UNSIGNED", unique = true)
     private long externalId;
 
     @ManyToOne
     @JsonIgnore
+    @JoinColumn(name = "project_id")
+    @ForeignKey(name = "project_id")
     private ExternalProjectInfo project;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String name;
     
     private boolean released;
@@ -83,9 +88,8 @@ public class ExternalVersionInfo {
     @Override
     public String toString() {
         return ExternalVersionInfo.class.getSimpleName() + " #" + id
-                + ", extId #" + externalId
+                + ", extId #" + externalId + " " + name
                 + " { project=" + project
-                + ", name=" + name
                 + ", released=" + released
                 + "}";
     }
