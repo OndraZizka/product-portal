@@ -1,5 +1,6 @@
 package org.jboss.essc.web.DAO;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,6 +14,26 @@ import org.jboss.essc.integ.trackers.model.ExternalVersionInfo;
 public class TrackersDao {
 
     @PersistenceContext private EntityManager em;
+    
+    
+    /**
+     *  Returns the versions of given project, or null if no such project is found.
+     */
+    public List<ExternalVersionInfo> getVersionsForProject( String name ){
+        String extId =  DaoUtils.getSingleOrNoneResult( 
+                em.createQuery("SELECT p.externalId FROM ExternalProjectInfo p WHERE p.name = ?1", String.class)
+                .setParameter(1, name) );
+        if( null == extId )
+            return null;
+        
+        // SELECT ver FROM ExternalVersionInfo ver WHERE ver.project.name = ?1
+        return em.createQuery("SELECT ver FROM ExternalVersionInfo ver WHERE ver.project.externalId = ?1", ExternalVersionInfo.class)
+                .setParameter(1, extId)
+                .getResultList();
+        
+        // Trying outer join to get all the info in one step... no success.
+        // SELECT p, ver FROM ExternalProjectInfo p LEFT OUTER JOIN p.versions AS ver WHERE p.name LIKE 'JBoss B%'
+    }
 
     
     /**

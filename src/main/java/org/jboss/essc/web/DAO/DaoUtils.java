@@ -50,6 +50,9 @@ public class DaoUtils {
         }
     }
 
+    /**
+     * @returns  the single result, or null if none was found.
+     */
     public static <T> T getSingleOrNoneResult(TypedQuery<T> query) {
         query.setMaxResults(1);
         List<T> result = query.getResultList();

@@ -10,13 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 
 @Entity
-@Table(name = "extProject")
+@Table(name = "extProject")  // uniqueConstraints = @UniqueConstraint(columnNames = {"sourceRepo", "externalId"})
 public class ExternalProjectInfo {
 
     // Need to have our ID as we load from multiple trackers (JBoss Jira, Red Hat Bugzilla...)
@@ -24,6 +25,9 @@ public class ExternalProjectInfo {
     @Column(columnDefinition = "INT UNSIGNED")
     @JsonIgnore
     private Long id;
+    
+    // Source repository (RH Bugzilla, JBoss Jira, ...)
+    //private String sourceRepo;
     
     // ID from External tracker.
     @Column(columnDefinition = "INT UNSIGNED", unique = true)
