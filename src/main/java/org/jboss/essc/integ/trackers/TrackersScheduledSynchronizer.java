@@ -76,7 +76,9 @@ public class TrackersScheduledSynchronizer {
                 
                 // Local list of releases.
                 //List<Long> = daoProduct.getVersionsOfProduct();
-                List<Release> knownReleases = daoRelease.getReleasesOfProduct( product, true );
+                List<Release>             knownReleases = daoRelease.getReleasesOfProduct( product, true );
+                List<ExternalVersionInfo> knownExtVers  = daoTrackers.getVersionsForProject(product.getName());
+                
 
                 // For each version in Bugzilla...
                 for (ExternalVersionInfo verInfo : projInfo.getVersions() ) {
@@ -90,15 +92,19 @@ public class TrackersScheduledSynchronizer {
                         StringUtils.removeStartIgnoreCase( verInfo.getName(), product.getName()).trim()
                     );
                     
+                    // Is it new?
+                    if( knownExtVers != null && containsVersionNamed( knownExtVers, verInfo) )
+                        continue;
+                    
                     Release newRel = new Release(null, product, verInfo.getName());
                     newRel.setExtIdBugzilla( "" + verInfo.getExternalId() );
+                    if( knownReleases.contains( newRel ))
+                        continue;
                     
-                    // Is it new?
-                    if( knownReleases.contains( newRel ))  continue;
-                    log.info("    Seems to be new: " + verInfo);
+                    log.info("    Sems to be new: " + verInfo);
                     //createReleaseIfNew( newRel );
                     verInfo.setProject(projInfo);
-                    createExternalVersionInfo( verInfo, knownReleases );
+                    createExternalVersionInfo( verInfo );
                 }
             }// for each product
             log.info("Finished synchronization with issue trackers.");
@@ -114,7 +120,7 @@ public class TrackersScheduledSynchronizer {
     /**
      *  Creates version info entity.
      */
-    private boolean createExternalVersionInfo( ExternalVersionInfo verInfo, List<Release> knownReleases ) {
+    private boolean createExternalVersionInfo( ExternalVersionInfo verInfo ) {
         try {
             daoTrackers.addVersionInfoIfNew( verInfo );
             return true;
@@ -137,6 +143,15 @@ public class TrackersScheduledSynchronizer {
         }
         catch( Exception ex ){
             log.error("Couldn't store a release imported from Bugzilla: " + ex, ex);
+        }
+        return false;
+    }
+
+    private boolean containsVersionNamed(List<ExternalVersionInfo> knownExtVers, ExternalVersionInfo verInfo) {
+        String name = verInfo.getName();
+        for( ExternalVersionInfo externalVersionInfo : knownExtVers) {
+            if( name.equals( externalVersionInfo.getName() ))
+                return true;
         }
         return false;
     }
