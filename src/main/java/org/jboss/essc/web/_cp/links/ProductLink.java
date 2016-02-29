@@ -16,10 +16,10 @@ public class ProductLink extends Panel {
     public ProductLink( String id, final Product prod ) {
         super( id );
         setRenderBodyOnly(true);
-        
-        add( new BookmarkablePageLink("link", ProductPage.class, 
-                new PageParameters().add("name", prod.getName())
-             ).add( new Label("label", prod.getName()) ) 
+
+        add(
+            new BookmarkablePageLink("link", ProductPage.class,  new PageParameters().add("name", prod.getName()))
+                .add( new Label("label", prod.getName()) )
         );
     }
 
