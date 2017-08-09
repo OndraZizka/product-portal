@@ -86,9 +86,17 @@ public class DepsActionsBox extends Panel {
                         new PropertyModel<MavenArtifact>(self, "proposal.subject"),
                         deps,
                         new IChoiceRenderer<MavenArtifact>() {
-                    @Override public Object getDisplayValue( MavenArtifact object ) { return object.toStringGAV(); }
-                    @Override public String getIdValue( MavenArtifact object, int index ) { return object.toStringGA(); }
-                } ) );
+                            @Override public Object getDisplayValue( MavenArtifact object ) { return object.toStringGAV(); }
+                            @Override public String getIdValue( MavenArtifact object, int index ) { return object.toStringGA(); }
+
+                            @Override
+                            public MavenArtifact getObject(String key, IModel<? extends List<? extends MavenArtifact>> imodel) {
+                                if (key == null)
+                                    return null;
+                                return imodel.getObject().stream().filter(artifact -> artifact.toStringGA().equals(key)).findFirst().get();
+                            }
+                        }
+                ) );
                 
                 // New artifact?
                 proposal.setNewGA("groupId:artifactId");

@@ -3,7 +3,6 @@ package org.jboss.essc.web.pages.user;
 import javax.inject.Inject;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.*;
@@ -13,7 +12,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.validation.IErrorMessageSource;
 import org.apache.wicket.validation.IValidatable;
 import org.apache.wicket.validation.IValidationError;
-import org.apache.wicket.validation.validator.AbstractValidator;
+import org.apache.wicket.validation.IValidator;
 import org.jboss.essc.web.DAO.UserDao;
 import org.jboss.essc.web.model.User;
 import org.jboss.essc.web.pages.BaseLayoutPage;
@@ -115,8 +114,9 @@ public class UserAccountPage extends BaseLayoutPage {
         this.resetPassForm.add( oldPassField );
         this.resetPassForm.add( newPass1Field );
         this.resetPassForm.add( new PasswordTextField("newPass2", new PropertyModel(UserAccountPage.this, "newPass2"))
-            .add( new AbstractValidator<String> () {
-                @Override protected void onValidate( IValidatable<String> validatable ) {
+            .add( new IValidator<String> () {
+                @Override
+                public void validate(IValidatable<String> validatable) {
                     if( ! validatable.getValue().equals( newPass1Field.getValue() ) ){
                         validatable.error( new IValidationError() {
                             @Override public String getErrorMessage( IErrorMessageSource messageSource ) {

@@ -15,6 +15,8 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 import org.apache.wicket.request.component.IRequestableComponent;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.request.resource.IResource;
 import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.jboss.essc.web.model.User;
@@ -125,11 +127,13 @@ public class WicketJavaEEApplication extends WebApplication {
         IPackageResourceGuard guard = 
         new IPackageResourceGuard() {
             private final IPackageResourceGuard DEFAULT = new PackageResourceGuard();
-            @Override public boolean accept( Class<?> scope, String path ) {
+
+            @Override
+            public boolean accept(String path) {
                 if( path.endsWith(".png") ) return true;
                 if( path.endsWith(".jpg") ) return true;
                 if( path.endsWith(".gif") ) return true;
-                return DEFAULT.accept( scope, path );
+                return DEFAULT.accept( path );
             }
         };
         getResourceSettings().setPackageResourceGuard( guard );
@@ -204,6 +208,11 @@ class EsscAuthStrategy implements IAuthorizationStrategy {
         }
 
         // okay to proceed
+        return true;
+    }
+
+    @Override
+    public boolean isResourceAuthorized(IResource arg0, PageParameters arg1) {
         return true;
     }
     
