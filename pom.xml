@@ -24,7 +24,7 @@
         <plugin.war.warName>${project.build.finalName}</plugin.war.warName>  <!-- To change to ROOT for "prod", to go to / context. -->
 
         <!-- Define the version of JBoss' Java EE 6 APIs we want to import. -->
-        <jboss.spec.version>3.0.3.Final</jboss.spec.version>
+        <jboss.spec.version>1.1.0.Final</jboss.spec.version>
         <version.wicket>7.8.0</version.wicket>
         <version.wicket.cdi>6.0</version.wicket.cdi>
 
@@ -190,7 +190,7 @@
 
             <dependency>
                 <groupId>org.jboss.spec</groupId>
-                <artifactId>jboss-javaee-6.0</artifactId>
+                <artifactId>jboss-javaee-7.0</artifactId>
                 <version>${jboss.spec.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -214,7 +214,7 @@
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
-                <version>1.0.4.Final</version>
+                <version>1.1.13.Final</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -251,21 +251,21 @@
         <!-- Import the Common Annotations API (JSR-250). -->
         <dependency>
             <groupId>org.jboss.spec.javax.annotation</groupId>
-            <artifactId>jboss-annotations-api_1.1_spec</artifactId>
+            <artifactId>jboss-annotations-api_1.2_spec</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <!-- Import the EJB API. -->
         <dependency>
             <groupId>org.jboss.spec.javax.ejb</groupId>
-            <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+            <artifactId>jboss-ejb-api_3.2_spec</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <!-- Import the JPA API. -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -273,7 +273,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.2.21.Final</version>
+            <version>4.3.11.Final</version>
             <scope>provided</scope>
         </dependency>
 
@@ -290,7 +290,7 @@
         <dependency>
             <groupId>org.jboss.logging</groupId>
             <artifactId>jboss-logging</artifactId>
-            <version>3.1.4.GA</version>
+            <version>3.3.1.Final</version>
             <scope>provided</scope>
         </dependency>
 
@@ -298,6 +298,7 @@
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
+            <version>1.4.7</version>
         </dependency>
 
 
@@ -343,7 +344,7 @@
         <dependency>
             <groupId>org.wicketstuff</groupId>
             <artifactId>wicketstuff-autocomplete-tagit</artifactId>
-            <version>1.5.13</version>
+            <version>7.8.1</version>
         </dependency>
 
         <!-- Wicket CDI integration. -->
@@ -358,14 +359,14 @@
         <!-- Import the JAX-RS API. Provided - the API is included in JBoss AS 7. -->
         <dependency>
             <groupId>org.jboss.spec.javax.ws.rs</groupId>
-            <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
+            <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <!-- For RestEasy's @Context HttpServletResponse -->
         <dependency>
             <groupId>org.jboss.spec.javax.servlet</groupId>
-            <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+            <artifactId>jboss-servlet-api_3.1_spec</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -373,13 +374,13 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>jaxrs-api</artifactId>
-            <version>2.3.10.Final</version>
+            <version>3.0.12.Final</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jettison-provider</artifactId>
-            <version>2.3.10.Final</version>
+            <version>3.1.4.Final</version>
             <scope>provided</scope>
         </dependency>
         <!-- Resteasy wants org.codehaus.jettison:jettison: ... -redhat -->
@@ -401,7 +402,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.2.4</version>
+            <version>2.8.1</version>
         </dependency>
 
         <dependency>
@@ -418,7 +419,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.4</version>
+            <version>2.5</version>
         </dependency>
 
 
@@ -442,10 +443,6 @@
             <version>1.2.17</version>
             <scope>test</scope>
         </dependency>
-        <!--
-        -->
-
-
 
 
 
@@ -460,8 +457,8 @@
 
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -473,7 +470,7 @@
         <dependency>
             <groupId>org.jboss.as</groupId>
             <artifactId>jboss-as-arquillian-container-managed</artifactId>
-            <version>7.1.3.Final</version>
+            <version>7.2.0.Final</version>
             <scope>test</scope>
         </dependency>
         <!--
@@ -502,7 +499,7 @@
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
-            <version>2.12</version>
+            <version>2.27</version>
             <scope>test</scope>
         </dependency>
 
@@ -510,7 +507,7 @@
         <dependency>
             <groupId>org.picketbox</groupId>
             <artifactId>picketbox</artifactId>
-            <version>4.0.21.Final</version>
+            <version>4.9.8.Final</version>
             <scope>provided</scope>
         </dependency>
 
@@ -530,7 +527,7 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>2.3.10.Final</version>
+            <version>3.0.19.Final</version>
             <scope>test</scope>
             <type>jar</type>
         </dependency>
