@@ -25,10 +25,10 @@ public class ArqTestCase extends junit.framework.TestCase {
     //@Ignore("Until I fix NoClassDefFoundError: org/jboss/shrinkwrap/descriptor/impl/base/NodeProviderImplBase")
     @Test
     public void testWelcomePage(){
-        WebClient wc = new WebClient(BrowserVersion.FIREFOX_3_6);
+        WebClient wc = new WebClient(BrowserVersion.FIREFOX_52);
         WebWindow w = wc.openWindow(url, "window1");
         assertEquals( w.getEnclosedPage().getWebResponse().getStatusCode(), 200 );
-        wc.closeAllWindows();
+        wc.close();
     }
 
 
