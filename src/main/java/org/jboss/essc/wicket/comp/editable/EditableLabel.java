@@ -2,7 +2,10 @@
 package org.jboss.essc.wicket.comp.editable;
 
 import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.markup.html.IHeaderResponse;
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.resource.PackageResourceReference;
@@ -39,15 +42,13 @@ public class EditableLabel<T> extends TextField<T> {
     @Override
     public void renderHead( IHeaderResponse response ) {
         super.renderHead( response );
-        //response.render(CssHeaderItem.forReference(CSS)); // Wicket 6
-        //response.render(JavaScriptHeaderItem.forReference(JS));
-        response.renderCSSReference( CSS );
-        response.renderJavaScriptReference( JS );
+        response.render(CssHeaderItem.forReference(CSS));
+        response.render(JavaScriptHeaderItem.forReference(JS));
         
         // OnLoad - initialize the element.
         setOutputMarkupId(true);
         String onLoad = String.format("EditableLink.init4( document.getElementById('%s'));", getMarkupId());
-        response.renderOnDomReadyJavaScript(onLoad);
+        response.render(OnDomReadyHeaderItem.forScript(onLoad));
     }
 
 }// class

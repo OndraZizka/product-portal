@@ -3,10 +3,10 @@ package org.jboss.essc.wicket;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.wicket.DefaultExceptionMapper;
+import org.apache.wicket.core.request.handler.PageProvider;
+import org.apache.wicket.core.request.handler.RenderPageRequestHandler;
 import org.apache.wicket.request.IExceptionMapper;
 import org.apache.wicket.request.IRequestHandler;
-import org.apache.wicket.request.handler.PageProvider;
-import org.apache.wicket.request.handler.RenderPageRequestHandler;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.IProvider;
 import org.jboss.essc.web.pages.home.HomePage;
