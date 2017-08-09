@@ -226,6 +226,12 @@
                 <version>3.1</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.codehaus.jettison</groupId>
+                <artifactId>jettison</artifactId>
+                <version>1.3.8</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -376,6 +382,8 @@
             <version>2.3.10.Final</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Resteasy wants org.codehaus.jettison:jettison: ... -redhat -->
+
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
