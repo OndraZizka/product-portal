@@ -386,6 +386,19 @@
         <!-- Resteasy wants org.codehaus.jettison:jettison: ... -redhat -->
 
         <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <version>3.1.4.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>3.1.4.Final</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
             <version>1.9.13</version>
@@ -523,13 +536,6 @@
             <groupId>org.jboss</groupId>
             <artifactId>jboss-serialization</artifactId>
             <version>1.0.4.FINAL</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>3.0.19.Final</version>
-            <scope>test</scope>
-            <type>jar</type>
         </dependency>
     </dependencies>
 
